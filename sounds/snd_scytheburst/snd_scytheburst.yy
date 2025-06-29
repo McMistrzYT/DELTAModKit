@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_scytheburst",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.0990477,
+  "exportDir":"",
+  "name":"snd_scytheburst",
+  "parent":{
+    "name":"Spells",
+    "path":"folders/DELTARUNE/Sounds/Dark/Spells.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_scytheburst.wav",
+  "volume":1.0,
+}

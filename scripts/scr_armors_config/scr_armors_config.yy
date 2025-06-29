@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_armors_config",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_armors_config",
+  "parent":{
+    "name":"Configs",
+    "path":"folders/Custom/Scripts/Configs.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

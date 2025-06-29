@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_facing_letter_to_number",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_facing_letter_to_number",
+  "parent":{
+    "name":"Cutscenes",
+    "path":"folders/DELTARUNE/Scripts/Cutscenes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

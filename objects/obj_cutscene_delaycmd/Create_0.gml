@@ -1,0 +1,11 @@
+instant = 0;
+command_arg1[0] = 0;
+command_arg2[0] = 0;
+command_arg3[0] = 0;
+command_arg4[0] = 0;
+command_arg5[0] = 0;
+command_arg6[0] = 0;
+_c = "none";
+command_actor[0] = 43894389;
+master_object = 4839438;
+alarm[0] = 1;

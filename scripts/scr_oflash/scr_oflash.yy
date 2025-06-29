@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_oflash",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_oflash",
+  "parent":{
+    "name":"Cutscenes",
+    "path":"folders/DELTARUNE/Scripts/Cutscenes.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

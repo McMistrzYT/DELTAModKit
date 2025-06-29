@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_litem",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_litem",
+  "parent":{
+    "name":"Light",
+    "path":"folders/DELTARUNE/Scripts/Inventory/Light.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_dmgwriter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_dmgwriter",
+  "parent":{
+    "name":"System",
+    "path":"folders/DELTARUNE/Scripts/Battle/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,9 @@
+siner = 0;
+alpha = 0.2;
+xstretch = 1;
+ystretch = 1;
+o_insurance = 0;
+depth = 4 + instance_number(object_index);
+OBSPEED = 0.02;
+b_insurance = 0;
+b_insurance = -0.2;

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_levelup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_levelup",
+  "parent":{
+    "name":"Battle",
+    "path":"folders/DELTARUNE/Scripts/Battle.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

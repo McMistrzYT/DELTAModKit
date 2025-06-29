@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"game_restart_true",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"game_restart_true",
+  "parent":{
+    "name":"Engine",
+    "path":"folders/DELTARUNE/Scripts/Engine.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_load_previous_chapter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_load_previous_chapter",
+  "parent":{
+    "name":"Config",
+    "path":"folders/DELTARUNE/Scripts/Config.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

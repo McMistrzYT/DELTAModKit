@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_battle",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_battle",
+  "parent":{
+    "name":"Battle",
+    "path":"folders/DELTARUNE/Scripts/Battle.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

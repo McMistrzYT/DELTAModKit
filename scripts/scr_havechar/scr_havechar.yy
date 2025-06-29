@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_havechar",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_havechar",
+  "parent":{
+    "name":"Party",
+    "path":"folders/DELTARUNE/Scripts/Party.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

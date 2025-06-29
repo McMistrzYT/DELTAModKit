@@ -1,0 +1,19 @@
+settinga = 0;
+settingb = 0;
+typingstyle = 0;
+typingspeed = 3;
+typingnoise = 144;
+charshake = 1;
+init = 0;
+chartimer = -1;
+charmax = 1;
+typingfinished = 0;
+writerfinished = 0;
+image_speed = 0;
+idealxscale = 1;
+idealyscale = 1;
+con = 0;
+loopsprite = sprite_index;
+playsound = 0;
+
+depth = -15500;

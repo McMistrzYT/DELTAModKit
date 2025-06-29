@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"AUDIO_APPEARANCE",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.498957,
+  "exportDir":"",
+  "name":"AUDIO_APPEARANCE",
+  "parent":{
+    "name":"Contact",
+    "path":"folders/DELTARUNE/Sounds/Contact.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"AUDIO_APPEARANCE.wav",
+  "volume":1.0,
+}

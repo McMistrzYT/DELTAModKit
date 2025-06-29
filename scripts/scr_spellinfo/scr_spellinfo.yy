@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_spellinfo",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_spellinfo",
+  "parent":{
+    "name":"Inventory",
+    "path":"folders/DELTARUNE/Scripts/Inventory.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

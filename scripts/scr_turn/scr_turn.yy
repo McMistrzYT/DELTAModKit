@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_turn",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_turn",
+  "parent":{
+    "name":"System",
+    "path":"folders/DELTARUNE/Scripts/Battle/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_funnytext",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_funnytext",
+  "parent":{
+    "name":"Funnytext",
+    "path":"folders/DELTARUNE/Scripts/Funnytext.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

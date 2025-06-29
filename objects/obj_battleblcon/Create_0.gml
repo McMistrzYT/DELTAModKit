@@ -1,0 +1,12 @@
+mywriter = instance_create(x + 5, y + 3, obj_writer);
+//mywriter.depth = 9999999;
+auto_length = 0;
+side = 1;
+xoffset = 0;
+init = 0;
+reformatted = 0;
+remx = x;
+remy = y;
+remmsgno = -1;
+initwritingx = -1;
+initwritingy = -1;

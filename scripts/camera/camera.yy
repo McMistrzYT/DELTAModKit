@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"camera",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"camera",
+  "parent":{
+    "name":"Engine",
+    "path":"folders/DELTARUNE/Scripts/Engine.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
