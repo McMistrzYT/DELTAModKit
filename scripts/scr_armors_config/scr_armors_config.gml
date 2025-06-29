@@ -32,7 +32,14 @@ enum DRArmor {
     LodeStone = 24,
     GingerGuard = 25,
     BlueRibbon = 26,
-    TennaTie = 27
+    TennaTie = 27,
+	
+	// Chapter 4
+	Waferguard = 50,
+	MysticBand = 51,
+	PowerBand = 52,
+	PrincessRibbon = 53,
+	GoldWidow = 54,
 }
 
 function scr_armorinfo(armorid)
@@ -665,6 +672,109 @@ function scr_armorinfo(armorid)
             
             armoricontemp = DRIcon.Shield;
             value = 600;
+            break;
+		
+		// Chapter 4
+		case DRArmor.Waferguard:
+            armornametemp = "Waferguard";
+            armordesctemp = "Although it looks brittle, it contains a magical#energy that blunts damage on impact. +4DF";
+
+            amessagetemp[DRCharacter.Susie] = "(Don't eat it. Don't eat it.)";
+            amessagetemp[DRCharacter.Ralsei] = "It's got drool on it.";
+            amessagetemp[DRCharacter.Noelle] = "What's next, cheezy armor? Faha!";
+            
+            armordftemp = 4;
+            
+            armorchartemp[DRCharacter.Kris] = true;
+            armorchartemp[DRCharacter.Susie] = true;
+            armorchartemp[DRCharacter.Ralsei] = true;
+            armorchartemp[DRCharacter.Noelle] = true;
+            
+            armoricontemp = DRIcon.Shield;
+            value = 900;
+            break;
+        
+        case DRArmor.MysticBand:
+            armornametemp = "MysticBand";
+            armordesctemp = "A silver armlet stained with amber.#Increases magic only. MAG +4";
+
+            amessagetemp[DRCharacter.Susie] = "Let's go, Rude Buster!";
+            amessagetemp[DRCharacter.Ralsei] = "Behold! Heal Prayer!";
+            amessagetemp[DRCharacter.Noelle] = "(The other flavor is better)";
+            
+            armormagtemp = 4;
+            
+            armorchartemp[DRCharacter.Kris] = true;
+            armorchartemp[DRCharacter.Susie] = true;
+            armorchartemp[DRCharacter.Ralsei] = true;
+            armorchartemp[DRCharacter.Noelle] = true;
+            
+            armoricontemp = DRIcon.Shield;
+            value = 1234;
+            break;
+        
+        case DRArmor.PowerBand:
+            armornametemp = "PowerBand";
+            armordesctemp = "A silver armlet stained with red essence.#Increases strength only. ATK +4";
+
+            amessagetemp[DRCharacter.Susie] = "BLOOD POWER ACTIVATE!";
+            amessagetemp[DRCharacter.Ralsei] = "I'm juiced up!";
+            amessagetemp[DRCharacter.Noelle] = "Why always jewelry?";
+
+            armorattemp = 4;
+
+            armorchartemp[DRCharacter.Kris] = true;
+            armorchartemp[DRCharacter.Susie] = true;
+            armorchartemp[DRCharacter.Ralsei] = true;
+            armorchartemp[DRCharacter.Noelle] = true;
+            
+            armoricontemp = DRIcon.Shield;
+            value = 1234;
+            break;
+        
+        case DRArmor.PrincessRibbon:
+            armornametemp = "PrincessRBN";
+            armordesctemp = "Elegant lace ribbon with gloves,#delicate enough to see through. +4 DEF +2 ATK";
+
+            amessagetemp[DRCharacter.Susie] = "Nah. Gloves don't fit.";
+            amessagetemp[DRCharacter.Ralsei] = "Cute! (Gloves don't fit)";
+            amessagetemp[DRCharacter.Noelle] = "Kris, you can wear the gloves!";
+
+            armorattemp = 2;
+            armordftemp = 4;
+            
+            armorchartemp[DRCharacter.Kris] = true;
+            armorchartemp[DRCharacter.Susie] = false;
+            armorchartemp[DRCharacter.Ralsei] = true;
+            armorchartemp[DRCharacter.Noelle] = true;
+
+            armorabilitytemp = "Elegance";
+            armorabilityicontemp = DRIcon.UPStat;
+            armoricontemp = DRIcon.Shield;
+            value = 1234;
+            break;
+        
+        case DRArmor.GoldWidow:
+            armornametemp = "GoldWidow";
+            armordesctemp = "A spider made of gold. It gathers coins#into it, reducing $ gained.";
+
+            amessagetemp[DRCharacter.Susie] = "Spider on my head. K.";
+            amessagetemp[DRCharacter.Ralsei] = "Itsy and/or bitsy!";
+            amessagetemp[DRCharacter.Noelle] = "E-Ew! Kris, get that away!";
+
+            armorattemp = 1;
+            armordftemp = 5;
+            armormagtemp = 1;
+            
+            armorchartemp[DRCharacter.Kris] = true;
+            armorchartemp[DRCharacter.Susie] = true;
+            armorchartemp[DRCharacter.Ralsei] = true;
+            armorchartemp[DRCharacter.Noelle] = false;
+
+            armorabilitytemp = "$ -10%";
+            armorabilityicontemp = DRIcon.DOWNStat;
+            armoricontemp = DRIcon.Shield;
+            value = 5000;
             break;
     }
 }

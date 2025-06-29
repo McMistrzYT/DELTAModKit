@@ -334,9 +334,10 @@ function scr_character_get_base_stats(charIdx) {
 		}
 		
 		case DRCharacter.Starwalker: {
-			__hp = 130 + defaultChapterHpIncreaseFormula;
+			__hp = 150 + defaultChapterHpIncreaseFormula;
 			__atk = 10 + chapter * 2 + max(chapter - 3, 0);
 			__mag = 12 + chapter * 2 + max(chapter - 3, 0);
+			__armors = [DRArmor.ShadowMantle, DRArmor.ShadowMantle];
 			__weapon = DRWeapon.TwistedSwd;
 			__spells[0] = DRSpell.HealPrayer;
 		    __spells[1] = DRSpell.SleepMist;

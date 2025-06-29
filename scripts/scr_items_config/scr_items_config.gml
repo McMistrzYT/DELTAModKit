@@ -67,7 +67,13 @@ enum DRItem {
 	FlatSoda = 36,
 	TVSlop = 37,
 	ExecBuffet = 38,
-	DeluxeDinner = 39
+	DeluxeDinner = 39,
+	
+	// Chapter 4
+	AncientSweet = 60,
+	Rhapsotea = 61,
+	Scarlixir = 62,
+	BitterTear = 63,
 }
 
 enum DRKeyItem {
@@ -96,7 +102,11 @@ enum DRKeyItem {
     OddController = 16,
     BackstagePass = 17,
     TripTicket = 18,
-    LancerCon = 19
+    LancerCon = 19,
+	
+	// Chapter 4
+	SheetMusic = 30,
+	ClaimbClaws = 31,
 }
 
 function scr_iteminfo(itemid)
@@ -459,6 +469,43 @@ function scr_iteminfo(itemid)
             value = 600;
             usable = 1;
             break;
+			
+		// Chapter 4
+		case DRItem.AncientSweet:
+            itemnameb = "AncientSweet";
+            itemdescb = "Kris only#+400";
+			__itemdesc = "A chocolatey cone etched with arcane#glyphs. Only Kris can eat it. +400 HP.";
+            itemtarget = 1;
+            value = 1000;
+            usable = 1;
+            break;
+        
+        case DRItem.Rhapsotea:
+            itemnameb = "Rhapsotea";
+            itemdescb = "Heals#115HP";
+			__itemdesc = "A smooth, silvery drink. It sounds like#whispered singing as it's poured. +115 HP.";
+            itemtarget = 1;
+            value = 250;
+            usable = 1;
+            break;
+        
+        case DRItem.Scarlixir:
+            itemnameb = "Scarlixir";
+            itemdescb = "Heals#160HP";
+			__itemdesc = "A red brew with a sickeningly fruity taste.#Recovers 160 HP.";
+            itemtarget = 1;
+            value = 450;
+            usable = 1;
+            break;
+        
+        case DRItem.BitterTear:
+            itemnameb = "BitterTear";
+            itemdescb = "Heals#All HP";
+			__itemdesc = "Bitter water that fell in droplets from the sky.#Recovers all HP.";
+            itemtarget = 1;
+            value = 0;
+            usable = 1;
+            break;
     }
 }
 
@@ -589,7 +636,7 @@ function scr_keyiteminfo(keyitemid)
 {
     tempkeyitemdesc = "---";
     tempkeyitemname = " ";
-    tempkeyitemusable = 0;
+    tempkeyitemusable = false;
     
     switch (keyitemid)
     {
@@ -601,13 +648,13 @@ function scr_keyiteminfo(keyitemid)
         case DRKeyItem.CellPhone:
             tempkeyitemdesc = "It can be used to make calls.";
             tempkeyitemname = "Cell Phone";
-            tempkeyitemusable = 1;
+            tempkeyitemusable = true;
             break;
         
         case DRKeyItem.Egg:
             tempkeyitemdesc = "Not too important, not too unimportant.";
             tempkeyitemname = "Egg";
-            tempkeyitemusable = 1;
+            tempkeyitemusable = true;
             break;
         
         case DRKeyItem.BrokenCake:
@@ -714,7 +761,7 @@ function scr_keyiteminfo(keyitemid)
             }
             
             tempkeyitemname = "Lancer";
-            tempkeyitemusable = 1;
+            tempkeyitemusable = true;
             break;
         
         case DRKeyItem.RouxlsKaard:
@@ -753,7 +800,7 @@ function scr_keyiteminfo(keyitemid)
             if (global.flag[1047] == 1)
                 crystal_amount++;
             
-            tempkeyitemusable = 1;
+            tempkeyitemusable = true;
             tempkeyitemdesc = stringsetsub("A sharp shadow moves like water in the hand.#You have collected [~1].", crystal_amount);
             tempkeyitemname = "ShadowCrystal";
             break;
@@ -794,6 +841,17 @@ function scr_keyiteminfo(keyitemid)
             }
             
             break;
+			
+		case DRKeyItem.SheetMusic:
+			tempkeyitemname = "SheetMusic";
+			tempkeyitemdesc = "Music that Susie attempted to transcribe.#USE it to read it.";
+			tempkeyitemusable = true;
+			break;
+			
+		case DRKeyItem.ClaimbClaws:
+			tempkeyitemname = "ClaimbClaws";
+			tempkeyitemdesc = "Claws so small they conveniently can't#be seen. Use them to climb up obvious walls.";
+			break;
     }
 }
 
@@ -1077,6 +1135,40 @@ function scr_item_use_action_overworld(itemid) {
             scr_healitem(global.charselect, 140);
             
             break;
+			
+		// Chapter 4
+		case DRItem.AncientSweet:
+			usable = 1;
+			_healamount = global.char[global.charselect] == DRCharacter.Kris ? 400 : 40;
+			
+			scr_healitem(global.charselect, _healamount);
+			break;
+			
+		case DRItem.Rhapsotea:
+            usable = 1;
+            _healamount = 115;
+            
+            scr_healitem(global.charselect, _healamount);
+            break;
+        
+        case DRItem.Scarlixir:
+            usable = 1;
+            _healamount = 160;
+            
+            if (global.char[global.charselect] == DRCharacter.Noelle)
+            {
+                _healamount = 155;
+                scr_healitem(0, 5);
+            }
+            
+            scr_healitem(global.charselect, _healamount);
+            break;
+        
+        case DRItem.BitterTear:
+            usable = 1;
+            _healamount = ceil(global.maxhp[global.char[global.charselect]]) + abs(global.hp[global.char[global.charselect]]);
+            scr_healitem(global.charselect, _healamount);
+            break;
     }
 }
 	
@@ -1318,6 +1410,53 @@ function scr_item_use_action_battle(casterid, itemid) {
 			scr_healitemspell(140);
             break;	
 		}
+		
+		// Chapter 4
+		case DRItem.AncientSweet: {
+			scr_healitemspell(scr_heal_amount_modify_by_equipment(starChara == DRCharacter.Kris ? 400 : 40));
+			break;
+		}
+		
+		case DRItem.Rhapsotea: {
+			scr_healitemspell(scr_heal_amount_modify_by_equipment(115));
+			break;	
+		}
+		
+		case DRItem.Scarlixir: {
+            if starChara == DRCharacter.Noelle
+            {
+                scr_healitemspell(scr_heal_amount_modify_by_equipment(155));
+                scr_heal(0, 5);
+                
+                with (global.charinstance[0])
+                {
+                    ha = instance_create(x, y, obj_healanim);
+                    ha.target = id;
+                    dmgwr = scr_dmgwriter_selfchar();
+                    
+                    with (dmgwr)
+                    {
+                        delay = 8;
+                        type = 3;
+                        damage = 5;
+                    }
+                    
+                    if (global.hp[global.char[myself]] >= global.maxhp[global.char[myself]])
+                        with (dmgwr)
+                            specialmessage = 3;
+                    
+                    tu += 1;
+                }
+            } else
+				scr_healitemspell(160);
+			break;
+		}
+		
+		case DRItem.BitterTear: {
+			reviveamt = ceil(global.maxhp[global.char[star]]) + abs(global.hp[global.char[star]]);
+            scr_healitemspell(scr_heal_amount_modify_by_equipment(reviveamt));
+			break;	
+		}
     }
 	
 	show_debug_message("scr_item_use_action_battle({0}, {1}) = {2}", casterid, itemid, item_use);
@@ -1330,7 +1469,8 @@ function scr_key_item_use_action_overworld(itemid) {
         default:
         case DRKeyItem.None:
             break;
-        
+			
+		// Chapter 1
         case DRKeyItem.CellPhone:
             with (obj_darkcontroller)
                 charcon = 0;
@@ -1353,7 +1493,8 @@ function scr_key_item_use_action_overworld(itemid) {
             global.msg[0] = "* (You used the Egg.)/%";
             scr_itemdialoguer();
             break;
-        
+			
+		// Chapter 2
         case DRKeyItem.Lancer:
             snd_stop(snd_splat);
             snd_play_x(snd_splat, 1, (global.submenucoord[4] / 10) + 0.8);
@@ -1383,5 +1524,16 @@ function scr_key_item_use_action_overworld(itemid) {
             
             scr_itemdialoguer();
             break;
+			
+		// Chapter 4
+		// in other words i cba to port obj_dw_church_susiesnote
+		case DRKeyItem.SheetMusic:
+			scr_speaker("no_name");
+			msgset(0, "* You looked down at the sheet music./");
+			msgnext("* .../");
+			msgnext("* You weren't able to read it.^1 After all, you're not in the Church anymore./%");
+			
+			scr_itemdialoguer();
+			break;
     }
 }

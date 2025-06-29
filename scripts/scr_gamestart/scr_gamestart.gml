@@ -199,6 +199,8 @@ function scr_gamestart()
 		global.at[i] = __atk;
 		global.df[i] = __def;
 		global.charweapon[i] = __weapon;
+		global.chararmor1[i] = __armors[0];
+		global.chararmor2[i] = __armors[1];
 		global.guts[i] = __guts;
 		
 		if scr_character_has_magic(i)

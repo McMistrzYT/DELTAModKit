@@ -32,6 +32,13 @@ enum DRWeapon {
     ToxicAxe = 24,
     FlexScarf = 25,
     BlackShard = 26,
+	
+	// Chapter 4
+	JingleBlade = 50,
+	ScarfMark = 51,
+	JusticeAxe = 52,
+	Winglade = 53,
+	AbsorbAx = 54,
 }
 
 function scr_weaponinfo(weaponid)
@@ -576,6 +583,113 @@ function scr_weaponinfo(weaponid)
 
             weaponicontemp = DRIcon.Shard;
             value = 0;
+            break;
+			
+		// Chapter 4
+		case DRWeapon.JingleBlade:
+            weaponnametemp = "JingleBlade";
+            weapondesctemp = "A lance-like sword with red-and-white stripes.#Perfect for jousting.";
+
+            wmessagetemp[DRCharacter.Susie] = "Sleigh the bad guys.";
+            wmessagetemp[DRCharacter.Ralsei] = "Mmm! Minty and festive!";
+            wmessagetemp[DRCharacter.Noelle] = "What is this, a barber pole?";
+
+            weaponattemp = 7;
+            weapondftemp = 1;
+            
+            weaponchartemp[DRCharacter.Kris] = true;
+            weaponchartemp[DRCharacter.Susie] = false;
+            weaponchartemp[DRCharacter.Ralsei] = false;
+            weaponchartemp[DRCharacter.Noelle] = true;
+
+            weaponicontemp = DRIcon.Sword;
+            weaponabilityicontemp = DRIcon.Smile;
+            weaponabilitytemp = "Festive";
+            value = 1234;
+            break;
+        
+        case DRWeapon.ScarfMark:
+            weaponnametemp = "ScarfMark";
+            weapondesctemp = "A thin scarf with a deep sheen. Holy writing has#been pressed into it, imbuing it with magic.";
+
+            wmessagetemp[DRCharacter.Susie] = "Heheh...";
+            wmessagetemp[DRCharacter.Ralsei] = "I'll keep my place.";
+            wmessagetemp[DRCharacter.Noelle] = "Look, ribbon dancing!";
+
+            weaponattemp = 4;
+            weapondftemp = 1;
+            weaponmagtemp = 1;
+            
+            weaponchartemp[DRCharacter.Kris] = false;
+            weaponchartemp[DRCharacter.Susie] = false;
+            weaponchartemp[DRCharacter.Ralsei] = true;
+            weaponchartemp[DRCharacter.Noelle] = false;
+
+            weaponicontemp = DRIcon.Scarf;
+            value = 900;
+            break;
+        
+        case DRWeapon.JusticeAxe:
+            weaponnametemp = "JusticeAxe";
+            weapondesctemp = "It has no special powers. However, in order to#attain this item, you became much stronger!";
+
+            wmessagetemp[DRCharacter.Susie] = "Watch this, old man!";
+            wmessagetemp[DRCharacter.Ralsei] = "... isn't Susie amazing?";
+            wmessagetemp[DRCharacter.Noelle] = "... Susie beat up an old man!?";
+
+            weaponattemp = 12;
+            
+            weaponchartemp[DRCharacter.Kris] = false;
+            weaponchartemp[DRCharacter.Susie] = true;
+            weaponchartemp[DRCharacter.Ralsei] = false;
+            weaponchartemp[DRCharacter.Noelle] = false;
+
+            weaponicontemp = DRIcon.Axe;
+            weaponabilityicontemp = DRIcon.Sparkles;
+            weaponabilitytemp = "???";
+            value = 0;
+            break;
+        
+        case DRWeapon.Winglade:
+            weaponnametemp = "Winglade";
+            weapondesctemp = "A majestic sword with a white feathered hilt.#Slightly increases money won.";
+
+            wmessagetemp[DRCharacter.Susie] = "Don't make me sneeze!";
+            wmessagetemp[DRCharacter.Ralsei] = "Th-that tickles!";
+            wmessagetemp[DRCharacter.Noelle] = "... whose feather is this?";
+
+            weaponattemp = 8;
+            
+            weaponchartemp[DRCharacter.Kris] = true;
+            weaponchartemp[DRCharacter.Susie] = false;
+            weaponchartemp[DRCharacter.Ralsei] = false;
+            weaponchartemp[DRCharacter.Noelle] = false;
+
+            weaponicontemp = DRIcon.Sword;
+            weaponabilityicontemp = DRIcon.UPStat;
+            weaponabilitytemp = "$ +5%";
+            value = 999;
+            break;
+        
+        case DRWeapon.AbsorbAx:
+            weaponnametemp = "AbsorbAx";
+            weapondesctemp = "A long, curved axe with an indent.#Scoop up HP when you attack.";
+
+            wmessagetemp[DRCharacter.Susie] = "Scoopin' time.";
+            wmessagetemp[DRCharacter.Ralsei] = "Don't scoop me!";
+            wmessagetemp[DRCharacter.Noelle] = "That red... is that blood?";
+
+            weaponattemp = 8;
+            
+            weaponchartemp[DRCharacter.Kris] = false;
+            weaponchartemp[DRCharacter.Susie] = true;
+            weaponchartemp[DRCharacter.Ralsei] = false;
+            weaponchartemp[DRCharacter.Noelle] = false;
+
+            weaponicontemp = DRIcon.Axe;
+            weaponabilityicontemp = DRIcon.EvilSmile;
+            weaponabilitytemp = "Vampire";
+            value = 1234;
             break;
     }
 }
