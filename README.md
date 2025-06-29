@@ -1,4 +1,4 @@
-> [!CRITICAL]
+> [!IMPORTANT]
 > DELTAModKit is in **active development.** There are many known visual bugs present and I'm aware of certain things (such as the main characters' attack, defense and magic values not being accurate to the real game's chapters). If you find any issues, you can help out by creating an issue or opening a pull request.
 
 # DELTAModKit
