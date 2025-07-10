@@ -19,8 +19,5 @@ To start playing around with DELTAModKit, you have to download [GameMaker Beta](
 ## Adding / Changing Modular Stuff
 The hearts of my modular reimplementations of the character, item, spell and equipment systems all live in the folder `Custom > Scripts > Configs`. I tried naming everything in an easy-to-understand way, but feel free to reach out if you encounter any issues. Provided in the `Custom > Objects` folder is an example cutscene for working with the Cutscene System and some helper markers to assist with character placement in cutscenes
 
-> [!WARNING]
-> This project is based on DELTARUNE Chapter 3, meaning many Chapter 4 things such as items, armors, weapons and key items are missing. I am already looking into backporting these items in a future update.
-
 ## Attribution
 All sprites and most code contained in this repository was created by Toby Fox and Royal Sciences LLC.
