@@ -1,5 +1,5 @@
 global.entrance = 23;
-instance_create(0, 0, /* obj_persistentfadein */ obj_fadein);
+instance_create(0, 0, obj_persistentfadein);
 event_user(7);
 
 switch (room) {

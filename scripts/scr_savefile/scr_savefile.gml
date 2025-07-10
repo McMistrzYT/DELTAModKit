@@ -1004,3 +1004,10 @@ function scr_room(arg0, arg1) constructor
     room_index = arg0;
     room_id = arg1;
 }
+
+function scr_tempload() {
+	filechoicebk3 = global.filechoice;
+	global.filechoice = 9;
+	scr_load();
+	global.filechoice = filechoicebk3;
+}

@@ -1,6 +1,3 @@
-global.darkzone = 1;
-global.facing = 0;
-
 global.currentroom = scr_get_id_by_room_index(room);
 scr_character_set_names();
 
@@ -28,13 +25,6 @@ climbing = 0;
 climbbuffer = 0;
 floorheight = 0;
 darkmode = global.darkzone;
-
-if (darkmode == 1)
-{
-    stepping = 1;
-    image_xscale = 2;
-    image_yscale = 2;
-}
 
 cutscene = 0;
 press_l = 0;
@@ -68,11 +58,22 @@ walkanim = 0;
 walkbuffer = 0;
 walktimer = 0;
 image_speed = 0;
-dsprite = spr_krisd_dark;
-rsprite = spr_krisr_dark;
-usprite = spr_krisu_dark;
-lsprite = spr_krisl_dark;
+dsprite = spr_krisd;
+rsprite = spr_krisr;
+usprite = spr_krisu;
+lsprite = spr_krisl;
 climbsprite = 3707;
+
+if darkmode {
+	dsprite = spr_krisd_dark;
+	rsprite = spr_krisr_dark;
+	usprite = spr_krisu_dark;
+	lsprite = spr_krisl_dark;	
+	
+	stepping = 1;
+    image_xscale = 2;
+    image_yscale = 2;
+}
 
 init_clothes = false;
 

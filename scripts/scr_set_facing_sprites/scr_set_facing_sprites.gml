@@ -71,13 +71,13 @@ function scr_set_facing_sprites(arg0)
                 _actorname = "berdlydark";
         }
         
-        /*if (_actorname == "krislight")
+        if (_actorname == "krislight")
         {
             usprite = spr_krisu;
             rsprite = spr_krisr;
             dsprite = spr_krisd;
             lsprite = spr_krisl;
-        }*/
+        }
         
         if (_actorname == "krisdark")
         {
@@ -87,23 +87,15 @@ function scr_set_facing_sprites(arg0)
             lsprite = spr_krisl_dark;
         }
         
-        /*if (_actorname == "susielight")
-        {
-            usprite = spr_susieu;
-            rsprite = spr_susier;
-            dsprite = spr_susied;
-            lsprite = spr_susiel;
-        }
-        
-        if (_actorname == "susielighteyes")
+        if (_actorname == "susielight" || _actorname == "susielighteyes")
         {
             usprite = spr_susie_walk_up_lw;
             rsprite = spr_susie_walk_right_lw;
             dsprite = spr_susie_walk_down_lw;
             lsprite = spr_susie_walk_left_lw;
-        }*/
+        }
         
-        if (_actorname == "susiedark")
+        if (_actorname == "susiedark" || _actorname == "susiedarkeyes")
         {
             usprite = spr_susieu_dark;
             rsprite = spr_susier_dark;

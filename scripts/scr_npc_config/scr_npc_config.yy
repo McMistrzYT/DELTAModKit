@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_npc_config",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_npc_config",
+  "parent":{
+    "name":"World",
+    "path":"folders/Custom/Scripts/Configs/World.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

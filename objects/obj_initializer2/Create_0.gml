@@ -63,8 +63,7 @@ global.savedata_async_load = false;
 global.savedata_error = false;
 global.savedata_debuginfo = "";
 
-// !MOD! !CHANGE! version
-global.versionno = "v0.0.089";
+scr_chapter_config();
 
 global.game_won = false;
 scr_input_manager_init();

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_light_items_config",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_light_items_config",
+  "parent":{
+    "name":"Inventory",
+    "path":"folders/Custom/Scripts/Configs/Inventory.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

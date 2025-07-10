@@ -1,7 +1,9 @@
 {
   "$GMObject":"",
   "%Name":"obj_collidebullet",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":15,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_collidebullet",
   "overriddenProperties":[],
@@ -9,7 +11,10 @@
     "name":"Bullets",
     "path":"folders/DELTARUNE/Objects/Battle/Bullets.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_bulletparent",
+    "path":"objects/obj_bulletparent/obj_bulletparent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

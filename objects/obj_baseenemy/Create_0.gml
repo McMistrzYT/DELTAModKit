@@ -7,4 +7,6 @@ hurtsprite = spr_diamond_overworld;
 sparedsprite = spr_diamond_overworld;
 custom_draw_example = 0;
 
+scr_enemy_set_sprites(enemyId);
+
 mod_debug_printed = false;

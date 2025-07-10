@@ -693,3 +693,19 @@ function scr_weaponinfo(weaponid)
             break;
     }
 }
+
+function get_lw_dw_weapon_list()
+{
+    var weapon_list = [
+		new lw_dw_weapon(DRLightItem.Pencil, DRWeapon.WoodBlade),
+		new lw_dw_weapon(DRLightItem.HalloweenPencil, DRWeapon.Spookysword),
+		new lw_dw_weapon(DRLightItem.LuckyPencil, DRWeapon.Trefoil),
+		new lw_dw_weapon(DRLightItem.Eraser, DRWeapon.BounceBlade),
+		new lw_dw_weapon(DRLightItem.MechanicalPencil, DRWeapon.MechaSaber),
+		new lw_dw_weapon(DRLightItem.CactusNeedle, DRWeapon.Saber10, 2),
+		new lw_dw_weapon(DRLightItem.BlackShard, DRWeapon.BlackShard, 16),
+		new lw_dw_weapon(DRLightItem.HolidayPencil, DRWeapon.JingleBlade),
+		new lw_dw_weapon(DRLightItem.QuillPen, DRWeapon.Winglade)
+	];
+    return weapon_list;
+}

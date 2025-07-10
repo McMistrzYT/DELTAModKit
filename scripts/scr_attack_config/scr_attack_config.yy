@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_attack_config",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_attack_config",
+  "parent":{
+    "name":"Battles",
+    "path":"folders/Custom/Scripts/Configs/Battles.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

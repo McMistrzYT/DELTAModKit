@@ -1073,12 +1073,12 @@ if (global.myfight == 5)
     }
 }
 
-if (global.charweapon[4] == DRWeapon.ThornRing)
+if (global.charweapon[DRCharacter.Noelle] == DRWeapon.ThornRing)
 {
     if ((t_siner % 6) == 0)
     {
-        if (global.hp[4] > round(global.maxhp[4] / 3))
-            global.hp[4]--;
+        if (global.hp[DRCharacter.Noelle] > round(global.maxhp[DRCharacter.Noelle] / 3))
+            global.hp[DRCharacter.Noelle]--;
     }
 }
 

@@ -40,10 +40,10 @@ if (global.interact == 0)
             with (obj_darkcontroller)
                 threebuffer = 2;
             
-            //with (obj_overworldc)
+           with (obj_overworldc)
             {
-                //movenoise = 1;
-                //threebuffer = 2;
+                movenoise = 1;
+                threebuffer = 2;
             }
             
             global.menuno = 0;
@@ -976,3 +976,6 @@ if (battlemode == 1)
         }
     }
 }*/
+
+if !ignoredepth
+	scr_depth();

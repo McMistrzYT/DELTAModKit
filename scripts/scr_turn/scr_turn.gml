@@ -722,3 +722,25 @@ function scr_defeatrun()
     defeatanim.image_yscale = image_yscale;
     instance_destroy();
 }
+
+function scr_randomtarget_old()
+{
+    abletotarget = 1;
+	
+	for (var i = 0; i < array_length(global.charcantarget); i++)
+		if global.charcantarget[i] == false abletotarget = false;
+    
+    mytarget = choose(0, 1, 2);
+    
+    if (abletotarget == 1)
+    {
+        while (global.charcantarget[mytarget] == 0)
+            mytarget = choose(0, 1, 2);
+    }
+    else
+    {
+        mytarget = 3;
+    }
+    
+    global.targeted[mytarget] = 1;
+}

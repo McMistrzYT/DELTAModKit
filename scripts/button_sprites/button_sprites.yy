@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"button_sprites",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"button_sprites",
+  "parent":{
+    "name":"Engine",
+    "path":"folders/DELTARUNE/Scripts/Engine.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

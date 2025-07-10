@@ -25,6 +25,10 @@ function scr_hero_has_pacify(heroIdx) {
 	return heroIdx == DRHero.Ralsei || heroIdx == DRHero.Noelle;
 }
 
+function scr_character_is_lightner(charIdx) {
+	return charIdx == DRCharacter.Kris || charIdx == DRCharacter.Susie || charIdx == DRCharacter.Noelle;	
+}
+
 function scr_hero_get_pacify_spell_cost(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Ralsei: return 40;
@@ -223,6 +227,17 @@ function scr_hero_set_sprites(heroObject) {
 
 function scr_character_set_caterpillar_sprites(charIdx) {
 	switch (charIdx) {
+		default:
+		case DRCharacter.Susie: {
+			name = "susie";
+			
+			usprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_up_dw : spr_susieu_dark) : spr_susie_walk_up_lw;
+			dsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_down_dw : spr_susied_dark) : spr_susie_walk_down_lw;
+			rsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_right_dw : spr_susier_dark) : spr_susie_walk_right_lw;
+			lsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_left_dw : spr_susiel_dark) : spr_susie_walk_left_lw;
+			break;
+		}
+		
 		case DRCharacter.Ralsei: {
 			name = "ralsei";
                 

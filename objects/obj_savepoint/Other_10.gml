@@ -9,7 +9,7 @@ global.fe = 0;
 global.interact = 1;
 nodialogue = 1;
 
-scr_save_point_text()
+scr_save_point_text();
 
 myinteract = 3;
 
@@ -19,7 +19,7 @@ if (nodialogue == 0)
 talked += 1;
 snd_play(snd_power);
 
-for (i = 0; i < 5; i += 1)
+for (i = 0; i < DRCharacter.__MAX__; i += 1)
 {
     if (global.hp[i] < global.maxhp[i])
         global.hp[i] = global.maxhp[i];

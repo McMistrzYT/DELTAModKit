@@ -170,11 +170,10 @@ if (EVENT == 76)
     global.flag[20] = 0;
     global.plot = 0;
     
-	// !MOD! !CHANGE! starter chapter location here
     switch (global.chapter) {
 		default:
-			global.darkzone = 1;
-			room_goto(room_dw_test);
+			global.darkzone = global.isStartingRoomDarkWorld;
+			room_goto(global.newFileStartingRoom);
 			break;
 	}
 }

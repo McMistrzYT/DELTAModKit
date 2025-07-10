@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_spells_config",
   "parent":{
-    "name":"Configs",
-    "path":"folders/Custom/Scripts/Configs.yy",
+    "name":"Battles",
+    "path":"folders/Custom/Scripts/Configs/Battles.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

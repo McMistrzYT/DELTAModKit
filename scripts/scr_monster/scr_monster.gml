@@ -129,6 +129,7 @@ function scr_monster_makeinstance(monsterid)
     
     global.monsterinstance[monsterid] = instance_create(global.monstermakex[monsterid], global.monstermakey[monsterid], global.monsterinstancetype[monsterid]);
     global.monsterinstance[monsterid].myself = monsterid;
+	global.monsterinstance[monsterid].enemyId = global.monstertype[monsterid];
     
     with (global.monsterinstance[monsterid])
         event_user(12);
@@ -294,6 +295,8 @@ function scr_enemy_object_init()
     hurtsprite = spr_diamond_knight_overworld;
     sparedsprite = spr_diamond_knight_overworld;
     custombody = 0;
+	
+	enemyId = DREnemy.None;
     
     for (i = 0; i < 10; i++)
         _charactsprite[i] = 382938298329;

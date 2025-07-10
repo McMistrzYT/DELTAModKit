@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_weapons_config",
   "parent":{
-    "name":"Configs",
-    "path":"folders/Custom/Scripts/Configs.yy",
+    "name":"Inventory",
+    "path":"folders/Custom/Scripts/Configs/Inventory.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

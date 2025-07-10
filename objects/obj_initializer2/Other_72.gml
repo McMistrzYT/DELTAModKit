@@ -22,7 +22,6 @@ if (ds_map_find_value(async_load, "id") == global.savedata_async_id)
         
         buffer_delete(global.savedata_buffer);
         global.savedata_buffer = undefined;
-        global.chapter = 3;
         //global_flagname_init();
         //scr_84_init_localization();
         //scr_84_load_ini();

@@ -1,5 +1,5 @@
 global.entrance = 3;
-instance_create(0, 0, obj_fadein/*obj_persistentfadein*/);
+instance_create(0, 0, obj_persistentfadein);
 event_user(7);
 
 /*if (global.chapter == 3)

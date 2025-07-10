@@ -6,8 +6,8 @@ function scr_speaker(speak)
     if (global.darkzone == 1)
         global.typer = 6;
     
-    //if (global.fighting == 1)
-    //    global.typer = 4;
+    if (global.fighting == 1)
+        global.typer = 4;
     
     global.fc = 0;
     global.fe = 0;
@@ -187,4 +187,159 @@ function scr_speaker(speak)
         global.fc = 21;
         global.typer = 62;
     }
+}
+
+function scr_anyface_next(arg0, arg1)
+{
+    global.msgno++;
+    scr_anyface(arg0, global.msgno, arg1);
+}
+
+function scr_anyface(arg0, arg1, arg2)
+{
+    _speakerC = arg0;
+    _msgno = arg1;
+    _emotion = arg2;
+    
+    if (is_real(arg2))
+    {
+        if (arg2 >= 10)
+        {
+            if (arg2 < 36)
+                _emotion = chr(55 + arg2);
+            else
+                emotion = chr(61 + arg2);
+        }
+    }
+    
+    _speaker = string_lower(_speakerC);
+    msgsetsub(arg1, "* Face ~1 not found/", _speaker);
+    
+    if (_speaker == "susie" || _speaker == "sus")
+        scr_susface(_msgno, _emotion);
+    
+    if (_speaker == "ralsei" || _speaker == "ral")
+        scr_ralface(_msgno, _emotion);
+    
+    if (_speaker == "noelle" || _speaker == "noe")
+        scr_noeface(_msgno, _emotion);
+    
+    if (_speaker == "toriel" || _speaker == "tor")
+        scr_torface(_msgno, _emotion);
+    
+    if (_speaker == "asgore" || _speaker == "asg")
+        scr_asgface(_msgno, _emotion);
+    
+    if (_speaker == "king" || _speaker == "kin")
+        scr_kingface(_msgno, _emotion);
+    
+    if (_speaker == "rudy" || _speaker == "rud")
+        scr_rudface(_msgno, _emotion);
+    
+    if (_speaker == "lancer" || _speaker == "lan")
+        scr_lanface(_msgno, _emotion);
+    
+    if (_speaker == "berdly" || _speaker == "ber")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\FB \\TB %", string(_emotion));
+    
+    if (_speaker == "alphys" || _speaker == "alp")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Fa \\Ta %", string(_emotion));
+    
+    if (_speaker == "none" || _speaker == "x" || _speaker == "no name" || _speaker == "no_name")
+        scr_noface(_msgno);
+    
+    if (_speaker == "rouxls" || _speaker == "rou")
+        scr_rurusface(_msgno, _emotion);
+    
+    if (_speaker == "queen" || _speaker == "que")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\FQ \\TQ %", string(_emotion));
+    
+    if (_speaker == "queen2" || _speaker == "que2")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\F0 \\Tq %", string(_emotion));
+    
+    if (_speaker == "sans" || _speaker == "san")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Fs \\Ts %", string(_emotion));
+    
+    if (_speaker == "undyne" || _speaker == "und")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\FU \\TU %", string(_emotion));
+    
+    if (_speaker == "burgerpants")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Fb \\T0 %", string(_emotion));
+    
+    if (_speaker == "sneo")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Tp %", string(_emotion));
+    
+    if (_speaker == "carol")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\FC \\TC %", string(_emotion));
+    
+    if (_speaker == "bratty")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Fy \\T0 %", string(_emotion));
+    
+    if (_speaker == "catti")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Fi \\T0 %", string(_emotion));
+    
+    if (_speaker == "jackenstein")
+        msgset(arg1, "\\TX \\F0 \\Tj %", string(_emotion));
+    
+    if (_speaker == "jackenstein_cute")
+        msgset(arg1, "\\TX \\F0 \\Tk %", string(_emotion));
+    
+    if (_speaker == "tenna")
+        msgsetsub(arg1, "\\TX \\F0 \\E~1 \\Tv %", string(_emotion));
+    
+    if (_speaker == "gerson")
+        msgset(arg1, "\\TX \\F0 \\Tg %", string(_emotion));
+}
+
+function scr_susface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FS \\TS %", string(arg1));
+}
+
+function scr_ralface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FR \\TR %", string(arg1));
+}
+
+function scr_noeface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FN \\TN %", string(arg1));
+}
+
+function scr_torface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FT \\TT %", string(arg1));
+}
+
+function scr_asgface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FA \\TA %", string(arg1));
+}
+
+function scr_kingface(arg0, arg1)
+{
+    if ((global.chapter == 1 && global.plot >= 235) || global.chapter >= 2)
+        global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FK \\TK %", string(arg1));
+    else
+        global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\TK %", string(arg1));
+}
+
+function scr_rudface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\Fr \\Tr %", string(arg1));
+}
+
+function scr_lanface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\FL \\TL %", string(arg1));
+}
+
+function scr_noface(arg0)
+{
+    global.msg[arg0] = "\\TX \\F0 \\T0 %";
+}
+
+function scr_rurusface(arg0, arg1)
+{
+    global.msg[arg0] = stringsetsub("\\TX \\F0 \\E~1 \\Fu \\T0 %", string(arg1));
 }

@@ -112,3 +112,6 @@ for (var i = 0; i < 3; i++)
         ossafe_savedata_save();
     }
 }
+
+quittimer = 0;
+quitxcoord = 0;

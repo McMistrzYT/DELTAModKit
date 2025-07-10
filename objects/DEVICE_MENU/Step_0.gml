@@ -73,9 +73,9 @@ if (MENU_NO == 1 || MENU_NO == 4 || MENU_NO == 6 || MENU_NO == 7 || MENU_NO == 1
                 {
                     global.filechoice = FILESLOT;
                     snd_free_all();
-                    //f = instance_create(0, 0, obj_persistentfadein);
-                    //f.image_xscale = 1000;
-                    //f.image_yscale = 1000;
+                    f = instance_create(0, 0, obj_persistentfadein);
+                    f.image_xscale = 1000;
+                    f.image_yscale = 1000;
                     
                     if (ossafe_file_exists("config_" + string(global.filechoice) + ".ini"))
                     {

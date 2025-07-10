@@ -114,11 +114,11 @@ function scr_texttype()
             break;
         
         case 22:
-            scr_textsetup(global.main_font/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 135, 6, 18, 0);
+            scr_textsetup(fnt_tinynoelle/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 135, 6, 18, 0);
             break;
         
         case 23:
-            scr_textsetup(global.main_font/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 129, 6, 18, 0);
+            scr_textsetup(fnt_tinynoelle/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 129, 6, 18, 0);
             break;
         
         case 30:
@@ -182,7 +182,7 @@ function scr_texttype()
             break;
         
         case 50:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 109, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 109, 9, 20, 0);
             break;
         
         case 51:
@@ -196,11 +196,11 @@ function scr_texttype()
             break;
         
         case 53:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
             break;
         
         case 54:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 2, 128, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 2, 128, 9, 20, 0);
             break;
         
         case 55:
@@ -257,41 +257,41 @@ function scr_texttype()
             break;
         
         case 68:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 138, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 138, 9, 20, 0);
             break;
         
         case 69:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 130, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 130, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 70:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 71:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 72:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 139, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 139, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 74:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 131, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 131, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 75:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
         case 76:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 129, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 129, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
@@ -313,7 +313,7 @@ function scr_texttype()
             break;
         
         case 81:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 476, 9, 20, 0);
+            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 476, 9, 20, 0);
             extra_ja_vspace = 2;
             break;
         
@@ -330,15 +330,15 @@ function scr_texttype()
             break;
         
         case 100:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("8bit")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
+            scr_textsetup(fnt_8bit/*scr_84_get_font("8bit")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
             
             if (room == room_board_preshadowmantle || room == room_shadowmantle || room == room_board_dungeon_2)
-                scr_textsetup(global.mainbig_font/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
+                scr_textsetup(fnt_8bit/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
             
             break;
         
         case 101:
-            scr_textsetup(global.mainbig_font/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
+            scr_textsetup(fnt_8bit/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
             break;
         
         default:

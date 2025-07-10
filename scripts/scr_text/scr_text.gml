@@ -3,20 +3,13 @@ function scr_text_extra(msc){
 	
 	show_debug_message("scr_text_extra(): " + string(msc));
 	switch (msc) {
-		// begin it at 10000
-		
-		case 9999: {
-			scr_speaker("no_name");
-			msgset(0, "* .../");
-			msgnext("* Kris,^1 what do you think about this situation...?/");
-			msgnext("\\C3");
-			break;
-		}
+		// begin it at 10000 to not interfere with any original scr_text data if you plan on porting
+		// that from deltarune
 		
 		case 10000: {
 			scr_speaker("no_name");
-			global.choicemsg[0] = "#Are you#okay?";
-			global.choicemsg[1] = "#Do it";
+			global.choicemsg[0] = "#Choicers";
+			global.choicemsg[1] = "#Are done#like this";
 			global.choicemsg[2] = " ";
 			global.choicemsg[3] = " ";
 			
@@ -25,8 +18,8 @@ function scr_text_extra(msc){
 		}
 		
 		case 10001: {
-			msgset(0, "* (K-KRIS?!)/%");
-			break;	
+			msgset(0, "* (You chose the option \"" + string_replace(global.choicemsg[global.choice], "#", " ") + "\")/%");
+			break;
 		}
 		
 		default: {

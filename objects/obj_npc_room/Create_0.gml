@@ -13,7 +13,7 @@ alwaysanimate = false;
 jpspecial = 0;
 skip = 0;
 
-scr_npc_setup();
+scr_npc_config();
 
 if (depthcancel == 0)
     scr_depth();

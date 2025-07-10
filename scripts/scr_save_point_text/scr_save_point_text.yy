@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_save_point_text",
   "parent":{
-    "name":"Config",
-    "path":"folders/DELTARUNE/Scripts/Config.yy",
+    "name":"World",
+    "path":"folders/Custom/Scripts/Configs/World.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

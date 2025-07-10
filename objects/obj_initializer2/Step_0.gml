@@ -58,7 +58,8 @@ var CH = string(global.chapter);
         if (global.is_console)
             global.screen_border_alpha = 0;
         
-        roomchoice = room_legend;//room_next(room);
+		global.darkzone = 0;
+        roomchoice = scr_debug_get_start_room();
     }
     
     room_goto(roomchoice);

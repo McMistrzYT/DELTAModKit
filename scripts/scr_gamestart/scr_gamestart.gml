@@ -55,10 +55,9 @@ function get_chapter_switch_parameters()
 function scr_gamestart()
 {
 	__global_object_depths();
-	global.main_font = font_add("8bitoperator_jve.ttf", 12, 0, 0, 32, 127);
-	global.mainbig_font = font_add("8bitoperator_jve.ttf", 24, 0, 0, 32, 127);
+	global.main_font = fnt_main;
+	global.mainbig_font = fnt_mainbig;
 	
-    global.chapter = 4;
     global.darkzone = 1;
     global.filechoice = 0;
     global.plot = 0;
@@ -156,6 +155,7 @@ function scr_gamestart()
         global.chararmor2[i] = DRArmor.None;
         global.weaponstyle[i] = 0;
         global.charname[i] = " ";
+		global.charauto[i] = false;
         
         for (q = 0; q < 4; q += 1)
         {
@@ -169,7 +169,6 @@ function scr_gamestart()
             global.itemspecial[i][q] = 0;
             global.itemelement[i][q] = 0;
             global.itemelementamount[i][q] = 0;
-            global.charauto[i] = 0;
         }
         
         for (j = 0; j < 12; j += 1)
@@ -250,11 +249,11 @@ function scr_gamestart()
     global.msc = 0;
     global.msgno = 0;
     
-    /*for (i = 0; i < 10; i += 1)
+    for (i = 0; i < 10; i += 1)
     {
         global.writersnd[i] = snd_noise;
         global.writerimg[i] = spr_btact;
-        global.writerobj[i] = 1395;
+        global.writerobj[i] = obj_funnytext;
         global.writerobjsettinga[i] = 0;
         global.writerobjsettingb[i] = 0;
         global.writerobjx[i] = 0;
@@ -270,8 +269,8 @@ function scr_gamestart()
         global.smimagespeed[i] = 0;
         global.sminstance[i] = 4384738473;
         global.smcolor[i] = c_white;
-        global.smstring[i] = stringsetloc(" ", "scr_gamestart_slash_scr_gamestart_gml_282_0");
-    }*/
+        global.smstring[i] = " ";
+    }
     
     global.smalarm[1] = 15;
     global.smyy[1] = 70;
@@ -323,13 +322,15 @@ function scr_gamestart()
     global.choicemsg[1] = "No";
     global.choicemsg[2] = "Maybe";
     global.choicemsg[3] = "Don't know";
-    global.litem[0] = 0;
-    global.litemname[0] = " ";
-    global.phone[0] = 201;
-    global.phonename[0] = "Home";
+	
+    global.litem[0] = DRLightItem.None;
+	
+    global.phone[0] = DRPhoneNumbers.Home;
+	
     global.lcharname = "Kris";
-    global.lweapon = 2;
-    global.larmor = 3;
+    global.lweapon = DRLightItem.Pencil;
+    global.larmor = DRLightItem.Bandage;
+	
     global.lxp = 0;
     global.llv = 1;
     global.lgold = 2;
@@ -394,68 +395,4 @@ function scr_gamestart()
     global.cinstance[0] = 4854845464869464;
     global.cinstance[1] = 48548454648694644;
     global.cinstance[2] = 48548454648694649;
-}
-
-function scr_gamestart_chapter_override()
-{
-    global.plot = 0;
-    global.char[0] = DRCharacter.Kris;
-    global.char[1] = DRCharacter.Susie;
-    global.char[2] = DRCharacter.Ralsei;
-	
-    scr_litemremove(1);
-    scr_litemremove(4);
-    scr_litemremove(8);
-    scr_litemremove(9);
-    scr_litemremove(10);
-	
-    global.phone[1] = 0;
-    global.phone[2] = 0;
-	
-    scr_keyitemremove(DRKeyItem.Egg);
-    scr_keyitemremove(DRKeyItem.BrokenCake);
-    scr_keyitemremove(DRKeyItem.BrokenKeyA);
-    scr_keyitemremove(DRKeyItem.BrokenKeyB);
-    scr_keyitemremove(DRKeyItem.BrokenKeyC);
-	scr_keyitemremove(DRKeyItem.DoorKey);
-    scr_keyitemremove(DRKeyItem.Lancer);
-    scr_keyitemremove(DRKeyItem.RouxlsKaard);
-    scr_keyitemremove(DRKeyItem.EmptyDisk);
-    scr_keyitemremove(DRKeyItem.LoadedDisk);
-    scr_keyitemremove(DRKeyItem.KeyGen);
-    scr_keyitemremove(DRKeyItem.Starwalker);
-    scr_keyitemremove(DRKeyItem.PureCrystal);
-	
-    scr_itemremove(DRItem.Manual);
-    
-    if (global.flag[64] < 24)
-        global.flag[64] = 24;
-    
-    if (global.chapter == 3)
-    {
-        global.flag[1173] = 0;
-        global.flag[1174] = 0;
-        global.flag[1194] = 0;
-        global.flag[1196] = 0;
-        global.flag[1198] = 0;
-        
-        for (var i = 0; i < 20; i++)
-            global.battlegrade[i] = "Z";
-        
-        global.swordboardeath = 0;
-        // scr_funnytext_init_sounds();
-    }
-    
-    if (global.chapter > 2)
-    {
-        global.flag[7] = 0;
-        global.flag[9] = 1;
-        global.flag[10] = 1;
-        global.flag[16] = 0.85;
-        global.flag[17] = 0.6;
-        global.flag[20] = 0;
-        global.flag[21] = 0;
-        global.flag[31] = 1;
-        global.flag[32] = 0;
-    }
 }

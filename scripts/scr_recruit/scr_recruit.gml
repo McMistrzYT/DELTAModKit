@@ -511,9 +511,10 @@ function scr_get_chapter_recruit_data(chapter)
     var recruit_ids = [];
 	
 	switch (chapter) {
-		case 1: recruit_ids = [5, 6, 11, 13, 14, 15, 22, 23]; break;
-		case 2: recruit_ids = [30, 31, 32, 33, 34, 35, 36, 40, 42, 44]; break;
-		case 3: recruit_ids = [54, 55, 56, 57, 58, 59, 60, 61]; break;
+		//case 1: recruit_ids = [5, 6, 11, 13, 14, 15, 22, 23]; break;
+		//case 2: recruit_ids = [30, 31, 32, 33, 34, 35, 36, 40, 42, 44]; break;
+		//case 3: recruit_ids = [54, 55, 56, 57, 58, 59, 60, 61]; break;
+		default: recruit_ids = [ DREnemy.TestEnemy ]; break;
 	}
 	
     return recruit_ids;

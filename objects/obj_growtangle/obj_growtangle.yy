@@ -40,6 +40,9 @@
     "name":"spr_battlebg_0",
     "path":"sprites/spr_battlebg_0/spr_battlebg_0.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_battlebg_0",
+    "path":"sprites/spr_battlebg_0/spr_battlebg_0.yy",
+  },
   "visible":true,
 }

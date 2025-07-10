@@ -500,3 +500,232 @@ function scr_windowcaption(ch1_title)
     else
         window_set_caption("DELTARUNE Chapter " + string(global.chapter));
 }
+
+function d_arrow(arg0, arg1, arg2, arg3, arg4)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_arrow(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+}
+
+function d_circle(arg0, arg1, arg2, arg3)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_circle(arg0 + off, arg1 + off, arg2, arg3);
+}
+
+function d_circle_color(arg0, arg1, arg2, arg3, arg4, arg5)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_circle_color(arg0 + off, arg1 + off, arg2, arg3, arg4, arg5);
+}
+
+function d_circle_colour(arg0, arg1, arg2, arg3, arg4, arg5)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_circle_colour(arg0 + off, arg1 + off, arg2, arg3, arg4, arg5);
+}
+
+function d_ellipse(arg0, arg1, arg2, arg3, arg4)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_ellipse(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+}
+
+function d_ellipse_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_ellipse_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_ellipse_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_ellipse_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_line(arg0, arg1, arg2, arg3)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line(arg0 + off, arg1 + off, arg2 + off, arg3 + off);
+}
+
+function d_line_color(arg0, arg1, arg2, arg3, arg4, arg5)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5);
+}
+
+function d_line_colour(arg0, arg1, arg2, arg3, arg4, arg5)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5);
+}
+
+function d_line_width(arg0, arg1, arg2, arg3, arg4)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line_width(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+}
+
+function d_line_width_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line_width_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_line_width_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_line_width_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_point(arg0, arg1)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_point(arg0 + off, arg1 + off);
+}
+
+function d_point_color(arg0, arg1, arg2)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_point_color(arg0 + off, arg1 + off, arg2);
+}
+
+function d_point_colour(arg0, arg1, arg2)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_point_colour(arg0 + off, arg1 + off, arg2);
+}
+
+function d_rectangle(arg0, arg1, arg2, arg3, arg4)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_rectangle(arg0, arg1, arg2 + off, arg3 + off, arg4);
+}
+
+function d_rectangle_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_rectangle_color(arg0, arg1, arg2 + off, arg3 + off, arg4, arg5, arg6, arg7, arg8);
+}
+
+function d_rectangle_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_rectangle_colour(arg0, arg1, arg2 + off, arg3 + off, arg4, arg5, arg6, arg7, arg8);
+}
+
+function d_roundrect(arg0, arg1, arg2, arg3, arg4)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+}
+
+function d_roundrect_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_roundrect_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_roundrect_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect_ext(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+}
+
+function d_roundrect_color_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect_color_ext(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6, arg7, arg8);
+}
+
+function d_roundrect_colour_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_roundrect_colour_ext(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6, arg7, arg8);
+}
+
+function d_triangle(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_triangle(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4 + off, arg5 + off, arg6);
+}
+
+function d_triangle_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_triangle_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4 + off, arg5 + off, arg6, arg7, arg8, arg9);
+}
+
+function d_triangle_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_triangle_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4 + off, arg5 + off, arg6, arg7, arg8, arg9);
+}
+
+function d_path(arg0, arg1, arg2, arg3)
+{
+    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
+    draw_path(arg0, arg1 + off, arg2 + off, arg3);
+}
+
+function scr_movetowards(arg0, arg1, arg2)
+{
+    if (arg0 == arg1)
+        return arg0;
+    else if (arg0 > arg1)
+        return max(arg0 - arg2, arg1);
+    else
+        return min(arg0 + arg2, arg1);
+}
+
+function scr_make_color_hsv(arg0, arg1, arg2)
+{
+    var hue = arg0;
+    
+    if (hue < 0)
+        hue = 256 - (-hue % 256);
+    else
+        hue %= 256;
+    
+    return make_color_hsv(hue, arg1, arg2);
+}
+
+function scr_obj_movetowards_obj(arg0, arg1, arg2 = 0, arg3 = 0)
+{
+    scr_obj_movetowards_point(arg0.x + arg2, arg0.y + arg3, arg1);
+}
+
+function scr_obj_movetowards_point(arg0, arg1, arg2)
+{
+    var _distance = point_distance(x, y, arg0, arg1);
+    
+    if (arg2 >= _distance)
+    {
+        x = arg0;
+        y = arg1;
+    }
+    else
+    {
+        var _direction = point_direction(x, y, arg0, arg1);
+        x += lengthdir_x(arg2, _direction);
+        y += lengthdir_y(arg2, _direction);
+    }
+}
+
+function scr_onscreen_tolerance(arg0, arg1)
+{
+    obj = arg0;
+    spacer = arg1;
+    
+    if ((obj.x + obj.sprite_width + spacer) < camerax() || (obj.x - spacer) > (camerax() + 640) || (obj.y + obj.sprite_height + spacer) < cameray() || (obj.y - spacer) > (cameray() + 480))
+        return false;
+    else
+        return true;
+}
