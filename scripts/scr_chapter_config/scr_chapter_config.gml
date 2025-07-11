@@ -1,9 +1,22 @@
 function scr_chapter_config() {
 	global.chapter = 4;
-	global.versionno = "v0.90-modkit-2";
+	global.versionno = "v0.90-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
 	global.isStartingRoomDarkWorld = false;
+}
+
+function scr_chapter_get_recruit_color() {
+	var chapter = recruitChapter[menuCoord[1]];
+	
+	switch (chapter) {
+		case 1: return c_purple;
+		case 2: return c_aqua;
+		case 3: return c_green;
+		case 4: return c_blue;
+	}
+	
+	return c_black;
 }
 
 function scr_gamestart_chapter_override()

@@ -1,3 +1,17 @@
+function scr_get_input_name(arg0)
+{
+    var _control = "[?]";
+    
+    var left_bracket = (global.lang == "en") ? "[" : "[";
+    var right_bracket = (global.lang == "en") ? "]" : "]";
+    _control = left_bracket + global.asc_def[global.input_k[arg0]] + right_bracket;
+    
+    if (!is_string(_control))
+        _control = "[?]";
+    else
+        return _control;
+}
+
 function scr_getbuttonsprite(arg0, arg1)
 {
     var control = arg0;

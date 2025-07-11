@@ -40,19 +40,7 @@ if (type == 3 && init == 1)
             ossafe_fill_rectangle(xx + 334, yy + 14, (xx + 620) - 4, (yy + 440) - 4, false);
         }
         
-        reccolor = c_black;
-        
-        if (recruitChapter[menuCoord[0]] == 1)
-            reccolor = c_purple;
-        
-        if (recruitChapter[menuCoord[0]] == 2)
-            reccolor = c_aqua;
-        
-        if (recruitChapter[menuCoord[0]] == 3)
-            reccolor = c_green;
-        
-        if (recruitChapter[menuCoord[0]] == 4)
-            reccolor = c_blue;
+        reccolor = scr_chapter_get_recruit_color();
         
         ossafe_fill_rectangle_color(xx + 370, yy + 75, xx + 370 + 205, yy + 75 + 150, 0, 0, reccolor, reccolor, false);
         draw_set_color(c_white);
@@ -80,25 +68,25 @@ if (type == 3 && init == 1)
         
         if (alternateMenu == 0)
         {
-            if (global.is_console || obj_gamecontroller.gamepad_active)
+            /*if (global.is_console || obj_gamecontroller.gamepad_active)
             {
                 draw_sprite_ext(scr_getbuttonsprite(global.input_g[4], false), 0, xx + 380, yy + 323, 2, 2, 0, c_white, 1);
                 draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, xx + 380, yy + 353, 2, 2, 0, c_white, 1);
                 draw_text(xx + 414, yy + 320, string_hash_to_newline("More Info"));
                 draw_text(xx + 414, yy + 350, string_hash_to_newline("Quit"));
             }
-            else
+            else*/
             {
                 draw_text(xx + 380, yy + 320, string_hash_to_newline(stringsetsub("~1: More Info#~2: Quit", scr_get_input_name(4), scr_get_input_name(5))));
             }
         }
-        else if (global.is_console || obj_gamecontroller.gamepad_active)
+        /*else if (global.is_console || obj_gamecontroller.gamepad_active)
         {
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[4], false), 0, xx + 380, yy + 323, 2, 2, 0, c_white, 1);
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, xx + 380, yy + 353, 2, 2, 0, c_white, 1);
             draw_text(xx + 414, yy + 320, string_hash_to_newline("More Info"));
             draw_text(xx + 414, yy + 350, string_hash_to_newline("Quit"));
-        }
+        }*/
         else
         {
             draw_text(xx + 380, yy + 320, string_hash_to_newline(stringsetsub("~1: More Info#~2: Quit", scr_get_input_name(4), scr_get_input_name(5))));
@@ -115,19 +103,7 @@ if (type == 3 && init == 1)
     
     if (menu == 1)
     {
-        reccolor = c_black;
-        
-        if (recruitChapter[menuCoord[1]] == 1)
-            reccolor = c_purple;
-        
-        if (recruitChapter[menuCoord[1]] == 2)
-            reccolor = c_aqua;
-        
-        if (recruitChapter[menuCoord[1]] == 3)
-            reccolor = c_green;
-        
-        if (recruitChapter[menuCoord[1]] == 4)
-            reccolor = c_blue;
+        reccolor = scr_chapter_get_recruit_color();
         
         ossafe_fill_rectangle_color(xx + 80, yy + 70, xx + 80 + 205, yy + 70 + 150, 0, 0, reccolor, reccolor, false);
         draw_set_color(c_white);
@@ -139,11 +115,11 @@ if (type == 3 && init == 1)
         animer += 0.25;
         draw_sprite_ext(recruitSprite[menuCoord[1]], animer, xx + 180 + rx, yy + 215 + ry, 2, 2, 0, c_white, 1);
         
-        if (recruitSprite[menuCoord[1]] == spr_werewire_idle)
+        /*if (recruitSprite[menuCoord[1]] == spr_werewire_idle)
         {
             draw_sprite_ext(spr_werewire_wire_curve, 0, (xx + 180 + rx) - 20, (yy + 215 + ry) - 12, 2, 2, 0, c_white, 1);
             draw_sprite_ext(spr_werewire_wire_vertical, 0, (xx + 180 + rx) - 20, (yy + 215 + ry) - 12 - 31, 2, 8, 0, c_white, 1);
-        }
+        }*/
         
         draw_set_color(c_white);
         draw_text(xx + 300, yy + 70, recruitName[menuCoord[1]]);
@@ -219,12 +195,12 @@ if (type == 3 && init == 1)
         {
             if (recruitPlaceable[menuCoord[1]])
             {
-                if (global.is_console || obj_gamecontroller.gamepad_active)
+                /*if (global.is_console || obj_gamecontroller.gamepad_active)
                 {
                     draw_sprite_ext(scr_getbuttonsprite(global.input_g[4], false), 0, xx + 80, yy + 402, 2, 2, 0, c_white, 1);
                     draw_text(xx + 114, yy + 400, "Place");
                 }
-                else
+                else*/
                 {
                     draw_text(xx + 80, yy + 400, stringsetsub("~1: Place", scr_get_input_name(4)));
                 }
@@ -237,23 +213,23 @@ if (type == 3 && init == 1)
             
             draw_set_color(c_white);
             
-            if (global.is_console || obj_gamecontroller.gamepad_active)
+            /*if (global.is_console || obj_gamecontroller.gamepad_active)
             {
                 draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, xx + 320, yy + 402, 2, 2, 0, c_white, 1);
                 draw_text(xx + 354, yy + 400, "Return");
             }
-            else
+            else*/
             {
                 draw_text(xx + 320, yy + 400, stringsetsub("~1: Return", scr_get_input_name(5)));
             }
         }
-        else if (global.is_console || obj_gamecontroller.gamepad_active)
+        /*else if (global.is_console || obj_gamecontroller.gamepad_active)
         {
             var button_x = (global.lang == "en") ? (xx + 165) : (xx + 84);
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, button_x, yy + 402, 2, 2, 0, c_white, 1);
             var x_offset = (global.lang == "en") ? 0 : 38;
             draw_text(xx + 80 + x_offset, yy + 400, string_hash_to_newline("Press         to Return"));
-        }
+        }*/
         else
         {
             draw_text(xx + 80, yy + 400, stringsetsub("Press ~1 to Return", scr_get_input_name(5)));
