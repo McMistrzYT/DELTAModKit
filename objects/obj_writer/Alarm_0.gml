@@ -104,3 +104,5 @@ if (reachedend_sound_play)
     if (reachedend && !reachedend_sound_played)
         playsound = 0;
 }
+
+if playsound scr_textsound()

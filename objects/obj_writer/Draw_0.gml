@@ -78,7 +78,7 @@ if (view_current == 0)
     wy = writingy;
     colorchange = 0;
     draw_set_font(myfont);
-    draw_set_color(c_white);
+    draw_set_color(mycolor);
     
     if (fadeonend != 0)
     {
@@ -300,6 +300,184 @@ if (view_current == 0)
             
             if (nextchar == "T")
             {
+                if (nextchar2 == "0")
+                {
+                    global.typer = 5;
+                    
+                    if (global.darkzone == 1)
+                        global.typer = 6;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "1")
+                {
+                    global.typer = 2;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "A")
+                {
+                    global.typer = 18;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "a")
+                {
+                    global.typer = 20;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "N")
+                {
+                    global.typer = 12;
+                    
+                    if (global.darkzone == 1)
+                        global.typer = 56;
+                    
+                    if (global.fighting == 1)
+                        global.typer = 59;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "n")
+                {
+                    global.typer = 23;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "B")
+                {
+                    global.typer = 13;
+                    
+                    if (global.darkzone == 1)
+                        global.typer = 57;
+                    
+                    if (global.fighting == 1)
+                        global.typer = 77;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "S")
+                {
+                    global.typer = 10;
+                    
+                    if (global.darkzone == 1)
+                    {
+                        global.typer = 30;
+                        
+                        if (global.fighting == 1)
+                            global.typer = 47;
+                    }
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "R")
+                {
+                    global.typer = 31;
+                    
+                    if (global.fighting == 1)
+                        global.typer = 45;
+                    
+                    if (global.flag[30] == 1)
+                        global.typer = 6;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "L")
+                {
+                    global.typer = 32;
+                    
+                    if (global.fighting == 1)
+                        global.typer = 46;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "X")
+                {
+                    global.typer = 40;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "r")
+                {
+                    global.typer = 55;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "T")
+                {
+                    global.typer = 7;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "J")
+                {
+                    global.typer = 35;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "K")
+                {
+                    global.typer = 33;
+                    
+                    if (global.chapter == 1)
+                    {
+                        if (global.plot < 235)
+                            global.typer = 36;
+                    }
+                    
+                    if (global.fighting == 1)
+                        global.typer = 48;
+                    
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "q")
+                {
+                    global.typer = 62;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "Q")
+                {
+                    global.typer = 58;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "s")
+                {
+                    global.typer = 14;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "U")
+                {
+                    global.typer = 17;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "p")
+                {
+                    global.typer = 67;
+                    scr_texttype();
+                }
+                
+                if (nextchar2 == "v")
+                {
+                    global.typer = 80;
+                    
+                    if (global.fighting == 1)
+                        global.typer = 81;
+                    
+                    scr_texttype();
+                }
+                
                 if (dialoguer == 1)
                 {
                     if (global.fc == 0)
