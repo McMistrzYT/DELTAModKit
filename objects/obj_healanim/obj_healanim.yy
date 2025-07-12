@@ -35,5 +35,5 @@
     "path":"sprites/spr_sparestar_anim/spr_sparestar_anim.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }
