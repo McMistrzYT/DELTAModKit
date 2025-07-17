@@ -40,7 +40,7 @@ function scr_textsound()
 {
     playtextsound = true;
     
-    if (button2_h() == true) // why toby, true is already true, isn't it?
+    if (button2_h() == true) // true is already true, isn't it toby????
     {
         var dontplaysound = true;
         
@@ -89,20 +89,20 @@ function scr_textsound()
                 play = false;
             }
         }
-        
-		var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
+
+        // Lower the Amount of If Statements (Also allows for Easily adding more letters to the blacklist, rather than having to do a lot of CtrlC+CtrlV)
+	var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
 		
         var i = 0
-		while i < array_length(soundblacklist)
+	while i < array_length(soundblacklist)
+	{
+		if getchar == soundblacklist[i]
 		{
-			if getchar == soundblacklist[i]
-			{
-				play = false;
-				break;
-			}
-			i++
+			play = false;
+			break;
 		}
-        
+		i++
+	}
         
         if (play == true)
         {
@@ -126,26 +126,6 @@ function scr_textsound()
                 audio_stop_sound(snd_txtsans);
                 qv = snd_play(snd_txtsans);
                 sound_timer = 2;
-            }
-            else if (textname == "snd_txtjack_high_cute" || textname == "snd_txtjack_low2")
-            {
-                if (textname == "snd_txtjack_high_cute")
-                {
-                    audio_stop_sound(snd_txtjack_high_cute);
-                    qv = snd_play(snd_txtjack_high_cute);
-                    qp = 0.75 + random(0.5);
-                    snd_pitch(qv, qp);
-                    sound_timer = 3;
-                }
-                
-                if (textname == "snd_txtjack_low2")
-                {
-                    audio_stop_sound(snd_txtjack_low2);
-                    qv = snd_play(snd_txtjack_low2);
-                    qp = 0.75 + random(0.5);
-                    snd_pitch(qv, qp);
-                    sound_timer = 3;
-                }
             }
             else
             {
@@ -528,41 +508,9 @@ function scr_texttype()
             extra_ja_vspace = 2;
             break;
         
-        case 82:
-        
-            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtjack_high_cute", 16, 36, true);
-            break;
-        
-        case 83:
-        
-            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtjack_low2", 16, 36, true);
-            break;
-        
-        case 84:
-        
-            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_tv_voice_short", 16, 36, true);
-            break;
-        
-        case 85:
-        
-            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txger", 16, 36, true);
-            break;
-        
-        case 86:
-        
-            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txger", 9, 20, false);
-            extra_ja_vspace = 2;
-            break;
-        
         case 87:
         
             scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtcar", 8, 18, false);
-            break;
-        
-        case 88:
-        
-            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtjack_low2", 9, 20, false);
-            extra_ja_vspace = 2;
             break;
         
         case 666:
