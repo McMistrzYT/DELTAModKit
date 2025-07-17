@@ -36,113 +36,6 @@ function scr_84_get_font(fontname, startwithfnt = true, localizedfont = true)
 	    return -1; // -1 is the default font for Gamemaker Studio 2.
 }
 
-function scr_textsound()
-{
-    playtextsound = true;
-    
-    if (button2_h() == true) // true is already true, isn't it toby????
-    {
-        var dontplaysound = true;
-        
-        if (variable_instance_exists(id, "runcheck"))
-        {
-            if (runcheck)
-            {
-                dontplaysound = false;
-            }
-        }
-        
-        if (dontplaysound)
-        {
-            playtextsound = false;
-        }
-    }
-    
-    if (skippable == false)
-    {
-        playtextsound = true;
-    }
-    
-    if (playtextsound == true)
-    {
-        if (rate <= 2)
-        {
-            getchar = string_char_at(mystring, pos);
-        }
-        else
-        {
-            getchar = string_char_at(mystring, pos - 1);
-        }
-        
-        play = true;
-        playcheck = false;
-        
-        if (getchar == "&" || getchar == "\n")
-        {
-            if (rate < 3)
-            {
-                playcheck = true;
-                getchar = string_char_at(mystring, pos + 1);
-            }
-            else
-            {
-                play = false;
-            }
-        }
-
-        // Lower the Amount of If Statements (Also allows for Easily adding more letters to the blacklist, rather than having to do a lot of CtrlC+CtrlV)
-	var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
-		
-        var i = 0
-	while i < array_length(soundblacklist)
-	{
-		if getchar == soundblacklist[i]
-		{
-			play = false;
-			break;
-		}
-		i++
-	}
-        
-        if (play == true)
-        {
-	    var textname = audio_get_name(textsound)
-            if (textname == "snd_txtq")
-            {
-                audio_stop_sound(snd_txtq_2);
-                qv = snd_play(snd_txtq_2);
-                qp = 0.9 + random(0.15);
-                snd_pitch(qv, qp);
-                sound_timer = 2;
-            }
-            else if (textname == "snd_txtspam")
-            {
-                audio_stop_sound(snd_txtspam2);
-                snd_play_x(snd_txtspam2, 0.8, 1.2);
-                sound_timer = 2;
-            }
-            else if (textname == "snd_txtsans")
-            {
-                audio_stop_sound(snd_txtsans);
-                qv = snd_play(snd_txtsans);
-                sound_timer = 2;
-            }
-            else
-            {
-                snd_play(textsound);
-            }
-            
-            with (obj_face_parent)
-            {
-                mouthmove = true;
-            }
-            
-            miniface_pos++;
-        }
-    }
-}
-
-
 function scr_texttype()
 {
     var font_set = true;
@@ -576,5 +469,111 @@ function scr_texttype()
         }
         
         vspace += extra_ja_vspace;
+    }
+}
+
+function scr_textsound()
+{
+    playtextsound = true;
+    
+    if (button2_h() == true) // true is already true, isn't it toby????
+    {
+        var dontplaysound = true;
+        
+        if (variable_instance_exists(id, "runcheck"))
+        {
+            if (runcheck)
+            {
+                dontplaysound = false;
+            }
+        }
+        
+        if (dontplaysound)
+        {
+            playtextsound = false;
+        }
+    }
+    
+    if (skippable == false)
+    {
+        playtextsound = true;
+    }
+    
+    if (playtextsound == true)
+    {
+        if (rate <= 2)
+        {
+            getchar = string_char_at(mystring, pos);
+        }
+        else
+        {
+            getchar = string_char_at(mystring, pos - 1);
+        }
+        
+        play = true;
+        playcheck = false;
+        
+        if (getchar == "&" || getchar == "\n")
+        {
+            if (rate < 3)
+            {
+                playcheck = true;
+                getchar = string_char_at(mystring, pos + 1);
+            }
+            else
+            {
+                play = false;
+            }
+        }
+
+        // Lower the Amount of If Statements (Also allows for Easily adding more letters to the blacklist, rather than having to do a lot of CtrlC+CtrlV)
+	var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
+		
+        var i = 0
+	while i < array_length(soundblacklist)
+	{
+		if getchar == soundblacklist[i]
+		{
+			play = false;
+			break;
+		}
+		i++
+	}
+        
+        if (play == true)
+        {
+	    var textname = audio_get_name(textsound)
+            if (textname == "snd_txtq")
+            {
+                audio_stop_sound(snd_txtq_2);
+                qv = snd_play(snd_txtq_2);
+                qp = 0.9 + random(0.15);
+                snd_pitch(qv, qp);
+                sound_timer = 2;
+            }
+            else if (textname == "snd_txtspam")
+            {
+                audio_stop_sound(snd_txtspam2);
+                snd_play_x(snd_txtspam2, 0.8, 1.2);
+                sound_timer = 2;
+            }
+            else if (textname == "snd_txtsans")
+            {
+                audio_stop_sound(snd_txtsans);
+                qv = snd_play(snd_txtsans);
+                sound_timer = 2;
+            }
+            else
+            {
+                snd_play(textsound);
+            }
+            
+            with (obj_face_parent)
+            {
+                mouthmove = true;
+            }
+            
+            miniface_pos++;
+        }
     }
 }
