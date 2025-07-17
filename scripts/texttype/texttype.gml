@@ -19,7 +19,7 @@ function scr_textsetup(font, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg
     hspace = arg8;
     vspace = arg9;
     special = arg10;
-    colorchange = 1;
+    colorchange = true;
     xcolor = mycolor;
 }
 
