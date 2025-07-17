@@ -1,4 +1,4 @@
-if (init == 0)
+if (init == false)
 {
     switch (image_index)
     {
@@ -34,5 +34,5 @@ if (init == 0)
     if (image_index != 0)
         doorEntrance = image_index;
     
-    init = 1;
+    init = true;
 }
