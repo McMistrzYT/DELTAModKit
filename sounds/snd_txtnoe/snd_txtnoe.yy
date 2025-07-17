@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_txtnoe",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.04328798,
+  "exportDir":"",
+  "name":"snd_txtnoe",
+  "parent":{
+    "name":"Dialogue",
+    "path":"folders/DELTARUNE/Sounds/Dark/Dialogue.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_txtnoe.wav",
+  "volume":1.0,
+}

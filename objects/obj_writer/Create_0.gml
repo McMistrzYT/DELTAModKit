@@ -88,3 +88,4 @@ alarm[0] = rate;
 
 if (rate < 3)
     alarm[2] = 1;
+else scr_textsound();

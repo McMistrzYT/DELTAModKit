@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_custommenu",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_custommenu",
+  "parent":{
+    "name":"Menus",
+    "path":"folders/DELTARUNE/Scripts/Menus.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
