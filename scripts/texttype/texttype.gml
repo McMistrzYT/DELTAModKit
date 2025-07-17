@@ -1,18 +1,39 @@
-function scr_textsetup(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
+function scr_textsetup(font, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
 {
-    myfont = arg0;
+    myfont = font;
     mycolor = arg1;
     writingx = arg2;
     writingy = arg3;
     charline = arg4;
     shake = arg5;
     rate = arg6;
-    textsound = arg7;
+    
+    if is_real(arg7)
+        textsound = arg7
+    else if is_string(arg7)
+        textsound = asset_get_index(arg7);
+    else
+        textsound = snd_error; // Incase if not valid.
+	if !audio_exists(textsound)
+		textsound = snd_error
     hspace = arg8;
     vspace = arg9;
     special = arg10;
     colorchange = 1;
     xcolor = mycolor;
+}
+
+function scr_84_get_font(fontname, startwithfnt = true, localizedfont = true)
+{
+	var start = (startwithfnt ? "fnt_" : ""); // incase if there's an Custom Font that DOESNT Start with `fnt_`
+	var fnten = asset_get_index(start + fontname);
+	var fnt = asset_get_index(start + (global.lang == "en" ? "" : string(global.lang) + "_") + fontname);
+	if font_exists(fnt) && localizedfont == true // Localization font toggle, even though if you're using this function you're likely using Localization.
+		return fnt;
+	else if font_exists(fnten)
+		return fnten;
+	else
+		return -1; // -1 is the default font for Gamemaker Studio 2.
 }
 
 
@@ -25,367 +46,459 @@ function scr_texttype()
     switch (global.typer)
     {
         case 0:
+        
             font_set = false;
             break;
         
         case 1:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 109, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_text", 8, 18, false);
             break;
         
         case 2:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 373, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_nosound", 8, 18, false);
             break;
         
         case 3:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 109, 8, 18, 1);
+        
+            scr_textsetup(scr_84_get_font("main"), 0xFFFFFF, x, y, 33, 0, 2, "snd_text", 8, 18, true);
             break;
         
         case 4:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 109, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_text", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 5:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 109, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_text", 8, 18, false);
             break;
         
         case 6:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 109, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_text", 16, 36, true);
             break;
         
         case 7:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 136, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txttor", 8, 18, false);
             break;
         
         case 8:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 136, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_txttor", 8, 18, false);
             break;
         
         case 10:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 128, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtsus", 8, 18, false);
             break;
         
         case 11:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 128, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtsus", 8, 18, false);
             break;
         
         case 12:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 129, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtnoe", 8, 18, false);
             break;
         
         case 13:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 130, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtber", 8, 18, false);
             break;
         
         case 14:
-            scr_textsetup(global.main_font/*scr_84_get_font("comicsans")*/, 16777215, x, y, 33, 0, 1, 126, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("comicsans"), c_white, x, y, 33, 0, 1, "snd_txtsans", 8, 18, false);
             break;
         
         case 15:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 109, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_text", 8, 18, false);
             break;
         
         case 16:
+        
             font_set = false;
             break;
         
         case 17:
-            if (global.darkzone == 1)
-                scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 127, 16, 36, 1);
-            else
-                scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 127, 8, 18, 0);
-            
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtund", 8, 18, false);
             break;
         
         case 18:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 124, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtasg", 8, 18, false);
             break;
         
         case 19:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 109, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_text", 8, 18, false);
             break;
         
         case 20:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 135, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtal", 8, 18, false);
             break;
         
         case 21:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 135, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtal", 8, 18, false);
             break;
         
         case 22:
-            scr_textsetup(fnt_tinynoelle/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 135, 6, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("tinynoelle"), c_white, x, y + 7, 33, 0, 1, "snd_txtal", 6, 18, false);
             break;
         
         case 23:
-            scr_textsetup(fnt_tinynoelle/*scr_84_get_font("tinynoelle")*/, 16777215, x, y + 7, 33, 0, 1, 129, 6, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("tinynoelle"), c_white, x, y + 7, 33, 0, 1, "snd_txtnoe", 6, 18, false);
             break;
         
         case 30:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 128, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtsus", 16, 36, true);
             break;
         
         case 31:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 131, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtral", 16, 36, true);
             break;
         
         case 32:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 134, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtlan", 16, 36, true);
             break;
         
         case 33:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 219, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_dadtxt", 16, 36, true);
             break;
         
         case 35:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 133, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtjok", 16, 36, true);
             break;
         
         case 36:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 373, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_nosound", 16, 36, true);
             break;
         
         case 37:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 3, 128, 18, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 3, "snd_txtsus", 18, 36, true);
             break;
         
         case 40:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 373, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_nosound", 8, 18, false);
             break;
         
         case 41:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 3, 373, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 3, "snd_nosound", 8, 18, false);
             break;
         
         case 42:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 2, 373, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 2, "snd_nosound", 16, 36, true);
             break;
         
         case 45:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 131, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtral", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 46:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 134, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtlan", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 47:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 128, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtsus", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 48:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 219, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_dadtxt", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 50:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 109, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_text", 9, 20, false);
             break;
         
         case 51:
+        
             var rate = langopt(10, 14);
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, rate, 109, 16, 36, 1);
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, rate, "snd_text", 16, 36, true);
             break;
         
         case 52:
+        
             var rate = langopt(6, 4);
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, rate, 109, 16, 36, 1);
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, rate, "snd_text", 16, 36, true);
             break;
         
         case 53:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtsus", 9, 20, false);
             break;
         
         case 54:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 2, 128, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 2, "snd_txtsus", 9, 20, false);
             break;
         
         case 55:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 1, 132, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtrud", 8, 18, false);
             break;
         
         case 56:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 129, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtnoe", 16, 36, true);
             break;
         
         case 57:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 130, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtber", 16, 36, true);
             break;
         
         case 58:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 68, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtq", 16, 36, true);
             break;
         
         case 59:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 129, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtnoe", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 60:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 131, 12, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_txtral", 12, 20, false);
             break;
         
         case 61:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 128, 12, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_txtsus", 12, 20, false);
             break;
         
         case 62:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 137, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtq_2", 16, 36, true);
             break;
         
         case 63:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 129, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_txtnoe", 8, 18, false);
             break;
         
         case 64:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 1, 2, 129, 8, 18, 0);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 1, 2, "snd_txtnoe", 8, 18, false);
             break;
         
         case 65:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 140, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtrx1", 16, 36, true);
             break;
         
         case 66:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 138, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtspam", 16, 36, true);
             break;
         
         case 67:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 139, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtspam2", 16, 36, true);
             break;
         
         case 68:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 138, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtspam", 9, 20, false);
             break;
         
         case 69:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 130, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtber", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 70:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtq", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 71:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 68, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtq", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 72:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 139, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtspam2", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 74:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 131, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtral", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 75:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 128, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtsus", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 76:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 129, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtnoe", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 77:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 130, 16, 28, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtber", 16, 28, true);
             extra_ja_vspace = 2;
             break;
         
         case 78:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 36, 0, 1, 109, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 36, 0, 1, "snd_text", 16, 36, true);
             break;
         
         case 79:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 45, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 2, "snd_txtsus", 18, 36, true);
             break;
         
         case 80:
-            scr_textsetup(global.mainbig_font, 16777215, x, y, 33, 0, 1, 476, 16, 36, 1);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_nosound", 8, 18, false);
             break;
         
         case 81:
-            scr_textsetup(fnt_dotumche/*scr_84_get_font("dotumche")*/, 0, x, y, 33, 0, 1, 476, 9, 20, 0);
+        
+            scr_textsetup(scr_84_get_font("dotumche"), c_white, x, y, 33, 0, 1, "snd_nosound", 9, 20, false);
+            extra_ja_vspace = 2;
+            break;
+        
+        case 82:
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtjack_high_cute", 16, 36, true);
+            break;
+        
+        case 83:
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txtjack_low2", 16, 36, true);
+            break;
+        
+        case 84:
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_tv_voice_short", 16, 36, true);
+            break;
+        
+        case 85:
+        
+            scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_txger", 16, 36, true);
+            break;
+        
+        case 86:
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txger", 9, 20, false);
+            extra_ja_vspace = 2;
+            break;
+        
+        case 87:
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, "snd_txtcar", 8, 18, false);
+            break;
+        
+        case 88:
+        
+            scr_textsetup(scr_84_get_font("dotumche"), 0, x, y, 33, 0, 1, "snd_txtjack_low2", 9, 20, false);
             extra_ja_vspace = 2;
             break;
         
         case 666:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 4, 373, 12, 20, 2);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 4, "snd_nosound", 12, 20, 2);
             break;
         
         case 667:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 2, 373, 12, 20, 2);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 2, "snd_nosound", 12, 20, 2);
             break;
         
         case 999:
-            scr_textsetup(global.main_font, 16777215, x, y, 33, 0, 4, 370, 8, 18, 3);
+        
+            scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 4, "snd_txtecho", 8, 18, 3);
             break;
         
         case 100:
-            scr_textsetup(fnt_8bit/*scr_84_get_font("8bit")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
-            
-            if (room == room_board_preshadowmantle || room == room_shadowmantle || room == room_board_dungeon_2)
-                scr_textsetup(fnt_8bit/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
-            
-            break;
         
-        case 101:
-            scr_textsetup(fnt_8bit/*scr_84_get_font("8bit_mixed")*/, 16777215, x, y, 22, 0, 1, 109, 16, 20, 0);
+            scr_textsetup(scr_84_get_font("8bit"), c_white, x, y, 22, 0, 1, "snd_text", 16, 20, false);
             break;
         
         default:
+        
             font_set = false;
             break;
     }
     
     if (font_set && global.lang == "ja")
     {
-        if (myfont == 15)
+		var fntname = font_get_name(myfont)
+		
+        if (fntname == "fnt_ja_main")
         {
             hspace = ((hspace * 26) / 16) + 1;
             
             if (vspace == 32)
+            {
                 vspace = 36;
+            }
         }
-        else if (myfont == 12)
+        else if (fntname == "fnt_ja_mainbig")
         {
             hspace = ((hspace * 13) / 8) + 1;
         }
-        else if (myfont == 10)
+        else if (fntname == "fnt_ja_comicsans")
         {
             textscale = 0.5;
             hspace = ((hspace * 13) / 8) + 3;
         }
-        else if (myfont == 14)
+        else if (fntname == "fnt_ja_tinynoelle")
         {
             textscale = 0.5;
             hspace = ((hspace * 13) / 8) + 1;
         }
-        else if (myfont == 11)
+        else if (fntname == "fnt_ja_dotumche")
         {
             hspace = ((hspace * 26) / 16) + 1;
         }
-        else if (myfont == 13)
+        else if (fntname == "fnt_ja_small")
         {
             hspace = ((hspace * 13) / 8) + 1;
-        }
-        else if (myfont == 3)
-        {
-            hspace = (hspace * 13) / 13;
-            vspace = 20;
-        }
-        else if (myfont == 2)
-        {
-            hspace = (hspace * 13) / 10;
-            vspace = 32;
         }
         
         vspace += extra_ja_vspace;
