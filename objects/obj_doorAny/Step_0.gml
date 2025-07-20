@@ -26,7 +26,7 @@ if (init == false)
             doorRoom = room - 3;
             break;
         
-        default
+        default:
 		doorRoom = room;
             break;
     }
