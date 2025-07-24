@@ -1,4 +1,4 @@
-if (init == 0)
+if (init == false)
 {
     switch (image_index)
     {
@@ -37,5 +37,5 @@ if (init == 0)
     {
     }
     
-    init = 1;
+    init = true;
 }
