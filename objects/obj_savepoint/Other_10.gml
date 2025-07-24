@@ -9,7 +9,33 @@ global.fe = 0;
 global.interact = 1;
 nodialogue = 1;
 
-scr_save_point_text();
+if CUSTOM
+{
+	nodialogue = false
+	if CUSTOM_TEXT = noone
+		nodialogue = true
+	else if is_array(CUSTOM_TEXT)
+	{
+		var i = 0
+		while i < array_length(CUSTOM_TEXT)
+		{
+			global.msg[i] = CUSTOM_TEXT[i]
+			i++
+		
+			if i == array_length(CUSTOM_TEXT)
+			{
+				global.msg[i] = "%%"
+			}
+		}
+	}
+	else if is_string(CUSTOM_TEXT)
+	{
+		global.msg[0] = CUSTOM_TEXT
+		global.msg[1] = "%%"
+	}
+}
+else
+	scr_save_point_text();
 
 myinteract = 3;
 
