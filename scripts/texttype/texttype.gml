@@ -1,24 +1,20 @@
-function scr_textsetup(font, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
+function scr_textsetup(font, textcolor, startx, starty, maxtextwidth, shaking, txtspd, sound, htextspacing, vtextspacing, specialtype)
 {
     myfont = font;
-    mycolor = arg1;
-    writingx = arg2;
-    writingy = arg3;
-    charline = arg4;
-    shake = arg5;
-    rate = arg6;
-    
-    if is_real(arg7)
-        textsound = arg7;
-    else if is_string(arg7)
-        textsound = asset_get_index(arg7);
-    else
-        textsound = snd_error; 
-     if !audio_exists(textsound)
-	textsound = snd_error;
-    hspace = arg8;
-    vspace = arg9;
-    special = arg10;
+    mycolor = textcolor;
+    writingx = startx;
+    writingy = starty;
+    charline = maxtextwidth;
+    shake = shaking;
+    rate = txtspd;
+    textsound = sound;
+    else if is_string(sound)
+        textsound = asset_get_index(sound);
+    if !audio_exists(textsound)
+        textsound = snd_text; 
+    hspace = htextspacing;
+    vspace = vtextspacing;
+    special = specialtype;
     colorchange = true;
     xcolor = mycolor;
 }
@@ -427,8 +423,22 @@ function scr_texttype()
             break;
         
         default:
-        
-            font_set = false;
+		var data = getcustomtyper(string(global.typer), false);
+		
+		if data == false
+		{
+			font_set = false;
+			break;
+		}
+		var i = 0;
+		var datanames = variable_struct_get_names(data);
+		while i < array_length(datanames)
+		{
+			variable_struct_set(self, datanames[i], variable_struct_get(data, datanames[i]));
+			i++;
+		}
+		writingx += x;
+		writingy += y;
             break;
     }
     
@@ -576,4 +586,38 @@ function scr_textsound()
             miniface_pos++;
         }
     }
+}
+
+
+variable_global_set("%%CUSTOMTYPERS%%", {})
+
+function createcustomtyper(FONTKEY, font, textcolor, startx, starty, maxtextwidth, shaking, txtspd, sound, htextspacing, vtextspacing, specialtype){
+	var newtype = {}
+	with newtype
+	{
+		scr_textsetup(font, textcolor, startx, starty, maxtextwidth, shaking, txtspd, sound, htextspacing, vtextspacing, specialtype)
+	}
+	variable_struct_set(variable_global_get("%%CUSTOMTYPERS%%"), FONTKEY, newtype)
+	return newtype
+}
+
+createcustomtyper("FALLBACKTYPER", scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_text", 16, 36, true)
+
+function getcustomtyper(FONTKEY, fallback = true)
+{
+	var custypers = variable_global_get("%%CUSTOMTYPERS%%")
+	if variable_struct_exists(custypers, FONTKEY)
+	{
+		return variable_struct_get(custypers, FONTKEY)
+	}
+	else if FONTKEY != "FALLBACKTYPER" && fallback
+		return getcustomtyper("FALLBACKTYPER")
+	else
+	{
+		if fallback
+		{
+			return show_error("FALLBACK KEY TYPER IS MISSING", true)
+		}
+	}
+	return false
 }
