@@ -21,6 +21,8 @@ function scr_textsetup(font, textcolor, startx, starty, maxtextwidth, shaking, t
 
 function scr_84_get_font(fontname, startwithfnt = true, localizedfont = true)
 {
+	if !variable_global_exists("lang")
+		global.lang = "en"
 	var start = (startwithfnt ? "fnt_" : ""); // incase if there's an Custom Font that DOESNT Start with `fnt_`
 	var fnten = asset_get_index(start + fontname);
 	var fnt = asset_get_index(start + (global.lang == "en" ? "" : string(global.lang) + "_") + fontname);
@@ -601,7 +603,7 @@ function createcustomtyper(FONTKEY, font, textcolor, startx, starty, maxtextwidt
 	return newtype
 }
 
-createcustomtyper("FALLBACKTYPER", scr_84_get_font("mainbig"), c_white, x, y, 33, 0, 1, "snd_text", 16, 36, true)
+createcustomtyper("FALLBACKTYPER", scr_84_get_font("mainbig"), c_white, 0, 0, 33, 0, 1, "snd_text", 16, 36, true)
 
 function getcustomtyper(FONTKEY, fallback = true)
 {
