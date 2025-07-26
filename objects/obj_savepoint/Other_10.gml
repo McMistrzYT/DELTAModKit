@@ -8,7 +8,7 @@ global.fc = 0;
 global.fe = 0;
 global.interact = 1;
 nodialogue = 1;
-
+var i = 0;
 if CUSTOM
 {
 	nodialogue = false
@@ -16,7 +16,7 @@ if CUSTOM
 		nodialogue = true
 	else if is_array(CUSTOM_TEXT)
 	{
-		var i = 0
+		i = 0
 		while i < array_length(CUSTOM_TEXT)
 		{
 			global.msg[i] = CUSTOM_TEXT[i]
