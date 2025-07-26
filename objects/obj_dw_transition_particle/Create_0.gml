@@ -1,6 +1,5 @@
-h = 6 + round(40);
+vspeed = -2;
 image_xscale = 2;
-image_yscale = 4 * h;
-y = cameray() + 260;
-vspeed = -16 - random(4);
-image_alpha = 0.5;
+image_yscale = 2;
+friction = 0.07;
+hspeed = -1 + random(2);
