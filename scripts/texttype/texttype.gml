@@ -8,7 +8,7 @@ function scr_textsetup(font, textcolor, startx, starty, maxtextwidth, shaking, t
     shake = shaking;
     rate = txtspd;
     textsound = sound;
-    else if is_string(sound)
+    if is_string(sound)
         textsound = asset_get_index(sound);
     if !audio_exists(textsound)
         textsound = snd_text; 
@@ -37,7 +37,7 @@ function scr_texttype()
     var font_set = true;
     var extra_ja_vspace = 0;
     textscale = 1;
-    
+    var rate = 6;
     switch (global.typer)
     {
         case 0:
@@ -237,13 +237,13 @@ function scr_texttype()
         
         case 51:
         
-            var rate = langopt(10, 14);
+            rate = langopt(10, 14);
             scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, rate, "snd_text", 16, 36, true);
             break;
         
         case 52:
         
-            var rate = langopt(6, 4);
+            rate = langopt(6, 4);
             scr_textsetup(scr_84_get_font("mainbig"), c_white, x, y, 33, 0, rate, "snd_text", 16, 36, true);
             break;
         
