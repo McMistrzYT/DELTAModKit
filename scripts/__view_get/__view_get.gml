@@ -1,58 +1,49 @@
-function __view_get(arg0, arg1)
+function __view_get(property, index)
 {
-    var __prop = arg0;
-    var __index = arg1;
+    var __prop = property;
+    var __index = index;
     var __res = -1;
-    
+    var __cam = view_get_camera(__index);
+			
     switch (__prop)
     {
         case e__VW.XView:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_x(__cam);
             break;
         
         case e__VW.YView:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_y(__cam);
             break;
         
         case e__VW.WView:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_width(__cam);
             break;
         
         case e__VW.HView:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_height(__cam);
             break;
         
         case e__VW.Angle:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_angle(__cam);
             break;
         
         case e__VW.HBorder:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_border_x(__cam);
             break;
         
         case e__VW.VBorder:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_border_y(__cam);
             break;
         
         case e__VW.HSpeed:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_speed_x(__cam);
             break;
         
         case e__VW.VSpeed:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_speed_y(__cam);
             break;
         
         case e__VW.Object:
-            var __cam = view_get_camera(__index);
             __res = camera_get_view_target(__cam);
             break;
         
@@ -91,71 +82,61 @@ function __view_get(arg0, arg1)
     return __res;
 }
 
-function __view_set(arg0, arg1, arg2)
+function __view_set(property, index, value)
 {
-    var __prop = arg0;
-    var __index = arg1;
-    var __val = arg2;
+    var __prop = property;
+    var __index = index;
+    var __val = value;
     __view_set_internal(__prop, __index, __val);
     var __res = __view_get(__prop, __index);
     return __res;
 }
 
-function __view_set_internal(arg0, arg1, arg2)
+function __view_set_internal(property, index, value)
 {
-    var __prop = arg0;
-    var __index = arg1;
-    var __val = arg2;
-    
+    var __prop = property;
+    var __index = index;
+    var __val = value;
+    var __cam = view_get_camera(__index);
     switch (__prop)
     {
         case e__VW.XView:
-            var __cam = view_get_camera(__index);
             camera_set_view_pos(__cam, __val, camera_get_view_y(__cam));
             break;
         
         case e__VW.YView:
-            var __cam = view_get_camera(__index);
             camera_set_view_pos(__cam, camera_get_view_x(__cam), __val);
             break;
         
         case e__VW.WView:
-            var __cam = view_get_camera(__index);
             camera_set_view_size(__cam, __val, camera_get_view_height(__cam));
             break;
         
         case e__VW.HView:
-            var __cam = view_get_camera(__index);
             camera_set_view_size(__cam, camera_get_view_width(__cam), __val);
             break;
         
         case e__VW.Angle:
-            var __cam = view_get_camera(__index);
             camera_set_view_angle(__cam, __val);
             break;
         
         case e__VW.HBorder:
-            var __cam = view_get_camera(__index);
             camera_set_view_border(__cam, __val, camera_get_view_border_y(__cam));
             break;
         
         case e__VW.VBorder:
-            var __cam = view_get_camera(__index);
             camera_set_view_border(__cam, camera_get_view_border_x(__cam), __val);
             break;
         
         case e__VW.HSpeed:
-            var __cam = view_get_camera(__index);
             camera_set_view_speed(__cam, __val, camera_get_view_speed_y(__cam));
             break;
         
         case e__VW.VSpeed:
-            var __cam = view_get_camera(__index);
             camera_set_view_speed(__cam, camera_get_view_speed_x(__cam), __val);
             break;
         
         case e__VW.Object:
-            var __cam = view_get_camera(__index);
             camera_set_view_target(__cam, __val);
             break;
         
