@@ -580,7 +580,7 @@ function scr_textsound()
                 snd_play(textsound);
             }
             
-            with (obj_face_parent)
+            with (asset_get_index("obj_face_parent"))
             {
                 mouthmove = true;
             }
