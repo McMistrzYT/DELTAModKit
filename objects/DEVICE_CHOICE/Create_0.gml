@@ -142,7 +142,7 @@ if (TYPE == 3)
         menu[7] = ">> <>> <<";
     }
     
-    YMAX = array_length_1d(menu) - 1;
+    YMAX = array_length(menu) - 1;
     
     for (j = 0; j <= YMAX; j += 1)
     {
