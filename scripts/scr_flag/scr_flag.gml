@@ -79,7 +79,8 @@ function global_flagname_menu_init(arg0, arg1, arg2, arg3)
 
 function debug_message(val)
 {
-	return show_debug_message(val)
+	if scr_debug()
+		show_debug_message(val)
 }
 
 function scr_flag_get(flag)

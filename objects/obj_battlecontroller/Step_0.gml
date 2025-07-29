@@ -1084,7 +1084,7 @@ if (global.charweapon[DRCharacter.Noelle] == DRWeapon.ThornRing)
 
 t_siner++;
 
-/*if (scr_debug())
+if (scr_debug())
 {
     scr_turn_skip();
     
@@ -1114,7 +1114,7 @@ t_siner++;
         global.tension = 250;
         scr_debug_print("TP maxed out!!");
     }
-}*/
+}
 
 var dolose = false;
 
