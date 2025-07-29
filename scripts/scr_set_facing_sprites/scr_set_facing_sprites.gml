@@ -404,6 +404,10 @@ if global.darkzone == true
 return "krislight"
 })
 
+scr_createfacingspritessubname("noelle", function() {return global.darkzone ? "noelledark" : "noellelight"})
+scr_createfacingspritessubname("berdly", function() {return global.darkzone ? "berdlydark" : "berdlylight"})
+scr_createfacingspritessubname("ralsei", function() {return global.chapter <= 1 ? "ralseihat" : "ralseinohat"})
+
 scr_createfacingsprites("ralseinohat", spr_ralsei_walk_down, spr_ralsei_walk_left, spr_ralsei_walk_up, spr_ralsei_walk_right)
 scr_createfacingspritessubname("ralseihat", "ralseinohat") // Doesn't Exist yet in DELTAMODKIT, So it'll default to Ralsei's Nohat sprite
 
