@@ -63,7 +63,7 @@ function scr_recruited_all_in_chapter(arg0)
     var recruit_data = scr_get_chapter_recruit_data(chapter);
     var all_recruited = true;
     
-    for (var i = 0; i < array_length_1d(recruit_data); i++)
+    for (var i = 0; i < array_length(recruit_data); i++)
     {
         if (global.flag[600 + recruit_data[i]] < 1)
         {

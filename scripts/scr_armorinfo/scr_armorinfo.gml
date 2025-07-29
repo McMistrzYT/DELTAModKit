@@ -92,7 +92,7 @@ function scr_armorcheck_equipped_any(armorid)
 {
     var __totalwearing = 0;
     
-    for (var __weari = 0; __weari < array_length_1d(global.chararmor1); __weari++)
+    for (var __weari = 0; __weari < array_length(global.chararmor1); __weari++)
         __totalwearing += scr_armorcheck_equipped(__weari, armorid);
     
     return __totalwearing;

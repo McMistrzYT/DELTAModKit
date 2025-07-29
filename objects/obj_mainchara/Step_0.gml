@@ -296,8 +296,8 @@ if (global.interact == 0 && freeze == 0)
                         {
                             y -= g;
                             py = 0;
-                            break;
                             mvd = 1;
+                            break;
                         }
                         
                         if (press_u == 0 && mvd == 0 && !place_meeting(x + px, y + g, obj_solidblock))
@@ -357,8 +357,8 @@ if (global.interact == 0 && freeze == 0)
                         {
                             x -= g;
                             px = 0;
-                            break;
                             mvd = 1;
+                            break;
                         }
                         
                         if (mvd == 0 && press_l == 0 && !place_meeting(x + g, y + py, obj_solidblock))
@@ -497,8 +497,8 @@ if (global.interact == 0 && freeze == 0)
                         y -= g;
                         py = 0;
                         _vedge = bbox_top;
-                        break;
                         mvd = 1;
+                        break;
                     }
                 }
                 
@@ -561,8 +561,8 @@ if (global.interact == 0 && freeze == 0)
                     x -= g;
                     px = 0;
                     _hedge = bbox_left;
-                    break;
                     mvd = 1;
+                    break;
                 }
                 
                 if (mvd == 0 && press_l == 0 && check_heightfloor(g, py, _checkobj))

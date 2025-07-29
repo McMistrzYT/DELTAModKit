@@ -2,7 +2,7 @@
 /// @arg 0 arr   // source array
 /// @arg 1 func  // function(element, index)
 function arr_foreach(arr, func) {
-    var n = array_length_1d(arr);
+    var n = array_length(arr);
     for (var i = 0; i < n; ++i) {
         func(arr[i], i);
     }
@@ -12,7 +12,7 @@ function arr_foreach(arr, func) {
 /// @arg 0 arr        // 1D array
 /// @arg 1 predicate  // function(element, index) → bool
 function arr_find_index(arr, predicate) {
-    var n = array_length_1d(arr);
+    var n = array_length(arr);
     for (var i = 0; i < n; ++i) {
         if (predicate(arr[i], i)) return i;
     }
@@ -51,14 +51,14 @@ function arr_push(arr) {
 /// @func array_pop(arr)
 /// @arg 0 arr        // 1D array
 function arr_pop(arr) {
-    var len = array_length_1d(arr);
+    var len = array_length(arr);
     if (len <= 0) return undefined;
     var val = arr[len-1];
     array_resize(arr, len-1);
     return val;
 }
 
-function arr_length(arr) { return array_length_1d(arr); }
+function arr_length(arr) { return array_length(arr); }
 
 // string
 function stringsetloc(str, code) { return str; }

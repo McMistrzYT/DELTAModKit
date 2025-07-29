@@ -483,7 +483,7 @@ function __global_object_depths()
     global.__objectNames[232] = "obj_solidcircle";
     global.__objectNames[233] = "obj_diag";
     global.__objectNames[234] = "obj_diamond";
-    var len = array_length_1d(global.__objectDepths);
+    var len = array_length(global.__objectDepths);
     global.__objectID2Depth = [];
     
     for (var i = 0; i < len; i++)
@@ -500,7 +500,7 @@ function object_get_depth(arg0)
     var objID = arg0;
     var ret = 0;
     
-    if (objID >= 0 && objID < array_length_1d(global.__objectID2Depth))
+    if (objID >= 0 && objID < array_length(global.__objectID2Depth))
         ret = global.__objectID2Depth[objID];
     
     return ret;
