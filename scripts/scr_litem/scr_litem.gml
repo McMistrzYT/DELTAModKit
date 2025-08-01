@@ -87,7 +87,7 @@ function scr_equip_dw_weapon_by_lw_id(arg0)
     var old_equip = global.charweapon[1];
     global.charweapon[1] = weapon.dw_id;
     
-    for (var i = 0; i < array_length_1d(global.weapon); i++)
+    for (var i = 0; i < array_length(global.weapon); i++)
     {
         if (global.weapon[i] == weapon.dw_id)
         {
@@ -106,9 +106,9 @@ function scr_equip_lw_weapon_by_dw_id(arg0)
     global.lweapon = weapon.lw_id;
     var weapon_list = get_lw_dw_weapon_list();
     
-    for (var i = 0; i < array_length_1d(global.litem); i++)
+    for (var i = 0; i < array_length(global.litem); i++)
     {
-        for (var j = 0; j < array_length_1d(weapon_list); j++)
+        for (var j = 0; j < array_length(weapon_list); j++)
         {
             if (global.litem[i] == weapon_list[j].lw_id)
                 scr_litemremove(global.litem[i]);
@@ -145,7 +145,7 @@ function get_weapon_by_dw_id(arg0)
     var weapon_id = arg0;
     var weapon_list = get_lw_dw_weapon_list();
     
-    for (var i = 0; i < array_length_1d(weapon_list); i++)
+    for (var i = 0; i < array_length(weapon_list); i++)
     {
         if (weapon_id == weapon_list[i].dw_id)
         {

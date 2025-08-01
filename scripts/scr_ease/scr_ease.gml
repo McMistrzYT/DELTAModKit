@@ -195,7 +195,6 @@ function scr_ease_out(arg0, arg1)
             if (arg1 == 4)
             {
                 return -1 * (power(arg0, arg1) - 1);
-                break;
             }
             
             return power(arg0, arg1) + 1;

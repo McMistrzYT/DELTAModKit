@@ -1,5 +1,4 @@
-if (y >= (cameray() + 400))
-    instance_destroy();
+image_alpha -= 0.05;
 
-if (!scr_onscreen_tolerance(id, 400))
+if (image_alpha <= 0)
     instance_destroy();
