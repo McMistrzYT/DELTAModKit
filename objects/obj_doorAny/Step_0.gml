@@ -27,6 +27,7 @@ if (init == false)
             break;
         
         default:
+		        //doorRoom = room; // This will break most DoorAny Functionality
             break;
     }
     
