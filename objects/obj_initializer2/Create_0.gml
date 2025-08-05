@@ -77,7 +77,7 @@ if (global.is_console)
 }
 else
 {
-    //global_flagname_init(); // flagnames are stripped
+    global_flagname_init(); // flagnames are stripped
     //scr_84_init_localization(); // no translations im too lazy
     //pal_swap_init_system(18); // ts gives me nightmares
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);

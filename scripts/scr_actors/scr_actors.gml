@@ -10,7 +10,7 @@ function scr_maincharacters_actors()
     with (obj_mainchara)
         visible = 0;
     
-    for (__jj = 0; __jj < array_length_1d(global.cinstance); __jj++)
+    for (__jj = 0; __jj < array_length(global.cinstance); __jj++)
     {
         if (i_ex(global.cinstance[__jj]))
         {

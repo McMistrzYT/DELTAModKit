@@ -296,8 +296,8 @@ if (global.interact == 0 && freeze == 0)
                         {
                             y -= g;
                             py = 0;
-                            break;
                             mvd = 1;
+                            break;
                         }
                         
                         if (press_u == 0 && mvd == 0 && !place_meeting(x + px, y + g, obj_solidblock))
@@ -357,8 +357,8 @@ if (global.interact == 0 && freeze == 0)
                         {
                             x -= g;
                             px = 0;
-                            break;
                             mvd = 1;
+                            break;
                         }
                         
                         if (mvd == 0 && press_l == 0 && !place_meeting(x + g, y + py, obj_solidblock))
@@ -497,8 +497,8 @@ if (global.interact == 0 && freeze == 0)
                         y -= g;
                         py = 0;
                         _vedge = bbox_top;
-                        break;
                         mvd = 1;
+                        break;
                     }
                 }
                 
@@ -561,8 +561,8 @@ if (global.interact == 0 && freeze == 0)
                     x -= g;
                     px = 0;
                     _hedge = bbox_left;
-                    break;
                     mvd = 1;
+                    break;
                 }
                 
                 if (mvd == 0 && press_l == 0 && check_heightfloor(g, py, _checkobj))
@@ -919,28 +919,31 @@ if (battlemode == 1)
     
     if (global.inv < 0)
     {
-        //with (collision_rectangle(x + 12, y + 40, x + 27, y + 49, obj_overworldbulletparent, 1, 0))
-        //    event_user(5);
+		if object_exists(asset_get_index("obj_overworldbulletparent"))
+		{
+	        with (collision_rectangle(x + 12, y + 40, x + 27, y + 49, obj_overworldbulletparent, 1, 0))
+	            event_user(5);
         
-        //with (collision_line(x + 12, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-        //    event_user(5);
+	        with (collision_line(x + 12, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
+	            event_user(5);
         
-        //with (collision_line(x + 26, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-        //    event_user(5);
+	        with (collision_line(x + 26, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
+	            event_user(5);
+		}
     }
 }
 
-/*if (scr_debug())
+if (scr_debug())
 {
     if (sunkus_kb_check_pressed(45))
     {
-        if (room_exists(room + ROOM_INITIALIZE))
+        if (room_exists(room_next(room)))
             room_goto_next();
     }
     
     if (sunkus_kb_check_pressed(46))
     {
-        if (room_exists(room - ROOM_INITIALIZE))
+        if (room_exists(room_previous(room)))
             room_goto_previous();
     }
     
@@ -948,34 +951,54 @@ if (battlemode == 1)
     {
         if (sunkus_kb_check(50))
         {
-            room_goto(room_krisroom);
-            global.plot = 0;
-            global.darkzone = 0;
+			var krroom = asset_get_index("room_krisroom")
+			if room_exists(krroom)
+			{
+	            room_goto(krroom);
+	            global.plot = 0;
+	            global.darkzone = 0;
+			}
         }
         
         if (sunkus_kb_check(51))
         {
-            room_goto(room_dw_castle_area_1);
-            global.plot = 7;
-            global.darkzone = 1;
+			var ctroom = asset_get_index("room_dw_castle_area_1")
+			if room_exists(ctroom)
+			{
+	            room_goto(ctroom);
+	            global.plot = 7;
+	            global.darkzone = 1;
+			}
         }
         
         if (sunkus_kb_check(55))
-            room_goto(room_legend_neo);
+		{
+			var neolegend = asset_get_index("room_legend_neo")
+			if room_exists(neolegend)
+				room_goto(neolegend);
+		}
         
         if (sunkus_kb_check(56))
         {
-            room_goto(room_battletest);
-            global.darkzone = 1;
+			var battest = asset_get_index("room_battletest")
+			if room_exists(battest)
+			{
+				room_goto(battest);
+				global.darkzone = 1;
+			}
         }
         
         if (sunkus_kb_check(57))
         {
-            room_goto(room_bullettest);
-            global.darkzone = 1;
+			var bultest = asset_get_index("room_bullettest")
+			if room_exists(bultest)
+			{
+	            room_goto(bultest);
+	            global.darkzone = 1;
+			}
         }
     }
-}*/
+}
 
 if !ignoredepth
 	scr_depth();

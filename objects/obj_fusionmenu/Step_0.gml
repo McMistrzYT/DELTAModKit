@@ -3,7 +3,6 @@ if (init == 0)
     xx = __view_get(e__VW.XView, 0);
     yy = __view_get(e__VW.YView, 0);
     customxy = 0;
-    
 	// Fuse Items
     if (type == 1)
     {
@@ -267,6 +266,7 @@ if (init == 0)
 	// Recruits
     if (type == 3)
     {
+	var _seatcheck = false;
         if (subtype == 2 || subtype == 1)
         {
             if (subtype == 1)
@@ -399,7 +399,7 @@ if (init == 0)
         scr_custommenu_optionxy();
         menuSpacingOverride[2] = 1;
         _n = 2;
-        var _seatcheck = 0;
+        _seatcheck = false;
         
         if (alternateMenu == 0)
         {

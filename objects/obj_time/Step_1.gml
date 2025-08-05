@@ -3,7 +3,7 @@ scr_input_manager_process();
 if (!paused) global.time += 1;
 else return;
 
-/*if (scr_debug())
+if (scr_debug())
 {
     if (sunkus_kb_check_pressed(117) && quicksaved == 22)
     {
@@ -26,7 +26,7 @@ else return;
                 __quickSaved = 1;
             
             __masterArray = variable_instance_get_names(instance_list[i]);
-            __arrayLength[i] = array_length_1d(__masterArray);
+            __arrayLength[i] = array_length(__masterArray);
             
             for (var __n = 0; __n < __arrayLength[i]; __n++)
             {
@@ -72,7 +72,7 @@ else return;
         
         with (all)
         {
-            if (object_index != obj_time && object_index != obj_gamecontroller)
+            if (object_index != obj_time && object_index != (asset_get_index("obj_gamecontroller")))
                 instance_change(obj_doom, false);
         }
         
@@ -119,7 +119,7 @@ else return;
         
         quicksaved = 2;
     }
-}*/
+}
 
 if (sunkus_kb_check(27))
 {
@@ -145,9 +145,9 @@ for (var i = 0; i < 10; i += 1)
     global.input_pressed[i] = 0;
 }
 
-/*gamepad_check_timer += 1;
+gamepad_check_timer += 1;
 
-if (gamepad_check_timer >= 90)
+if (gamepad_check_timer >= 90) && object_exists(asset_get_index("obj_gamecontroller"))
 {
     if (!gamepad_is_connected(obj_gamecontroller.gamepad_id))
     {
@@ -172,7 +172,7 @@ if (gamepad_check_timer >= 90)
     gamepad_check_timer = 0;
 }
 
-if (obj_gamecontroller.gamepad_active == 1 && quicksaved != 2)
+if object_exists(asset_get_index("obj_gamecontroller")) && (obj_gamecontroller.gamepad_active == 1 && quicksaved != 2)
 {
     for (var i = 0; i < 4; i += 1)
     {
@@ -210,7 +210,7 @@ if (obj_gamecontroller.gamepad_active == 1 && quicksaved != 2)
         }
     }
 }
-else*/
+else
 {
     for (var i = 0; i < 10; i += 1)
     {
@@ -231,7 +231,7 @@ else*/
     }
 }
 
-/*if (scr_debug())
+if (scr_debug())
 {
     if (mouse_check_button_pressed(mb_middle))
         instance_create(0, 0, obj_debug_xy);
@@ -243,4 +243,4 @@ else*/
         else
             room_speed = 30;
     }
-}*/
+}

@@ -104,17 +104,20 @@ function snd_resume(arg0) {
 	audio_resume_sound(arg0);	
 }
 
-function snd_init(arg0) {
+function snd_init(songname) {
 	var dir = "mus/";
     
     if (global.launcher)
         dir = working_directory + "../mus/";
     
-    initsongvar = dir + arg0;
-    _mystream = audio_create_stream(initsongvar);
+    initsongvar = dir + songname;
+    if file_exists(initsongvar)
+        _mystream = audio_create_stream(initsongvar);
+    else
+        _mystream = snd_nosound;
     _astream = instance_create(0, 0, obj_astream);
     _astream.mystream = _mystream;
-    _astream.songname = arg0;
+    _astream.songname = songname;
     return _mystream;
 }
 

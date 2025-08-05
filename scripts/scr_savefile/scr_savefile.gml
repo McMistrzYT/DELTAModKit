@@ -961,7 +961,7 @@ function scr_get_room_by_id(arg0)
     
     var room_index = -1;
     
-    for (var i = 0; i < array_length_1d(rooms); i++)
+    for (var i = 0; i < array_length(rooms); i++)
     {
         if (rooms[i].room_id == room_id)
         {
@@ -983,7 +983,7 @@ function scr_get_id_by_room_index(arg0)
     var rooms = scr_get_room_list();
     var room_id = -1;
     
-    for (var i = 0; i < array_length_1d(rooms); i++)
+    for (var i = 0; i < array_length(rooms); i++)
     {
         if (rooms[i].room_index == room_index)
         {

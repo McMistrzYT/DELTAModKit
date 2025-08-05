@@ -12,11 +12,29 @@ function scr_roomname(roomid)
 {
     roomname = scr_debug() ? "! UNKNOWN ! scr_roomname" : "Dark World...?";
     
+	var failname = roomname;
+	
     switch (roomid) {
 		case 0: roomname = "---"; break;
 		
 		case room_dw_test: roomname = "Dark World - Testbed"; break;
 		case room_lw_test: roomname = "Light World - Testbed"; break;
+	}
+	
+	if roomname == failname
+	{
+		var replacementname = failname;
+		with (obj_savepoint)
+		{
+			if CUSTOM
+			{
+				if CUSTOM_PLACENAME != "NULL"
+				{
+					replacementname = CUSTOM_PLACENAME;
+				}
+			}
+		}
+		roomname = replacementname;
 	}
     
     return roomname;

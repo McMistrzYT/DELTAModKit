@@ -38,7 +38,7 @@ function __background_get_colour_element()
     __result[1] = -1;
     var __colstring = "Colour";
     var __layerlist = layer_get_all();
-    var __layerlistlength = array_length_1d(__layerlist);
+    var __layerlistlength = array_length(__layerlist);
     var __layerid = -1;
     var __isforeground = false;
     
@@ -56,7 +56,7 @@ function __background_get_colour_element()
     if (__layerid != -1)
     {
         var __els = layer_get_all_elements(__layerid);
-        var __elslength = array_length_1d(__els);
+        var __elslength = array_length(__els);
         
         for (var __i = 0; __i < __elslength; __i++)
         {
@@ -129,7 +129,7 @@ function __background_set_element(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7
     var __fglen = string_length(__fgstring);
     var __bglen = string_length(__bgstring);
     var __layerlist = layer_get_all();
-    var __layerlistlength = array_length_1d(__layerlist);
+    var __layerlistlength = array_length(__layerlist);
     var __collayer = -1;
     var __slots, __isforeground;
     
@@ -368,7 +368,7 @@ function __background_get_element(arg0)
     var __fglen = string_length(__fgstring);
     var __bglen = string_length(__bgstring);
     var __layerlist = layer_get_all();
-    var __layerlistlength = array_length_1d(__layerlist);
+    var __layerlistlength = array_length(__layerlist);
     var __layerid = -1;
     var __isforeground = false;
     
@@ -416,7 +416,7 @@ function __background_get_element(arg0)
     if (__layerid != -1)
     {
         var __els = layer_get_all_elements(__layerid);
-        var __elslength = array_length_1d(__els);
+        var __elslength = array_length(__els);
         
         for (var __i = 0; __i < __elslength; __i++)
         {
