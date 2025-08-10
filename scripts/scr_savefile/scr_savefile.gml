@@ -402,7 +402,8 @@ function scr_saveprocess(arg0)
         ossafe_file_text_writeln(myfileid);
     }
     
-    for (i = 0; i < 5; i += 1)
+    ossafe_file_text_write_string(myfileid, "CHARACTERAMT: " + string(DRHero.__MAX__));
+    for (i = 0; i < DRHero.__MAX__; i++)
     {
         if (!global.is_console)
         {
@@ -687,9 +688,14 @@ function scr_load()
         ds_list_destroy(weaponstyle_list);
         ossafe_file_text_readln(myfileid);
     }
-    
-    for (i = 0; i < 5; i += 1)
-    {
+
+	var newread = ossafe_file_text_read_string(myfileid)
+	var amt = 5 // Original Max for DELTAMODKIT save files.
+	if newread != string_digits(newread){ // we can assume it's using the updated system
+		amt = real(string_digits(newread)) // Using the Amount of Characters returned by the Save Point.
+	}
+	else
+    for (i = 0; i < amt; i++){
         if (!global.is_console)
         {
             global.hp[i] = ossafe_file_text_read_real(myfileid);
