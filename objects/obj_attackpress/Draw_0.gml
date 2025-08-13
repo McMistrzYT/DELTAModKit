@@ -45,7 +45,7 @@ if (active == 1)
             j = global.char[i];
             fullbox = 0;
 			
-			var _col = scr_hero_get_color(j - 1);
+			var _col = scr_hero_get_attackpress_color(j - 1);
 			draw_set_color(_col);
 			
 			if (pressbuffer[clamp(j, 0, 3)])
