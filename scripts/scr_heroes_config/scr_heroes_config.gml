@@ -59,16 +59,13 @@ function scr_hero_get_color(heroIdx) {
 	}
 }
 
-function scr_hero_get_attackpress_color(heroIdx) {
+function scr_hero_get_attackbackground_color(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Kris:	return c_blue;
 		case DRHero.Susie:	return c_purple;
 		case DRHero.Ralsei: return c_green;
-		case DRHero.Noelle: return c_yellow;
 		
-		case DRHero.Starwalker: return c_yellow;
-		
-		default: return c_white;
+		default: return scr_hero_get_color(heroIdx);
 	}
 }
 
@@ -81,7 +78,7 @@ function scr_hero_get_attacktarget_color(heroIdx) {
 		
 		case DRHero.Starwalker: return make_color_rgb(255, 255, 153);
 		
-		default: return c_white;
+		default: return scr_hero_get_color(heroIdx);
 	}
 }
 
