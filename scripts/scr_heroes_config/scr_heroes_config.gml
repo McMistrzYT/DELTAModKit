@@ -78,7 +78,7 @@ function scr_hero_get_attacktarget_color(heroIdx) {
 		
 		case DRHero.Starwalker: return make_color_rgb(255, 255, 153);
 		
-		default: return scr_hero_get_color(heroIdx);
+		default: return c_white;
 	}
 }
 
