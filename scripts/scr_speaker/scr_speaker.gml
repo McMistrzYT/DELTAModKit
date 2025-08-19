@@ -1,25 +1,16 @@
-function scr_speaker(speak)
-{
+function scr_speaker(speak){
     _speaker = speak;
     global.typer = 5;
     
-    if (global.darkzone == 1)
-        global.typer = 6;
-    
-    if (global.fighting == 1)
-        global.typer = 4;
+    if (global.darkzone == 1) global.typer = 6;
+    if (global.fighting == 1) global.typer = 4;
     
     global.fc = 0;
     global.fe = 0;
-    
-    if (_speaker == "silent" && global.darkzone == 0)
-        global.typer = 2;
-    
-    if (_speaker == "silent" && global.darkzone == 1)
-        global.typer = 36;
-    
-    if (_speaker == "balloon" || _speaker == "enemy")
-        global.typer = 50;
+
+    if (_speaker == "silent" && global.darkzone == 0) global.typer = 2;
+    if (_speaker == "silent" && global.darkzone == 1) global.typer = 36;
+    if (_speaker == "balloon" || _speaker == "enemy") global.typer = 50;
     
     if (_speaker == "sans")
     {
@@ -33,17 +24,13 @@ function scr_speaker(speak)
         global.fc = 9;
     }
     
-    if (_speaker == "temmie" || _speaker == "tem")
-        global.typer = 21;
+    if (_speaker == "temmie" || _speaker == "tem") global.typer = 21;
     
-    if (_speaker == "jevil")
-		global.typer = 35;
+    if (_speaker == "jevil") global.typer = 35;
     
-    if (_speaker == "catti")
-        global.fc = 13;
+    if (_speaker == "catti") global.fc = 13;
     
-    if (_speaker == "jockington" || _speaker == "joc")
-        global.fc = 14;
+    if (_speaker == "jockington" || _speaker == "joc") global.fc = 14;
     
     if (_speaker == "catty" || _speaker == "caddy")
         global.fc = 16;
@@ -204,7 +191,7 @@ function scr_anyface(speakerchar, msgno, emotion){
             if (emotion < 36)
                 _emotion = chr(55 + emotion);
             else
-                emotion = chr(61 + emotion);
+                _emotion = chr(61 + emotion);
     
     _speaker = string_lower(_speakerC);
     msgsetsub(msgno, "* Face ~1 not found/", _speaker);
