@@ -41,10 +41,10 @@
     {"$GMFolder":"","%Name":"Phases","folderPath":"folders/DELTARUNE/Objects/Battle/Phases.yy","name":"Phases","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"System","folderPath":"folders/DELTARUNE/Objects/Battle/System.yy","name":"System","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Characters","folderPath":"folders/DELTARUNE/Objects/Characters.yy","name":"Characters","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Debug","folderPath":"folders/DELTARUNE/Objects/Debug.yy","name":"Debug","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Dialogue","folderPath":"folders/DELTARUNE/Objects/Dialogue.yy","name":"Dialogue","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Engine","folderPath":"folders/DELTARUNE/Objects/Engine.yy","name":"Engine","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Events","folderPath":"folders/DELTARUNE/Objects/Events.yy","name":"Events","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Debug","folderPath":"folders/DELTARUNE/Objects/Debug.yy","name":"Debug","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Menus","folderPath":"folders/DELTARUNE/Objects/Menus.yy","name":"Menus","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Contact","folderPath":"folders/DELTARUNE/Objects/Menus/Contact.yy","name":"Contact","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Game","folderPath":"folders/DELTARUNE/Objects/Menus/Game.yy","name":"Game","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -159,7 +159,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1400.0.849",
+    "IDEVersion":"2024.1400.0.874",
   },
   "name":"DELTAModKit",
   "resources":[
