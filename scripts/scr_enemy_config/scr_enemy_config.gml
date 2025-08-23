@@ -193,7 +193,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					// and so acts dont repeat
 					
 					// Kris's ACTs
-					if actcon[DRCharacter.Kris] == 0 {
+					if actcon[DRCharacter.Kris] == 0 && acting[DRCharacter.Kris] != 0 {
 						actcon[DRCharacter.Kris] = 1;
 						
 						if acting[DRCharacter.Kris] == 1 {
