@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_attack_shard",
-    "path":"sprites/spr_attack_shard/spr_attack_shard.yy",
+    "name":"spr_attack_cut1",
+    "path":"sprites/spr_attack_cut1/spr_attack_cut1.yy",
   },
   "spriteMaskId":null,
   "visible":true,
