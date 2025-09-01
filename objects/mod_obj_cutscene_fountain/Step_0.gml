@@ -1,5 +1,6 @@
-if con == 0 && obj_mainchara.x < x {
+if con == 0 && obj_mainchara.x < x && global.interact == 0{
 	con = 2;
+	global.interact = 1;
 	
 	scr_cutscene_make();
 	scr_maincharacters_actors();
@@ -39,6 +40,7 @@ if con == 0 && obj_mainchara.x < x {
 }
 
 if go_to_dark_world && con != 3 {
+	global.interact = 0;
 	con = 3;
 	c_actortokris();
 	c_actortocaterpillar();

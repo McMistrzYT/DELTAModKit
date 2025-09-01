@@ -40,7 +40,7 @@ if (type == 3 && init == 1)
             ossafe_fill_rectangle(xx + 334, yy + 14, (xx + 620) - 4, (yy + 440) - 4, false);
         }
         
-        reccolor = scr_chapter_get_recruit_color();
+        reccolor = scr_chapter_get_recruit_color(recruitChapter[menuCoord[0]]);
         
         ossafe_fill_rectangle_color(xx + 370, yy + 75, xx + 370 + 205, yy + 75 + 150, 0, 0, reccolor, reccolor, false);
         draw_set_color(c_white);
@@ -103,7 +103,7 @@ if (type == 3 && init == 1)
     
     if (menu == 1)
     {
-        reccolor = scr_chapter_get_recruit_color();
+        reccolor = scr_chapter_get_recruit_color(recruitChapter[menuCoord[1]]);
         
         ossafe_fill_rectangle_color(xx + 80, yy + 70, xx + 80 + 205, yy + 70 + 150, 0, 0, reccolor, reccolor, false);
         draw_set_color(c_white);

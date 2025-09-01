@@ -588,6 +588,7 @@
     {"id":{"name":"IMAGE_MENU_ANIMATION","path":"sprites/IMAGE_MENU_ANIMATION/IMAGE_MENU_ANIMATION.yy",},},
     {"id":{"name":"IMAGE_MENU","path":"sprites/IMAGE_MENU/IMAGE_MENU.yy",},},
     {"id":{"name":"IMAGE_SOUL_BLUR","path":"sprites/IMAGE_SOUL_BLUR/IMAGE_SOUL_BLUR.yy",},},
+    {"id":{"name":"spr_attack_cut1","path":"sprites/spr_attack_cut1/spr_attack_cut1.yy",},},
     {"id":{"name":"spr_attack_mash1","path":"sprites/spr_attack_mash1/spr_attack_mash1.yy",},},
     {"id":{"name":"spr_attack_mash2","path":"sprites/spr_attack_mash2/spr_attack_mash2.yy",},},
     {"id":{"name":"spr_attack_shard","path":"sprites/spr_attack_shard/spr_attack_shard.yy",},},

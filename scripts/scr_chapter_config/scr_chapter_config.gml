@@ -6,8 +6,7 @@ function scr_chapter_config() {
 	global.isStartingRoomDarkWorld = false;
 }
 
-function scr_chapter_get_recruit_color() {
-	var chapter = recruitChapter[menuCoord[1]];
+function scr_chapter_get_recruit_color(chapter) {
 	
 	switch (chapter) {
 		case 1: return c_purple;
