@@ -444,7 +444,7 @@ function scr_spell_use_action(casterid, spellid) {
             break;
 		}
         
-        /*case DRSpell.SleepMist:
+        case DRSpell.SleepMist:
             var _mistcount = 0;
             
             for (_spelli = 0; _spelli < 3; _spelli++)
@@ -463,9 +463,9 @@ function scr_spell_use_action(casterid, spellid) {
             }
             
             global.spelldelay = 20 + (_mistcount * 10);
-            break;*/
+            break;
         
-        /*case DRSpell.IceShock:
+        case DRSpell.IceShock:
             cancelattack = 0;
             global.spelldelay = 30;
             
@@ -504,7 +504,7 @@ function scr_spell_use_action(casterid, spellid) {
                 global.spelldelay = 140;
             }
             
-            break;*/
+            break;
         
         case DRSpell.UltraHeal: {
 			global.flag[1045]++;

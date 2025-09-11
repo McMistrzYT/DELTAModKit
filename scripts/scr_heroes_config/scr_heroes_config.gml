@@ -219,6 +219,61 @@ function scr_hero_set_sprites(heroObject) {
 			break;
 		}
 		
+		case obj_heronoelle: {
+			attackframes = 4;
+			itemframes = 9;
+			defendframes = 0;
+			actframes = 7;
+			actreturnframes = 10;
+			attackspeed = 0.5;
+			spellframes = 6;
+			normalsprite = spr_noelle_walk_right_dw;
+			idlesprite = spr_noelleb_idle;
+    
+			//if (global.encounterno == 73)
+			//    idlesprite = spr_noelle_shocked_dw;
+    
+			defendsprite = spr_noelleb_defend;
+			hurtsprite = spr_noelleb_hurt;
+			attackreadysprite = spr_noelleb_attackready;
+			attacksprite = spr_noelleb_attack;
+			itemsprite = spr_noelleb_item;
+			itemreadysprite = spr_noelleb_itemready;
+			spellreadysprite = spr_noelleb_spellready;
+    
+			//if (global.encounterno == 82)
+			//    spellreadysprite = spr_noelleb_spellready; what does this even do, like, the sprite is the same one
+    
+			spellsprite = spr_noelleb_spell;
+			defeatsprite = spr_noelleb_defeat;
+			victorysprite = spr_noelleb_victory;
+			actreadysprite = spr_noelleb_actready;
+			actsprite = spr_noelleb_act;
+			victoryframes = sprite_get_number(victorysprite);
+			_sideb = 0;
+			
+			//if (scr_sideb_get_phase() >= 2)
+			//	_sideb = 1;
+    
+			if (_sideb == 1)
+			{
+				//import these yourself i dont care about you're snowgraves
+			    attackreadysprite = spr_noelleb_attackready;
+			    attacksprite = spr_noelleb_spell;
+			    attackframes = 6;
+			    victorysprite = spr_noelleb_pray;
+			    victoryframes = 10;
+			    defendframes = 5;
+			    defendsprite = spr_noelleb_defend_sideb;
+			    hurtsprite = spr_noelleb_hurt_sideb;
+			    idlesprite = spr_noelleb_idle_sideb;
+			}
+    
+			mywidth = 52;
+			myheight = 86;
+			break;
+		}
+		
 		case obj_herostarwalker: {
 			attackframes = 1;
 		    itemframes = 1;
@@ -258,6 +313,10 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 			dsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_down_dw : spr_susied_dark) : spr_susie_walk_down_lw;
 			rsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_right_dw : spr_susier_dark) : spr_susie_walk_right_lw;
 			lsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_left_dw : spr_susiel_dark) : spr_susie_walk_left_lw;
+			
+			x -= (global.darkzone == 1) ? 6 : 3;
+			y -= (global.darkzone == 1) ? 16 : 6;
+			
 			break;
 		}
 		
@@ -268,10 +327,32 @@ function scr_character_set_caterpillar_sprites(charIdx) {
             dsprite = spr_ralsei_walk_down;
             rsprite = spr_ralsei_walk_right;
             lsprite = spr_ralsei_walk_left;
+			
+			usprite_blush = spr_ralsei_walk_up;
+			dsprite_blush = spr_ralsei_walk_down_blush;
+			rsprite_blush = spr_ralsei_walk_right_blush;
+			lsprite_blush = spr_ralsei_walk_left_blush;
+			
+			x -= 2;
+			y -= 12;
+			
 			break;
 		}
 		
-		case DRCharacter.Noelle: { name = "noelle"; break; } // noelle has no sprites because i didnt wanna do allat importing
+		case DRCharacter.Noelle: { 
+			name = "noelle"; 
+			
+            slidesprite = spr_noelle_walk_down_dw;
+			usprite = (global.darkzone == 1) ? spr_noelle_walk_up_dw : spr_noelle_walk_up_lw;
+			rsprite = (global.darkzone == 1) ? spr_noelle_walk_right_dw : spr_noelle_walk_right_lw;
+			lsprite = (global.darkzone == 1) ? spr_noelle_walk_left_dw : spr_noelle_walk_left_lw;
+			dsprite = (global.darkzone == 1) ? spr_noelle_walk_down_dw : spr_noelle_walk_down_lw;
+			
+			x -= (global.darkzone == 1) ? 4 : 6;
+			y -= (global.darkzone == 1) ? 20 : 9;
+			
+			break; 
+		}
 		
 		case DRCharacter.Starwalker: {
 			name = "starwalker";

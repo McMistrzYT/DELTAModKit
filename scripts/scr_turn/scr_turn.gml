@@ -709,11 +709,21 @@ function scr_defeatrun()
     {
         fatal = 0;
     }
-    
-    //if (fatal == 1)
-    //    defeatanim = instance_create(x, y, obj_deathanim);
-    //else
-        defeatanim = instance_create(x, y, obj_defeatanim);
+		
+	
+    if (!__frozen)
+    {
+        if (fatal == 1)
+            defeatanim = instance_create(x, y, obj_deathanim);
+        else
+            defeatanim = instance_create(x, y, obj_defeatanim);
+    }
+    else if (__frozen)
+    {
+        defeatanim = instance_create(x, y, obj_frozennpc);
+        defeatanim.depth = depth;
+        defeatanim.inbattle = 1;
+    }
     
     defeatanim.sprite_index = sprite_index;
     defeatanim.sprite_index = hurtsprite;

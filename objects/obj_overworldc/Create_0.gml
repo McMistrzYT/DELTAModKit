@@ -14,7 +14,7 @@ if (global.chapter >= 2)
 		if global.char[pipis] == DRCharacter.None { skippedchars++; continue; }
 		if !scr_character_is_lightner(global.char[pipis]) { skippedchars++; continue; }
 		
-		global.cinstance[pipis - skippedchars] = instance_create(obj_mainchara.x - 3, obj_mainchara.y - 6, obj_caterpillarchara);
+		global.cinstance[pipis - skippedchars] = instance_create(obj_mainchara.x, obj_mainchara.y, obj_caterpillarchara);
 		with (global.cinstance[pipis - skippedchars])
 			scr_character_set_caterpillar_sprites(global.char[other.pipis]);
 	}
