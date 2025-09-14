@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_snowgrave",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":5.0793877,
+  "exportDir":"",
+  "name":"snd_snowgrave",
+  "parent":{
+    "name":"Spells",
+    "path":"folders/DELTARUNE/Sounds/Dark/Spells.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_snowgrave.ogg",
+  "volume":1.0,
+}

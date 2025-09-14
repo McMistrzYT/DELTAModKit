@@ -1,0 +1,10 @@
+siner = 0;
+amp = 0;
+image_xscale = 3;
+image_yscale = 2;
+stimer = 0;
+initdelay = 0;
+myself = -1;
+target = -1;
+success = 0;
+init = 0;

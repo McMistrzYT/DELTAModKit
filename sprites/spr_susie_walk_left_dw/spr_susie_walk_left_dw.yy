@@ -26,7 +26,7 @@
   ],
   "name":"spr_susie_walk_left_dw",
   "nineSlice":null,
-  "origin":0,
+  "origin":9,
   "parent":{
     "name":"Dark",
     "path":"folders/DELTARUNE/Sprites/Characters/Susie/Dark.yy",
@@ -90,7 +90,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":0,
-    "yorigin":0,
+    "yorigin":-2,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
