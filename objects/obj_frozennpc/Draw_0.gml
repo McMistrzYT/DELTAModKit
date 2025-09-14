@@ -35,18 +35,6 @@ if (global.fighting == 0 && fresh == 2)
         remx = global.flag[55];
         remy = global.flag[56];
         
-        if (sprite_index == spr_virovirokun_hurt && room == room_dw_city_big_1)
-        {
-            remx = 224;
-            remy = 72;
-        }
-        
-        if (sprite_index == spr_virovirokun_hurt && room == room_dw_city_roadblock)
-        {
-            remx = 1000;
-            remy = 588;
-        }
-        
         global.flag[55] = 0;
         global.flag[56] = 0;
         

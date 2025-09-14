@@ -250,14 +250,14 @@ function scr_hero_set_sprites(heroObject) {
 			actreadysprite = spr_noelleb_actready;
 			actsprite = spr_noelleb_act;
 			victoryframes = sprite_get_number(victorysprite);
-			_sideb = 0;
+			_sideb = false;
 			
 			//if (scr_sideb_get_phase() >= 2)
-			//	_sideb = 1;
-    
-			if (_sideb == 1)
-			{
-				//import these yourself i dont care about you're snowgraves
+			//	_sideb = true;
+				
+			//import these yourself i dont care about you're snowgraves
+			if (_sideb)
+			{/*
 			    attackreadysprite = spr_noelleb_attackready;
 			    attacksprite = spr_noelleb_spell;
 			    attackframes = 6;
@@ -267,7 +267,7 @@ function scr_hero_set_sprites(heroObject) {
 			    defendsprite = spr_noelleb_defend_sideb;
 			    hurtsprite = spr_noelleb_hurt_sideb;
 			    idlesprite = spr_noelleb_idle_sideb;
-			}
+			*/}
     
 			mywidth = 52;
 			myheight = 86;

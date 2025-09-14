@@ -11,11 +11,11 @@ if (init == 0)
     {
         timer = -270;
         
-        with (obj_heronoelle)
+        with (global.cinstance[caster])
             visible = 0;
         
-        fn = scr_dark_marker(obj_heronoelle.x, obj_heronoelle.y, spr_noelleb_spell);
-        fn.depth = obj_heronoelle.depth;
+        fn = scr_dark_marker(global.cinstance[caster].x, global.cinstance[caster].y, global.cinstance[caster].spellsprite);
+        fn.depth = global.cinstance[caster].depth;
         fn.image_index = 0;
         fncon = 0;
     }
@@ -23,7 +23,7 @@ if (init == 0)
 
 timer++;
 
-if (altpath == 1)
+/*if (altpath == 1)
 {
     if (fncon == 0)
     {
@@ -127,7 +127,7 @@ if (altpath == 1)
             fncon = 4;
         }
     }
-}
+}*/
 
 if (timer > 0)
 {
@@ -168,12 +168,12 @@ if (timer >= 20 && timer <= (75 + (altpath * 30)))
         stimer = 0;
 }
 
-if (timer == 70 && altpath == 1)
+/*if (timer == 70 && altpath == 1)
 {
     fb.sprite_index = spr_berdly_ice;
     fb.x -= 22;
     fb.y -= 48;
-}
+}*/
 
 if (timer == (95 + (altpath * 30)) && damage > 0 && global.fighting == 1)
 {
@@ -230,14 +230,14 @@ if (timer >= (90 + (altpath * 30)))
 
 if (timer == (120 + (altpath * 150)))
 {
-    if (altpath)
+    /*if (altpath)
     {
         with (obj_berdlyb2_enemy)
             sidebcon = 1;
         
         obj_berdlyb2_enemy.fn = fn;
         obj_berdlyb2_enemy.fb = fb;
-    }
+    }*/
     
     instance_destroy();
 }

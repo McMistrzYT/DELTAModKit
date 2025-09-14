@@ -718,7 +718,7 @@ function scr_defeatrun()
         else
             defeatanim = instance_create(x, y, obj_defeatanim);
     }
-    else if (__frozen)
+    else
     {
         defeatanim = instance_create(x, y, obj_frozennpc);
         defeatanim.depth = depth;

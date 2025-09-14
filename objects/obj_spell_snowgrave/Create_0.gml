@@ -9,5 +9,5 @@ init = 0;
 fncon = 0;
 con = 0;
 
-if (global.encounterno == 82)
-    altpath = 1;
+//if (global.encounterno == 82)
+//    altpath = 1;
