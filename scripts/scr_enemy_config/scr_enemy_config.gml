@@ -65,7 +65,6 @@ function scr_monstersetup()
         case DREnemy.TestEnemy:
             global.monstername[myself] = "Enemy";
             global.monstermaxhp[myself] = 130;
-            global.monstermaxhp[myself] = 130;
             global.monsterhp[myself] = 130;
             global.monsterat[myself] = 7;
             global.monsterdf[myself] = 0;
