@@ -126,7 +126,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					
 					scr_randomtarget();
 					myattackchoice = choose(DRBulletPattern.HomingDiamonds, DRBulletPattern.RisingDiamonds, DRBulletPattern.SwordThrow);
-					myattackpriority = myattackchoice == 2 ? DRBulletPattern.SwordThrow : 0;
+					myattackpriority = myattackchoice == DRBulletPattern.SwordThrow ? 2 : 0;
 					scr_attackpriority(myattackpriority);
 					
 					if !instance_exists(obj_darkener) // no this isnt supposed to be "darkner" its literally just something that darkens things, a darkener lol
