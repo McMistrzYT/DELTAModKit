@@ -246,6 +246,8 @@ function scr_enemy_object_init()
         _charactsprite[i] = 382938298329;
     
     depth = 90 - ((y - cameray()) / 50);
+	
+	nextact = 0;
 }
 
 function scr_monsterattacknamecount(arg0)

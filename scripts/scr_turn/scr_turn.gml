@@ -103,6 +103,7 @@ function scr_mnendturn()
         {
             attacked = 0;
             talked = 0;
+			nextact = 0;
 			for (i = 0; i < DRCharacter.__MAX__; i++)
 				acting[i] = 0;
         }
@@ -196,11 +197,13 @@ function scr_endturn()
         global.myfight = 3;
         global.currentactingchar = 0;
         
-        if (global.acting[0] == 0)
-            scr_nextact();
+        //if (global.acting[0] == 0)
+        //    scr_nextact();
         
         if (global.acting[0] == 1 && global.actingsimul[0] == 1)
             scr_act_simul();
+		else 
+            scr_nextact();
     }
     
     with (obj_battlecontroller)
@@ -416,7 +419,7 @@ function scr_actselect(arg0, arg1)
     if (i_ex(global.monsterinstance[arg0]))
 		global.monsterinstance[arg0].acting[global.char[global.charturn]] = arg1 + 1;
     
-    if (global.char[global.charturn] == DRCharacter.Kris)
+    /*if (global.char[global.charturn] == DRCharacter.Kris)
     {
         global.actingsimul[0] = actsimul[arg1];
         global.acting[0] = 1;
@@ -432,7 +435,7 @@ function scr_actselect(arg0, arg1)
             }
         }
     }
-    else
+    else*/
     {
         global.actingtarget[global.charturn] = arg0;
         global.actingsingle[global.charturn] = 1;
@@ -445,16 +448,30 @@ function scr_actselect(arg0, arg1)
 function scr_nextact()
 {
 	show_debug_message("------------ scr_nextact")
+    global.currentactingchar = 0;
 	
     global.acting[0] = 0;
     global.acting[1] = 0;
     global.acting[2] = 0;
-    global.actingsingle[global.currentactingchar] = 0;
+    //global.actingsingle[global.currentactingchar] = 0;
+	
+    if (global.currentactingchar >= 3) {
+		show_debug_message("Going to ATTACK phase");
+        with (obj_monsterparent)
+        {
+			for (i = 1; i < DRCharacter.__MAX__; i++)
+				acting[i] = 0;
+        }
+        
+        global.currentactingchar = 0;
+        scr_attackphase();
+	}
+	
     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
     
     with (__minstance)
     {
-		acting[DRCharacter.Kris] = 0;
+		//acting[DRCharacter.Kris] = 0;
 		for (i = 1; i < DRCharacter.__MAX__; i++) {
 			//acting[i] = 0;
 			actcon[i] = 0;
@@ -465,31 +482,35 @@ function scr_nextact()
 	show_debug_message("global.currentactingchar = {0}", global.currentactingchar);
     while (global.currentactingchar < 3)
     {
-        global.currentactingchar++;
-		show_debug_message("++global.currentactingchar = {0}", global.currentactingchar);
-        
-        if (global.currentactingchar < 3)
-        {
 			show_debug_message("global.actingsingle[{0}] = {1}", global.currentactingchar, global.actingsingle[global.currentactingchar]);
             if (global.actingsingle[global.currentactingchar] == 1)
             {
+				if (global.actingsimul[global.currentactingchar] != 0) break; // let all simul acts be handled by scr_act_simul
                 __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
 				with (__minstance)
 					actcon[global.char[global.currentactingchar]] = 1;
 					
 				show_debug_message("actcon[{0}] = {1}", global.char[global.currentactingchar], 1);
 				
-				if (global.actingsimul[global.currentactingchar] == 0)
+				//if (global.actingsimul[global.currentactingchar] == 0)
 					singleactcomplete = 1;
 					
+				global.actingsingle[global.currentactingchar] = 0;
 				break;
             }
-        }
+        global.currentactingchar++;
+		show_debug_message("++global.currentactingchar = {0}", global.currentactingchar);
     }
+	
 	
 	show_debug_message("singleactcomplete = {0}", singleactcomplete);
 	show_debug_message("------------")
     
+    if (!singleactcomplete)
+    {
+		show_debug_message("Going to ACT SIMUL phase", singleactcomplete);
+        scr_act_simul();
+    }
     if (global.currentactingchar >= 3)
     {
 		show_debug_message("Going to ATTACK phase", singleactcomplete);
@@ -501,11 +522,6 @@ function scr_nextact()
         
         global.currentactingchar = 0;
         scr_attackphase();
-    }
-    else if (!singleactcomplete)
-    {
-		show_debug_message("Going to ACT SIMUL phase", singleactcomplete);
-        scr_act_simul();
     }
 }
 
@@ -522,7 +538,7 @@ function scr_act_simul()
         {
 			if (global.actsimul[global.char[__ii]][global.actingtarget[__ii]][global.actingchoice[__ii]] == 1) {
 				obj_monsterparent.simulorder[global.char[__ii]] = __simulcount;
-                global.monsterinstance[global.actingtarget[__ii]].actcon[global.char[__ii]] = global.char[__ii] == DRCharacter.Kris ? 0 : 1;
+                global.monsterinstance[global.actingtarget[__ii]].actcon[global.char[__ii]] = 1;//global.char[__ii] == DRCharacter.Kris ? 0 : 1;
 					
 				__foundsimul = 1;
 			}
@@ -534,6 +550,8 @@ function scr_act_simul()
             }
             
             obj_monsterparent.simultotal = __simulcount;
+			
+			if !__foundsimul break; //stop if it's not a simul act and let it be handled by scr_nextact
         }
     }
 	
