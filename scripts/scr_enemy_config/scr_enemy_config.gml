@@ -65,7 +65,6 @@ function scr_monstersetup()
         case DREnemy.TestEnemy:
             global.monstername[myself] = "Enemy";
             global.monstermaxhp[myself] = 130;
-            global.monstermaxhp[myself] = 130;
             global.monsterhp[myself] = 130;
             global.monsterat[myself] = 7;
             global.monsterdf[myself] = 0;
@@ -127,7 +126,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					
 					scr_randomtarget();
 					myattackchoice = choose(DRBulletPattern.HomingDiamonds, DRBulletPattern.RisingDiamonds, DRBulletPattern.SwordThrow);
-					myattackpriority = myattackchoice == 2 ? DRBulletPattern.SwordThrow : 0;
+					myattackpriority = myattackchoice == DRBulletPattern.SwordThrow ? 2 : 0;
 					scr_attackpriority(myattackpriority);
 					
 					if !instance_exists(obj_darkener) // no this isnt supposed to be "darkner" its literally just something that darkens things, a darkener lol
@@ -193,8 +192,10 @@ function scr_enemy_process_phase(enemyId, phase) {
 					// and so acts dont repeat
 					
 					// Kris's ACTs
-					if actcon[DRCharacter.Kris] == 0 && acting[DRCharacter.Kris] != 0 {
-						actcon[DRCharacter.Kris] = 1;
+					//if actcon[DRCharacter.Kris] == 0 && acting[DRCharacter.Kris] != 0 {
+					if actcon[DRCharacter.Kris] == 1 {
+					    actcon[DRCharacter.Kris] = 0;
+					    nextact = 1;
 						
 						if acting[DRCharacter.Kris] == 1 {
 							msgset(0, "* ENEMY - AT 1 DF 1&* Susceptible to Brainshock./%");
@@ -219,7 +220,8 @@ function scr_enemy_process_phase(enemyId, phase) {
 					    }
 					
 						if acting[DRCharacter.Kris] == 4 {
-							actcon[DRCharacter.Kris] = simulorder[DRCharacter.Kris] == 0 ? 20 : -1;
+							nextact = 0;
+							actcon[DRCharacter.Kris] = simulorder[DRCharacter.Kris] == 0 ? 20 : 0;
 						
 							msgset(0, simultotal == 1 ? "* Kris decided to have a really long message when acting alone." : "* Kris's simul act!");
 						
@@ -242,7 +244,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					// Susie's ACTs
 					if actcon[DRCharacter.Susie] == 1 {
 						if acting[DRCharacter.Susie] == 1 {
-							actcon[DRCharacter.Kris] = 1;
+							nextact = 1;
 					        actcon[DRCharacter.Susie] = 0;
 						
 					        msgset(0, "* Susie's unique act A!./%");
@@ -262,7 +264,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					// Ralsei's ACTs
 					if actcon[DRCharacter.Ralsei] == 1 {
 						if acting[DRCharacter.Ralsei] == 1 {
-							actcon[DRCharacter.Kris] = 1;
+							nextact = 1;
 					        actcon[DRCharacter.Ralsei] = 0;
 						
 					        msgset(0, "* Ralsei's unique act A!./%");
@@ -281,9 +283,10 @@ function scr_enemy_process_phase(enemyId, phase) {
 					
 					// Finish handling
 					if arr_contains(actcon, 20) && scr_terminate_writer()
-						for (i = 0; i < DRCharacter.__MAX__; i++) actcon[i] = i == DRCharacter.Kris ? 1 : -1;
+						for (i = 0; i < DRCharacter.__MAX__; i++) { actcon[i] = -1; nextact = 1; }//i == DRCharacter.Kris ? 1 : -1;
 						
-					if actcon[DRCharacter.Kris] == 1 && !instance_exists(obj_writer)
+					//if actcon[DRCharacter.Kris] == 1 && !instance_exists(obj_writer)
+					if nextact && !instance_exists(obj_writer)
 						scr_nextact();
 						
 					break;

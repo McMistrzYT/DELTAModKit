@@ -53,7 +53,7 @@ for (var i = 0; i < 3; i += 1)
 	havechar[global.char[i] - 1] = 1;
     charpos[global.char[i] - 1] = i;
         
-    if (i > 0 && global.char[i] != DRCharacter.Kris)
+    if (i > 0 )//&& global.char[i] != DRCharacter.Kris)
     {
         global.cinstance[i - 1] = instance_create(obj_mainchara.x, obj_mainchara.y, obj_caterpillarchara);
         global.cinstance[i - 1].target = i * 12;
