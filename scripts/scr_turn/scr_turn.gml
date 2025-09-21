@@ -455,18 +455,6 @@ function scr_nextact()
     global.acting[2] = 0;
     //global.actingsingle[global.currentactingchar] = 0;
 	
-    if (global.currentactingchar >= 3) {
-		show_debug_message("Going to ATTACK phase");
-        with (obj_monsterparent)
-        {
-			for (i = 1; i < DRCharacter.__MAX__; i++)
-				acting[i] = 0;
-        }
-        
-        global.currentactingchar = 0;
-        scr_attackphase();
-	}
-	
     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
     
     with (__minstance)
