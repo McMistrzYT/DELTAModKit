@@ -693,8 +693,8 @@ function scr_load()
 	var amt = 5 // Original Max for DELTAMODKIT save files.
 	if newread != string_digits(newread){ // we can assume it's using the updated system
 		amt = real(string_digits(newread)) // Using the Amount of Characters returned by the Save Point.
+        ossafe_file_text_readln(myfileid);
 	}
-	else
     for (i = 0; i < amt; i++){
         if (!global.is_console)
         {
