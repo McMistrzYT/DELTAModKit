@@ -289,8 +289,7 @@ function scr_set_vhs_ini_value(has_watched)
     ossafe_ini_close();
 }
 
-function scr_save()
-{
+function scr_save() {
     scr_saveprocess(global.filechoice);
     filechoicebk2 = global.filechoice;
     global.filechoice = 9;
@@ -335,8 +334,7 @@ function scr_save()
     ossafe_savedata_save();
 }
 
-function scr_saveprocess(arg0)
-{
+function scr_saveprocess(arg0) {
     global.lastsavedtime = global.time;
     global.lastsavedlv = global.lv;
     file = "filech" + string(global.chapter) + "_" + string(arg0);
@@ -403,6 +401,7 @@ function scr_saveprocess(arg0)
     }
     
     ossafe_file_text_write_string(myfileid, "CHARACTERAMT: " + string(DRHero.__MAX__));
+            ossafe_file_text_writeln(myfileid);
     for (i = 0; i < DRHero.__MAX__; i++)
     {
         if (!global.is_console)
@@ -560,7 +559,7 @@ function scr_saveprocess(arg0)
     
     ossafe_file_text_write_real(myfileid, global.plot);
     ossafe_file_text_writeln(myfileid);
-    ossafe_file_text_write_real(myfileid, global.currentroom);
+    ossafe_file_text_write_string(myfileid, room_get_name(global.currentroom));
     ossafe_file_text_writeln(myfileid);
     ossafe_file_text_write_real(myfileid, global.time);
     ossafe_file_text_close(myfileid);
@@ -891,7 +890,7 @@ function scr_load()
     
     global.plot = ossafe_file_text_read_real(myfileid);
     ossafe_file_text_readln(myfileid);
-    global.currentroom = ossafe_file_text_read_real(myfileid);
+    global.currentroom = asset_get_index(ossafe_file_text_read_string(myfileid));
     ossafe_file_text_readln(myfileid);
     global.time = ossafe_file_text_read_real(myfileid);
     ossafe_file_text_readln(myfileid);
@@ -901,19 +900,7 @@ function scr_load()
     
     audio_group_set_gain(1, global.flag[15], 0);
     audio_set_master_gain(0, global.flag[17]);
-    var room_id = global.currentroom;
-    
-    if (room_id < 10000)
-    {
-        room_id = scr_get_id_by_room_index(global.currentroom);
-        
-        if (room_id == -1)
-            room_id += (global.currentroom + (global.chapter * 10000));
-        
-        global.currentroom = room_id;
-    }
-    
-    __loadedroom = scr_get_room_by_id(global.currentroom);
+    __loadedroom = (global.currentroom);
     
     //if (scr_dogcheck())
     //    __loadedroom = 83;
@@ -957,8 +944,7 @@ function scr_ini_chapter(arg0, arg1)
         return "G" + string(arg1);
 }
 
-function scr_get_room_by_id(arg0)
-{
+function scr_get_room_by_id(arg0) {
     var room_id = arg0;
     var rooms = scr_get_room_list();
     
@@ -966,40 +952,44 @@ function scr_get_room_by_id(arg0)
         room_id += (global.chapter * 10000);
     
     var room_index = -1;
-    
-    for (var i = 0; i < array_length(rooms); i++)
-    {
-        if (rooms[i].room_id == room_id)
-        {
-            room_index = rooms[i].room_index;
-            break;
-        }
-    }
-    
-    if (room_index == -1)
-    {
+	if !is_string(room_id)
+	    for (var i = 0; i < array_length(rooms); i++)
+	    {
+	        if (rooms[i].room_id == room_id)
+	        {
+	            room_index = rooms[i].room_index;
+	            break;
+	        }
+	    }
+	else room_id = asset_get_index(room_id)
+
+    if (room_id == -1) {
+		show_message("FAILED TO GET ROOM NAME")
+		return 0;
     }
     
     return room_index;
 }
 
-function scr_get_id_by_room_index(arg0)
-{
+function scr_get_id_by_room_index(arg0) {
     var room_index = arg0;
     var rooms = scr_get_room_list();
     var room_id = -1;
-    
-    for (var i = 0; i < array_length(rooms); i++)
-    {
-        if (rooms[i].room_index == room_index)
-        {
-            room_id = rooms[i].room_id;
-            break;
-        }
+    if !is_string(arg0) {
+	    for (var i = 0; i < array_length(rooms); i++)
+	    {
+	        if (rooms[i].room_index == room_index)
+	        {
+	            room_id = rooms[i].room_id;
+	            break;
+	        }
+	    }
     }
-    
-    if (room_id == -1)
-    {
+	else room_id = asset_get_index(arg0)
+
+    if (room_id == -1) {
+		show_message("FAILED TO GET ROOM NAME")
+		return 0;
     }
     
     return room_id;
