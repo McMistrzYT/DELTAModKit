@@ -27,7 +27,7 @@
   "option_ios_icon_iphone_spotlight_120":"${base_options_dir}/ios/icons/spotlight/iphone_120.png",
   "option_ios_icon_iphone_spotlight_80":"${base_options_dir}/ios/icons/spotlight/iphone_80.png",
   "option_ios_icon_itunes_artwork_1024":"${base_options_dir}/ios/icons/itunes/itunes_1024.png",
-  "option_ios_interpolate_pixels":true,
+  "option_ios_interpolate_pixels":false,
   "option_ios_launchscreen_fill":0,
   "option_ios_launchscreen_image":"${base_options_dir}/ios/splash/launchscreen.png",
   "option_ios_launchscreen_image_landscape":"${base_options_dir}/ios/splash/launchscreen-landscape.png",

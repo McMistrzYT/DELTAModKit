@@ -10,7 +10,7 @@
   "option_tvos_icon_1280":"${base_options_dir}/tvos/icons/1280.png",
   "option_tvos_icon_400":"${base_options_dir}/tvos/icons/400.png",
   "option_tvos_icon_400_2x":"${base_options_dir}/tvos/icons/400_2x.png",
-  "option_tvos_interpolate_pixels":true,
+  "option_tvos_interpolate_pixels":false,
   "option_tvos_min_version":"10.0",
   "option_tvos_output_dir":"~/GameMakerStudio2/tvOS",
   "option_tvos_podfile_lock_path":"${options_dir}\\tvos\\Podfile.lock",
