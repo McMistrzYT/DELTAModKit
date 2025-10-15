@@ -19,14 +19,8 @@ if (delaytimer >= delay)
 {
     draw_set_color(c_white);
     
-    if (type == 0)
-        draw_set_color(lightb);
-    
-    if (type == 1)
-        draw_set_color(lightf);
-    
-    if (type == 2)
-        draw_set_color(lightg);
+	if (type == 0)
+		draw_set_color(scr_char_get_dmgwriter_color(char));
     
     if (type == 3)
         draw_set_color(c_lime);
@@ -36,9 +30,6 @@ if (delaytimer >= delay)
     
     if (type == 5 && damage < 0)
         draw_set_color(c_ltgray);
-    
-    if (type == 6)
-        draw_set_color(lighty);
     
     message = specialmessage;
     

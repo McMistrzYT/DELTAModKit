@@ -336,10 +336,8 @@ if (finishattacktimer > 0)
             damage = round(((global.battleat[myself] * points) / 20) - (global.monsterdf[global.chartarget[myself]] * 3));
             
             scr_damage_enemy(global.chartarget[myself], damage);
-            dm.type = char - 1;
-            
-            if (char == 4)
-                dm.type = 6;
+            dm.type = 0;
+			dm.char = global.char[myself];
             
             dm.delay = 8;
             

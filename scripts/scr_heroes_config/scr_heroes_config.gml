@@ -82,6 +82,17 @@ function scr_hero_get_attacktarget_color(heroIdx) {
 	}
 }
 
+function scr_char_get_dmgwriter_color(heroIdx) {
+	switch (heroIdx) {
+		case DRCharacter.Kris:	return merge_color(c_aqua, c_white, 0.5);
+		case DRCharacter.Susie:	return merge_color(c_purple, c_white, 0.6);
+		case DRCharacter.Ralsei: return merge_color(c_lime, c_white, 0.5);
+		case DRCharacter.Noelle: return merge_color(c_yellow, c_white, 0.3);
+		
+		default: return merge_color(scr_hero_get_color(heroIdx), c_white, 0.5);
+	}
+}
+
 function scr_hero_get_battle_instance(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Kris:	return obj_herokris;

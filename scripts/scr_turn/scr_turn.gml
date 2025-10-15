@@ -550,7 +550,7 @@ function scr_damage_enemy(arg0, arg1)
 {
     dm = instance_create(global.monsterx[arg0], (global.monstery[arg0] + 20) - (global.hittarget[arg0] * 20), obj_dmgwriter);
     
-    if (caster < 4)
+    /*if (caster < 4)
     {
         dm.type = global.char[caster] - 1;
         
@@ -559,7 +559,9 @@ function scr_damage_enemy(arg0, arg1)
     }
     
     if (caster == 5)
-        dm.type = 5;
+        dm.type = 5;*/
+	dm.type = 0;
+	dm.char = global.char[caster];
     
     dm.damage = arg1;
     global.monsterhp[arg0] -= arg1;
