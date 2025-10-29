@@ -745,8 +745,8 @@ function scr_randomtarget_old()
 {
     abletotarget = 1;
 	
-	for (var i = 0; i < array_length(global.charcantarget); i++)
-		if global.charcantarget[i] == false abletotarget = false;
+	if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
+		abletotarget = 0;
     
     mytarget = choose(0, 1, 2);
     
