@@ -15,7 +15,7 @@
   "option_html5_google_tracking_id":"",
   "option_html5_icon":"${base_options_dir}/html5/fav.ico",
   "option_html5_index":"",
-  "option_html5_interpolate_pixels":true,
+  "option_html5_interpolate_pixels":false,
   "option_html5_jsprepend":"",
   "option_html5_loadingbar":"",
   "option_html5_localrunalert":true,
