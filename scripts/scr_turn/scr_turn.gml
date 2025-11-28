@@ -20,7 +20,7 @@ function scr_mnendturn()
         techwon = 1;
     
     if (techwon == 1)
-        scr_combat_result();
+        scr_wincombat();
     
     if (techwon == 0)
     {
