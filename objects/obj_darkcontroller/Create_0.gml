@@ -43,23 +43,25 @@ for (var i = 0; i < 36; i += 1)
 global.cinstance[0] = 4343434343;
 global.cinstance[1] = 343434343434;
 
-for (var i = 0; i < 3; i += 1)
-{
+for (var i = 0; i < 3; i += 1) {
+	var char = global.char[i]
     global.faceaction[i] = 0;
 	
-	if (global.char[i] == DRCharacter.None) continue;
+	if (char == DRCharacter.None) continue;
 	
 	chartotal++;
-	havechar[global.char[i] - 1] = 1;
-    charpos[global.char[i] - 1] = i;
+	havechar[char - 1] = 1;
+    charpos[char - 1] = i;
         
-    if (i > 0 )//&& global.char[i] != DRCharacter.Kris)
-    {
-        global.cinstance[i - 1] = instance_create(obj_mainchara.x, obj_mainchara.y, obj_caterpillarchara);
+    if (i > 0) {
+		scr_character_set_caterpillar_offsets(char)
+        global.cinstance[i - 1] = instance_create(obj_mainchara.x - halign, obj_mainchara.y - valign, obj_caterpillarchara);
         global.cinstance[i - 1].target = i * 12;
+		global.cinstance[i - 1].characterslot = char
 		
-		with (global.cinstance[i - 1])
-			scr_character_set_caterpillar_sprites(global.char[i]);
+		with (global.cinstance[i - 1]) {
+			scr_character_set_caterpillar_sprites(char);
+		}
     }
 }
 

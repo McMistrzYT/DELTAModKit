@@ -1,8 +1,7 @@
 scr_depth();
 image_speed = 0;
 
-if (global.darkzone)
-    scr_darksize(id);
+if (global.darkzone) scr_darksize(id);
 
 walk = 0;
 fun = 0;
@@ -47,8 +46,9 @@ mywidth = sprite_width;
 myheight = sprite_height;
 xoffset = 0;
 yoffset = 0;
-init = 0;
+init = false;
 forget = 0;
 ignoredepth = 0;
 halign = 6;
 valign = 16;
+characterslot = 0

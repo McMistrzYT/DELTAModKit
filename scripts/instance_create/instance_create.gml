@@ -1,6 +1,6 @@
-function instance_create(arg0, arg1, arg2){
-	var myDepth = object_get_depth(arg2);
-    return instance_create_depth(arg0, arg1, myDepth, arg2);
+function instance_create(x, y, object){
+	var myDepth = object_get_depth(object);
+    return instance_create_depth(x, y, myDepth, object);
 }
 
 function d_make(arg0 = -1, arg1 = -1, arg2 = -1, arg3 = -1, arg4 = -1)
