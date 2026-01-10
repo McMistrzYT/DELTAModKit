@@ -20,7 +20,7 @@ function scr_mnendturn()
         techwon = 1;
     
     if (techwon == 1)
-        scr_combat_result();
+        scr_wincombat();
     
     if (techwon == 0)
     {
@@ -455,18 +455,6 @@ function scr_nextact()
     global.acting[2] = 0;
     //global.actingsingle[global.currentactingchar] = 0;
 	
-    if (global.currentactingchar >= 3) {
-		show_debug_message("Going to ATTACK phase");
-        with (obj_monsterparent)
-        {
-			for (i = 1; i < DRCharacter.__MAX__; i++)
-				acting[i] = 0;
-        }
-        
-        global.currentactingchar = 0;
-        scr_attackphase();
-	}
-	
     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
     
     with (__minstance)
@@ -562,7 +550,7 @@ function scr_damage_enemy(arg0, arg1)
 {
     dm = instance_create(global.monsterx[arg0], (global.monstery[arg0] + 20) - (global.hittarget[arg0] * 20), obj_dmgwriter);
     
-    if (caster < 4)
+    /*if (caster < 4)
     {
         dm.type = global.char[caster] - 1;
         
@@ -571,7 +559,9 @@ function scr_damage_enemy(arg0, arg1)
     }
     
     if (caster == 5)
-        dm.type = 5;
+        dm.type = 5;*/
+	dm.type = 0;
+	dm.char = global.char[caster];
     
     dm.damage = arg1;
     global.monsterhp[arg0] -= arg1;
@@ -755,8 +745,8 @@ function scr_randomtarget_old()
 {
     abletotarget = 1;
 	
-	for (var i = 0; i < array_length(global.charcantarget); i++)
-		if global.charcantarget[i] == false abletotarget = false;
+	if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
+		abletotarget = 0;
     
     mytarget = choose(0, 1, 2);
     

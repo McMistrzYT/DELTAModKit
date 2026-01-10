@@ -82,6 +82,17 @@ function scr_hero_get_attacktarget_color(heroIdx) {
 	}
 }
 
+function scr_char_get_dmgwriter_color(heroIdx) {
+	switch (heroIdx) {
+		case DRCharacter.Kris:	return merge_color(c_aqua, c_white, 0.5);
+		case DRCharacter.Susie:	return merge_color(c_purple, c_white, 0.6);
+		case DRCharacter.Ralsei: return merge_color(c_lime, c_white, 0.5);
+		case DRCharacter.Noelle: return merge_color(c_yellow, c_white, 0.3);
+		
+		default: return merge_color(scr_hero_get_color(heroIdx), c_white, 0.5);
+	}
+}
+
 function scr_hero_get_battle_instance(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Kris:	return obj_herokris;
@@ -398,7 +409,8 @@ function scr_character_get_base_stats(charIdx) {
 	switch (charIdx) {
 		case DRCharacter.Kris: {
 			__hp = 90 + defaultChapterHpIncreaseFormula;
-			__atk = 10 + chapter * 2 + max(chapter - 3, 0);
+			__atk = 10 + max(chapter - 1, 0) * 2 + max(chapter - 3, 0);
+			__mag = 0;
 			__weapon = DRWeapon.WoodBlade;
 			
 			if chapter >= 2 __armors = [DRArmor.AmberCard, DRArmor.AmberCard];
@@ -415,8 +427,8 @@ function scr_character_get_base_stats(charIdx) {
 			break;
 		}
 		case DRCharacter.Susie: {
-			__hp = 110 + defaultChapterHpIncreaseFormula;
-			__atk = 14 + chapter * 2 + 2 * max(chapter - 3, 0);
+			__hp = 110 + defaultChapterHpIncreaseFormula + (chapter > 2 ? 10 : 0);
+			__atk = 14 + max(chapter - 1, 0) * 2 + 2 * max(chapter - 3, 0);
 			__mag = 1 + max(chapter - 2, 0);
 			__weapon = DRWeapon.ManeAx;
 			
@@ -436,8 +448,8 @@ function scr_character_get_base_stats(charIdx) {
 		}
 		case DRCharacter.Ralsei: {
 			__hp = 70 + defaultChapterHpIncreaseFormula;
-			__atk = 8 + chapter * 2 + max(chapter - 3, 0);
-			__mag = 7 + chapter * 2 + max(chapter - 3, 0);
+			__atk = 8 + max(chapter - 1, 0) * 2 + max(chapter - 3, 0);
+			__mag = 7 + max(chapter - 1, 0) * 2 + max(chapter - 3, 0);
 			__weapon = DRWeapon.RedScarf;
 			
 			if chapter >= 2 __armors = [DRArmor.AmberCard, DRArmor.WhiteRibbon];

@@ -1032,7 +1032,7 @@ if (global.myfight == 3)
 {
     if (scr_monsterpop() == 0 && !instance_exists(obj_writer))
     {
-        scr_combat_result();
+        scr_wincombat();
         
         if (global.myfight == 3)
             scr_endturn();

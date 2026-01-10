@@ -1,3 +1,5 @@
+if !init exit;
+
 scr_enemy_drawhurt_generic();
 
 if (custom_draw_example == 0)

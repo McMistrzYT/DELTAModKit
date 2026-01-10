@@ -1,3 +1,8 @@
+if !init {
+	scr_enemy_set_sprites(enemyId);
+	init = true;
+}
+
 if global.monster[myself]
 {
     if scr_isphase(DREncounterPhase.EnemyTalk)
