@@ -374,6 +374,7 @@ function scr_character_set_caterpillar_offsets(charIdx) {
 	depthbonus = 5
     halign = 3
     valign = 6;
+	timebetweenwalkframes = 10;
 	var autoresizeoffsets = true
 	#endregion
 	switch charIdx {

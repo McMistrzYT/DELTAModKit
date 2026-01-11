@@ -25,7 +25,7 @@ rsprite = spr_susier_dark;
 lsprite = spr_susiel_dark;
 slidesprite = spr_susied_dark;
 climbsprite = spr_susieu_dark;
-
+timebetweenwalkframes = 10
 parent = obj_mainchara;
 pd = parent.dsprite;
 pr = parent.rsprite;

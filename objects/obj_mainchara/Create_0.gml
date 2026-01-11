@@ -63,6 +63,7 @@ rsprite = spr_krisr;
 usprite = spr_krisu;
 lsprite = spr_krisl;
 climbsprite = 3707;
+timebetweenwalkframes = 10
 
 if darkmode {
 	dsprite = spr_krisd_dark;

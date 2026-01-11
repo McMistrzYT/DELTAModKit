@@ -109,50 +109,31 @@ if (x != nowx)
 if (y != nowy)
     walk = 1;
 
-if (walk == 1)
-    walkbuffer = 6;
-
-if (walkbuffer > 3 && fun == 0)
-{
-    walktimer += 1.5;
-    
-    if (runmove == 1)
-        walktimer += 1.5;
-    
-    if (walktimer >= 40)
-        walktimer -= 40;
-    
-    if (walktimer < 10)
-        image_index = 0;
-    
-    if (walktimer >= 10)
-        image_index = 1;
-    
-    if (walktimer >= 20)
-        image_index = 2;
-    
-    if (walktimer >= 30)
-        image_index = 3;
+if (walk == true) walkbuffer = 6
+	
+if (walkbuffer > 3 && fun == false) {
+	walktimer += 1.5
+	if (runmove == true) walktimer += 1.5
+		
+		
+	if (walktimer >= (image_number * timebetweenwalkframes)) 
+		walktimer -= (image_number * timebetweenwalkframes)
+		
+	image_index = floor(walktimer / timebetweenwalkframes)
 }
-
-if (walkbuffer <= 0 && fun == 0)
-{
-    if (walktimer < 10)
-        walktimer = 9.5;
-    
-    if (walktimer >= 10 && walktimer < 20)
-        walktimer = 19.5;
-    
-    if (walktimer >= 20 && walktimer < 30)
-        walktimer = 29.5;
-    
-    if (walktimer >= 30)
-        walktimer = 39.5;
-    
-    image_index = 0;
+	
+if (walkbuffer <= 0 && fun == false) {
+	if (walktimer < timebetweenwalkframes) walktimer = 9.5
+		
+	var current = floor(walktimer / timebetweenwalkframes) * timebetweenwalkframes
+	var next = current + timebetweenwalkframes
+		
+	if (walktimer >= current && walktimer < next) walktimer = next - 0.5
+		
+	image_index = 0
 }
-
-walkbuffer -= 0.75;
+	
+walkbuffer -= 0.75
 
 if (fun == 0 && slided == 0)
 {

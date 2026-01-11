@@ -98,8 +98,7 @@ function scr_refresh_party() {
     }	
 }
 
-function scr_makecaterpillar(xx, yy, characterId, idx)
-{
+function scr_makecaterpillar(xx, yy, characterId, idx) {
     global.cinstance[idx] = instance_create(xx, yy, obj_caterpillarchara);
     global.cinstance[idx].target = 12 + idx * 12;
     
