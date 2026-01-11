@@ -123,7 +123,7 @@ if (walkbuffer > 3 && fun == false) {
 }
 	
 if (walkbuffer <= 0 && fun == false) {
-	if (walktimer < timebetweenwalkframes) walktimer = 9.5
+	if (walktimer < timebetweenwalkframes) walktimer = timebetweenwalkframes - 0.5
 		
 	var current = floor(walktimer / timebetweenwalkframes) * timebetweenwalkframes
 	var next = current + timebetweenwalkframes
