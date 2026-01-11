@@ -159,13 +159,7 @@
     {"$GMFolder":"","%Name":"Chapter 1","folderPath":"folders/DELTARUNE/Tilesets/Dark World/Tilesets/Chapter 1.yy","name":"Chapter 1","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
-  "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"balnwonknu_sum.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"balnwonknu_sum.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"castletown_empty.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"castletown_empty.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"quiet_autumn.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"quiet_autumn.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"THE_HOLY.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"THE_HOLY.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"wind.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"wind.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-  ],
+  "IncludedFiles":[],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
