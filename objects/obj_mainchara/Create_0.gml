@@ -88,17 +88,10 @@ swordfacing = 1;
 swordsprite = rsprite;
 fun = 0;
 
-if (global.facing == 0)
-    sprite_index = dsprite;
-
-if (global.facing == 1)
-    sprite_index = rsprite;
-
-if (global.facing == 2)
-    sprite_index = usprite;
-
-if (global.facing == 3)
-    sprite_index = lsprite;
+if (global.facing == 0) sprite_index = dsprite;
+if (global.facing == 1) sprite_index = rsprite;
+if (global.facing == 2) sprite_index = usprite;
+if (global.facing == 3) sprite_index = lsprite;
 
 onebuffer = 0;
 twobuffer = 0;
@@ -110,8 +103,7 @@ for (i = 0; i < 10; i += 1)
 
 cameFromEntrance = global.entrance;
 
-if (global.interact == 3)
-{
+if (global.interact == 3) {
     noentrancefound = 0;
     
     if (global.entrance > 0)
@@ -261,45 +253,38 @@ initht = sprite_height;
 mywidth = sprite_width;
 myheight = sprite_height;
 
-function check_heightfloor(arg0, arg1, arg2)
-{
+// @desc Checks if kris and the floorobject is on the Same Height (Only Defined in obj_mainchara so it can only be used in that Scope.)
+function check_heightfloor(xcheck, ycheck, floorobject) {
     var __onfloor = 0;
-    var __inst = instance_position(bbox_right + arg0, bbox_top + arg1, arg2);
+    var __inst = instance_position(bbox_right + xcheck, bbox_top + ycheck, floorobject);
     
-    if (__inst != -4)
-    {
+    if (__inst != noone) {
         if (__inst.floorheight == floorheight)
             __onfloor++;
     }
     
-    __inst = instance_position(bbox_right + arg0, bbox_bottom + arg1, arg2);
-    
-    if (__inst != -4)
-    {
+    __inst = instance_position(bbox_right + xcheck, bbox_bottom + ycheck, floorobject);
+    if (__inst != noone) {
         if (__inst.floorheight == floorheight)
             __onfloor++;
     }
     
-    __inst = instance_position(bbox_left + arg0, bbox_top + arg1, arg2);
-    
-    if (__inst != -4)
-    {
+    __inst = instance_position(bbox_left + xcheck, bbox_top + ycheck, floorobject);
+    if (__inst != noone) {
         if (__inst.floorheight == floorheight)
             __onfloor++;
     }
     
-    __inst = instance_position(bbox_left + arg0, bbox_bottom + arg1, arg2);
-    
-    if (__inst != -4)
-    {
+    __inst = instance_position(bbox_left + xcheck, bbox_bottom + ycheck, floorobject);
+    if (__inst != noone) {
         if (__inst.floorheight == floorheight)
             __onfloor++;
     }
     
     if (__onfloor == 4)
-        __onfloor = 1;
+        __onfloor = true;
     else
-        __onfloor = 0;
+        __onfloor = false;
     
     return __onfloor;
 }

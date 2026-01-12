@@ -159,7 +159,9 @@
     {"$GMFolder":"","%Name":"Chapter 1","folderPath":"folders/DELTARUNE/Tilesets/Dark World/Tilesets/Chapter 1.yy","name":"Chapter 1","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
-  "IncludedFiles":[],
+  "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"ch5_shop.ogg","CopyToMask":-1,"filePath":"datafiles/mus","name":"ch5_shop.ogg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+  ],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{

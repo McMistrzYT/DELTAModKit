@@ -278,61 +278,49 @@ if (global.interact == 0 && freeze == 0)
         {
 			scr_defaultprimarycollisioncode(obj_solidblock)
         }
-    }
-    else
-    {
+    } else {
         var _hedge = bbox_right;
         var _vedge = bbox_bottom;
         var _goingright = 0;
         var _goingdown = 0;
-        var _checkobj = 535;
+        var _checkobj = asset_get_index("obj_heightfloor");
         
-        if (px > 0)
-        {
+        if (px > 0) {
             _goingright = 1;
             _hedge = bbox_right;
         }
         
-        if (px < 0)
-        {
+        if (px < 0) {
             _goingright = -1;
             _hedge = bbox_left;
         }
         
-        if (py > 0)
-        {
+        if (py > 0) {
             _goingdown = 1;
             _vedge = bbox_bottom;
         }
         
-        if (py < 0)
-        {
+        if (py < 0) {
             _goingdown = -1;
             _vedge = bbox_top;
         }
         
-        if (!check_heightfloor(px, 0, _checkobj))
-        {
-            for (g = wspeed; g > 0; g -= 1)
-            {
-                mvd = 0;
+        if (!check_heightfloor(px, 0, _checkobj)) {
+            for (g = wspeed; g > 0; g -= 1) {
+                mvd = false;
                 
-                if (press_d == 0)
-                {
-                    if (check_heightfloor(px, -g, _checkobj))
-                    {
+                if (press_d == false) {
+					if (check_heightfloor(px, -g, _checkobj)) {
                         y -= g;
                         py = 0;
                         _vedge = bbox_top;
-                        mvd = 1;
+                        mvd = true;
                         break;
                     }
-                }
+				}
                 
-                if (press_u == 0)
-                {
-                    if (check_heightfloor(px, g, _checkobj))
-                    {
+                if (press_u == false) {
+                    if (check_heightfloor(px, g, _checkobj)) {
                         y += g;
                         py = 0;
                         _vedge = bbox_bottom;
@@ -341,59 +329,50 @@ if (global.interact == 0 && freeze == 0)
                 }
             }
             
-            xmeet = 1;
-            bkx = 0;
+            xmeet = true;
+            bkx = false;
             
-            if (px > 0)
-            {
-                for (var i = px; i >= 0; i -= 1)
-                {
+            if (px > 0) {
+                for (var i = px; i >= 0; i -= 1) {
                     if (check_heightfloor(i, 0, _checkobj))
                     {
                         px = i;
-                        bkx = 1;
+                        bkx = true;
                         break;
                     }
                 }
             }
             
-            if (px < 0)
-            {
-                for (var i = px; i <= 0; i += 1)
-                {
+            if (px < 0) {
+                for (var i = px; i <= 0; i += 1) {
                     if (check_heightfloor(i, 0, _checkobj))
                     {
                         px = i;
-                        bkx = 1;
+                        bkx = true;
                         break;
                     }
                 }
             }
             
-            if (bkx == 0)
-                px = 0;
+            if (bkx == false) px = 0;
         }
         
-        if (!check_heightfloor(0, py, _checkobj))
-        {
-            ymeet = 1;
-            bky = 0;
+        if (!check_heightfloor(0, py, _checkobj)) {
+            ymeet = true;
+            bky = false;
             
-            for (g = wspeed; g > 0; g -= 1)
-            {
-                mvd = 0;
+            for (g = wspeed; g > 0; g -= 1) {
+                mvd = false;
                 
-                if (press_r == 0 && check_heightfloor(-g, py, _checkobj))
-                {
+                if (press_r == false && check_heightfloor(-g, py, _checkobj)) {
                     x -= g;
                     px = 0;
                     _hedge = bbox_left;
-                    mvd = 1;
+                    mvd = true;
                     break;
                 }
                 
-                if (mvd == 0 && press_l == 0 && check_heightfloor(g, py, _checkobj))
-                {
+                if (mvd == false && press_l == false && check_heightfloor(g, py, _checkobj)) {
                     x += g;
                     px = 0;
                     _hedge = bbox_right;
@@ -401,92 +380,64 @@ if (global.interact == 0 && freeze == 0)
                 }
             }
             
-            if (py > 0)
-            {
-                for (var i = py; i >= 0; i -= 1)
-                {
-                    if (check_heightfloor(0, i, _checkobj))
-                    {
+            if (py > 0) {
+                for (var i = py; i >= 0; i -= 1) {
+                    if (check_heightfloor(0, i, _checkobj)) {
                         py = i;
-                        bky = 1;
+                        bky = true;
                         break;
                     }
                 }
             }
             
-            if (py < 0)
-            {
-                for (var i = py; i <= 0; i += 1)
-                {
-                    if (check_heightfloor(0, i, _checkobj))
-                    {
+            if (py < 0) {
+                for (var i = py; i <= 0; i += 1) {
+                    if (check_heightfloor(0, i, _checkobj)) {
                         py = i;
-                        bky = 1;
+                        bky = true;
                         break;
                     }
                 }
             }
             
-            if (bky == 0)
-                py = 0;
+            if (bky == false) py = 0;
         }
         
-        if (!check_heightfloor(px, 0, _checkobj))
-        {
-            xymeet = 1;
-            bkxy = 0;
+        if (!check_heightfloor(px, 0, _checkobj)) {
+            xymeet = true;
+            bkxy = false;
             var i = px;
             j = py;
             
-            while (j != 0 || i != 0)
-            {
-                if (check_heightfloor(i, j, _checkobj))
-                {
+            while (j != 0 || i != 0) {
+                if (check_heightfloor(i, j, _checkobj)) {
                     px = i;
                     py = j;
-                    bkxy = 1;
+                    bkxy = true;
                     break;
                 }
                 
-                if (abs(j) >= 1)
-                {
-                    if (j > 0)
-                        j -= 1;
-                    
-                    if (j < 0)
-                        j += 1;
-                }
-                else
-                {
-                    j = 0;
-                }
+                if (abs(j) >= 1) {
+                    if (j > 0) j -= 1;
+                    if (j < 0) j += 1;
+                }       else   j = 0;
                 
-                if (abs(i) >= 1)
-                {
-                    if (i > 0)
-                        i -= 1;
-                    
-                    if (i < 0)
-                        i += 1;
-                }
-                else
-                {
-                    i = 0;
-                }
+                if (abs(i) >= 1) {
+                    if (i > 0) i -= 1;
+                    if (i < 0) i += 1;
+                }       else   i = 0;
             }
             
-            if (bkxy == 0)
-            {
+            if (bkxy == false) {
                 px = 0;
                 py = 0;
             }
         }
     }
     
-    runmove = 0;
+    runmove = false;
     
-    if (run == 1 && xmeet == 0 && ymeet == 0 && xymeet == 0)
-    {
+    if (run == 1 && xmeet == 0 && ymeet == 0 && xymeet == 0) {
         if (abs(px) > 0 || abs(py) > 0)
         {
             runmove = 1;
