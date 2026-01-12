@@ -59,7 +59,7 @@ function scr_overworldcontrollers_spawncharacters(spawndarkners = true) {
 	    if (i > 0) {
 			scr_character_set_caterpillar_offsets(char)
 	        global.cinstance[i - 1] = instance_create(obj_mainchara.x - halign + obj_mainchara.halign, obj_mainchara.y - valign + obj_mainchara.valign, obj_caterpillarchara);
-	        global.cinstance[i - 1].target = chartotal * 12;
+	        global.cinstance[i - 1].target = (chartotal - 1) * 12;
 			global.cinstance[i - 1].characterslot = char
 		
 			with (global.cinstance[i - 1]) {
