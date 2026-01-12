@@ -316,6 +316,17 @@ function scr_hero_set_sprites(heroObject) {
 
 function scr_character_set_caterpillar_sprites(charIdx) {
 	switch (charIdx) {
+		case DRCharacter.Kris: {
+			name = "kris";
+			
+			usprite = global.darkzone ? spr_krisu_dark : spr_krisu
+			dsprite = global.darkzone ? spr_krisd_dark : spr_krisd
+			rsprite = global.darkzone ? spr_krisr_dark : spr_krisr
+			lsprite = global.darkzone ? spr_krisl_dark : spr_krisl
+			
+			break;
+		}
+		
 		default:
 		case DRCharacter.Susie: {
 			name = "susie";
@@ -378,6 +389,13 @@ function scr_character_set_caterpillar_offsets(charIdx) {
 	var autoresizeoffsets = true
 	#endregion
 	switch charIdx {
+			case DRCharacter.Kris: {
+				halign = 0
+				valign = 0
+				depthbonus = 0
+				break
+			}
+		
 			case DRCharacter.Susie: { // Susie Uses Default Horizontal alignment and Vertical Alignment
 				if global.darkzone == true depthbonus -= 60;	
 				break

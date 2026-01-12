@@ -36,43 +36,27 @@ if (!init) {
 	}
 }
 
-if (!ignoredepth)
-{
+if (!ignoredepth) {
     scr_depth();
-    depth += 5;
-    
-    if (name == "ralsei")
-        depth -= 80;
-    
-    if (name == "susie" && global.darkzone == 1)
-        depth -= 60;
-    
-    if (name == "noelle")
-        depth -= 5;
+    depth += depthbonus;
 }
 
 nowx = x;
 nowy = y;
-moved = 0;
-walk = 0;
-runmove = 0;
-slided = 0;
+moved = false;
+walk = false;
+runmove = false;
+slided = false;
 
-if (obj_mainchara.x != remx[0])
-    moved = 1;
+if (obj_mainchara.x != remx[0]) || (obj_mainchara.y != remy[0]) 
+	moved = true;
 
-if (obj_mainchara.y != remy[0])
-    moved = 1;
+if (sliding[target] == true) moved = true;
 
-if (sliding[target] == 1)
-    moved = 1;
-
-if (moved == 1 && follow == 1)
-{
+if (moved == true && follow == true) {
     blushtimer = 0;
     
-    for (i = 75; i > 0; i -= 1)
-    {
+    for (i = 75; i > 0; i -= 1) {
         remx[i] = remx[i - 1];
         remy[i] = remy[i - 1];
         facing[i] = facing[i - 1];
@@ -83,72 +67,22 @@ if (moved == 1 && follow == 1)
     remy[0] = obj_mainchara.y;
     sliding[0] = obj_mainchara.sliding;
     facing[0] = global.facing;
-    x = remx[target] - halign;
-    y = remy[target] - valign;
+    x = remx[target] - halign + obj_mainchara.halign;
+    y = remy[target] - valign + obj_mainchara.valign;
     
-    if (sliding[target] == 1)
-    {
+    if (sliding[target] == true) {
         x = remx[target];
         y = remy[target];
         sprite_index = slidesprite;
-        slided = 1;
+        slided = true;
     }
     
-    if (abs(remx[target + 1] - remx[target]) > 4)
-        runmove = 1;
-    
-    if (abs(remy[target + 1] - remy[target]) > 4)
-        runmove = 1;
+    if (abs(remy[target + 1] - remy[target]) > 4) runmove = true;
     
     dir = facing[target];
 }
 
-if (x != nowx)
-    walk = 1;
-
-if (y != nowy)
-    walk = 1;
-
-if (walk == true) walkbuffer = 6
-	
-if (walkbuffer > 3 && fun == false) {
-	walktimer += 1.5
-	if (runmove == true) walktimer += 1.5
-		
-		
-	if (walktimer >= (image_number * timebetweenwalkframes)) 
-		walktimer -= (image_number * timebetweenwalkframes)
-		
-	image_index = floor(walktimer / timebetweenwalkframes)
-}
-	
-if (walkbuffer <= 0 && fun == false) {
-	if (walktimer < timebetweenwalkframes) walktimer = timebetweenwalkframes - 0.5
-		
-	var current = floor(walktimer / timebetweenwalkframes) * timebetweenwalkframes
-	var next = current + timebetweenwalkframes
-		
-	if (walktimer >= current && walktimer < next) walktimer = next - 0.5
-		
-	image_index = 0
-}
-	
-walkbuffer -= 0.75
-
-if (fun == 0 && slided == 0)
-{
-    if (facing[target] == 0)
-        sprite_index = dsprite;
-    
-    if (facing[target] == 1)
-        sprite_index = rsprite;
-    
-    if (facing[target] == 2)
-        sprite_index = usprite;
-    
-    if (facing[target] == 3)
-        sprite_index = lsprite;
-}
+scr_overworldcharwalking_shared(facing[target])
 
 if ((/*dsprite == spr_ralseid || */dsprite == spr_ralsei_walk_down) && global.interact == 0 && fun == 0)
 {

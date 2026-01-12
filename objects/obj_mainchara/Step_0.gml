@@ -680,59 +680,9 @@ if (global.interact == 0 && freeze == 0)
     y += py;
 }
 
-if (fun == 0)
-{
-    walk = 0;
-    
-    if (x != nowx && nopress == 0)
-        walk = 1;
-    
-    if (y != nowy && nopress == 0)
-        walk = 1;
-    
-   if (walk == true) walkbuffer = 6
-	
-	if (walkbuffer > 3 && fun == false) {
-		walktimer += 1.5
-		if (runmove == true) walktimer += 1.5
-		
-		
-		if (walktimer >= (image_number * timebetweenwalkframes)) 
-			walktimer -= (image_number * timebetweenwalkframes)
-		
-		image_index = floor(walktimer / timebetweenwalkframes)
-	}
-	
-	if (walkbuffer <= 0 && fun == false && climbing == false) {
-		if (walktimer < timebetweenwalkframes) walktimer = timebetweenwalkframes - 0.5
-		
-		var current = floor(walktimer / timebetweenwalkframes) * timebetweenwalkframes
-		var next = current + timebetweenwalkframes
-		
-		if (walktimer >= current && walktimer < next) walktimer = next - 0.5
-		
-		image_index = 0
-	}
-	
-	walkbuffer -= 0.75
-}
-
-if (fun == 0)
-{
-    if (global.facing == 0)
-        sprite_index = dsprite;
-    
-    if (global.facing == 1)
-        sprite_index = rsprite;
-    
-    if (global.facing == 2)
-        sprite_index = usprite;
-    
-    if (global.facing == 3)
-        sprite_index = lsprite;
-    
-    if (climbing == 1)
-        sprite_index = climbsprite;
+if (fun == false) {
+	scr_overworldcharwalking_shared(global.facing)
+    if (climbing == true) sprite_index = climbsprite;
 }
 
 if (stepping == 1 && fun == 0)

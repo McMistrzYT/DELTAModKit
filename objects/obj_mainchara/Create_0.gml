@@ -64,6 +64,9 @@ usprite = spr_krisu;
 lsprite = spr_krisl;
 climbsprite = 3707;
 timebetweenwalkframes = 10
+halign = 0
+valign = 0
+depthbonus = 0
 
 if darkmode {
 	dsprite = spr_krisd_dark;
@@ -75,6 +78,9 @@ if darkmode {
     image_xscale = 2;
     image_yscale = 2;
 }
+
+scr_character_set_caterpillar_offsets(global.char[0])
+scr_character_set_caterpillar_sprites(global.char[0])
 
 init_clothes = false;
 

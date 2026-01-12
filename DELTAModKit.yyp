@@ -456,6 +456,7 @@
     {"id":{"name":"scr_script_repeat","path":"scripts/scr_script_repeat/scr_script_repeat.yy",},},
     {"id":{"name":"scr_set_facing_sprites","path":"scripts/scr_set_facing_sprites/scr_set_facing_sprites.yy",},},
     {"id":{"name":"scr_shakeobj","path":"scripts/scr_shakeobj/scr_shakeobj.yy",},},
+    {"id":{"name":"scr_shared_overworld","path":"scripts/scr_shared_overworld/scr_shared_overworld.yy",},},
     {"id":{"name":"scr_speaker","path":"scripts/scr_speaker/scr_speaker.yy",},},
     {"id":{"name":"scr_spell","path":"scripts/scr_spell/scr_spell.yy",},},
     {"id":{"name":"scr_spellinfo","path":"scripts/scr_spellinfo/scr_spellinfo.yy",},},
