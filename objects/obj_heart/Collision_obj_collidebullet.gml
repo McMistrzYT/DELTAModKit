@@ -1,2 +1,1 @@
-with (other)
-	event_user(5);
+with (other) event_user(5);
