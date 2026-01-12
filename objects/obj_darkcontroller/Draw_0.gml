@@ -305,7 +305,7 @@ if (global.menuno == 4)
     draw_set_font(global.mainbig_font);
     draw_text(xx + 130, yy + 105, string_hash_to_newline(global.charname[charcoord]));
     
-    for (i = 0; i < 3; i += 1)
+    for (i = 0; i < array_length(global.char); i += 1)
     {
         chosen = 0.4;
         

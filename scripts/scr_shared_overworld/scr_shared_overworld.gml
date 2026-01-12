@@ -45,7 +45,7 @@ function scr_overworldcontrollers_spawncharacters(spawndarkners = true) {
 		charpos[i] = 0
 	}
 	
-	for (var i = 1; i < array_length(global.char); i += 1) {
+	for (var i = 0; i < array_length(global.char); i += 1) {
 		var char = global.char[i]
 	    global.faceaction[i] = 0;
 	
@@ -94,7 +94,7 @@ function scr_defaultprimarycollisioncode(_solidobjecttype = obj_solidblock) {
 	                break;
 	            }
                         
-	            if (press_u == 0 && mvd == false && !place_meeting(x + px, y + g, _solidobjecttype)) {
+	            if (press_u == false && mvd == false && !place_meeting(x + px, y + g, _solidobjecttype)) {
 	                y += g;
 	                py = 0;
 	                break;
@@ -136,14 +136,14 @@ function scr_defaultprimarycollisioncode(_solidobjecttype = obj_solidblock) {
 	        for (g = wspeed; g > 0; g -= 1) {
 	            mvd = false;
                         
-	            if (press_r == 0 && !place_meeting(x - g, y + py, _solidobjecttype)) {
+	            if (press_r == false && !place_meeting(x - g, y + py, _solidobjecttype)) {
 	                x -= g;
 	                px = 0;
 	                mvd = true;
 	                break;
 	            }
                         
-	            if (mvd == 0 && press_l == 0 && !place_meeting(x + g, y + py, _solidobjecttype)) {
+	            if (mvd == false && press_l == false && !place_meeting(x + g, y + py, _solidobjecttype)) {
 	                x += g;
 	                px = 0;
 	                break;
