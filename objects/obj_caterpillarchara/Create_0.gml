@@ -33,8 +33,9 @@ pr = parent.rsprite;
 pl = parent.lsprite;
 pu = parent.usprite;
 
-for (i = 0; i < 75; i += 1)
-{
+maxtarget = 75 * array_length(global.char)
+
+for (i = 0; i < maxtarget; i += 1) {
     remx[i] = parent.x;
     remy[i] = parent.y;
     facing[i] = global.facing;

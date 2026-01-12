@@ -34,6 +34,18 @@ if (!init) {
 	        valign = 12;
 	    }
 	}
+		
+	if target > maxtarget {
+		var previousmax = maxtarget
+		maxtarget = target * 2
+		for (i = previousmax; i < maxtarget; i += 1) {
+		    remx[i] = remx[previousmax];
+		    remy[i] = remy[previousmax];
+		    facing[i] =  facing[previousmax] 
+		    sliding[i] = sliding[previousmax]
+		    special[i] = special[previousmax]
+		}
+	}
 }
 
 if (!ignoredepth) {
@@ -56,7 +68,7 @@ if (sliding[target] == true) moved = true;
 if (moved == true && follow == true) {
     blushtimer = 0;
     
-    for (i = 75; i > 0; i -= 1) {
+    for (i = maxtarget; i > 0; i -= 1) {
         remx[i] = remx[i - 1];
         remy[i] = remy[i - 1];
         facing[i] = facing[i - 1];
