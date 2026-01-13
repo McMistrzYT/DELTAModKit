@@ -1,11 +1,7 @@
-function global_flagname_init()
-{
+function global_flagname_init() {
 	global.flagname = [];
 
-	repeat (9999)
-	{
-	    array_push(global.flagname, undefined)
-	}
+	repeat (9999) array_push(global.flagname, undefined)
 
 	global.flagname[6] = "disable text skip [Broken]"
 	global.flagname[8] = "Simplify VFX"
@@ -52,11 +48,13 @@ function global_flagname_init()
 	global.flagname[407] = "Blue Checkmark 2"
 	global.flagname[420] = "Blue Checkmark 3"
 	// Battles
-	global.flagname[22] = "Block Soul Slow"
-	global.flagname[34] = "CharAction"
-	global.flagname[37] = "Dojo Battle"
 	global.flagname[13] = "Multikey Attack"
 	global.flagname[14] = "Remember Last Option [Battle]"
+	global.flagname[22] = "Block Soul Slow"
+	global.flagname[34] = "CharAction"
+	global.flagname[36] = "Failed Dojo"
+	global.flagname[37] = "Dojo Battle"
+	global.flagname[39] = "Technically Won/Force Win"
 	global.flagname[40] = "Fled Or Fatal Kill Enemies"
 	global.flagname[41] = "Spared Enemies"
 	global.flagname[42] = "Pacified Enemies"
@@ -72,8 +70,7 @@ function global_flagname_init()
 	global.flagname[1045] = "Sus Heal Strength"
 }
 
-function global_flagname_menu_init(arg0, arg1, arg2, arg3)
-{
+function global_flagname_menu_init(arg0, arg1, arg2, arg3) {
     return show_message("FlagName Menu No longer exists as most Debugging features are now being commented out before release [or getting replaced with return].")
 }
 

@@ -1,7 +1,5 @@
-function scr_gameover()
-{
-    if (global.flag[35] == 0)
-    {
+function scr_gameover() {
+    if (global.flag[35] == 0) {
         audio_stop_all();
         snd_play(snd_hurt1);
         
@@ -10,15 +8,13 @@ function scr_gameover()
         room_goto(room_gameover);
     }
     
-    if (global.flag[35] == 1)
-    {
+    if (global.flag[35] == 1) {
         global.turntimer = -1;
         global.flag[36] = 1;
         global.flag[39] = 1;
     }
     
-    if (global.flag[35] == 2)
-    {
+    if (global.flag[35] == 2) {
         audio_stop_all();
         snd_play(snd_hurt1);
         snd_free_all();

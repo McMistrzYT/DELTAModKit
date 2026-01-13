@@ -288,8 +288,6 @@ function check_heightfloor(xcheck, ycheck, floorobject) {
     
     return __onfloor;
 }
-	
-
 
 nudgex = 0;
 nudgey = 0;
