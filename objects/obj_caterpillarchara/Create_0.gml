@@ -53,3 +53,5 @@ forget = 0;
 ignoredepth = 0;
 halign = 6;
 valign = 16;
+
+facingcodeoverride = -1

@@ -94,7 +94,13 @@ if (moved == true && follow == true) {
     dir = facing[target];
 }
 
-scr_overworldcharwalking_shared(facing[target])
+var hascustomcode = is_method(facingcodeoverride)
+
+scr_overworldcharwalking_shared(hascustomcode ? -1 : facing[target])
+
+if hascustomcode {
+	facingcodeoverride()	
+}
 
 if ((/*dsprite == spr_ralseid || */dsprite == spr_ralsei_walk_down) && global.interact == 0 && fun == 0)
 {
