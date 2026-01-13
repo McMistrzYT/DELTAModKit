@@ -288,9 +288,14 @@ function check_heightfloor(xcheck, ycheck, floorobject) {
     
     return __onfloor;
 }
+	
+
 
 nudgex = 0;
 nudgey = 0;
 nudgelerp = 0.1;
 
 noclip = false;
+
+darkrunmultiplierchangeamt = 0.8	// Default == 0.8
+runspeedadder = 1					// Default == 1

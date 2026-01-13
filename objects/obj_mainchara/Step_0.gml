@@ -110,127 +110,81 @@ if (global.interact == 0 && freeze == 0)
         }
     }
     
-    if (!canrun)
-        run = 0;
+    if (!canrun) run = false;
     
-    if (run == 1)
-    {
-        if (darkmode == 0)
-        {
-            wspeed = bwspeed + 1;
-            
-            if (runtimer > 10)
-                wspeed = bwspeed + 2;
-            
-            if (runtimer > 60)
-                wspeed = bwspeed + 3;
-        }
-        
-        if (darkmode == 1)
-        {
-            wspeed = bwspeed + 2;
-            
-            if (runtimer > 10)
-                wspeed = bwspeed + 4;
-            
-            if (runtimer > 60)
-                wspeed = bwspeed + 5;
-        }
+    if (run == true) {
+		var multiply = 1
+		if darkmode  multiply += darkrunmultiplierchangeamt
+		
+		var changeamt = runspeedadder
+		if (runtimer > 10) changeamt += runspeedadder;
+		if (runtimer > 60) changeamt += runspeedadder;
+		
+		wspeed = bwspeed + round(changeamt * multiply)		
     }
     
-    if (run == 0)
-        wspeed = bwspeed;
+    if (run == false)		wspeed = bwspeed;
+    if (climbing == true)	wspeed = ceil(wspeed * 0.7);
     
-    if (climbing == 1)
-        wspeed = ceil(wspeed * 0.7);
-    
-    if (left_h())
-        press_l = 1;
-    
-    if (right_h())
-        press_r = 1;
-    
-    if (up_h())
-        press_u = 1;
-    
-    if (down_h())
-        press_d = 1;
+    if left_h()  press_l = true;
+    if right_h() press_r = true;
+    if up_h()    press_u = true;
+    if down_h()  press_d = true;
     
     px = 0;
     py = 0;
     pressdir = -1;
     
-    if (press_r == 1)
-    {
+    if (press_r == true) {
         px = wspeed;
         pressdir = 1;
     }
     
-    if (press_l == 1)
-    {
+    if (press_l == true) {
         px = -wspeed;
         pressdir = 3;
     }
     
-    if (press_d == 1)
-    {
+    if (press_d == true) {
         py = wspeed;
         pressdir = 0;
     }
     
-    if (press_u == 1)
-    {
+    if (press_u == true) {
         py = -wspeed;
         pressdir = 2;
     }
     
-    if (nopress == 1 && pressdir != -1)
+    if (nopress == true && pressdir != -1)
         global.facing = pressdir;
     
-    if (global.facing == 2)
-    {
-        if (press_d == 1)
-            global.facing = 0;
-        
-        if (press_u == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 2) {
+        if (press_d == 1)					global.facing = 0;
+        if (press_u == 0 && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 0)
-    {
-        if (press_u == 1)
-            global.facing = 2;
-        
-        if (press_d == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 0) {
+        if (press_u == true)					global.facing = 2;
+        if (press_d == false && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 3)
-    {
-        if (press_r == 1)
-            global.facing = 1;
-        
-        if (press_l == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 3) {
+        if (press_r == true)					global.facing = 1;
+        if (press_l == false && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 1)
-    {
-        if (press_l == 1)
+    if (global.facing == 1) {
+        if (press_l == true)
             global.facing = 3;
         
-        if (press_r == 0 && pressdir != -1)
+        if (press_r == false && pressdir != -1)
             global.facing = pressdir;
     }
     
-    if (press_r == 1)
-        swordfacing = 1;
+    if (press_r == true) swordfacing = 1;
+    if (press_l == true) swordfacing = -1;
     
-    if (press_l == 1)
-        swordfacing = -1;
-    
-    if (swordmode == 1)
-    {
+    if (swordmode == true) {
         if (button1_p() && swordcon == 0 && global.interact == 0)
         {
             global.interact = 4;
@@ -252,23 +206,22 @@ if (global.interact == 0 && freeze == 0)
             image_speed = 0.5;
             swordtimer = 0;
             swordcon = 1;
-            press_l = 0;
-            press_r = 0;
-            press_u = 0;
-            press_d = 0;
+            press_l = false;
+            press_r = false;
+            press_u = false;
+            press_d = false;
             //swordhitbox = instance_create(slashmarker.x, slashmarker.y, obj_swordhitbox);
             //swordhitbox.image_xscale = slashmarker.image_xscale;
             //swordhitbox.image_yscale = image_yscale;
         }
     }
     
-    nopress = 0;
-    xmeet = 0;
-    ymeet = 0;
-    xymeet = 0;
+    nopress = false;
+    xmeet = false;
+    ymeet = false;
+    xymeet = false;
     
-    if (floorheight == 0)
-    {
+    if (floorheight == 0) {
         var checkcol = true;
         
         if (scr_debug() && noclip)
