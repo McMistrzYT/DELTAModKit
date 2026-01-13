@@ -280,55 +280,39 @@ function scr_retarget_spell()
     }
 }
 
-function scr_ambush()
-{
-    with (obj_writer)
-        instance_destroy();
+function scr_ambush() {
+    with (obj_writer) instance_destroy();
+    with (obj_face) instance_destroy();
     
-    with (obj_face)
-        instance_destroy();
-    
-    global.charturn = 3;
+    global.charturn = array_length(global.charmove);
     global.mnfight = 1;
     global.myfight = -1;
     
-    with (obj_monsterparent)
-        ambushed = 1;
+    with (obj_monsterparent) ambushed = true;
 }
 
-function scr_nexthero()
-{
+function scr_nexthero() {
     moveswapped = 0;
     prevturn = global.charturn;
     
-    if (global.charturn == 0)
-    {
-        moveswapped = 1;
-        
-        if (global.charmove[1] == 1 && scr_charcan(1))
-            global.charturn = 1;
-        else if (global.charmove[2] == 1 && scr_charcan(2))
-            global.charturn = 2;
-        else
-            scr_endturn();
-    }
-    
-    if (global.charturn == 1 && moveswapped == 0)
-    {
-        moveswapped = 1;
-        
-        if (scr_charcan(2) && global.acting[1] == 0)
-            global.charturn = 2;
-        else
-            scr_endturn();
-    }
+	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
+		if i >= array_length(global.charmove) {
+			moveswapped = true
+			scr_endturn()
+		} else if global.charmove[i] == true && scr_charcan(i) && global.acting[i] == false {
+			global.charturn = i
+			moveswapped = true
+		} else {
+			break	
+		}
+	}
     
     var endturn = false;
     
-    if ((global.charturn == 2 && moveswapped == 0) || endturn == true)
+    if (endturn == true)
         scr_endturn();
     
-    if (moveswapped == 1)
+    if (moveswapped == true)
         global.bmenuno = 0;
     
     if (global.charturn > 0)
@@ -340,36 +324,24 @@ function scr_nexthero()
     }
 }
 
-function scr_prevhero()
-{
+function scr_prevhero() {
     prevturn = global.charturn;
-    moveswapped = 0;
+    moveswapped = false;
     
-    if (global.charturn == 1)
-    {
-        if (global.charmove[0] == 1)
-        {
-            global.charturn = 0;
-            moveswapped = 1;
-        }
-    }
+	for (var i = global.charturn - 1; i >= 0; --i) {
+	    if i >= 0 {
+			if global.charmove[i] == true && global.acting[i] == false {
+				global.charturn = i
+				moveswapped = true
+				break
+			}
+		} else break
+	}
     
-    if (global.charturn == 2)
-    {
-        moveswapped = 1;
-        
-        if (global.charmove[1] == 1 && global.acting[1] == 0)
-            global.charturn = 1;
-        else if (global.charmove[0] == 1)
-            global.charturn = 0;
-    }
-    
-    if (moveswapped == 1)
-    {
+    if (moveswapped == true) {
         global.bmenuno = 0;
 		
-		with (obj_monsterparent)
-			acting[global.char[global.charturn]] = 0;
+		with (obj_monsterparent) acting[global.char[global.charturn]] = false;
         
         global.actingsingle[global.charturn] = 0;
         global.actingsimul[global.charturn] = 0;
@@ -377,54 +349,45 @@ function scr_prevhero()
         global.chartarget[global.charturn] = 0;
         global.charaction[global.charturn] = 0;
         global.charspecial[global.charturn] = 0;
-        movenoise = 1;
+        movenoise = true;
     }
     
-    if (idefendedthisturn > 0)
-    {
+    if (idefendedthisturn > 0) {
         idefendedthisturn--;
         mercytotal -= 40;
     }
     
-    if (global.charturn == 0)
-    {
+    if (global.charturn == 0) {
         with (obj_monsterparent)
             for (i = 0; i < DRCharacter.__MAX__; i++)
-				acting[i] = 0;
-        
-        global.acting[0] = 0;
-        global.acting[1] = 0;
-        global.acting[2] = 0;
-        global.faceaction[1] = 0;
-        global.chartarget[1] = 0;
-        global.charaction[1] = 0;
-        global.charspecial[1] = 0;
-        global.faceaction[2] = 0;
+				acting[i] = false; // Clears All Acts (Enemy Side)
+				
+        for (var i = 0; i < array_length(global.acting); ++i) { // Clears all Acts (Hero Side)
+		    global.acting[i] = false
+			global.chartarget[i] = 0
+			global.charspecial[i] = 0
+			global.faceaction[i] = 0
+		}
+		
         global.tension = global.temptension[0];
         
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][0] = global.item[i];
+        for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
+    } else {
+        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
     }
-    else
-    {
-        global.tension = global.temptension[global.charturn];
-        
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
-    }
+    global.tension = global.temptension[global.charturn];
 }
 
-function scr_actselect(arg0, arg1)
-{
-    if (i_ex(global.monsterinstance[arg0]))
-		global.monsterinstance[arg0].acting[global.char[global.charturn]] = arg1 + 1;
+function scr_actselect(star, action) {
+    if (i_ex(global.monsterinstance[star]))
+		global.monsterinstance[star].acting[global.char[global.charturn]] = action + 1;
     
     /*if (global.char[global.charturn] == DRCharacter.Kris)
     {
-        global.actingsimul[0] = actsimul[arg1];
+        global.actingsimul[0] = actsimul[action];
         global.acting[0] = 1;
         global.actingsingle[0] = 1;
-        global.actingtarget[global.charturn] = arg0;
+        global.actingtarget[global.charturn] = star;
         
         for (i = 0; i < 3; i += 1)
         {
@@ -437,16 +400,15 @@ function scr_actselect(arg0, arg1)
     }
     else*/
     {
-        global.actingtarget[global.charturn] = arg0;
+        global.actingtarget[global.charturn] = star;
         global.actingsingle[global.charturn] = 1;
-        global.actingsimul[global.charturn] = actsimul[arg1];
+        global.actingsimul[global.charturn] = actsimul[action];
         global.faceaction[global.charturn] = 6;
         global.charaction[global.charturn] = 9;
     }
 }
 
-function scr_nextact()
-{
+function scr_nextact() {
 	show_debug_message("------------ scr_nextact")
     global.currentactingchar = 0;
 	

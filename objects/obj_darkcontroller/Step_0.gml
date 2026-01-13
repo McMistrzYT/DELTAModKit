@@ -1228,14 +1228,12 @@ if (global.interact == 5)
                     selectnoise = 1;
                     deschaver = 1;
                     
-                    /*if (global.chapter == 2 || global.chapter == 3)
-                    {
-                        if (scr_keyitemcheck(DRKeyIte.Lancer))
-                        {
+                    if (global.chapter == 2 || global.chapter == 3) && object_exists(asset_get_index("obj_lancergotchi")) {
+                        if (scr_keyitemcheck(DRKeyItem.Lancer)) {
                             if (!instance_exists(obj_lancergotchi))
                                 instance_create(x, y, obj_lancergotchi);
                         }
-                    }*/
+                    }
                 }
                 
                 if (global.submenu == 2 || global.submenu == 3)
