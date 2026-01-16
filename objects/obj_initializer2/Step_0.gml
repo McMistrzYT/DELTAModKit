@@ -18,7 +18,7 @@ if (global.is_console) {
 
 var CH = string(global.chapter);
 
-if (audio_group_is_loaded(1))
+//if (audio_group_is_loaded(1))
 {
     roomchoice = room_legend;//PLACE_CONTACT;
     menu_go = 0;
