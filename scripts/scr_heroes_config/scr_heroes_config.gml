@@ -642,7 +642,7 @@ function scr_character_has_magic(charIdx) {
 function scr_character_get_act_name_override(charIdx) {
 	switch (charIdx) {
 		default:
-		case DRCharacter.Kris: return "";
+		case DRCharacter.Kris: return "Action";
 		
 		case DRCharacter.Susie: return "S-Action";
 		case DRCharacter.Ralsei: return "R-Action";
@@ -654,7 +654,7 @@ function scr_character_get_act_name_override(charIdx) {
 
 function scr_character_set_names() {
 	global.lcharname = "Kris";
-    global.charname[DRCharacter.None] = " ";
+    global.charname[DRCharacter.None] = " ";	
     global.charname[DRCharacter.Kris] = "Kris";
     global.charname[DRCharacter.Susie] = "Susie";
     global.charname[DRCharacter.Ralsei] = "Ralsei";

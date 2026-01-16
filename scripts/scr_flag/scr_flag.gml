@@ -1,7 +1,5 @@
 function global_flagname_init() {
-	global.flagname = [];
-
-	repeat (9999) array_push(global.flagname, undefined)
+	global.flagname = array_create(9999, undefined);
 
 	global.flagname[6] = "disable text skip [Broken]"
 	global.flagname[8] = "Simplify VFX"

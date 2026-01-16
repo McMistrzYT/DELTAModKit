@@ -1,9 +1,12 @@
 global.is_console = /*scr_is_switch_os() || */os_type == os_ps4 || os_type == os_ps5;
 
-if (!global.is_console)
-    window_enable_borderless_fullscreen(true);
+global.charname = [];
+repeat DRCharacter.__MAX__ array_push(global.charname, "???")
+scr_character_set_names()
 
-global.debug = 0;
+if (!global.is_console) window_enable_borderless_fullscreen(true);
+
+global.debug = DEBUGMODE;
 var launch_data = scr_init_launch_parameters();
 global.launcher = launch_data.is_launcher;
 textures_loaded = false;

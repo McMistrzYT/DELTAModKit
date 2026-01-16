@@ -204,21 +204,14 @@ if (global.myfight == 0)
 			}
         }
         
-        if (button2_p() == 1 && onebuffer < 0 && global.charturn > 0)
-        {
+        if (button2_p() == 1 && onebuffer < 0 && global.charturn > 0) {
             twobuffer = 1;
-            movenoise = 1;
-            scr_prevhero();
+            if scr_prevhero() movenoise = true;
         }
         
-        with (battlewriter)
-            depth = 3;
-        
-        with (obj_face)
-            depth = 3;
-        
-        with (obj_smallface)
-            depth = 3;
+        with (battlewriter) depth = 3;
+        with (obj_face) depth = 3;
+        with (obj_smallface) depth = 3;
     }
     
     if (global.bmenuno == 2 && global.flag[34] == 1) // Spells

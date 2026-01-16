@@ -37,7 +37,7 @@ if (!init) {
 		
 	if target > maxtarget {
 		var previousmax = maxtarget
-		maxtarget = target * 2
+		maxtarget = floor(target * 1.5)
 		for (i = previousmax; i < maxtarget; i += 1) {
 		    remx[i] = remx[previousmax];
 		    remy[i] = remy[previousmax];

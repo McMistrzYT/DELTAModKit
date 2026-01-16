@@ -6,7 +6,9 @@
     {"$GMAudioGroup":"v1","%Name":"audio_sfx","exportDir":"","name":"audio_sfx","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
-    "children":[],
+    "children":[
+      {"children":[],"name":"Debug",},
+    ],
     "name":"Default",
   },
   "defaultScriptType":1,
@@ -382,6 +384,7 @@
     {"id":{"name":"game_restart_true","path":"scripts/game_restart_true/game_restart_true.yy",},},
     {"id":{"name":"i_ex","path":"scripts/i_ex/i_ex.yy",},},
     {"id":{"name":"instance_create","path":"scripts/instance_create/instance_create.yy",},},
+    {"id":{"name":"macros","path":"scripts/macros/macros.yy",},},
     {"id":{"name":"msgset","path":"scripts/msgset/msgset.yy",},},
     {"id":{"name":"ossafe","path":"scripts/ossafe/ossafe.yy",},},
     {"id":{"name":"scr_actinfo","path":"scripts/scr_actinfo/scr_actinfo.yy",},},

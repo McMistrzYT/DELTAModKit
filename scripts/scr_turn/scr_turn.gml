@@ -295,19 +295,19 @@ function scr_nexthero() {
     moveswapped = 0;
     prevturn = global.charturn;
     
+    var endturn = false;
+    
 	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
 		if i >= array_length(global.charmove) {
 			moveswapped = true
-			scr_endturn()
+			endturn = true
 		} else if global.charmove[i] == true && scr_charcan(i) && global.acting[i] == false {
 			global.charturn = i
 			moveswapped = true
-		} else {
-			break	
+		} else if global.char[i] > DRCharacter.None {
+			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
 		}
 	}
-    
-    var endturn = false;
     
     if (endturn == true)
         scr_endturn();
@@ -315,8 +315,7 @@ function scr_nexthero() {
     if (moveswapped == true)
         global.bmenuno = 0;
     
-    if (global.charturn > 0)
-    {
+    if (global.charturn > 0) {
         global.temptension[global.charturn] = global.tension;
         
         for (i = 0; i < 12; i += 1)
@@ -328,14 +327,16 @@ function scr_prevhero() {
     prevturn = global.charturn;
     moveswapped = false;
     
-	for (var i = global.charturn - 1; i >= 0; --i) {
-	    if i >= 0 {
-			if global.charmove[i] == true && global.acting[i] == false {
-				global.charturn = i
-				moveswapped = true
-				break
-			}
-		} else break
+	if global.charturn > 0 { // No need to run Calculations if we know it'll fail anyways.
+		for (var i = global.charturn - 1; i >= 0; --i) {
+		    if i >= 0 {
+				if scr_charcan(i) {
+					global.charturn = i
+					moveswapped = true
+					break
+				}
+			} else break
+		}
 	}
     
     if (moveswapped == true) {
@@ -350,32 +351,34 @@ function scr_prevhero() {
         global.charaction[global.charturn] = 0;
         global.charspecial[global.charturn] = 0;
         movenoise = true;
-    }
     
-    if (idefendedthisturn > 0) {
-        idefendedthisturn--;
-        mercytotal -= 40;
-    }
+	    if (idefendedthisturn > 0) {
+	        idefendedthisturn--;
+	        mercytotal -= 40;
+	    }
     
-    if (global.charturn == 0) {
-        with (obj_monsterparent)
-            for (i = 0; i < DRCharacter.__MAX__; i++)
-				acting[i] = false; // Clears All Acts (Enemy Side)
+	    if (global.charturn == 0) {
+	        with (obj_monsterparent)
+	            for (i = 0; i < DRCharacter.__MAX__; i++)
+					acting[i] = false; // Clears All Acts (Enemy Side)
 				
-        for (var i = 0; i < array_length(global.acting); ++i) { // Clears all Acts (Hero Side)
-		    global.acting[i] = false
-			global.chartarget[i] = 0
-			global.charspecial[i] = 0
-			global.faceaction[i] = 0
-		}
+	        for (var i = 0; i < array_length(global.acting); ++i) { // Clears all Acts (Hero Side)
+			    global.acting[i] = false
+				global.chartarget[i] = 0
+				global.charspecial[i] = 0
+				global.faceaction[i] = 0
+			}
 		
-        global.tension = global.temptension[0];
+	        global.tension = global.temptension[0];
         
-        for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
-    } else {
-        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
+	        for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
+	    } else {
+	        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
+	    }
+	    global.tension = global.temptension[global.charturn];
     }
-    global.tension = global.temptension[global.charturn];
+	
+	return moveswapped
 }
 
 function scr_actselect(star, action) {
