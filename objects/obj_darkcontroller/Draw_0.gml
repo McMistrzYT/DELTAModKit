@@ -512,76 +512,40 @@ if (global.menuno == 2)
     if (global.submenu == 10)
         draw_sprite(spr_heart_harrows, menusiner / 20, 100 + xx + (coord * 50), 142 + yy);
     
-    if (global.submenu != 11)
-    {
-        bicon = charcoord - 1;
-        
-        if (charcoord == 4)
-            bicon = 5;
-        
-        draw_sprite_ext(spr_dmenu_equip, bicon, xx + 302, yy + 108, 2, 2, 0, c_white, 1);
-        draw_sprite_ext(spr_dmenu_equip, 3, xx + 302, yy + 142, 2, 2, 0, c_white, 1);
-        draw_sprite_ext(spr_dmenu_equip, 4, xx + 302, yy + 172, 2, 2, 0, c_white, 1);
-    }
-    
-    if (global.submenu == 11)
-    {
-        bicon = charcoord - 1;
-        
-        if (charcoord == 4)
-            bicon = 5;
-        
-        if (global.submenucoord[11] == 0)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 122);
-        else
-            draw_sprite_ext(spr_dmenu_equip, bicon, xx + 302, yy + 108, 2, 2, 0, c_white, 1);
-        
-        if (global.submenucoord[11] == 1)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 152);
-        else
-            draw_sprite_ext(spr_dmenu_equip, 3, xx + 302, yy + 142, 2, 2, 0, c_white, 1);
-        
-        if (global.submenucoord[11] == 2)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 182);
-        else
-            draw_sprite_ext(spr_dmenu_equip, 4, xx + 302, yy + 172, 2, 2, 0, c_white, 1);
-    }
-    
-    if (charweaponname[charcoord] != " ")
-    {
-        draw_text(xx + 365, yy + 112, string_hash_to_newline(charweaponname[charcoord]));
-        draw_item_icon(xx + 343, yy + 118, charweaponicon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 112, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
-    
-    if (global.chararmor1[charcoord] != 0)
-    {
-        draw_text(xx + 365, yy + 142, string_hash_to_newline(chararmor1name[charcoord]));
-        draw_item_icon(xx + 343, yy + 148, chararmor1icon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 142, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
-    
-    if (global.chararmor2[charcoord] != 0)
-    {
-        draw_text(xx + 365, yy + 172, string_hash_to_newline(chararmor2name[charcoord]));
-        draw_item_icon(xx + 343, yy + 178, chararmor2icon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 172, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
+	var slots = scr_character_darkmenu_geticondatareader(charcoord)
+		
+	for (var i = 0; i < array_length(slots); ++i) {
+		try {
+			var slot = slots[i]
+			var sprite = slot.sprite
+			var offset_x = slot.spriteoffset[0]
+			var offset_y = slot.spriteoffset[1]
+			var image = slot.imageindex
+			var _x = xx + 365
+			var _y = yy + 112 + (30 * i)
+			var scale = slot.scale
+			var text = slot.text
+			if global.submenu == 11 && global.submenucoord[11] == i {
+				sprite = spr_heart
+				offset_x = -57
+				offset_y = 10
+				image = 0
+				scale = 1
+			}
+			
+			draw_sprite_ext(sprite, image, _x + offset_x, _y + offset_y, scale, scale, 0, c_white, 1)
+			
+			if text != " " {
+				draw_text(_x, _y, string_hash_to_newline(text));
+				draw_item_icon(_x - 22, _y + 6, slot.weaponicon);
+			} else {
+			    draw_set_color(c_dkgray);
+			    draw_text(_x, _y, string_hash_to_newline("(Nothing)"));
+			    draw_set_color(c_white);
+			}
+		} catch (ex) {
+			show_debug_message("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
+	}
     
     var eq_xoff = langopt(0, -6);
     

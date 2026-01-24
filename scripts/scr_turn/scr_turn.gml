@@ -248,36 +248,17 @@ function scr_retarget(arg0)
     global.chartarget[arg0] = thistarget;
 }
 
-function scr_retarget_spell()
-{
-    cancelattack = 0;
+function scr_retarget_spell() {
+    cancelattack = true;
     
-    if (star == 0)
-    {
-        if (global.monster[0] == 0)
-            star = 1;
-    }
-    
-    if (star == 1)
-    {
-        if (global.monster[1] == 0)
-            star = 2;
-    }
-    
-    if (star == 2)
-    {
-        if (global.monster[2] == 0)
-            star = 3;
-        
-        if (star == 3 && global.monster[0] == 1)
-            star = 0;
-        
-        if (star == 3 && global.monster[1] == 1)
-            star = 1;
-        
-        if (star == 3)
-            cancelattack = 1;
-    }
+	for (var i = 0; i < array_length(global.monster); ++i) {
+		var truei = (star + i) % array_length(global.monster)
+	    if global.monster[truei] == true{
+			cancelattack = false
+			star = truei
+			break
+		}
+	}
 }
 
 function scr_ambush() {
@@ -292,23 +273,23 @@ function scr_ambush() {
 }
 
 function scr_nexthero() {
-    moveswapped = 0;
+    moveswapped = false;
     prevturn = global.charturn;
     
     var endturn = false;
     
 	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
-		if i >= array_length(global.charmove) {
-			moveswapped = true
-			endturn = true
-		} else if global.charmove[i] == true && scr_charcan(i) && global.acting[i] == false {
-			global.charturn = i
-			moveswapped = true
-		} else if global.char[i] > DRCharacter.None {
+		moveswapped = true
+		if i >= array_length(global.charmove) endturn = true // No one Left
+		else if global.charmove[i] == true && scr_charcan(i) && global.acting[i] == false {
+			global.charturn = i 
+		} else if global.char[i] > DRCharacter.None { // This Character Cannot Move. (Try Next Character)
+			moveswapped = false
 			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
 		}
+		show_debug_message(moveswapped)
 	}
-    
+	
     if (endturn == true)
         scr_endturn();
     

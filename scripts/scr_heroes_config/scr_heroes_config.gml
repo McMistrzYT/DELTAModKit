@@ -662,3 +662,49 @@ function scr_character_set_names() {
 	
 	global.charname[DRCharacter.Starwalker] = "Starwalker";
 }
+	
+function scr_character_get_primaryweapon_icon(charIdx) {
+	switch charIdx {
+		default: return charIdx - 1	// Keeps it how it Originally was, Change if you want.
+		case DRCharacter.Noelle: return 5
+	}
+}
+
+function scr_character_get_armoricons(charIdx) {
+	switch charIdx {
+		default: return [3, 4]
+	}
+}
+
+function scr_character_darkmenu_geticondatareader(charIdx) {
+	switch charIdx {
+		default: 
+			var slots = [
+			{
+				sprite: spr_dmenu_equip,
+				spriteoffset: [-63, -4],
+				text: string_hash_to_newline(charweaponname[charIdx]),
+				imageindex: scr_character_get_primaryweapon_icon(charIdx),
+				scale: 2,
+				weaponicon: charweaponicon[charIdx]
+			}
+		]
+	
+		var icons = scr_character_get_armoricons(charIdx)
+		for (var i = 0; i < array_length(icons); ++i) {
+			try {
+				array_push(slots, {
+					sprite: spr_dmenu_equip,
+					spriteoffset: [-63, 0],
+					text: string_hash_to_newline(variable_struct_get(self, "chararmor" + string(i + 1) + "name")[charIdx]),
+					imageindex: icons[i],
+					scale: 2,
+					weaponicon: variable_struct_get(self, "chararmor" + string(i + 1) + "icon")[charIdx]
+				})
+			} catch (ex) {
+				show_debug_message("Failed to add data for armor icon {0}, reason: {1}", i, ex.longMessage)
+			}
+		}
+		return slots
+	}
+}
