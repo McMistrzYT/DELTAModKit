@@ -11,3 +11,10 @@ con = 0;
 
 //if (global.encounterno == 82)
 //    altpath = 1;
+
+//spellanimationcenterx = xx + 500
+spellparticlespawnerpositiondifference = 45
+
+if global.fighting {
+	x = camerax() + (camerawidth()/2 + 180)
+}
