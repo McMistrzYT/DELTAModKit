@@ -316,9 +316,8 @@ function scr_prevhero() {
     
     if (moveswapped == true) {
         global.bmenuno = 0;
-		
-		//with (obj_monsterparent) acting[global.char[global.charturn]] = false;
-	    with (obj_monsterparent) for (i = global.charturn; i < array_length(global.char); i++) acting[global.char[i]] = false
+		with (obj_monsterparent) acting[global.char[global.charturn]] = false;
+		with (obj_monsterparent) acting[global.char[other.prevturn]] = false;
         
         global.actingsingle[global.charturn] = 0;
         global.actingsimul[global.charturn] = 0;
@@ -605,7 +604,6 @@ function scr_enemy_hurt()
 }
 
 function scr_defeatrun(){
-    
     __frozen = false;
 		
     if (object_is_ancestor(object_index, obj_monsterparent)) {
@@ -614,9 +612,7 @@ function scr_defeatrun(){
         if (__frozen == true) {
             _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
             _rtext.image_index = 12;
-            
-            if (recruitable == true)
-                global.flag[global.monstertype[myself] + 600] = -1;
+            if (recruitable == true) global.flag[global.monstertype[myself] + 600] = -1;
             
             global.flag[63] = true;
         } else if (recruitable == true && global.flag[61] == false) {
