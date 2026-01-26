@@ -204,7 +204,7 @@ if (global.myfight == 0)
 			}
         }
         
-        if (button2_p() == 1 && onebuffer < 0 && global.charturn > 0) {
+        if (button2_p() && onebuffer < 0) {
             twobuffer = 1;
             if scr_prevhero() movenoise = true;
         }
@@ -937,7 +937,7 @@ if (global.myfight == 0)
                     global.faceaction[global.charturn] = 10;
                     global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn];
                     global.charaction[global.charturn] = 2;
-                    global.charspecial[global.charturn] = 100;
+                    global.charspecial[global.charturn] = DRSpell.Spare;
                     scr_nexthero();
                 }
                 

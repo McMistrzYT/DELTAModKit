@@ -287,20 +287,14 @@ function scr_nexthero() {
 			moveswapped = false
 			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
 		}
-		show_debug_message(moveswapped)
 	}
 	
-    if (endturn == true)
-        scr_endturn();
+    if (endturn == true) scr_endturn();
+    if (moveswapped == true) global.bmenuno = 0;
     
-    if (moveswapped == true)
-        global.bmenuno = 0;
-    
-    if (global.charturn > 0) {
+    if (global.charturn >= 0) {
         global.temptension[global.charturn] = global.tension;
-        
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][global.charturn] = tempitem[i][prevturn];
+        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][prevturn];
     }
 }
 
@@ -323,7 +317,8 @@ function scr_prevhero() {
     if (moveswapped == true) {
         global.bmenuno = 0;
 		
-		with (obj_monsterparent) acting[global.char[global.charturn]] = false;
+		//with (obj_monsterparent) acting[global.char[global.charturn]] = false;
+	    with (obj_monsterparent) for (i = global.charturn; i < array_length(global.char); i++) acting[global.char[i]] = false
         
         global.actingsingle[global.charturn] = 0;
         global.actingsimul[global.charturn] = 0;
@@ -337,25 +332,12 @@ function scr_prevhero() {
 	        idefendedthisturn--;
 	        mercytotal -= 40;
 	    }
-    
-	    if (global.charturn == 0) {
-	        with (obj_monsterparent)
-	            for (i = 0; i < DRCharacter.__MAX__; i++)
-					acting[i] = false; // Clears All Acts (Enemy Side)
-				
-	        for (var i = 0; i < array_length(global.acting); ++i) { // Clears all Acts (Hero Side)
-			    global.acting[i] = false
-				global.chartarget[i] = 0
-				global.charspecial[i] = 0
-				global.faceaction[i] = 0
-			}
 		
-	        global.tension = global.temptension[0];
-        
-	        for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
-	    } else {
-	        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
-	    }
+		global.acting[prevturn] = false
+		global.faceaction[prevturn] = 0
+		global.charspecial[prevturn] = 0
+		global.chartarget[prevturn] = 0
+	    for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
 	    global.tension = global.temptension[global.charturn];
     }
 	
