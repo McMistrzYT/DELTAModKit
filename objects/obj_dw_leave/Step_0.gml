@@ -36,23 +36,34 @@ if (con == 10)
             visible = 0;
     }
     
-    /*with (obj_caterpillarchara)
-    {
-        if (visible == 1)
-        {
-            me = scr_dark_marker_depth(x, y, 510000, sprite_index);
-            visible = 0;
+    with (obj_caterpillarchara) {
+        if (visible == true && !fun) {
+			follow = false
+			fun = true
+			ignoredepth = true
+			image_index = 0
+			depth += 510000
+            //me = scr_dark_marker_depth(x, y, 510000, sprite_index);
+            //visible = false;
             
-            if (name == "ralsei")
-            {
-                me.sprite_index = spr_ralsei_wave_start;
-                me.image_speed = 0.2;
+            if (name == "ralsei") {
+				if sprite_exists(asset_get_index("spr_ralsei_wave_start")) && sprite_exists(asset_get_index("spr_ralsei_wave_down")) && script_exists(asset_get_index("scr_script_delayed")) && script_exists(asset_get_index("scr_var")) {
+	                sprite_index = spr_ralsei_wave_start;
+	                image_speed = 0.2;
                 
-                with (me)
-                    scr_script_delayed(scr_var, 15, "sprite_index", spr_ralsei_wave_down);
+	                scr_script_delayed(scr_var, 15, "sprite_index", spr_ralsei_wave_down);
+				} else {
+					//if room == room_dw_castle_area_1 {
+					//	if x > 320 + 120 hspeed = -1
+					//	if x < 320 - 120 hspeed = 1
+					//	sprite_index = usprite	
+					//	image_speed = 0.1
+					//	vspeed = -2
+					//}
+				}
             }
         }
-    }*/
+    }
     
     contimer = 0;
     con = 11;

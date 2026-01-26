@@ -28,7 +28,11 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"v2","%Name":"nextroom","filters":[
+        "GMRoom",
+      ],"listItems":[],"multiselect":false,"name":"nextroom","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"room_lw_test","path":"rooms/room_lw_test/room_lw_test.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"room_lw_test","varType":5,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,

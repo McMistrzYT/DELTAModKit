@@ -7,7 +7,6 @@ function scr_chapter_config() {
 }
 
 function scr_chapter_get_recruit_color(chapter) {
-	
 	switch (chapter) {
 		case 1: return c_purple;
 		case 2: return c_aqua;
@@ -18,8 +17,7 @@ function scr_chapter_get_recruit_color(chapter) {
 	return c_black;
 }
 
-function scr_gamestart_chapter_override()
-{
+function scr_gamestart_chapter_override(){
     global.plot = 0;
     global.char[0] = DRCharacter.Kris;
     global.char[1] = DRCharacter.Susie;
@@ -53,8 +51,7 @@ function scr_gamestart_chapter_override()
     if (global.flag[64] < 24)
         global.flag[64] = 24;
     
-    if (global.chapter == 3)
-    {
+    if (global.chapter == 3) {
         global.flag[1173] = 0;
         global.flag[1174] = 0;
         global.flag[1194] = 0;
