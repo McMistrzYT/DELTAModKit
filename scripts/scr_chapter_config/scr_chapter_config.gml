@@ -1,6 +1,6 @@
 function scr_chapter_config() {
 	global.chapter = 4;
-	global.versionno = "v0.90-modkit-3";
+	global.versionno = "v0.901-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
 	global.isStartingRoomDarkWorld = false;
