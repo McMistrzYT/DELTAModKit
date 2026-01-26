@@ -22,7 +22,7 @@ function scr_boltcheck(partyslot){
 function scr_boltcheck_onebutton(){
     dualbolt = -1;
     dualboltid = -1;
-	for (var i = 0; i < DRCharacter.__MAX__; ++i) pressbuffer[i] = 5;
+	for (i = 0; i < DRCharacter.__MAX__; ++i) pressbuffer[i] = 5;
     qualifybolt = -1;
     close = 99;
     topclose = 999;

@@ -163,7 +163,8 @@ function scr_enemy_process_phase(enemyId, phase) {
 					rtimer++;
 					if rtimer != 12 break;
 					
-					global.monsterattackname[myself] = ["HomingDiamonds", "RisingDiamonds", "SwordThrow"][myattackchoice];
+					var _attacks = ["HomingDiamonds", "RisingDiamonds", "SwordThrow"] // Moved to here to stop GameMakerStudio2-Beta's Main Code Viewer from Complaining.
+					global.monsterattackname[myself] = _attacks[myattackchoice];
 					dc = scr_bulletspawner(x, y, obj_dbulletcontroller);
 					dc.type = myattackchoice;
 					
@@ -296,4 +297,29 @@ function scr_enemy_process_phase(enemyId, phase) {
 			break;
 		}
 	}
+}
+
+function scr_enemy_defeatrunanimations(){
+	#region Base Deltarune
+		scr_createdefeatanimation(obj_defeatanim, function() { return true     })     // Lowest Priorty, Default Battle Run
+		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    }, 10) // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
+		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen }, 60, function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
+	#endregion
+}
+
+// Defeat Run System Core Data Config init
+variable_global_set("@@DefeatAnimationData@@", [])
+
+function scr_createdefeatanimation(object, condition = function() { return false }, priority = 0, postcreate = function(instance) {}) {
+		var defeatanimdata = {}
+		defeatanimdata.object = object
+		defeatanimdata.condition = condition
+		defeatanimdata.priority = priority
+		defeatanimdata.postcreate = postcreate
+		array_push(scr_getdefeatanimationdataarray(), defeatanimdata)
+}
+
+function scr_getdefeatanimationdataarray() {
+	if !variable_global_exists("@@DefeatAnimationData@@") variable_global_set("@@DefeatAnimationData@@", [])
+	return 	variable_global_get("@@DefeatAnimationData@@")
 }

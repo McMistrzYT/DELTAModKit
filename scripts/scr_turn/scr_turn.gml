@@ -396,15 +396,14 @@ function scr_nextact() {
 	show_debug_message("------------ scr_nextact")
     global.currentactingchar = 0;
 	
-    global.acting[0] = 0;
-    global.acting[1] = 0;
-    global.acting[2] = 0;
+    global.acting[0] = false;
+    global.acting[1] = false;
+    global.acting[2] = false;
     //global.actingsingle[global.currentactingchar] = 0;
 	
     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
     
-    with (__minstance)
-    {
+    with (__minstance) {
 		//acting[DRCharacter.Kris] = 0;
 		for (i = 1; i < DRCharacter.__MAX__; i++) {
 			//acting[i] = 0;
@@ -414,8 +413,7 @@ function scr_nextact() {
     
     var singleactcomplete = 0;
 	show_debug_message("global.currentactingchar = {0}", global.currentactingchar);
-    while (global.currentactingchar < 3)
-    {
+    while (global.currentactingchar < 3) {
 			show_debug_message("global.actingsingle[{0}] = {1}", global.currentactingchar, global.actingsingle[global.currentactingchar]);
             if (global.actingsingle[global.currentactingchar] == 1)
             {
@@ -427,7 +425,7 @@ function scr_nextact() {
 				show_debug_message("actcon[{0}] = {1}", global.char[global.currentactingchar], 1);
 				
 				//if (global.actingsimul[global.currentactingchar] == 0)
-					singleactcomplete = 1;
+					singleactcomplete = true;
 					
 				global.actingsingle[global.currentactingchar] = 0;
 				break;
@@ -550,8 +548,7 @@ function scr_damage_enemy(arg0, arg1)
     }
 }
 
-function scr_turntimer(arg0)
-{
+function scr_turntimer(arg0){
     if (global.turntimer < arg0)
         global.turntimer = arg0;
 }
@@ -625,60 +622,61 @@ function scr_enemy_hurt()
     }
 }
 
-function scr_defeatrun()
-{
-    var __frozen;
+function scr_defeatrun(){
     
-    if (object_is_ancestor(object_index, obj_monsterparent))
-    {
-        __frozen = 0;
+    __frozen = false;
+		
+    if (object_is_ancestor(object_index, obj_monsterparent)) {
+        if (global.flag[51 + myself] == 6) __frozen = true;
         
-        if (global.flag[51 + myself] == 6)
-            __frozen = 1;
-        
-        if (__frozen == 1)
-        {
+        if (__frozen == true) {
             _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
             _rtext.image_index = 12;
             
-            if (recruitable == 1)
+            if (recruitable == true)
                 global.flag[global.monstertype[myself] + 600] = -1;
             
-            global.flag[63] = 1;
-        }
-        
-        if (recruitable == 1 && global.flag[61] == 0 && __frozen == 0)
-        {
-            global.flag[63] = 1;
+            global.flag[63] = true;
+        } else if (recruitable == true && global.flag[61] == false) {
+            global.flag[63] = true;
             
-            if (global.flag[global.monstertype[myself] + 600] != -1)
-            {
+            if (global.flag[global.monstertype[myself] + 600] != -1) {
                 global.flag[global.monstertype[myself] + 600] = -1;
                 _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
                 _rtext.image_index = 7;
             }
         }
     }
-    else
-    {
-        fatal = 0;
-    }
-		
+    else fatal = false
 	
-    if (!__frozen)
-    {
-        if (fatal == 1)
-            defeatanim = instance_create(x, y, obj_deathanim);
-        else
-            defeatanim = instance_create(x, y, obj_defeatanim);
-    }
-    else
-    {
-        defeatanim = instance_create(x, y, obj_frozennpc);
-        defeatanim.depth = depth;
-        defeatanim.inbattle = 1;
-    }
-    
+	
+	var highestpriority_id = 0
+	var highestpriority = 0
+	
+	var animdat = scr_getdefeatanimationdataarray()
+	
+	//var debugrandomchoice = true
+	//if debugrandomchoice highestpriority_id = irandom(array_length(animdat))
+	//else
+	for (var i = 0; i < array_length(animdat); ++i) {
+		with animdat[i] {
+			try {
+				if highestpriority <= priority && method(other, condition)() {
+					highestpriority_id = i
+					highestpriority = priority
+				}
+			} catch (ex) {
+				show_debug_message("Animation with object index of " + string(object) + " Had an Error when trying to get, Removing from List.\n----------------------------\n{0}", ex.longMessage)
+				array_delete(animdat, i, 1)
+				i--
+			}
+		}
+	}
+	
+    var defeatanim_data = animdat[highestpriority_id]
+    var defeatanim = instance_create(x, y, defeatanim_data.object)
+	with defeatanim_data method(other, postcreate)(defeatanim)
+	
     defeatanim.sprite_index = sprite_index;
     defeatanim.sprite_index = hurtsprite;
     defeatanim.image_index = 0;
@@ -687,24 +685,17 @@ function scr_defeatrun()
     instance_destroy();
 }
 
-function scr_randomtarget_old()
-{
-    abletotarget = 1;
+function scr_randomtarget_old() {
+    abletotarget = false;
 	
-	if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
-		abletotarget = 0;
+	for (var i = 0; i < array_length(global.charcantarget); ++i) {
+	    if global.charcantarget[i] abletotarget = true
+	}
     
-    mytarget = choose(0, 1, 2);
+    mytarget = irandom(array_length(global.charcantarget)-1);
     
-    if (abletotarget == 1)
-    {
-        while (global.charcantarget[mytarget] == 0)
-            mytarget = choose(0, 1, 2);
-    }
-    else
-    {
-        mytarget = 3;
-    }
+    if (abletotarget == true) while (global.charcantarget[mytarget] == false) mytarget = irandom(array_length(global.charcantarget)-1);
+    else mytarget = 3;
     
-    global.targeted[mytarget] = 1;
+    global.targeted[mytarget] = true;
 }
