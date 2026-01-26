@@ -1,47 +1,37 @@
-if (global.interact == 5)
-{
-    charcon = 1;
+if (global.interact == 5) { // If Menu is Open
+    charcon = true;
     
-    if (global.submenu == 5 || global.submenu == 22)
-    {
+    if (global.submenu == 5 || global.submenu == 22) {
         global.charselect = global.submenucoord[global.submenu];
         global.faceaction[0] = 0;
         global.faceaction[1] = 0;
         global.faceaction[2] = 0;
         global.faceaction[global.charselect] = 7;
         
-        if (left_p())
-        {
-            movenoise = 1;
-            
-            if (global.submenucoord[global.submenu] > 0)
-                global.submenucoord[global.submenu] -= 1;
-            else
-                global.submenucoord[global.submenu] = chartotal - 1;
+		var moveamt = 0
+		
+        if (left_p()) { // Go Left!
+            movenoise = true;
+            moveamt--
         }
         
-        if (right_p())
-        {
-            movenoise = 1;
-            
-            if (global.submenucoord[global.submenu] < (chartotal - 1))
-                global.submenucoord[global.submenu] += 1;
-            else
-                global.submenucoord[global.submenu] = 0;
+        if (right_p()) { // Go Right!
+            movenoise = true;
+            moveamt++
         }
+		if abs(moveamt > 0) && chartotal > 0 {
+			global.submenucoord[global.submenu] = scr_wrap_newer(global.submenucoord[global.submenu] + moveamt, 0, chartotal)
+		}
         
-        if (button1_p() && onebuffer < 0 && twobuffer < 0)
-        {
+        if (button1_p() && onebuffer < 0 && twobuffer < 0) {
             onebuffer = 2;
             
-            if (global.submenu == 5)
-            {
+            if (global.submenu == 5) {
                 scr_itemuse(global.item[global.submenucoord[2]]);
                 
-                if (usable == 1)
-                {
+                if (usable == true) {
                     //with (obj_event_manager)
-                    //    trigger_event(GameEvent.Zero, GameEvent.Eleven);
+                    //    trigger_event(TrophySystem.AwardTrophy, TrophySystem.TrophyItemCh3);
                 }
                 
                 if (usable == 1 && replaceable == 0)
@@ -55,11 +45,15 @@ if (global.interact == 5)
                 global.charselect = -1;
             }
             
-            if (global.submenu == 22)
-            {
+            if (global.submenu == 22) {
 				// unused
-                //scr_spell_overworld(global.spell[global.char[global.submenucoord[20]]][global.submenucoord[21]]);
-                //global.tension -= global.spellcost[global.char[global.submenucoord[20]]][global.submenucoord[21]];
+				if script_exists(asset_get_index("scr_spell_overworld")) {
+					scr_spell_overworld(global.spell[global.char[global.submenucoord[20]]][global.submenucoord[21]]);
+	                global.tension -= global.spellcost[global.char[global.submenucoord[20]]][global.submenucoord[21]];
+				} else {
+					global.submenu = 21
+					snd_play(snd_error)
+				}
             }
         }
         
@@ -68,8 +62,7 @@ if (global.interact == 5)
         if (button2_p() && twobuffer < 0 && onebuffer < 0)
             close = 1;
         
-        if (global.submenu == 22)
-        {
+        if (global.submenu == 22) {
             if (global.spellcost[global.char[global.submenucoord[20]]][global.submenucoord[21]] > global.tension)
                 close = 1;
         }
@@ -1632,25 +1625,18 @@ if (global.interact == 5)
             }
         }
         
-        close = 0;
+        close = false;
+        if (button2_p() && twobuffer < 0) close = true;
+        if (button3_p() && threebuffer < 0) close = true;
         
-        if (button2_p() && twobuffer < 0)
-            close = 1;
-        
-        if (button3_p() && threebuffer < 0)
-            close = 1;
-        
-        if (close == 1)
-        {
-            if (global.menuno == 0)
-            {
+        if (close == true) {
+            if (global.menuno == 0) {
                 global.menuno = -1;
                 global.interact = 0;
                 charcon = 0;
                 deschaver = 0;
                 
-                with (obj_mainchara)
-                {
+                with (obj_mainchara) {
                     threebuffer = 2;
                     twobuffer = 2;
                 }
@@ -1659,92 +1645,64 @@ if (global.interact == 5)
     }
 }
 
-if (global.interact == 6)
-{
-    if (!instance_exists(obj_dialoguer))
-        global.interact = 0;
-}
+if (global.interact == 6 && !instance_exists(obj_dialoguer)) // If State == MenuTextbox without any Textboxes, Free Kris from their Prison of standing still.
+	global.interact = false;
 
-if (charcon == 1)
-{
-    drawchar = 1;
-    bpy = 60;
-    tpy = 80;
+if (charcon == true) {
+    drawchar = true; // Render Character Bar
+    bpy = 60; // Set Target Character Bar y
+    tpy = 80; // Set Target TensionBar Y
     
-    if (global.interact == 5)
-    {
-        if (tp < (tpy - 1))
-        {
+    if (global.interact == 5) {
+        if (tp < (tpy - 1)) {
             if ((tpy - tp) <= 40)
                 tp += round((tpy - tp) / 2.5);
             else
                 tp += 30;
         }
-        else
-        {
-            tp = tpy;
-        }
+        else tp = tpy;
     }
     
-    if (bp < (bpy - 1) && charcon == 1)
-    {
+    if (bp < (bpy - 1)) { // Slide Chars Onscreen
         if ((bpy - bp) <= 40)
             bp += round((bpy - bp) / 2.5);
         else
             bp += 30;
     }
-    else
-    {
-        bp = bpy;
-    }
+    else bp = bpy;
 }
 
-if (charcon == 0)
-{
-    if (tp > 0)
-    {
+if (charcon == false) {
+    if (tp > 0) { // If TP Bar is Visible (Despite DMK having that ability commented out) Slide out of View
         if (tp >= 80)
             tp -= round(tp / 2.5);
         else
             tp -= 30;
-    }
-    else
-    {
-        tp = 0;
-    }
+    } else  tp = 0;
     
-    if (bp > 0)
-    {
+    if (bp > 0) { // Slide CharBar offscreen
         if (bp >= 40)
             bp -= round(bp / 2.5);
         else
             bp -= 30;
-    }
-    else
-    {
-        bp = 0;
-    }
+    } else bp = 0;
     
-    if (bp == 0)
-        drawchar = 0;
+    if (bp == 0) drawchar = false;
 }
 
-if (movenoise == 1)
-{
+if (movenoise == true) {
     snd_play(snd_menumove);
-    movenoise = 0;
+    movenoise = false;
 }
 
-if (selectnoise == 1)
-{
+if (selectnoise == true) {
     snd_play(snd_select);
-    selectnoise = 0;
+    selectnoise = false;
 }
 
-if (cancelnoise == 1)
-{
+if (cancelnoise == true) {
     snd_play(snd_smallswing);
-    cancelnoise = 0;
+    cancelnoise = false;
 }
 
 onebuffer -= 1;

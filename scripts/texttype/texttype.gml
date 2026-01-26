@@ -539,21 +539,15 @@ function scr_textsound()
         }
 
         // Lower the Amount of If Statements (Also allows for Easily adding more letters to the blacklist, rather than having to do a lot of CtrlC+CtrlV)
-	var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
+		var soundblacklist = [" ", "^", "!", ".", "?", ",", ":", "/", "\\", "|", "*"];
 		
         var i = 0
-	while i < array_length(soundblacklist)
-	{
-		if getchar == soundblacklist[i]
-		{
-			play = false;
-			break;
+		while i < array_length(soundblacklist) && play == true {
+			if getchar == soundblacklist[i] play = false;
+			i++
 		}
-		i++
-	}
         
-        if (play == true)
-        {
+        if (play == true) {
 	    var textname = audio_get_name(textsound)
             if (textname == "snd_txtq")
             {

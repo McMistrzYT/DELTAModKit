@@ -390,17 +390,15 @@ function ossafe_file_text_close(arg0)
     }
 }
 
-function langopt(arg0, arg1)
-{
-    return (global.lang == "ja") ? arg1 : arg0;
+function langopt(en, ja) {
+    return (global.lang == "ja") ? ja : en;
 }
 
-function scr_timedisp(arg0)
-{
-    var minutes = floor(arg0 / 1800);
+function scr_timedisp(frames) {
+    var minutes = floor(frames / 1800);
     var remmins = minutes % 60;
     var hours = (minutes - remmins) / 60;
-    var seconds = floor((arg0 / 30) - (minutes * 60));
+    var seconds = floor((frames / 30) - (minutes * 60));
     var hourstring = string(hours) + ":";
     var minstring = string(remmins) + ":";
     
@@ -416,12 +414,10 @@ function scr_timedisp(arg0)
     return timedisp;
 }
 
-function scr_chapterswitch(arg0 = 0)
-{
+function scr_chapterswitch(chapter = 0) {
     var parameters = get_chapter_switch_parameters();
-    
-    if (arg0 == 0)
-    {
+    if code_is_compiled() return show_message("YoYoCompiled Games are not Compatible with game_change due to all code being in the exe, Chapter Switching Cannot Continue.");
+    if (chapter == 0) {
         switch (os_type)
         {
             case os_windows:
@@ -440,12 +436,9 @@ function scr_chapterswitch(arg0 = 0)
                 game_change("..", parameters);
                 break;
         }
-    }
-    else
-    {
-        var chapstring = string(arg0);
-        switch (os_type)
-        {
+    } else {
+        var chapstring = string(chapter);
+        switch (os_type) {
             case os_windows:
                 game_change("/../chapter" + chapstring + "_windows", "-game data.win" + parameters);
                 break;

@@ -470,6 +470,7 @@
     {"id":{"name":"scr_turn","path":"scripts/scr_turn/scr_turn.yy",},},
     {"id":{"name":"scr_weaponinfo","path":"scripts/scr_weaponinfo/scr_weaponinfo.yy",},},
     {"id":{"name":"scr_weapons_config","path":"scripts/scr_weapons_config/scr_weapons_config.yy",},},
+    {"id":{"name":"scr_wrap","path":"scripts/scr_wrap/scr_wrap.yy",},},
     {"id":{"name":"snd_play","path":"scripts/snd_play/snd_play.yy",},},
     {"id":{"name":"substring","path":"scripts/substring/substring.yy",},},
     {"id":{"name":"texttype","path":"scripts/texttype/texttype.yy",},},
