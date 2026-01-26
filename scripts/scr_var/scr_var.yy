@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_script_repeat",
+  "%Name":"scr_var",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_script_repeat",
+  "name":"scr_var",
   "parent":{
     "name":"Engine",
     "path":"folders/DELTARUNE/Scripts/Engine.yy",

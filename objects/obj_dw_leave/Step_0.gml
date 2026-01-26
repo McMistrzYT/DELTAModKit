@@ -47,19 +47,21 @@ if (con == 10)
             //visible = false;
             
             if (name == "ralsei") {
-				if sprite_exists(asset_get_index("spr_ralsei_wave_start")) && sprite_exists(asset_get_index("spr_ralsei_wave_down")) && script_exists(asset_get_index("scr_script_delayed")) && script_exists(asset_get_index("scr_var")) {
+				if script_exists(asset_get_index("scr_var")) {
 	                sprite_index = spr_ralsei_wave_start;
 	                image_speed = 0.2;
                 
 	                scr_script_delayed(scr_var, 15, "sprite_index", spr_ralsei_wave_down);
 				} else {
-					//if room == room_dw_castle_area_1 {
-					//	if x > 320 + 120 hspeed = -1
-					//	if x < 320 - 120 hspeed = 1
-					//	sprite_index = usprite	
-					//	image_speed = 0.1
-					//	vspeed = -2
-					//}
+					if room == room_dw_castle_area_1 {
+						scr_script_delayed(function() {
+							if x > 320 + 120 hspeed = -1
+							if x < 320 - 120 hspeed = 1
+							sprite_index = usprite	
+							image_speed = 0.1
+							vspeed = -2							
+						}, 15)
+					}
 				}
             }
         }
