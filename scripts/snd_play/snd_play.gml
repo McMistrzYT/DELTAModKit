@@ -1,6 +1,6 @@
 function scr_load_audio()
 {
-    var audio_groups = [1, 0];
+    var audio_groups = [audio_sfx, audiogroup_default];
     
     for (var i = 0; i < array_length(audio_groups); i++)
     {
