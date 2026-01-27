@@ -51,7 +51,7 @@ if (victory == 1 && victoried == 0)
         if (global.flag[37] == 1)
             global.battlemsg[0] = "* You won the battle!/%";
         
-        if (global.flag[63] == 1)
+        if (global.flag[63] == true)
         {
             var gainedstats = scr_levelup();
             

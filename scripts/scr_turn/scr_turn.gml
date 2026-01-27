@@ -600,27 +600,28 @@ function scr_defeatrun(){
     __frozen = false;
 	_spared = false
 	if !variable_struct_exists(self, "fatal") fatal = false
+	if variable_struct_exists(self, "myself") {
+        if global.flag[51 + myself] == 6 __frozen = true
+		if global.flag[51 + myself] == 2 _spared = true
+	}
 	
 	if (object_is_ancestor(object_index, obj_monsterparent)) {
-        if (global.flag[51 + myself] == 6) __frozen = true;
-		if global.flag[51 + myself] == 2 _spared = true
         
-		if !_spared
-        if (__frozen == true) {
-            _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
-            _rtext.image_index = 12;
-            if (recruitable == true) global.flag[global.monstertype[myself] + 600] = -1;
-            
-            global.flag[63] = true;
-        } else if (recruitable == true && global.flag[61] == false) {
-            global.flag[63] = true;
-            
-            if (global.flag[global.monstertype[myself] + 600] != -1) {
-                global.flag[global.monstertype[myself] + 600] = -1;
-                _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
-                _rtext.image_index = 7;
-            }
-        }
+		var messageanimindex = -1
+		var brokenbond = true // By default a Bond is likely broken.
+			
+	    if __frozen messageanimindex = 12 // Make Status Text "Frozen."
+		if _spared brokenbond = false
+		
+		if brokenbond {
+			if messageanimindex < 0 messageanimindex = 7
+	        global.flag[63] = true;
+	        if (global.flag[global.monstertype[myself] + 600] != -1 && recruitable) global.flag[global.monstertype[myself] + 600] = -1;
+		}
+		if messageanimindex >= 0 {
+	            _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
+	            _rtext.image_index = messageanimindex;	
+		}
     }
     else fatal = false
 	

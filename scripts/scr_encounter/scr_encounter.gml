@@ -354,38 +354,21 @@ function scr_blconskip(arg0)
     }
 }
 
-function scr_bullet_inherit(arg0)
-{
-    if (i_ex(arg0))
-    {
-        if (damage != -1)
-            arg0.damage = damage;
-        
-        if (grazepoints != -1)
-            arg0.grazepoints = grazepoints;
-        
-        if (timepoints != -1)
-            arg0.timepoints = timepoints;
-        
-        if (inv != -1)
-            arg0.inv = inv;
-        
-        if (target != -1)
-            arg0.target = target;
-        
-        if (grazed != -1)
-            arg0.grazed = 0;
-        
-        if (grazetimer != -1)
-            arg0.grazetimer = 0;
-        
-        if (object_index == obj_dbulletcontroller)
-        {
-            arg0.creatorid = creatorid;
-            arg0.creator = creator;
+function scr_bullet_inherit(bulletinstance) {
+    if (i_ex(bulletinstance)) {
+        if (damage != -1) bulletinstance.damage = damage;
+        if (grazepoints != -1) bulletinstance.grazepoints = grazepoints;
+        if (timepoints != -1) bulletinstance.timepoints = timepoints;
+        if (inv != -1) bulletinstance.inv = inv;
+        if (target != -1) bulletinstance.target = target;
+        if (grazed != -1) bulletinstance.grazed = 0;
+        if (grazetimer != -1) bulletinstance.grazetimer = 0;
+        if (object_index == obj_dbulletcontroller) {
+            bulletinstance.creatorid = creatorid;
+            bulletinstance.creator = creator;
         }
         
-        arg0.element = element;
+        bulletinstance.element = element;
     }
 }
 
