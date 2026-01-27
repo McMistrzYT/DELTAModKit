@@ -413,6 +413,7 @@
     {"id":{"name":"scr_darksize","path":"scripts/scr_darksize/scr_darksize.yy",},},
     {"id":{"name":"scr_debug","path":"scripts/scr_debug/scr_debug.yy",},},
     {"id":{"name":"scr_debugging_config","path":"scripts/scr_debugging_config/scr_debugging_config.yy",},},
+    {"id":{"name":"scr_defend","path":"scripts/scr_defend/scr_defend.yy",},},
     {"id":{"name":"scr_depth","path":"scripts/scr_depth/scr_depth.yy",},},
     {"id":{"name":"scr_dmenu","path":"scripts/scr_dmenu/scr_dmenu.yy",},},
     {"id":{"name":"scr_dmgwriter","path":"scripts/scr_dmgwriter/scr_dmgwriter.yy",},},

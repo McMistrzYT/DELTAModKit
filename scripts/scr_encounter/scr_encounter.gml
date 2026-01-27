@@ -112,37 +112,24 @@ function scr_isphase(arg0)
     return __isphase;
 }
 
-function scr_randomtarget()
-{
-    abletotarget = 1;
+function scr_randomtarget(){
+    abletotarget = false;
+    for (var i = 0; i < array_length(global.charcantarget) && !abletotarget; ++i) {
+	    if global.charcantarget[i] abletotarget = true
+	}
     
-    if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
-        abletotarget = 0;
+    mytarget = irandom(array_length(global.charcantarget)-1);
     
-    mytarget = choose(0, 1, 2);
-    
-    if (abletotarget == 1)
-    {
-        while (global.charcantarget[mytarget] == 0)
-            mytarget = choose(0, 1, 2);
-    }
+    if (abletotarget)
+        while (global.charcantarget[mytarget] == false) mytarget = irandom(array_length(global.charcantarget)-1);
     else
-    {
         mytarget = 3;
-    }
     
-    global.targeted[mytarget] = 1;
+    global.targeted[mytarget] = true;
     
-    if (global.chapter >= 2 && mytarget != 3)
-    {
-        if (global.charcantarget[0])
-            global.targeted[0] = 1;
-        
-        if (global.charcantarget[1])
-            global.targeted[1] = 1;
-        
-        if (global.charcantarget[2])
-            global.targeted[2] = 1;
+    if (global.chapter >= 2 && mytarget != 3) {
+		for (var i = 0; i < array_length(global.charcantarget); ++i)
+		    if global.charcantarget[i] global.targeted[i] = true
         
         mytarget = 4;
     }

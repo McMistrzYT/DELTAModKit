@@ -229,27 +229,20 @@ if (my_method == 2)
     }
 }
 
-haveauto = 0;
-autoed = 0;
-
-if (global.charauto[DRCharacter.Susie] == 1)
-{
-    if (global.char[0] == DRCharacter.Susie || global.char[1] == DRCharacter.Susie || global.char[2] == DRCharacter.Susie)
-    {
-        sus = 0;
-        
-        if (global.char[1] == DRCharacter.Susie)
-            sus = 1;
-        
-        if (global.char[2] == DRCharacter.Susie)
-            sus = 2;
-        
-        if (global.hp[DRCharacter.Susie] >= 0 && global.charmove[sus] == 1)
-        {
-            haveauto = 1;
+for (i = 0; i < array_length(global.char); ++i) {
+	haveauto[i] = false
+	autoed[i] = false
+	autopoints[i] = 0
+	var character = global.char[i]
+	if global.charauto[character] == true {
+		var autotype = scr_character_autotype(character) 
+		if autotype[0] == 1 {
+		    if (global.hp[character] >= 0 && global.charmove[i] == true) {
+		        haveauto[i] = true;
+				autopoints[i] = autotype[1]
             
-            if (timermax == 3)
-                timermax = 50;
-        }
-    }
+		        if (timermax == 3) timermax = 50;
+		    }
+		}
+	}
 }

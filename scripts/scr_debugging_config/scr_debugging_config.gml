@@ -1,2 +1,2 @@
 function scr_debug() { return DEBUGMODE; }
-function scr_debug_get_start_room() { global.darkzone = true; return keyboard_check_direct(vk_anykey) ? PLACE_MENU : room_dw_test; }
+function scr_debug_get_start_room() { global.charauto[2] = true global.charauto[3] = true global.darkzone = true; return keyboard_check_direct(vk_anykey) ? PLACE_MENU : room_dw_test; }

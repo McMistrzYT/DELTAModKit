@@ -1,5 +1,4 @@
-function scr_charbox()
-{
+function scr_charbox(){
     for (c = 0; c < DRHero.__MAX__; c += 1)
     {
         if (havechar[c] == 1)

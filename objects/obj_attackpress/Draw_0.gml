@@ -183,23 +183,25 @@ if (active == 1)
     {
         posttimer += 1;
         
-        if (posttimer > (timermax - 35) && haveauto == 1 && autoed == 0 && scr_monsterpop() > 0)
-        {
-            global.charinstance[sus].points = 160;
+		for (i = 0; i < array_length(haveauto); ++i) {
+		    if haveauto[i] == true {
+		        if (posttimer > (timermax - 35) && autoed[i] == false && scr_monsterpop() > 0) {
+		            global.charinstance[i].points = autopoints[i];
             
-            if (global.automiss[global.chartarget[sus]] == 1)
-                global.charinstance[sus].points = 0;
+		            if (global.automiss[global.chartarget[i]] == true)
+		                global.charinstance[i].points = 0;
             
-            with (global.charinstance[sus])
-            {
-                state = 1;
-                attacktimer = 0;
-                is_auto_susie = 1;
-            }
+		            with (global.charinstance[i]) {
+		                state = 1;
+		                attacktimer = 0;
+		                is_auto_susie = true;
+		            }
             
-            posttimer -= 25;
-            autoed = 1;
-        }
+		            posttimer -= 25;
+		            autoed[i] = true;
+		        }
+			}
+		}
         
         if (posttimer > timermax)
         {

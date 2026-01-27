@@ -708,3 +708,19 @@ function scr_character_darkmenu_geticondatareader(charIdx) {
 		return slots
 	}
 }
+	
+function scr_character_autotype(charIdx) {
+	/* ==== Auto Types ====
+		 0: Idle, No Argument,
+		 1: Attack, DamagePoints,
+		 2: Spell, Slot,
+		 3: Item, ItemSlot, (Not Implemented)
+		 4: Defend, No Argument
+		 6: Action, ActId, (Not Implemented)
+		10: Spare, No Argument,
+	*/
+	switch charIdx {
+		default: return [0] // Idle.
+		case DRCharacter.Susie: return [1, 160]
+	}
+}

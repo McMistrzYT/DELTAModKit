@@ -68,20 +68,8 @@ function scr_mnendturn()
             }
         }
         
-        if (global.charmove[0] == 0 || global.charauto[global.char[0]] == 1)
-            global.charturn = 1;
-        
-        if (global.charturn == 1)
-        {
-            if (global.charmove[1] == 0 || global.charauto[global.char[1]] == 1)
-                global.charturn = 2;
-        }
-        
-        if (global.charturn == 2)
-        {
-            if (global.charmove[2] == 0 || global.charauto[global.char[2]] == 1)
-                skip = 1;
-        }
+		global.charturn = -1
+		scr_nexthero()
         
         for (i = 0; i < 3; i += 1)
         {
@@ -108,9 +96,8 @@ function scr_mnendturn()
 				acting[i] = 0;
         }
         
-        if (skip == 1)
-        {
-            if (global.char[0] == DRCharacter.Susie && global.charauto[DRCharacter.Susie] == 1)
+        if (skip == 1) {
+			if (global.char[0] == DRCharacter.Susie && global.charauto[DRCharacter.Susie] == 1)
             {
                 global.acting[0] = 1;
                 global.myfight = 3;
@@ -127,48 +114,55 @@ function scr_mnendturn()
     }
 }
 
-function scr_endturn()
-{
-    for (i = 0; i < 12; i += 1)
-        global.item[i] = tempitem[i][global.charturn];
+function scr_endturn(){
+	if global.charturn < array_length(tempitem[i])
+    for (i = 0; i < 12; i += 1) global.item[i] = tempitem[i][global.charturn];
     
     for (i = 0; i < 12; i += 1)
-    {
         for (j = 0; j < 3; j += 1)
             tempitem[i][j] = global.item[i];
-    }
     
-    moveswapped = 0;
+    moveswapped = false;
     
-    with (obj_writer)
-        instance_destroy();
+    with (obj_writer) instance_destroy();
+    with (obj_face) instance_destroy();
+    with (obj_smallface) instance_destroy();
     
-    with (obj_face)
-        instance_destroy();
+    global.attacking = false;
     
-    with (obj_smallface)
-        instance_destroy();
-    
-    global.attacking = 0;
-    
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < 3; i += 1) {
         global.monsterattackname[i] = " ";
+		var character = global.char[i]
         
-        if (global.charauto[global.char[i]] == 1 && global.hp[global.char[i]] > 0)
-        {
-            if (global.monster[2] == 1)
-                global.chartarget[i] = 2;
-            
-            if (global.monster[1] == 1)
-                global.chartarget[i] = 1;
-            
-            if (global.monster[0] == 1)
-                global.chartarget[i] = 0;
+        if (global.charauto[character] == true && global.hp[character] > 0 && character > 0) {
+			var dat = scr_character_autotype(character)
+			global.charaction[i] = dat[0]
+			global.acting[i] = true
+			switch dat[0] {
+				default: break case 1:
+				global.charaction[i] = 0
+				for (j = 0; j < array_length(global.monster); ++j) { if global.monster[j] global.chartarget[i] = j break }
+				break case 2: 
+					global.charspecial[i] = global.spell[character][scr_wrap_newer(dat[1], 0, array_length(global.spell[character]))] 
+					var lowesthp = int64(99999999)
+					for (j = 0; j < array_length(global.char); ++j) {
+					    if lowesthp > global.hp[global.char[j]] { global.chartarget[i] = j lowesthp = global.hp[global.char[j]]}
+					}
+				break case 4: scr_defend(i, false) 
+				break case 10: 
+					global.charspecial[i] = DRSpell.Spare 
+					global.charaction[i] = 2 
+					var foundone = false
+					for (j = 0; j < array_length(global.monster) && !foundone; ++j) {
+					    if (global.mercymod[j] >= 100 && global.monster[j]) {foundone = true global.chartarget[i] = j}
+					}
+					if !foundone global.charaction[i] = 0
+				break
+			}
         }
         
         if (global.charaction[i] == 1)
-            global.attacking = 1;
+            global.attacking = true;
     }
     
     __noactors = 1;
@@ -280,9 +274,9 @@ function scr_nexthero() {
     
 	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
 		moveswapped = true
-		if i >= array_length(global.charmove) endturn = true // No one Left
-		else if global.charmove[i] == true && scr_charcan(i) && global.acting[i] == false {
-			global.charturn = i 
+		if i >= array_length(global.charmove) {endturn = true global.charturn = i} // No one Left
+		else if scr_charcan(i) {
+			global.charturn = i
 		} else if global.char[i] > DRCharacter.None { // This Character Cannot Move. (Try Next Character)
 			moveswapped = false
 			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
@@ -292,10 +286,12 @@ function scr_nexthero() {
     if (endturn == true) scr_endturn();
     if (moveswapped == true) global.bmenuno = 0;
     
-    if (global.charturn >= 0) {
+    if (prevturn >= 0 && !endturn) {
         global.temptension[global.charturn] = global.tension;
         for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][prevturn];
     }
+	
+	return endturn
 }
 
 function scr_prevhero() {
@@ -303,14 +299,11 @@ function scr_prevhero() {
     moveswapped = false;
     
 	if global.charturn > 0 { // No need to run Calculations if we know it'll fail anyways.
-		for (var i = global.charturn - 1; i >= 0; --i) {
-		    if i >= 0 {
-				if scr_charcan(i) {
-					global.charturn = i
-					moveswapped = true
-					break
-				}
-			} else break
+		for (var i = global.charturn - 1; i >= 0 && !moveswapped; --i) {
+			if scr_charcan(i) {
+				global.charturn = i
+				moveswapped = true
+			}
 		}
 	}
     

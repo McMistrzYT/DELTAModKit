@@ -95,7 +95,7 @@ function scr_gamestart()
     {
         global.heromakex[i] = 100;
         global.heromakey[i] = 200;
-        global.charauto[i] = 0;
+        global.charauto[i] = false;
         global.charmove[i] = 0;
         global.charcantarget[i] = 0;
         global.chardead[i] = 0;

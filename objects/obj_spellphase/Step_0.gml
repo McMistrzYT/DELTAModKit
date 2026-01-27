@@ -1,5 +1,4 @@
-if (active == 1)
-{
+if (active == 1){
     spelltimer += 1;
     
     if (spelltimer >= global.spelldelay && i_ex(spellwriter) == false)

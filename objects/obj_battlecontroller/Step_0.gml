@@ -195,11 +195,7 @@ if (global.myfight == 0)
 					break;
 					
 				case 4: // DEFEND
-					scr_tensionheal(40);
-                
-	                global.faceaction[global.charturn] = 4;
-	                global.charaction[global.charturn] = 10;
-	                scr_nexthero();
+					scr_defend()
 					break;
 			}
         }
