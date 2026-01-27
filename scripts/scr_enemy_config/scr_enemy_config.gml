@@ -304,14 +304,7 @@ function scr_enemy_defeatrunanimations(){
 		scr_createdefeatanimation(obj_defeatanim, function() { return true     })     // Lowest Priorty, Default Battle Run
 		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    }, 10) // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
 		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen }, 60, function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
-		scr_createdefeatanimation(obj_spareanim,  function() { return _spared }, 100, function(instance) { _spritetochangeto = sparedsprite }) // Frozen Solid.
-		
-    //spareanim = instance_create(x, y, obj_spareanim);
-    //spareanim.sprite_index = sprite_index;
-    //spareanim.sprite_index = sparedsprite;
-    //spareanim.image_index = 0;
-    //spareanim.image_xscale = image_xscale;
-    //spareanim.image_yscale = image_yscale;
+		scr_createdefeatanimation(obj_spareanim,  function() { return _spared  }, 100,function(instance) { _spritetochangeto = sparedsprite }) // Frozen Solid.
 	#endregion
 }
 
