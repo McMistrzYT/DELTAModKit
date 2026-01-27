@@ -605,6 +605,7 @@ function scr_defeatrun(){
         if (global.flag[51 + myself] == 6) __frozen = true;
 		if global.flag[51 + myself] == 2 _spared = true
         
+		if !_spared
         if (__frozen == true) {
             _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
             _rtext.image_index = 12;
