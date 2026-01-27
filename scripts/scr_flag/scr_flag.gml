@@ -58,7 +58,7 @@ function global_flagname_init() {
 	global.flagname[42] = "Pacified Enemies"
 	global.flagname[43] = "Susie Attacks"
 	global.flagname[44] = "Total Kills"
-	global.flagname[54] = "Encounter Flag"
+	global.flagname[54] = "EncounterEnd Flag Result Flag" // Weird Name, since it is a Flag that Points to what Flag the Encounter End Results with be put into.
 	global.flagname[50] = "Battle End Result"
 	global.flagname[51] = "End of Battle Enemy Stats [0]"
 	global.flagname[52] = "End of Battle Enemy Stats [1]"

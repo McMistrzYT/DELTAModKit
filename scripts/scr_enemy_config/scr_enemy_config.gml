@@ -304,6 +304,14 @@ function scr_enemy_defeatrunanimations(){
 		scr_createdefeatanimation(obj_defeatanim, function() { return true     })     // Lowest Priorty, Default Battle Run
 		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    }, 10) // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
 		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen }, 60, function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
+		scr_createdefeatanimation(obj_spareanim,  function() { return _spared }, 100, function(instance) { _spritetochangeto = sparedsprite }) // Frozen Solid.
+		
+    //spareanim = instance_create(x, y, obj_spareanim);
+    //spareanim.sprite_index = sprite_index;
+    //spareanim.sprite_index = sparedsprite;
+    //spareanim.image_index = 0;
+    //spareanim.image_xscale = image_xscale;
+    //spareanim.image_yscale = image_yscale;
 	#endregion
 }
 
@@ -322,4 +330,39 @@ function scr_createdefeatanimation(object, condition = function() { return false
 function scr_getdefeatanimationdataarray() {
 	if !variable_global_exists("@@DefeatAnimationData@@") variable_global_set("@@DefeatAnimationData@@", [])
 	return 	variable_global_get("@@DefeatAnimationData@@")
+}
+
+function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[51 + self.myself]) {
+	#macro MONSTERS_DEFEATTYPES_None 0
+	#macro MONSTERS_DEFEATTYPES_Violence 1
+	#macro MONSTERS_DEFEATTYPES_Spare 2
+	#macro MONSTERS_DEFEATTYPES_Pacify 3
+	#macro MONSTERS_DEFEATTYPES_Frozen 6
+	if mode == "all" || mode == "init" {
+        _amt_add = 0;
+        _frozened = 0;
+        _violenced = 0;
+        _spared = 0;
+        _pacified = 0;
+	}
+	if mode == "all" || mode == "tally" {
+		_amt_add++
+		switch monsterslotbattleendflag {
+			case MONSTERS_DEFEATTYPES_None:		_amt_add--		break
+			case MONSTERS_DEFEATTYPES_Violence: _violenced++	break
+			case MONSTERS_DEFEATTYPES_Spare:	_spared++		break
+			case MONSTERS_DEFEATTYPES_Pacify:	_pacified++		break
+			case MONSTERS_DEFEATTYPES_Frozen:	_frozened++		break
+		}
+	}
+	if mode == "all" || mode == "updatebattleendflags" {
+        if (_frozened > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Frozen;
+        if (_pacified > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Pacify;
+        if (_spared > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Spare;
+        if (_violenced > 0) global.flag[50] = MONSTERS_DEFEATTYPES_Violence;
+		
+		switch global.flag[50] {
+			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break
+		}
+	}
 }

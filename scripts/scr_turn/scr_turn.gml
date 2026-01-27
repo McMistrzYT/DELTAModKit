@@ -605,9 +605,12 @@ function scr_enemy_hurt()
 
 function scr_defeatrun(){
     __frozen = false;
-		
-    if (object_is_ancestor(object_index, obj_monsterparent)) {
+	_spared = false
+	if !variable_struct_exists(self, "fatal") fatal = false
+	
+	if (object_is_ancestor(object_index, obj_monsterparent)) {
         if (global.flag[51 + myself] == 6) __frozen = true;
+		if global.flag[51 + myself] == 2 _spared = true
         
         if (__frozen == true) {
             _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
@@ -650,13 +653,13 @@ function scr_defeatrun(){
 			}
 		}
 	}
+	_spritetochangeto = hurtsprite
 	
     var defeatanim_data = animdat[highestpriority_id]
     var defeatanim = instance_create(x, y, defeatanim_data.object)
 	with defeatanim_data method(other, postcreate)(defeatanim)
 	
-    defeatanim.sprite_index = sprite_index;
-    defeatanim.sprite_index = hurtsprite;
+    defeatanim.sprite_index = _spritetochangeto;
     defeatanim.image_index = 0;
     defeatanim.image_xscale = image_xscale;
     defeatanim.image_yscale = image_yscale;

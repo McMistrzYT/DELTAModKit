@@ -54,14 +54,9 @@ function scr_monster_add(arg0, arg1)
     return __returnid;
 }
 
-function scr_spareanim()
-{
-    spareanim = instance_create(x, y, obj_spareanim);
-    spareanim.sprite_index = sprite_index;
-    spareanim.sprite_index = sparedsprite;
-    spareanim.image_index = 0;
-    spareanim.image_xscale = image_xscale;
-    spareanim.image_yscale = image_yscale;
+function scr_spareanim() {
+	_spared = true
+	scr_defeatrun()
 }
 
 function scr_monster_makeinstance(monsterid)
@@ -121,49 +116,12 @@ function scr_monsterdefeat()
             global.monstergold[3] += 24;
         }
         
-        if (scr_monsterpop() == 0)
-        {
-            _amt_add = 0;
-            _frozened = 0;
-            _violenced = 0;
-            _spared = 0;
-            _pacified = 0;
-            
-            for (d_i = 0; d_i < 3; d_i += 1)
-            {
-                if (global.flag[51 + d_i] != 0)
-                    _amt_add += 1;
-                
-                if (global.flag[51 + d_i] == 1)
-                    _violenced += 1;
-                
-                if (global.flag[51 + d_i] == 2)
-                    _spared += 1;
-                
-                if (global.flag[51 + d_i] == 3)
-                    _pacified += 1;
-                
-                if (global.flag[51 + d_i] == 6)
-                    _frozened += 1;
-            }
-            
-            if (_frozened > 0)
-                global.flag[50] = 6;
-            
-            if (_pacified > 0)
-                global.flag[50] = 3;
-            
-            if (_spared > 0)
-                global.flag[50] = 2;
-            
-            if (_violenced > 0)
-                global.flag[50] = 1;
-            
-            if (global.flag[50] == 6)
-                global.flag[926]++;
-            
-            if (global.flag[54] != 0)
-            {
+        if (scr_monsterpop() == 0) {
+			scr_monster_get_defeattypes("init")
+            for (d_i = 0; d_i < 3; d_i += 1) scr_monster_get_defeattypes("tally", global.flag[51 + d_i])
+            scr_monster_get_defeattypes("updatebattleendflags")
+               
+            if (global.flag[54] != 0) {
                 global.flag[global.flag[54]] = global.flag[50];
                 show_debug_message("=====Encounter Results=====");
                 show_debug_message("encounter flag: global.flag[" + string(global.flag[54]) + "]=" + string(global.flag[50]));
