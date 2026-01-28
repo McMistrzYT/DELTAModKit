@@ -1,8 +1,7 @@
 function scr_weaponinfo_mine()
 {
-    for (i = 0; i < 6; i += 1)
-    {
-        scr_weaponinfo(global.charweapon[i]);
+    for (i = 0; i < DRCharacter.__MAX__; i += 1) {
+        scr_weaponinfo(global.charweapon[i], i);
         charweaponname[i] = weaponnametemp;
         charweapondesc[i] = weapondesctemp;
         charweaponat[i] = weaponattemp;

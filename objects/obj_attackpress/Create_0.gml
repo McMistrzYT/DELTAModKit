@@ -128,33 +128,24 @@ if (havechar[1] == 1 && havechar[2] == 0)
 boltgap = 20;
 boltspeed = 8;
 boltx = 0;
-points[0] = 0;
-points[1] = 0;
-points[2] = 0;
-pressbuffer[0] = 0;
-pressbuffer[1] = 0;
-pressbuffer[2] = 0;
-pressbuffer[3] = 0;
-charbolt[0] = 1;
-charbolt[1] = 1;
-charbolt[2] = 1;
 
-for (i = 0; i < 3; i += 1)
-{
-    if (havechar[i] == 0)
-        charbolt[i] = 0;
+for (var i = 1; i < DRCharacter.__MAX__; ++i) {
+	pressbuffer[i-1] = 0;
+}
+	
+bolttotal = 0
+for (var i = 0; i < array_length(global.char); ++i) {
+	boltuse[i] = 0
+	points[i] = 0
+	charbolt[i] = 0
+	if havechar[i] charbolt[i] = global.itembolts[global.char[i]][0]
+	attacked[i] = false
+	bolttotal += charbolt[i]
 }
 
-attacked[0] = 0;
-attacked[1] = 0;
-attacked[2] = 0;
-bolttotal = charbolt[0] + charbolt[1] + charbolt[2];
 boltxoff = 0;
 my_method = 1;
 boltnum = 1;
-boltuse[0] = 0;
-boltuse[1] = 0;
-boltuse[2] = 0;
 lastbolt = -1;
 boltchar[0] = -1;
 diff = 10;
@@ -164,20 +155,16 @@ if (global.flag[13] == 0)
 
 if (my_method == 1)
 {
-    for (i = 0; i < bolttotal; i += 1)
-    {
-        boltalive[i] = 1;
+    for (i = 0; i < bolttotal; i += 1) {
+        boltalive[i] = true;
         c = choose(0, 1, 2);
         
-        while (havechar[c] == 0)
-            c = choose(0, 1, 2);
+        while (havechar[c] == 0) c = choose(0, 1, 2);
         
-        while (boltuse[c] >= charbolt[c])
-        {
+        while (boltuse[c] >= charbolt[c]) {
             c = choose(0, 1, 2);
             
-            while (havechar[c] == 0)
-                c = choose(0, 1, 2);
+            while (havechar[c] == 0) c = choose(0, 1, 2);
         }
         
         boltchar[i] = c;

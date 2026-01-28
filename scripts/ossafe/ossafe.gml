@@ -1,5 +1,4 @@
-function ossafe_fill_rectangle(arg0, arg1, arg2, arg3, arg4)
-{
+function ossafe_fill_rectangle(arg0, arg1, arg2, arg3, arg4){
     var x1 = arg0;
     var y1 = arg1;
     var x2 = arg2;
@@ -32,10 +31,9 @@ function ossafe_fill_rectangle(arg0, arg1, arg2, arg3, arg4)
     draw_rectangle(x1, y1, x2, y2, outline);
 }
 
-function setxy(arg0, arg1)
-{
-    x = arg0;
-    y = arg1;
+function setxy(x, y){
+    self.x = x;
+    self.y = y;
 }
 
 function draw_background_tiled_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
@@ -43,14 +41,12 @@ function draw_background_tiled_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
     draw_sprite_tiled_ext(arg0, 0, arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
-function scr_moveheart()
-{
+function scr_moveheart(){
     global.inv = 0;
     return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
 }
 
-function ossafe_ini_open(arg0)
-{
+function ossafe_ini_open(arg0){
     if (!global.is_console)
     {
         ini_open(arg0);
@@ -84,9 +80,8 @@ function ossafe_ini_close()
     }
 }
 
-function draw_background_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-{
-    draw_sprite_ext(arg0, 0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+function draw_background_ext(sprite, x, y, xscale, yscale, rot = 0, col = c_white, alpha = 1){
+    draw_sprite_ext(sprite, 0, x, y, xscale, yscale, rot, col, alpha);
 }
 
 function ossafe_file_text_open_read(arg0)
@@ -227,13 +222,8 @@ function scr_ds_list_read(arg0)
     return new_list;
 }
 
-function safe_delete(arg0)
-{
-    if (i_ex(arg0))
-    {
-        with (arg0)
-            instance_destroy();
-    }
+function safe_delete(instance) {
+    if i_ex(instance) with (instance) instance_destroy();
 }
 
 function ossafe_file_delete(arg0)
@@ -402,13 +392,11 @@ function scr_timedisp(frames) {
     var hourstring = string(hours) + ":";
     var minstring = string(remmins) + ":";
     
-    if (remmins < 10)
-        minstring = "0" + minstring;
+    if (remmins < 10) minstring = "0" + minstring;
     
     var secstring = string(floor(seconds));
     
-    if (seconds < 10)
-        secstring = "0" + secstring;
+    if (seconds < 10) secstring = "0" + secstring;
     
     var timedisp = hourstring + minstring + secstring;
     return timedisp;
@@ -418,8 +406,7 @@ function scr_chapterswitch(chapter = 0) {
     var parameters = get_chapter_switch_parameters();
     if code_is_compiled() return show_message("YoYoCompiled Games are not Compatible with game_change due to all code being in the exe, Chapter Switching Cannot Continue.");
     if (chapter == 0) {
-        switch (os_type)
-        {
+        switch (os_type) {
             case os_windows:
                 game_change("/../", "-game data.win" + parameters);
                 break;
@@ -486,54 +473,44 @@ function scr_prefetch_textures()
     }
 }
 
-function scr_windowcaption(ch1_title)
-{
+function scr_windowcaption(ch1_title){
     if (global.tempflag[10] != 1 && global.chapter == 1)
         window_set_caption(ch1_title);
     else
         window_set_caption("DELTARUNE Chapter " + string(global.chapter));
 }
 
-function d_arrow(arg0, arg1, arg2, arg3, arg4)
-{
+function d_arrow(x1, y1, x2, y2, size){
     var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_arrow(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+    draw_arrow(x1 + off, y1 + off, x2 + off, y2 + off, size);
 }
 
-function d_circle(arg0, arg1, arg2, arg3)
-{
+function d_circle(x, y, radius, outline){
     var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_circle(arg0 + off, arg1 + off, arg2, arg3);
+    draw_circle(x + off, y + off, radius, outline);
 }
 
-function d_circle_color(arg0, arg1, arg2, arg3, arg4, arg5)
-{
+function d_circle_color(x, y, radius, color1, color2, outline){
     var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_circle_color(arg0 + off, arg1 + off, arg2, arg3, arg4, arg5);
+    draw_circle_color(x + off, y + off, radius, color1, color2, outline);
 }
 
-function d_circle_colour(arg0, arg1, arg2, arg3, arg4, arg5)
-{
-    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_circle_colour(arg0 + off, arg1 + off, arg2, arg3, arg4, arg5);
+function d_circle_colour(x, y, radius, color1, color2, outline){
+    return d_circle_color(x, y, radius, color1, color2, outline)
 }
 
-function d_ellipse(arg0, arg1, arg2, arg3, arg4)
-{
+function d_ellipse(x1, y1, x2, y2, outline){
     var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_ellipse(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4);
+    draw_ellipse(x1 + off, y1 + off, x2 + off, y2 + off, outline);
 }
 
-function d_ellipse_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
-{
+function d_ellipse_color(x1, y1, x2, y2, color1, color2, outline){
     var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_ellipse_color(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+    draw_ellipse_color(x1 + off, y1 + off, x2 + off, y2 + off, color1, color2, outline);
 }
 
-function d_ellipse_colour(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
-{
-    var off = (os_type == os_ps4 || os_type == os_ps5) ? 1 : 0;
-    draw_ellipse_colour(arg0 + off, arg1 + off, arg2 + off, arg3 + off, arg4, arg5, arg6);
+function d_ellipse_colour(x1, y1, x2, y2, color1, color2, outline){
+    return d_ellipse_color(x1, y1, x2, y2, color1, color2, outline);
 }
 
 function d_line(arg0, arg1, arg2, arg3)
