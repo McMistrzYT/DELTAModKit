@@ -16,41 +16,37 @@ spelldelay[2] = 10;
 maxdelay = 0;
 maxdelaytimer = 0;
 
-if (spelluse == 0)
-{
-    for (xyz = 0; xyz < 3; xyz += 1)
-    {
-        havechar[xyz] = 0;
-        charitem[xyz] = 0;
-        charspell[xyz] = 0;
+if (spelluse == false){
+    for (xyz = 0; xyz < 3; xyz += 1) {
+        havechar[xyz] = false;
+        charitem[xyz] = false;
+        charspell[xyz] = false;
         
-        if (global.charaction[xyz] == 1)
-            havechar[xyz] = 1;
+        if (global.charaction[xyz] == 1) // Attacking
+            havechar[xyz] = true;
         
-        if (global.charaction[xyz] == 4 || global.charaction[xyz] == 2)
-        {
+        if (global.charaction[xyz] == 4 || global.charaction[xyz] == 2) { // Spell or Item
             if (maxdelay == 0)
                 maxdelay = 25;
             
             maxdelay += 15;
             
-            if (xyz == 2 && spelluse == 1)
-            {
+            if (xyz == 2 && spelluse == true) {
                 if (spelldelay[1] == 25)
                     spelldelay[2] = 45;
                 else
                     spelldelay[2] = 25;
             }
             
-            if (xyz == 1 && spelluse == 1)
+            if (xyz == 1 && spelluse == true)
                 spelldelay[1] = 25;
             
-            spelluse = 1;
+            spelluse = true;
             
             if (global.charaction[xyz] == 4)
-                charitem[xyz] = 1;
+                charitem[xyz] = true;
             else
-                charspell[xyz] = 1;
+                charspell[xyz] = true;
         }
     }
 }

@@ -614,9 +614,11 @@ function scr_defeatrun(){
 		if _spared brokenbond = false
 		
 		if brokenbond {
-			if messageanimindex < 0 messageanimindex = 7
 	        global.flag[63] = true;
-	        if (global.flag[global.monstertype[myself] + 600] != -1 && recruitable) global.flag[global.monstertype[myself] + 600] = -1;
+	        if (global.flag[global.monstertype[myself] + 600] != -1 && recruitable) {
+				global.flag[global.monstertype[myself] + 600] = -1;
+				if messageanimindex < 0 messageanimindex = 7
+			}
 		}
 		if messageanimindex >= 0 {
 	            _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
