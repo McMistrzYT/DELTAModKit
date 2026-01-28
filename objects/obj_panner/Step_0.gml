@@ -1,7 +1,7 @@
 if (type == 0)
 {
-    __view_set(e__VW.XView, 0, __view_get(e__VW.XView, 0) + panx);
-    __view_set(e__VW.YView, 0, __view_get(e__VW.YView, 0) + pany);
+    __view_set(e__VW.XView, 0, camerax() + panx);
+    __view_set(e__VW.YView, 0, cameray() + pany);
 }
 
 pantimer += 1;

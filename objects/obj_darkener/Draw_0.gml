@@ -32,5 +32,5 @@ if (darken == 0)
 
 draw_set_alpha(darkamt / 20);
 draw_set_color(c_black);
-draw_rectangle(__view_get(e__VW.XView, 0) - 40, __view_get(e__VW.YView, 0) - 40, __view_get(e__VW.XView, 0) + 680, __view_get(e__VW.YView, 0) + 520, false);
+draw_rectangle(camerax() - 40, cameray() - 40, camerax() + 680, cameray() + 520, false);
 draw_set_alpha(1);

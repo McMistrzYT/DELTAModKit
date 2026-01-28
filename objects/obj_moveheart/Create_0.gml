@@ -10,8 +10,8 @@ if (instance_exists(obj_heartmarker))
 }
 else if (!instance_exists(obj_growtangle))
 {
-    distx = __view_get(e__VW.XView, 0) + 310;
-    disty = __view_get(e__VW.YView, 0) + 160;
+    distx = camerax() + 310;
+    disty = cameray() + 160;
 }
 else
 {

@@ -42,10 +42,10 @@ if (dont == 0)
             speed = 8;
     }
     
-    if (y > (__view_get(e__VW.YView, 0) + 500))
+    if (y > (cameray() + 500))
         instance_destroy();
     
-    if (y < (__view_get(e__VW.YView, 0) - 20))
+    if (y < (cameray() - 20))
         instance_destroy();
 }
 

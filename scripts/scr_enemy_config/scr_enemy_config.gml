@@ -145,7 +145,7 @@ function scr_enemy_process_phase(enemyId, phase) {
 					if !scr_attackpriority(myattackpriority + 1) break;
 					show_debug_message("My Attack Priority, pass: {0}", myattackpriority);
 					
-					if !instance_exists(obj_growtangle) instance_create(__view_get(e__VW.XView, 0) + 320, __view_get(e__VW.YView, 0) + 170, obj_growtangle);
+					if !instance_exists(obj_growtangle) instance_create(camerax() + 320, cameray() + 170, obj_growtangle);
 					
 					if myattackchoice == DRBulletPattern.SwordThrow {
 						obj_growtangle.x = camerax() + 240;
@@ -185,8 +185,8 @@ function scr_enemy_process_phase(enemyId, phase) {
 				}
 				
 				case DREncounterPhase.Acting: {
-					xx = __view_get(e__VW.XView, 0);
-					yy = __view_get(e__VW.YView, 0);
+					xx = camerax();
+					yy = cameray();
 					
 					// acting[charId] == actId (as defined in enemy config)
 					// from what i can tell, actcon is just a helper value to make sure things get called correctly
