@@ -431,8 +431,7 @@ function scr_nextact() {
     }
 }
 
-function scr_act_simul()
-{
+function scr_act_simul(){
 	show_debug_message("------------ scr_act_simul")
 	__simulcount = 0;
     
@@ -464,9 +463,8 @@ function scr_act_simul()
 	show_debug_message("------------")
 }
 
-function scr_damage_enemy(arg0, arg1)
-{
-    dm = instance_create(global.monsterx[arg0], (global.monstery[arg0] + 20) - (global.hittarget[arg0] * 20), obj_dmgwriter);
+function scr_damage_enemy(star, damage){
+    dm = instance_create(global.monsterx[star], (global.monstery[star] + 20) - (global.hittarget[star] * 20), obj_dmgwriter);
     
     /*if (caster < 4)
     {
@@ -481,55 +479,48 @@ function scr_damage_enemy(arg0, arg1)
 	dm.type = 0;
 	dm.char = global.char[caster];
     
-    dm.damage = arg1;
-    global.monsterhp[arg0] -= arg1;
+    dm.damage = damage;
+    global.monsterhp[star] -= damage;
     
-    if (arg1 > 0)
-    {
-        with (global.monsterinstance[arg0])
+    if (damage > 0) {
+        with (global.monsterinstance[star])
         {
             shakex = 9;
             state = 3;
             hurttimer = 30;
         }
         
-        if (i_ex(global.monsterinstance[arg0]))
-            global.monsterinstance[arg0].hurtamt = arg1;
+        if (i_ex(global.monsterinstance[star])) global.monsterinstance[star].hurtamt = damage;
     }
     
-    global.hittarget[arg0] += 1;
+    global.hittarget[star] += 1;
     
-    if (arg1 == 0)
-    {
-        with (global.monsterinstance[arg0])
-        {
+    if (damage == 0) {
+        with (global.monsterinstance[star]) {
             hurtamt = 0;
             
-            if (hurttimer <= 15 && candodge == 1)
-            {
+            if (hurttimer <= 15 && candodge == true) {
                 dodgetimer = 0;
                 state = 4;
             }
         }
     }
     
-    var a = 0;
+    var a = false; // if A is not false it WILL not allow death.
     
-    if (global.monsterhp[arg0] <= 0 && a == 0)
-    {
-        with (global.monsterinstance[arg0])
+    if (global.monsterhp[star] <= 0 && a == false) {
+        with (global.monsterinstance[star])
             scr_monsterdefeat();
     }
 }
 
-function scr_turntimer(arg0){
-    if (global.turntimer < arg0)
-        global.turntimer = arg0;
+function scr_turntimer(time){
+    if (global.turntimer < time)
+        global.turntimer = time;
 }
 
-function scr_bulletspawner(arg0, arg1, arg2)
-{
-    __dc = instance_create(arg0, arg1, arg2);
+function scr_bulletspawner(x, y, obj){
+    __dc = instance_create(x, y, obj);
     __dc.creator = myself;
     __dc.creatorid = id;
     __dc.target = mytarget;
@@ -537,8 +528,7 @@ function scr_bulletspawner(arg0, arg1, arg2)
     return __dc;
 }
 
-function scr_simultext(arg0)
-{
+function scr_simultext(arg0){
     __yoffset = simulorder[arg0] * 30;
     global.typer = 4;
     battlewriter = instance_create(xx + 30, yy + 376 + __yoffset, obj_writer);
@@ -567,28 +557,18 @@ function scr_enemyhurt_tired_after_damage(arg0)
         scr_monster_make_tired(myself);
 }
 
-function scr_enemy_hurt()
-{
+function scr_enemy_hurt(){
     hurttimer -= 1;
     
     if (hurttimer < 0)
-    {
         state = 0;
-    }
-    else
-    {
-        if (global.monster[myself] == 0)
-            scr_defeatrun();
+    else {
+        if (global.monster[myself] == 0) scr_defeatrun();
         
         hurtshake += 1;
         
-        if (hurtshake > 1)
-        {
-            if (shakex > 0)
-                shakex -= 1;
-            
-            if (shakex < 0)
-                shakex += 1;
+        if (hurtshake > 1) {
+			if abs(shakex) > 0 shakex -= sign(shakex)
             
             shakex = -shakex;
             hurtshake = 0;
