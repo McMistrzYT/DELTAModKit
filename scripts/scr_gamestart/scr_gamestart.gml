@@ -122,7 +122,7 @@ function scr_gamestart()
     for (i = 0; i < 72; i++)
         global.pocketitem[i] = DRItem.None;
     
-    for (i = 0; i < 48; i++)
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i++)
     {
         global.weapon[i] = DRWeapon.None;
         global.armor[i] = DRArmor.None;

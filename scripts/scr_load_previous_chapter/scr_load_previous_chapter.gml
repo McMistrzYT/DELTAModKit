@@ -570,7 +570,7 @@ function scr_load_chapter2()
             ossafe_file_text_readln(myfileid);
         }
         
-        for (j = 0; j < 48; j += 1)
+        for (j = 0; j < INVENTORYMAX_ARMORANDWEAPONS; j += 1)
         {
             global.weapon[j] = ossafe_file_text_read_real(myfileid);
             ossafe_file_text_readln(myfileid);
