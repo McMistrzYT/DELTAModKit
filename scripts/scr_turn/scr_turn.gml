@@ -581,8 +581,12 @@ function scr_defeatrun(){
 	_spared = false
 	if !variable_struct_exists(self, "fatal") fatal = false
 	if variable_struct_exists(self, "myself") {
-        if global.flag[51 + myself] == 6 __frozen = true
-		if global.flag[51 + myself] == 2 _spared = true
+		switch global.flag[51 + myself] {
+			case MONSTERS_DEFEATTYPES_Frozen: __frozen = true break;
+			
+			case MONSTERS_DEFEATTYPES_Pacify:
+			case MONSTERS_DEFEATTYPES_Spare: _spared = true break;
+		}
 	}
 	
 	if (object_is_ancestor(object_index, obj_monsterparent)) {

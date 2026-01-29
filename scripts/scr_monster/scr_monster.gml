@@ -101,16 +101,13 @@ function scr_monsterdefeat()
                 global.flag[44]++;
         }
         
-        if (global.flag[51 + myself] == 2)
-            global.flag[41] += 1;
-        
-        if (global.flag[51 + myself] == 3)
-            global.flag[42] += 1;
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Spare) global.flag[41] += 1;
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Pacify) global.flag[42] += 1;
         
         if (global.flag[51 + myself] == 5)
             global.flag[43] += 1;
         
-        if (global.flag[51 + myself] == 6)
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Frozen)
         {
             global.flag[45] += 1;
             global.monstergold[3] += 24;
