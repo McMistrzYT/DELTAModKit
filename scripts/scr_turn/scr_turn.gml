@@ -577,9 +577,9 @@ function scr_enemy_hurt(){
 }
 
 function scr_defeatrun(){
-    __frozen = false;
-	_spared = false
-	if !variable_struct_exists(self, "fatal") fatal = false
+	if !variable_struct_exists(self, "__frozen")   __frozen = false
+	if !variable_struct_exists(self, "_spared")		_spared = false
+	if !variable_struct_exists(self, "fatal")		  fatal = false
 	if variable_struct_exists(self, "myself") {
 		switch global.flag[51 + myself] {
 			case MONSTERS_DEFEATTYPES_Frozen: __frozen = true break;
