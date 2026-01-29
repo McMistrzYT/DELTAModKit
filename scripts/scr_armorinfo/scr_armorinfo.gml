@@ -1,7 +1,5 @@
-function scr_armorinfo_mine()
-{
-    for (i = 0; i < 6; i += 1)
-    {
+function scr_armorinfo_mine(){
+    for (i = 0; i < DRCharacter.__MAX__; i += 1) {
         scr_armorinfo(global.chararmor1[i]);
         chararmor1name[i] = armornametemp;
         chararmor1desc[i] = armordesctemp;
