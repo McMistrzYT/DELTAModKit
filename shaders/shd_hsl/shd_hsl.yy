@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_hsl",
+  "name":"shd_hsl",
+  "parent":{
+    "name":"Ch4+",
+    "path":"folders/DELTARUNE/Shaders/Ch4+.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}
