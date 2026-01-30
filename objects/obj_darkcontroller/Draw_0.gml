@@ -282,14 +282,13 @@ if (global.menuno == 4)
     draw_set_font(global.mainbig_font);
     draw_text(xx + 130, yy + 105, string_hash_to_newline(global.charname[charcoord]));
     
-    for (i = 0; i < array_length(global.char); i += 1)
-    {
+    for (i = 0; i < array_length(global.char); i += 1) {
         chosen = 0.4;
         
         if (i == coord)
             chosen = 1;
-        
-        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        var headspritedata = scr_character_getdarkheadsprite(global.char[i])
+        draw_sprite_ext(headspritedata[0], headspritedata[1], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 20)
@@ -469,14 +468,14 @@ if (global.menuno == 2)
     var charname_xoff = langopt(0, -25);
     draw_text(xx + 135 + charname_xoff, yy + 107, string_hash_to_newline(global.charname[charcoord]));
     
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < 3; i += 1) {
         chosen = 0.4;
         
-        if (i == coord)
-            chosen = 1;
+        if (i == coord) chosen = 1;
+		
+		var headspritedata = scr_character_getdarkheadsprite(global.char[i])
         
-        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        draw_sprite_ext(headspritedata[0], headspritedata[1], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 10)
