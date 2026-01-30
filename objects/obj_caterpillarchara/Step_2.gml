@@ -1,3 +1,5 @@
+if !i_ex(parent) exit;
+
 if (!init) {
     ignoredepth = false;
     init = true;
@@ -60,7 +62,7 @@ walk = false;
 runmove = false;
 slided = false;
 
-if (obj_mainchara.x != remx[0]) || (obj_mainchara.y != remy[0]) 
+if (parent.x != remx[0]) || (parent.y != remy[0]) 
 	moved = true;
 
 if (sliding[target] == true) moved = true;
@@ -75,12 +77,12 @@ if (moved == true && follow == true) {
         sliding[i] = sliding[i - 1];
     }
     
-    remx[0] = obj_mainchara.x;
-    remy[0] = obj_mainchara.y;
-    sliding[0] = obj_mainchara.sliding;
+    remx[0] = parent.x;
+    remy[0] = parent.y;
+    sliding[0] = parent.sliding;
     facing[0] = global.facing;
-    x = remx[target] - halign + obj_mainchara.halign;
-    y = remy[target] - valign + obj_mainchara.valign;
+    x = remx[target] - halign + parent.halign;
+    y = remy[target] - valign + parent.valign;
     
     if (sliding[target] == true) {
         x = remx[target];
@@ -107,8 +109,8 @@ if fun == false {
 
 if ((/*dsprite == spr_ralseid || */dsprite == spr_ralsei_walk_down) && global.interact == 0 && fun == 0)
 {
-    distfrommcx = obj_mainchara.x - (x + 2);
-    distfrommcy = obj_mainchara.y - (y + 12);
+    distfrommcx = parent.x - (x + 2);
+    distfrommcy = parent.y - (y + 12);
     
     if (abs(distfrommcy) <= 14 && abs(distfrommcx) <= 20)
     {

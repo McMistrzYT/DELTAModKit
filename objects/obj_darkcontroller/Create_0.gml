@@ -43,7 +43,11 @@ for (var i = 0; i < 36; i += 1)
 global.cinstance[0] = 4343434343;
 global.cinstance[1] = 343434343434;
 
-scr_overworldcontrollers_spawncharacters(true)
+spawnedfollowers = false
+if i_ex(obj_mainchara) && variable_instance_exists(obj_mainchara, "dsprite") {
+	spawnedfollowers = true
+	scr_overworldcontrollers_spawncharacters(true)
+}
 
 global.charinstance[0] = obj_mainchara;
 global.charinstance[1] = global.cinstance[0];
