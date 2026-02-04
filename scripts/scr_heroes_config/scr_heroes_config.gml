@@ -46,6 +46,39 @@ function scr_hero_uses_acts_instead_of_spells(heroIdx) {
 	}
 }
 
+function scr_character_getbattleintro(charIdx) {
+	switch charIdx {
+		default: 
+		break case DRCharacter.Kris: _sprite = spr_kris_sword_jump_down; 
+		break case DRCharacter.Susie: _sprite = spr_susier_wall; 
+		break case DRCharacter.Noelle: {
+			if scr_asset_exists("spr_noelleb_battleintro")
+				_sprite = spr_noelleb_battleintro
+			
+			if scr_asset_exists("scr_sideb_get_phase") && scr_asset_exists("spr_noelleb_battleintro_sideb") {
+				var _sideb = scr_sideb_get_phase();
+				if _sideb >= 2 _sprite = spr_noelleb_battleintro_sideb
+			}
+			
+			_imagespeed = 0.5
+		}
+		break 
+	}
+}
+
+function scr_character_getbattleintroland(charIdx) {
+	var originalimageindex = image_index
+	image_index = 0
+	image_speed = 0.5
+	switch charIdx {
+		default: 
+		break case DRCharacter.Kris: sprite_index = spr_krisb_attack; 
+		break case DRCharacter.Susie: sprite_index = spr_susieb_attack; if (global.charweapon[DRCharacter.Susie] == DRWeapon.None) { sprite_index = spr_susieb_attack_unarmed; }
+		break case DRCharacter.Noelle: image_index = originalimageindex
+		break case DRCharacter.Ralsei: sprite_index = spr_ralsei_battleintro
+	}
+}
+
 function scr_hero_get_color(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Kris:	return c_aqua;
