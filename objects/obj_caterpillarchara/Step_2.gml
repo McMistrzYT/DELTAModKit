@@ -91,7 +91,7 @@ if (moved == true && follow == true) {
         slided = true;
     }
     
-    if (abs(remy[target + 1] - remy[target]) > 4) runmove = true;
+    if (abs(remy[target + 1] - remy[target]) > 4) || (abs(remx[target + 1] - remx[target]) > 4) runmove = true;
     
     dir = facing[target];
 }
