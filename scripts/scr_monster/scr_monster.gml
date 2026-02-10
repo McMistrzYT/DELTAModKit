@@ -77,35 +77,29 @@ function scr_monster_makeinstance(monsterid)
         event_user(15);
 }
 
-function scr_monsterdefeat()
-{
-    if (global.monster[myself] == 1)
-    {
+function scr_monsterdefeat() {
+    if (global.monster[myself] == 1) {
         global.monstergold[3] += global.monstergold[myself];
         global.monsterexp[3] += global.monsterexp[myself];
         global.monster[myself] = 0;
         
-        if (global.flag[51 + myself] == 0)
-        {
-            global.flag[51 + myself] = 2;
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_None) {
+            global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Spare;
             
-            if (global.monsterhp[myself] <= 0)
-                global.flag[51 + myself] = 1;
+            if (global.monsterhp[myself] <= 0) global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Violence;
         }
         
-        if (global.flag[51 + myself] == 1)
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Violence)
         {
             global.flag[40] += 1;
-            
-            if (fatal == 1)
-                global.flag[44]++;
+			
+            if (fatal == 1) global.flag[44]++; // Fatal Kills
         }
         
         if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Spare) global.flag[41] += 1;
         if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Pacify) global.flag[42] += 1;
         
-        if (global.flag[51 + myself] == 5)
-            global.flag[43] += 1;
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_AutoViolenced) global.flag[43] += 1;
         
         if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Frozen)
         {

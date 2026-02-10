@@ -35,7 +35,7 @@ if (initdelay <= 0)
         {
             with (target)
             {
-                global.flag[51 + myself] = 3;
+                global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Pacify;
                 event_user(10);
                 scr_monsterdefeat();
             }

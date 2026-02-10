@@ -326,10 +326,12 @@ function scr_getdefeatanimationdataarray() {
 }
 
 function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[51 + self.myself]) {
+	// For more Precise Control go to 'scr_monster->scr_monsterdefeat' and 'scr_turn->scr_defeatrun'
 	#macro MONSTERS_DEFEATTYPES_None 0
 	#macro MONSTERS_DEFEATTYPES_Violence 1
 	#macro MONSTERS_DEFEATTYPES_Spare 2
 	#macro MONSTERS_DEFEATTYPES_Pacify 3
+	#macro MONSTERS_DEFEATTYPES_AutoViolenced 5
 	#macro MONSTERS_DEFEATTYPES_Frozen 6
 	if mode == "all" || mode == "init" {
         _amt_add = 0;
