@@ -16,7 +16,7 @@ for (var i = 0; i < array_length(global.cinstance) + 1 && i < array_length(globa
 	instance.fun = false
 	
 	_sprite = instance.sprite_index
-	_imagespeed = 1
+	_imagespeed = 0
 	if variable_instance_exists(instance, "rsprite") _sprite = instance.rsprite
 	
 	scr_character_getbattleintro(global.char[i])
