@@ -761,6 +761,6 @@ function scr_character_autotype(charIdx) {
 function scr_character_getdarkheadsprite(charIdx) {
 	// Format: [{SpriteToCallFrom}, {ImageIndex}]
 	switch charIdx {
-		default: return [spr_equipchar_ch2, -1]//charIdx]	
+		default: return [spr_equipchar_ch2, charIdx]	
 	}
 }
