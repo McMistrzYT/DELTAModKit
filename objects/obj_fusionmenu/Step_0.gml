@@ -1,7 +1,7 @@
 if (init == 0)
 {
-    xx = __view_get(e__VW.XView, 0);
-    yy = __view_get(e__VW.YView, 0);
+    xx = camerax();
+    yy = cameray();
     customxy = 0;
 	// Fuse Items
     if (type == 1)

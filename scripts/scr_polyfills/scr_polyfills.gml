@@ -62,3 +62,16 @@ function arr_length(arr) { return array_length(arr); }
 
 // string
 function stringsetloc(str, code) { return str; }
+/// @func stringsetsubloc(string, ..., localizationkey)
+/// @arg 0 englishstring
+/// @arg 1+ replacements
+function stringsetsubloc() {
+	var len = argument_count;
+    var args;
+    
+    for (var i = 0; i < len; i++)
+        args[i] = argument[i];
+    
+    var str = script_execute_ext(stringsetsub, args);
+    return str;
+}

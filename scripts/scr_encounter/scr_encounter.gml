@@ -1,7 +1,7 @@
 function scr_encountersetup(encounterid)
 {
-    xx = __view_get(e__VW.XView, 0);
-    yy = __view_get(e__VW.YView, 0);
+    xx = camerax();
+    yy = cameray();
     
     for (i = 0; i < 3; i += 1)
     {
@@ -112,37 +112,24 @@ function scr_isphase(arg0)
     return __isphase;
 }
 
-function scr_randomtarget()
-{
-    abletotarget = 1;
+function scr_randomtarget(){
+    abletotarget = false;
+    for (var i = 0; i < array_length(global.charcantarget) && !abletotarget; ++i) {
+	    if global.charcantarget[i] abletotarget = true
+	}
     
-    if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
-        abletotarget = 0;
+    mytarget = irandom(array_length(global.charcantarget)-1);
     
-    mytarget = choose(0, 1, 2);
-    
-    if (abletotarget == 1)
-    {
-        while (global.charcantarget[mytarget] == 0)
-            mytarget = choose(0, 1, 2);
-    }
+    if (abletotarget)
+        while (global.charcantarget[mytarget] == false) mytarget = irandom(array_length(global.charcantarget)-1);
     else
-    {
         mytarget = 3;
-    }
     
-    global.targeted[mytarget] = 1;
+    global.targeted[mytarget] = true;
     
-    if (global.chapter >= 2 && mytarget != 3)
-    {
-        if (global.charcantarget[0])
-            global.targeted[0] = 1;
-        
-        if (global.charcantarget[1])
-            global.targeted[1] = 1;
-        
-        if (global.charcantarget[2])
-            global.targeted[2] = 1;
+    if (global.chapter >= 2 && mytarget != 3) {
+		for (var i = 0; i < array_length(global.charcantarget); ++i)
+		    if global.charcantarget[i] global.targeted[i] = true
         
         mytarget = 4;
     }
@@ -367,38 +354,21 @@ function scr_blconskip(arg0)
     }
 }
 
-function scr_bullet_inherit(arg0)
-{
-    if (i_ex(arg0))
-    {
-        if (damage != -1)
-            arg0.damage = damage;
-        
-        if (grazepoints != -1)
-            arg0.grazepoints = grazepoints;
-        
-        if (timepoints != -1)
-            arg0.timepoints = timepoints;
-        
-        if (inv != -1)
-            arg0.inv = inv;
-        
-        if (target != -1)
-            arg0.target = target;
-        
-        if (grazed != -1)
-            arg0.grazed = 0;
-        
-        if (grazetimer != -1)
-            arg0.grazetimer = 0;
-        
-        if (object_index == obj_dbulletcontroller)
-        {
-            arg0.creatorid = creatorid;
-            arg0.creator = creator;
+function scr_bullet_inherit(bulletinstance) {
+    if (i_ex(bulletinstance)) {
+        if (damage != -1) bulletinstance.damage = damage;
+        if (grazepoints != -1) bulletinstance.grazepoints = grazepoints;
+        if (timepoints != -1) bulletinstance.timepoints = timepoints;
+        if (inv != -1) bulletinstance.inv = inv;
+        if (target != -1) bulletinstance.target = target;
+        if (grazed != -1) bulletinstance.grazed = 0;
+        if (grazetimer != -1) bulletinstance.grazetimer = 0;
+        if (object_index == obj_dbulletcontroller) {
+            bulletinstance.creatorid = creatorid;
+            bulletinstance.creator = creator;
         }
         
-        arg0.element = element;
+        bulletinstance.element = element;
     }
 }
 

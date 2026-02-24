@@ -1,10 +1,4 @@
-function scr_darksize()
-{
-    var inst = id;
-    
-    if (argument_count)
-        inst = argument0;
-    
+function scr_darksize(inst = id){    
     inst.image_xscale = 2;
     inst.image_yscale = 2;
 }

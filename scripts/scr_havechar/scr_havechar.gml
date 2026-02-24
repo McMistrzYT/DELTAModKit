@@ -1,4 +1,4 @@
-function scr_havechar(charname){
+function scr_havechar(charname, giveslot = false){
     var checker = charname;
     
 	// for legacy purposes
@@ -11,13 +11,22 @@ function scr_havechar(charname){
     if (checker == "noelle" || checker == "no" || checker == "n")
         checker = DRCharacter.Noelle;
     
-    return global.char[0] == checker || global.char[1] == checker || global.char[2] == checker;
+	var found = giveslot ? [0, false] : false
+	
+	for (var i = 0; i < array_length(global.char); ++i) {
+	    if global.char[i] == checker {
+			found = giveslot ? [true, i] : true
+			break
+		}
+	}
+	
+    return found;
 }
 
-function scr_losechar()
-{
-    global.char[2] = 0;
-    global.char[1] = 0;
+function scr_losechar() {
+	for (var i = 1; i < array_length(global.char); ++i) {
+	    global.char[i] = DRCharacter.None
+	}
     
     scr_refresh_party();
     
@@ -28,11 +37,9 @@ function scr_losechar()
         global.submenucoord[i] = 0;
 }
 
-function scr_getchar(charid)
-{
+function scr_getchar(charid, force = false) {
 	// for legacy purposes
-    switch (charid)
-    {
+    switch (charid) {
         case "kr":
         case "kris":
             charid = DRCharacter.Kris;
@@ -55,25 +62,24 @@ function scr_getchar(charid)
     }
     
     var characterToGet = charid;
-    getchar = 0;
+    getchar = false;
     
-    if (global.char[0] == 0)
-    {
-        global.char[0] = characterToGet;
-        getchar = 1;
-    }
-    
-    if (global.char[1] == 0 && getchar == 0)
-    {
-        global.char[1] = characterToGet;
-        getchar = 1;
-    }
-    
-    if (global.char[2] == 0 && getchar == 0)
-    {
-        global.char[2] = characterToGet;
-        getchar = 1;
-    }
+	for (var i = 0; i < array_length(global.char) && getchar == false; ++i) {
+	    if global.char[i] == DRCharacter.None {
+			global.char[i] = characterToGet;
+			getchar = true
+		}
+	}
+	
+	if getchar == false {
+		var charname = "UnknownCharacter | " + string(characterToGet)
+		try { charname = global.charname[characterToGet] } catch (ex) {} // Incase if that charname does not Exist.
+		show_debug_message("Tried to add '{0}' to the party, {1}", charname, force ? "Forcing in anyways." : "But the party was full.")
+		
+		if force {
+			array_push(global.char, characterToGet)
+		}
+	}
     
     scr_refresh_party();
 }
@@ -86,7 +92,7 @@ function scr_refresh_party() {
 			havechar[i] = 0;
 		}
 		
-		for (i = 0; i < 3; i++) {
+		for (i = 0; i < array_length(global.char); i++) {
 			c = global.char[i];
 			if c == DRCharacter.None continue;
 			
@@ -98,13 +104,15 @@ function scr_refresh_party() {
     }	
 }
 
-function scr_makecaterpillar(xx, yy, characterId, idx)
-{
-    global.cinstance[idx] = instance_create(xx, yy, obj_caterpillarchara);
+function scr_makecaterpillar(xx, yy, characterId, idx) {
+	scr_character_set_caterpillar_offsets(characterId)
+    global.cinstance[idx] = instance_create(xx - halign, yy - valign, obj_caterpillarchara);
     global.cinstance[idx].target = 12 + idx * 12;
-    
-    with (global.cinstance[idx])
+    global.cinstance[idx].characterslot = characterId
+	
+    with (global.cinstance[idx]) {
 		scr_character_set_caterpillar_sprites(characterId);
+	}
     
     return global.cinstance[idx];
 }

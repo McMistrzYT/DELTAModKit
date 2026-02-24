@@ -1,8 +1,6 @@
-function scr_weaponinfo_mine()
-{
-    for (i = 0; i < 6; i += 1)
-    {
-        scr_weaponinfo(global.charweapon[i]);
+function scr_weaponinfo_mine(){
+    for (i = 0; i < DRCharacter.__MAX__; i += 1) {
+        scr_weaponinfo(global.charweapon[i], i);
         charweaponname[i] = weaponnametemp;
         charweapondesc[i] = weapondesctemp;
         charweaponat[i] = weaponattemp;
@@ -24,10 +22,8 @@ function scr_weaponinfo_mine()
     }
 }
 
-function scr_weaponinfo_all()
-{
-    for (i = 0; i < 48; i += 1)
-    {
+function scr_weaponinfo_all(){
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i += 1){
         scr_weaponinfo(global.weapon[i]);
         weaponname[i] = weaponnametemp;
         weapondesc[i] = weapondesctemp;
@@ -54,7 +50,7 @@ function scr_weaponcheck_inventory(arg0)
     haveit = 0;
     itemcount = 0;
     
-    for (i = 0; i < 48; i += 1)
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i += 1)
     {
         if (global.weapon[i] == arg0)
             haveit = 1;
@@ -97,7 +93,7 @@ function scr_weaponget(arg0)
         var __itemcount = 0;
         __weapon[0] = arg0;
         
-        for (__i = 0; __i < 48; __i++)
+        for (__i = 0; __i < INVENTORYMAX_ARMORANDWEAPONS; __i++)
         {
             if (global.weapon[__i] != 0)
             {
@@ -106,13 +102,13 @@ function scr_weaponget(arg0)
             }
         }
         
-        if (__itemcount >= 48)
+        if (__itemcount >= INVENTORYMAX_ARMORANDWEAPONS)
         {
-            noroom = 1;
+            noroom = true;
         }
         else
         {
-            for (__i = 0; __i < 48; __i++)
+            for (__i = 0; __i < INVENTORYMAX_ARMORANDWEAPONS; __i++)
             {
                 if (__i <= __itemcount)
                     global.weapon[__i] = __weapon[__i];
@@ -124,7 +120,7 @@ function scr_weaponget(arg0)
     else if (legacy)
     {
         loop = 1;
-        global.weapon[48] = 999;
+        global.weapon[INVENTORYMAX_ARMORANDWEAPONS] = 999;
         
         while (loop == 1)
         {
@@ -134,7 +130,7 @@ function scr_weaponget(arg0)
                 break;
             }
             
-            if (__i == 48)
+            if (__i == INVENTORYMAX_ARMORANDWEAPONS)
             {
                 noroom = 1;
                 break;

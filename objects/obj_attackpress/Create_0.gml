@@ -16,41 +16,37 @@ spelldelay[2] = 10;
 maxdelay = 0;
 maxdelaytimer = 0;
 
-if (spelluse == 0)
-{
-    for (xyz = 0; xyz < 3; xyz += 1)
-    {
-        havechar[xyz] = 0;
-        charitem[xyz] = 0;
-        charspell[xyz] = 0;
+if (spelluse == false){
+    for (xyz = 0; xyz < 3; xyz += 1) {
+        havechar[xyz] = false;
+        charitem[xyz] = false;
+        charspell[xyz] = false;
         
-        if (global.charaction[xyz] == 1)
-            havechar[xyz] = 1;
+        if (global.charaction[xyz] == 1) // Attacking
+            havechar[xyz] = true;
         
-        if (global.charaction[xyz] == 4 || global.charaction[xyz] == 2)
-        {
+        if (global.charaction[xyz] == 4 || global.charaction[xyz] == 2) { // Spell or Item
             if (maxdelay == 0)
                 maxdelay = 25;
             
             maxdelay += 15;
             
-            if (xyz == 2 && spelluse == 1)
-            {
+            if (xyz == 2 && spelluse == true) {
                 if (spelldelay[1] == 25)
                     spelldelay[2] = 45;
                 else
                     spelldelay[2] = 25;
             }
             
-            if (xyz == 1 && spelluse == 1)
+            if (xyz == 1 && spelluse == true)
                 spelldelay[1] = 25;
             
-            spelluse = 1;
+            spelluse = true;
             
             if (global.charaction[xyz] == 4)
-                charitem[xyz] = 1;
+                charitem[xyz] = true;
             else
-                charspell[xyz] = 1;
+                charspell[xyz] = true;
         }
     }
 }
@@ -128,33 +124,24 @@ if (havechar[1] == 1 && havechar[2] == 0)
 boltgap = 20;
 boltspeed = 8;
 boltx = 0;
-points[0] = 0;
-points[1] = 0;
-points[2] = 0;
-pressbuffer[0] = 0;
-pressbuffer[1] = 0;
-pressbuffer[2] = 0;
-pressbuffer[3] = 0;
-charbolt[0] = 1;
-charbolt[1] = 1;
-charbolt[2] = 1;
 
-for (i = 0; i < 3; i += 1)
-{
-    if (havechar[i] == 0)
-        charbolt[i] = 0;
+for (var i = 1; i < DRCharacter.__MAX__; ++i) {
+	pressbuffer[i-1] = 0;
+}
+	
+bolttotal = 0
+for (var i = 0; i < array_length(global.char); ++i) {
+	boltuse[i] = 0
+	points[i] = 0
+	charbolt[i] = 0
+	if havechar[i] charbolt[i] = global.itembolts[global.char[i]][0]
+	attacked[i] = false
+	bolttotal += charbolt[i]
 }
 
-attacked[0] = 0;
-attacked[1] = 0;
-attacked[2] = 0;
-bolttotal = charbolt[0] + charbolt[1] + charbolt[2];
 boltxoff = 0;
 my_method = 1;
 boltnum = 1;
-boltuse[0] = 0;
-boltuse[1] = 0;
-boltuse[2] = 0;
 lastbolt = -1;
 boltchar[0] = -1;
 diff = 10;
@@ -164,20 +151,16 @@ if (global.flag[13] == 0)
 
 if (my_method == 1)
 {
-    for (i = 0; i < bolttotal; i += 1)
-    {
-        boltalive[i] = 1;
+    for (i = 0; i < bolttotal; i += 1) {
+        boltalive[i] = true;
         c = choose(0, 1, 2);
         
-        while (havechar[c] == 0)
-            c = choose(0, 1, 2);
+        while (havechar[c] == 0) c = choose(0, 1, 2);
         
-        while (boltuse[c] >= charbolt[c])
-        {
+        while (boltuse[c] >= charbolt[c]) {
             c = choose(0, 1, 2);
             
-            while (havechar[c] == 0)
-                c = choose(0, 1, 2);
+            while (havechar[c] == 0) c = choose(0, 1, 2);
         }
         
         boltchar[i] = c;
@@ -229,27 +212,20 @@ if (my_method == 2)
     }
 }
 
-haveauto = 0;
-autoed = 0;
-
-if (global.charauto[DRCharacter.Susie] == 1)
-{
-    if (global.char[0] == DRCharacter.Susie || global.char[1] == DRCharacter.Susie || global.char[2] == DRCharacter.Susie)
-    {
-        sus = 0;
-        
-        if (global.char[1] == DRCharacter.Susie)
-            sus = 1;
-        
-        if (global.char[2] == DRCharacter.Susie)
-            sus = 2;
-        
-        if (global.hp[DRCharacter.Susie] >= 0 && global.charmove[sus] == 1)
-        {
-            haveauto = 1;
+for (i = 0; i < array_length(global.char); ++i) {
+	haveauto[i] = false
+	autoed[i] = false
+	autopoints[i] = 0
+	var character = global.char[i]
+	if global.charauto[character] == true {
+		var autotype = scr_character_autotype(character) 
+		if autotype[0] == 1 {
+		    if (global.hp[character] >= 0 && global.charmove[i] == true) {
+		        haveauto[i] = true;
+				autopoints[i] = autotype[1]
             
-            if (timermax == 3)
-                timermax = 50;
-        }
-    }
+		        if (timermax == 3) timermax = 50;
+		    }
+		}
+	}
 }

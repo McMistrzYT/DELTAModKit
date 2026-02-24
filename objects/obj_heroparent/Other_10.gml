@@ -48,16 +48,13 @@ if (finishattacktimer > 0)
             if (is_auto_susie == 1 && global.monsterhp[global.chartarget[myself]] <= 0)
             {
                 with (global.chartarget[myself])
-                    global.flag[51 + myself] = 5;
+                    global.flag[51 + myself] = MONSTERS_DEFEATTYPES_AutoViolenced;
             }
             
             if (damage > 0)
             {
-                if (global.monstertype[0] != 20)
-                    scr_tensionheal(round(points / 10));
-                
-                if (global.monstertype[0] == 20)
-                    scr_tensionheal(round(points / 15));
+                if (global.monstertype[0] != 20) scr_tensionheal(round(points / 10));
+                if (global.monstertype[0] == 20) scr_tensionheal(round(points / 15));
                 
                 attack = instance_create(global.monsterx[global.chartarget[myself]] + random(6), global.monstery[global.chartarget[myself]] + random(6), obj_basicattack);
                     

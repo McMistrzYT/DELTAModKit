@@ -1,7 +1,8 @@
-if (scr_monsterpop() > 0)
-{
-    for (i = 0; i < 3; i += 1)
-    {
+if (scr_monsterpop() > 0) {
+	if target > 0 && target < array_length(global.charinstance) {
+		
+	}
+    for (i = 0; i < 3; i += 1) {
         if (target == i)
         {
             if (i_ex(global.charinstance[i]))

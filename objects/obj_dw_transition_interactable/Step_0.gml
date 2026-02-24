@@ -14,12 +14,12 @@ if (con == 1)
     with (obj_mainchara)
     {
         cutscene = 1;
-        idealx = 300;
+        idealx = other.kris_x_jumpprepare_nosus;
         
         if (scr_havechar(2))
-            idealx = 285;
+            idealx = other.kris_x_jumpprepare_sus;
         
-        scr_move_to_point_over_time(idealx, 100, 6);
+        scr_move_to_point_over_time(idealx, other.kris_y_jumpprepare, 6);
     }
     
     if (instance_exists(obj_caterpillarchara))
@@ -30,14 +30,14 @@ if (con == 1)
         {
             scr_depth();
             image_speed = 0.25;
-            scr_move_to_point_over_time(313, 86, 6);
+            scr_move_to_point_over_time(other.sus_x_jumpprepare, other.sus_y_jumpprepare, 6);
         }
         
         with (obj_caterpillarchara)
             instance_destroy();
     }
     
-    scr_pan_lerp(151, 0, 6);
+    scr_pan_lerp(camerapantox, camerapantoy, 6);
     con = 2;
     alarm[4] = 7;
 }
@@ -65,6 +65,12 @@ if (con == 3)
             kris_y = obj_mainchara.y;
             kris_only = 1;
         }
+		transtimeoffset_baseval = other.transtimeoffset_baseval
+		transtimeoffset_addskiprunback = other.transtimeoffset_addskiprunback
+		rx1 = other.rx1
+		ry1 = other.ry1
+		rx2 = other.rx2
+		ry2 = other.ry2
     }
     
     con = 4;

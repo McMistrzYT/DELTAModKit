@@ -1,5 +1,5 @@
-xx = __view_get(e__VW.XView, 0);
-yy = __view_get(e__VW.YView, 0);
+xx = camerax();
+yy = cameray();
 
 if (init == 0)
 {
@@ -150,12 +150,11 @@ if (timer >= 0)
 if (timer == 1)
     audio_play_sound(snd_snowgrave, 50, 0);
 
-if (timer >= 20 && timer <= (75 + (altpath * 30)))
-{
+if (timer >= 20 && timer <= (75 + (altpath * 30))) {
     stimer++;
-    snowflake[0] = instance_create(xx + 455, yy + 560, obj_spell_snowgrave_snowflake);
-    snowflake[1] = instance_create(xx + 500, yy + 600, obj_spell_snowgrave_snowflake);
-    snowflake[2] = instance_create(xx + 545, yy + 520, obj_spell_snowgrave_snowflake);
+    snowflake[0] = instance_create(x - spellparticlespawnerpositiondifference, yy + 560, obj_spell_snowgrave_snowflake);
+    snowflake[1] = instance_create(x, yy + 600, obj_spell_snowgrave_snowflake);
+    snowflake[2] = instance_create(x + spellparticlespawnerpositiondifference, yy + 520, obj_spell_snowgrave_snowflake);
     
     for (i = 0; i < 3; i++)
     {

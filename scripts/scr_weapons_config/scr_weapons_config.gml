@@ -41,8 +41,7 @@ enum DRWeapon {
 	AbsorbAx = 54,
 }
 
-function scr_weaponinfo(weaponid)
-{
+function scr_weaponinfo(weaponid, character = -1){
     weaponnametemp = " ";
     weapondesctemp = " ";
 

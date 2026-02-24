@@ -12,8 +12,8 @@ function scr_battlecursor_memory_reset()
 
 function scr_battletext()
 {
-    xx = __view_get(e__VW.XView, 0);
-    yy = __view_get(e__VW.YView, 0);
+    xx = camerax();
+    yy = cameray();
     
     battlewriter = instance_create(xx + 30, yy + 376, obj_writer);
     myface = instance_create(xx + 26, yy + 380, obj_face);

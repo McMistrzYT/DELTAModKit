@@ -3,8 +3,8 @@ alarm[0] = 1;
 charcon = 0;
 chartimer = 0;
 tp = 0;
-xx = __view_get(e__VW.XView, 0);
-yy = __view_get(e__VW.YView, 0);
+xx = camerax();
+yy = cameray();
 global.fighting = 0;
 movenoise = 0;
 selectnoise = 0;
@@ -43,24 +43,10 @@ for (var i = 0; i < 36; i += 1)
 global.cinstance[0] = 4343434343;
 global.cinstance[1] = 343434343434;
 
-for (var i = 0; i < 3; i += 1)
-{
-    global.faceaction[i] = 0;
-	
-	if (global.char[i] == DRCharacter.None) continue;
-	
-	chartotal++;
-	havechar[global.char[i] - 1] = 1;
-    charpos[global.char[i] - 1] = i;
-        
-    if (i > 0 )//&& global.char[i] != DRCharacter.Kris)
-    {
-        global.cinstance[i - 1] = instance_create(obj_mainchara.x, obj_mainchara.y, obj_caterpillarchara);
-        global.cinstance[i - 1].target = i * 12;
-		
-		with (global.cinstance[i - 1])
-			scr_character_set_caterpillar_sprites(global.char[i]);
-    }
+spawnedfollowers = false
+if i_ex(obj_mainchara) && variable_instance_exists(obj_mainchara, "dsprite") {
+	spawnedfollowers = true
+	scr_overworldcontrollers_spawncharacters(true)
 }
 
 global.charinstance[0] = obj_mainchara;

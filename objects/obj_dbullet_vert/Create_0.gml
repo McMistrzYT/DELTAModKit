@@ -3,11 +3,11 @@ grazepoints = 5;
 timepoints = 5;
 active = 0;
 
-if (y < (__view_get(e__VW.YView, 0) + 20))
-    y = __view_get(e__VW.YView, 0) + 20;
+if (y < (cameray() + 20))
+    y = cameray() + 20;
 
-if (y > (__view_get(e__VW.YView, 0) + 460))
-    y = __view_get(e__VW.YView, 0) + 460;
+if (y > (cameray() + 460))
+    y = cameray() + 460;
 
 dont = 1;
 difficulty = 1;

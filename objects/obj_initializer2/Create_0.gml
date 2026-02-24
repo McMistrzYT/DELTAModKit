@@ -1,9 +1,12 @@
 global.is_console = /*scr_is_switch_os() || */os_type == os_ps4 || os_type == os_ps5;
 
-if (!global.is_console)
-    window_enable_borderless_fullscreen(true);
+global.charname = [];
+repeat DRCharacter.__MAX__ array_push(global.charname, "???")
+scr_character_set_names()
 
-global.debug = 0;
+if (!global.is_console) window_enable_borderless_fullscreen(true);
+
+global.debug = DEBUGMODE;
 var launch_data = scr_init_launch_parameters();
 global.launcher = launch_data.is_launcher;
 textures_loaded = false;
@@ -80,6 +83,7 @@ else
     global_flagname_init(); // flagnames are stripped
     //scr_84_init_localization(); // no translations im too lazy
     //pal_swap_init_system(18); // ts gives me nightmares
+	scr_enemy_defeatrunanimations()
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);
     global.damagefontgold = font_add_sprite_ext(spr_numbersfontbig_gold, "0123456789+-%", 20, 0);
     global.hpfont = font_add_sprite_ext(spr_numbersfontsmall, "0123456789-+", 0, 2);
@@ -103,9 +107,9 @@ else
 
 loadtex = -4;
 
-//if (global.is_console)
-//    loadtex = instance_create(0, 0, obj_prefetchtex);
-//else
+if (global.is_console)
+    loadtex = instance_create(0, 0, obj_prefetchtex);
+else
     scr_prefetch_textures();
 
 textures_loaded = false;

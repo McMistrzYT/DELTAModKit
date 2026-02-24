@@ -163,7 +163,7 @@ function scr_set_facing_sprites(arg0)
             
             specialsprite[4] = spr_susie_shock_r;
             specialsprite[5] = spr_susie_shock;
-        }
+        }*/
         
         if (_actorname == "noellelight")
         {
@@ -180,7 +180,7 @@ function scr_set_facing_sprites(arg0)
             rsprite = spr_noelle_walk_right_dw;
             dsprite = spr_noelle_walk_down_dw;
         }
-        
+        /*
         if (_actorname == "berdlylight")
         {
             usprite = spr_berdly_walk_up_lw;
@@ -316,8 +316,7 @@ function scr_set_facing_sprites(arg0)
     ltsprite = lsprite;
 }
 
-function scr_createfacingsprites(nameidentifier, down,left,up,right)
-{
+function scr_createfacingsprites(nameidentifier, down, left, up, right){
 	var facingdata = {}
 	facingdata.name = nameidentifier
 	facingdata.down = down
@@ -328,90 +327,79 @@ function scr_createfacingsprites(nameidentifier, down,left,up,right)
 	return facingdata
 }
 
-function scr_createfacingspritessubname(name, nameidentifier)
-{
+function scr_createfacingspritessubname(name, nameidentifier){
 	variable_struct_set(variable_global_get("%%ACTORNAMECHANGER%%"), name, nameidentifier)
 }
 
-function scr_getfacingspritessubname(name)
-{
+function scr_getfacingspritessubname(name){
 	var face = variable_global_get("%%ACTORNAMECHANGER%%")
 	
-	if variable_struct_exists(variable_global_get("%%ACTORNAMECHANGER%%"), name)
-	{
+	if variable_struct_exists(variable_global_get("%%ACTORNAMECHANGER%%"), name) {
 		var data = variable_struct_get(variable_global_get("%%ACTORNAMECHANGER%%"), name)
 		if is_string(data)
 			return data;
-		else if	is_method(data)
-		{
-			var data_convert = method(id, data)
+		else if	is_method(data) {
+			var data_convert = method(self, data)
 			return data_convert()
 		}
 	}
 	return name
 }
 
-function scr_getfacingsprites(nameidentifier)
-{
+function scr_getfacingsprites(nameidentifier){
 	var face = variable_global_get("%%ACTORDEFAULTFACINGSPRITES%%");
 	nameidentifier = scr_getfacingspritessubname(nameidentifier); // Just In Case
 	if variable_struct_exists(face, nameidentifier)
-	{
 		return variable_struct_get(face, nameidentifier);
-	}
 	else
 		return noone;
 }
 
-// Base Deltarune
-scr_createfacingsprites("krislight", spr_krisd, spr_krisl, spr_krisu, spr_krisr)
-scr_createfacingsprites("krisdark", spr_krisd_dark, spr_krisl_dark, spr_krisu_dark, spr_krisr_dark)
+#region Base Deltarune
+	#region Lightners
+		#region Kris
+			scr_createfacingspritessubname("kris",function() {return global.darkzone ? "krisdark" : "krislight"	})
+			scr_createfacingsprites("krislight", spr_krisd, spr_krisl, spr_krisu, spr_krisr)
+			scr_createfacingsprites("krisdark", spr_krisd_dark, spr_krisl_dark, spr_krisu_dark, spr_krisr_dark)
+		#endregion Kris
+		#region Susie
+			scr_createfacingsprites("susielighteyes", spr_susie_walk_down_lw, spr_susie_walk_left_lw, spr_susie_walk_up_lw, spr_susie_walk_right_lw)
+			scr_createfacingspritessubname("susielight", "susielighteyes") // Doesn't Exist in DELTAMODKIT
+			scr_createfacingspritessubname("susie", function() {
+				var _actorname = "susiedark"
+				if (global.darkzone == 0) _actorname = "susielighteyes";
+			    if (global.darkzone == 1) {
+			        if (global.chapter <= 1) _actorname = "susiedark";
+					else _actorname = "susiedarkeyes";
+			    }
+				return _actorname
+			})
+			scr_createfacingsprites("susiedark", spr_susied_dark, spr_susiel_dark, spr_susieu_dark, spr_susier_dark)
+			scr_createfacingsprites("susiedarkeyes", spr_susie_walk_down_dw, spr_susie_walk_left_dw, spr_susie_walk_up_dw, spr_susie_walk_right_dw)
+			scr_createfacingspritessubname("susieunhappy", function() {return global.darkzone ? "susiedarkeyes" : "susielighteyes"}) // Doesn't Exist in DELTAMODKIT
+		#endregion Susie
+		#region Noelle
+			scr_createfacingsprites("noellelight", spr_noelle_walk_down_lw, spr_noelle_walk_left_lw, spr_noelle_walk_up_lw, spr_noelle_walk_right_lw)
+			scr_createfacingsprites("noelledark", spr_noelle_walk_down_dw, spr_noelle_walk_left_dw, spr_noelle_walk_up_dw, spr_noelle_walk_right_dw)
+			scr_createfacingspritessubname("noelle", function() {return global.darkzone ? "noelledark" : "noellelight"})
+		#endregion Noelle
+	
+		#region Berdly
+			scr_createfacingspritessubname("berdly", function() {return global.darkzone ? "berdlydark" : "berdlylight"})
+		#endregion Berdly
+	#endregion
 
-scr_createfacingsprites("susielighteyes", spr_susie_walk_down_lw, spr_susie_walk_left_lw, spr_susie_walk_up_lw, spr_susie_walk_right_lw)
-scr_createfacingspritessubname("susielight", "susielighteyes") // Doesn't Exist in DELTAMODKIT
-scr_createfacingspritessubname("susie", function() {
-	var _actorname = "susiedark"
-	if (global.darkzone == 0)
-    {
-            _actorname = "susielighteyes";
-    }
-            
-    if (global.darkzone == 1)
-    {
-        if (global.chapter == 1)
-        {
-            _actorname = "susiedark";
-        }
-                
-        if (global.chapter >= 2)
-        {
-            _actorname = "susiedarkeyes";
-        }
-    }
-	return _actorname
-})
-scr_createfacingsprites("susiedark", spr_susied_dark, spr_susiel_dark, spr_susieu_dark, spr_susier_dark)
-scr_createfacingsprites("susiedarkeyes", spr_susie_walk_down_dw, spr_susie_walk_left_dw, spr_susie_walk_up_dw, spr_susie_walk_right_dw)
-scr_createfacingspritessubname("susieunhappy", function() {
-if global.darkzone == true
-	return "susiedarkeyes"
-return "susielighteyes"
-}) // Doesn't Exist in DELTAMODKIT
+	#region Ralsei
+		scr_createfacingsprites("ralseinohat", spr_ralsei_walk_down, spr_ralsei_walk_left, spr_ralsei_walk_up, spr_ralsei_walk_right)
+		scr_createfacingspritessubname("ralseihat", "ralseinohat") // Doesn't Exist yet in DELTAMODKIT, So it'll default to Ralsei's Nohat sprite
+		scr_createfacingspritessubname("ralsei", function() {return global.chapter <= 1 ? "ralseihat" : "ralseinohat"})
+	#endregion
 
-scr_createfacingspritessubname("kris", function() {
-if global.darkzone == true
-	return "krisdark"
-return "krislight"
-})
+	#region Missing from Base DMK
+		if sprite_exists(asset_get_index("spr_toriel_u")) // We can assume Toriel Exists
+			scr_createfacingsprites("toriel", spr_toriel_d, spr_toriel_l, spr_toriel_u, spr_toriel_r)
+		if sprite_exists(asset_get_index("spr_torcar_u")) // We can assume Toriel's Car Exists
+			scr_createfacingsprites("car", spr_torcar_d, spr_torcar_l, spr_torcar_u, spr_torcar_r)
+	#endregion
 
-scr_createfacingspritessubname("noelle", function() {return global.darkzone ? "noelledark" : "noellelight"})
-scr_createfacingspritessubname("berdly", function() {return global.darkzone ? "berdlydark" : "berdlylight"})
-scr_createfacingspritessubname("ralsei", function() {return global.chapter <= 1 ? "ralseihat" : "ralseinohat"})
-
-scr_createfacingsprites("ralseinohat", spr_ralsei_walk_down, spr_ralsei_walk_left, spr_ralsei_walk_up, spr_ralsei_walk_right)
-scr_createfacingspritessubname("ralseihat", "ralseinohat") // Doesn't Exist yet in DELTAMODKIT, So it'll default to Ralsei's Nohat sprite
-
-if sprite_exists(asset_get_index("spr_toriel_u")) // We can assume Toriel Exists
-	scr_createfacingsprites("toriel", spr_toriel_d, spr_toriel_l, spr_toriel_u, spr_toriel_r)
-if sprite_exists(asset_get_index("spr_torcar_u")) // We can assume Toriel's Car Exists
-	scr_createfacingsprites("car", spr_torcar_d, spr_torcar_l, spr_torcar_u, spr_torcar_r)
+#endregion

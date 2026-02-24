@@ -51,7 +51,7 @@ if (victory == 1 && victoried == 0)
         if (global.flag[37] == 1)
             global.battlemsg[0] = "* You won the battle!/%";
         
-        if (global.flag[63] == 1)
+        if (global.flag[63] == true)
         {
             var gainedstats = scr_levelup();
             
@@ -195,30 +195,19 @@ if (global.myfight == 0)
 					break;
 					
 				case 4: // DEFEND
-					scr_tensionheal(40);
-                
-	                global.faceaction[global.charturn] = 4;
-	                global.charaction[global.charturn] = 10;
-	                scr_nexthero();
+					scr_defend()
 					break;
 			}
         }
         
-        if (button2_p() == 1 && onebuffer < 0 && global.charturn > 0)
-        {
+        if (button2_p() && onebuffer < 0) {
             twobuffer = 1;
-            movenoise = 1;
-            scr_prevhero();
+            if scr_prevhero() movenoise = true;
         }
         
-        with (battlewriter)
-            depth = 3;
-        
-        with (obj_face)
-            depth = 3;
-        
-        with (obj_smallface)
-            depth = 3;
+        with (battlewriter) depth = 3;
+        with (obj_face) depth = 3;
+        with (obj_smallface) depth = 3;
     }
     
     if (global.bmenuno == 2 && global.flag[34] == 1) // Spells
@@ -944,7 +933,7 @@ if (global.myfight == 0)
                     global.faceaction[global.charturn] = 10;
                     global.chartarget[global.charturn] = global.bmenucoord[global.bmenuno][global.charturn];
                     global.charaction[global.charturn] = 2;
-                    global.charspecial[global.charturn] = 100;
+                    global.charspecial[global.charturn] = DRSpell.Spare;
                     scr_nexthero();
                 }
                 

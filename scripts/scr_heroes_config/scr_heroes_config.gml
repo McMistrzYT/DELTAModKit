@@ -46,6 +46,39 @@ function scr_hero_uses_acts_instead_of_spells(heroIdx) {
 	}
 }
 
+function scr_character_getbattleintro(charIdx) {
+	switch charIdx {
+		default: 
+		break case DRCharacter.Kris: _sprite = spr_kris_sword_jump_down; 
+		break case DRCharacter.Susie: _sprite = spr_susier_wall; 
+		break case DRCharacter.Noelle: {
+			if scr_asset_exists("spr_noelleb_battleintro")
+				_sprite = spr_noelleb_battleintro
+			
+			if scr_asset_exists("scr_sideb_get_phase") && scr_asset_exists("spr_noelleb_battleintro_sideb") {
+				var _sideb = scr_sideb_get_phase();
+				if _sideb >= 2 _sprite = spr_noelleb_battleintro_sideb
+			}
+			
+			_imagespeed = 0.5
+		}
+		break 
+	}
+}
+
+function scr_character_getbattleintroland(charIdx) {
+	var originalimageindex = image_index
+	image_index = 0
+	image_speed = 0.5
+	switch charIdx {
+		default: 
+		break case DRCharacter.Kris: sprite_index = spr_krisb_attack; 
+		break case DRCharacter.Susie: sprite_index = spr_susieb_attack; if (global.charweapon[DRCharacter.Susie] == DRWeapon.None) { sprite_index = spr_susieb_attack_unarmed; }
+		break case DRCharacter.Noelle: image_index = originalimageindex
+		break case DRCharacter.Ralsei: sprite_index = spr_ralsei_battleintro
+	}
+}
+
 function scr_hero_get_color(heroIdx) {
 	switch (heroIdx) {
 		case DRHero.Kris:	return c_aqua;
@@ -316,6 +349,17 @@ function scr_hero_set_sprites(heroObject) {
 
 function scr_character_set_caterpillar_sprites(charIdx) {
 	switch (charIdx) {
+		case DRCharacter.Kris: {
+			name = "kris";
+			
+			usprite = global.darkzone ? spr_krisu_dark : spr_krisu
+			dsprite = global.darkzone ? spr_krisd_dark : spr_krisd
+			rsprite = global.darkzone ? spr_krisr_dark : spr_krisr
+			lsprite = global.darkzone ? spr_krisl_dark : spr_krisl
+			
+			break;
+		}
+		
 		default:
 		case DRCharacter.Susie: {
 			name = "susie";
@@ -324,9 +368,6 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 			dsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_down_dw : spr_susied_dark) : spr_susie_walk_down_lw;
 			rsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_right_dw : spr_susier_dark) : spr_susie_walk_right_lw;
 			lsprite = global.darkzone ? (global.chapter >= 2 ? spr_susie_walk_left_dw : spr_susiel_dark) : spr_susie_walk_left_lw;
-			
-			x -= (global.darkzone == 1) ? 6 : 3;
-			y -= (global.darkzone == 1) ? 16 : 6;
 			
 			break;
 		}
@@ -344,9 +385,6 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 			rsprite_blush = spr_ralsei_walk_right_blush;
 			lsprite_blush = spr_ralsei_walk_left_blush;
 			
-			x -= 2;
-			y -= 12;
-			
 			break;
 		}
 		
@@ -358,9 +396,6 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 			rsprite = (global.darkzone == 1) ? spr_noelle_walk_right_dw : spr_noelle_walk_right_lw;
 			lsprite = (global.darkzone == 1) ? spr_noelle_walk_left_dw : spr_noelle_walk_left_lw;
 			dsprite = (global.darkzone == 1) ? spr_noelle_walk_down_dw : spr_noelle_walk_down_lw;
-			
-			x -= (global.darkzone == 1) ? 4 : 6;
-			y -= (global.darkzone == 1) ? 20 : 9;
 			
 			break; 
 		}
@@ -374,6 +409,49 @@ function scr_character_set_caterpillar_sprites(charIdx) {
             lsprite = spr_npc_originalstarwalker;
 			break;
 		}
+	}
+}
+
+function scr_character_set_caterpillar_offsets(charIdx) {
+	// All Alignment Values have been Changed for Lightworld Scale, and will be Resized to Dark At the end of This Script.
+	#region Default Caterpillar
+	depthbonus = 5
+    halign = 3
+    valign = 6;
+	timebetweenwalkframes = 10;
+	var autoresizeoffsets = true
+	#endregion
+	switch charIdx {
+			case DRCharacter.Kris: {
+				halign = 0
+				valign = 0
+				depthbonus = 0
+				break
+			}
+		
+			case DRCharacter.Susie: { // Susie Uses Default Horizontal alignment and Vertical Alignment
+				if global.darkzone == true depthbonus -= 60;	
+				break
+			}
+			case DRCharacter.Ralsei: {
+				depthbonus -= 80
+		        halign = 1;
+		        valign = 6;
+				break
+			}
+			case DRCharacter.Noelle: {
+				depthbonus -= 5
+		        halign = 2
+		        valign = 9
+				break
+			}
+			
+			// Starwalker Uses Default.
+	}
+	
+	if autoresizeoffsets && global.darkzone {
+		halign *= 2
+		valign *= 2
 	}
 }
 
@@ -597,7 +675,7 @@ function scr_character_has_magic(charIdx) {
 function scr_character_get_act_name_override(charIdx) {
 	switch (charIdx) {
 		default:
-		case DRCharacter.Kris: return "";
+		case DRCharacter.Kris: return "Action";
 		
 		case DRCharacter.Susie: return "S-Action";
 		case DRCharacter.Ralsei: return "R-Action";
@@ -609,11 +687,113 @@ function scr_character_get_act_name_override(charIdx) {
 
 function scr_character_set_names() {
 	global.lcharname = "Kris";
-    global.charname[DRCharacter.None] = " ";
+    global.charname[DRCharacter.None] = " ";	
     global.charname[DRCharacter.Kris] = "Kris";
     global.charname[DRCharacter.Susie] = "Susie";
     global.charname[DRCharacter.Ralsei] = "Ralsei";
     global.charname[DRCharacter.Noelle] = "Noelle";	
 	
 	global.charname[DRCharacter.Starwalker] = "Starwalker";
+}
+	
+function scr_character_get_primaryweapon_icon(charIdx) {
+	switch charIdx {
+		default: return charIdx - 1	// Keeps it how it Originally was, Change if you want.
+		case DRCharacter.Noelle: return 5
+	}
+}
+
+function scr_character_get_armoricons(charIdx) {
+	switch charIdx {
+		default: return [3, 4]
+	}
+}
+
+function scr_character_darkmenu_geticondatareader(charIdx) {
+	switch charIdx {
+		default: 
+			var slots = [
+			{
+				sprite: spr_dmenu_equip,
+				spriteoffset: [-63, -4],
+				text: string_hash_to_newline(charweaponname[charIdx]),
+				imageindex: scr_character_get_primaryweapon_icon(charIdx),
+				scale: 2,
+				weaponicon: charweaponicon[charIdx]
+			}
+		]
+	
+		var icons = scr_character_get_armoricons(charIdx)
+		for (var i = 0; i < array_length(icons); ++i) {
+			try {
+				array_push(slots, {
+					sprite: spr_dmenu_equip,
+					spriteoffset: [-63, 0],
+					text: string_hash_to_newline(variable_struct_get(self, "chararmor" + string(i + 1) + "name")[charIdx]),
+					imageindex: icons[i],
+					scale: 2,
+					weaponicon: variable_struct_get(self, "chararmor" + string(i + 1) + "icon")[charIdx]
+				})
+			} catch (ex) {
+				show_debug_message("Failed to add data for armor icon {0}, reason: {1}", i, ex.longMessage)
+			}
+		}
+		return slots
+	}
+}
+	
+function scr_character_autotype(charIdx) {
+	/* ==== Auto Types ====
+		 0: Idle, No Argument,
+		 1: Attack, DamagePoints,
+		 2: Spell, Slot,
+		 3: Item, ItemSlot, (Not Implemented)
+		 4: Defend, No Argument
+		 6: Action, ActId, (Not Implemented)
+		10: Spare, No Argument,
+	*/
+	switch charIdx {
+		default: return [0] // Idle.
+		case DRCharacter.Susie: return [1, 160]
+	}
+}
+
+function scr_character_getdarkheadsprite(charIdx) {
+	// Format: [{SpriteToCallFrom}, {ImageIndex}]
+	switch charIdx {
+		default: return [spr_equipchar_ch2, charIdx]	
+	}
+}
+
+function scr_hero_rendercharboxicons(charIdx) {
+    var icon_offset = 5;
+	var buttonsize = 35
+	var buttoncenterx = 100.50
+	
+	var buttons = [
+		spr_btfight, 
+		(scr_hero_uses_acts_instead_of_spells(charIdx) ? spr_btact :  spr_bttech),
+		spr_btitem,
+		spr_btspare,
+		spr_btdefend,
+	]
+	
+	switch charIdx {
+		default:
+			for (var i = 0; i < array_length(buttons); ++i) {
+				if i > (array_length(btc) - 1) btc[i] = 0
+				var sprite = buttons[i]
+				var xmulti = (i - (array_length(buttons) - 1)/2)
+				var _x = xx + xchunk + round((buttoncenterx - sprite_get_width(sprite)/2) + (buttonsize * xmulti)) + icon_offset
+				//var _x = xx + xchunk + (15 + (i*buttonsize)) + icon_offset // Uncomment to revert to Normal X Pos Code
+				var _y = (485 - bp) + yy
+			    draw_sprite(sprite, btc[i], _x, _y);
+				
+				//show_debug_message("CHAR: {3}, SPRITE: {0}, CenterX:{1}, CenterY:{2}", sprite_get_name(sprite), (_x - xchunk - xx - icon_offset) + sprite_get_width(sprite)/2, (_y - bp-yy) + sprite_get_height(sprite)/2, global.charname[charIdx + 1])				
+			}
+            
+            if (spare_glow == 1 && gc == charpos[c]) draw_sprite_ext(spr_btspare, 2, xx + xchunk + 120 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
+            if (pacify_glow == 1 && gc == charpos[c]) draw_sprite_ext(spr_bttech, 2, xx + xchunk + 50 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));	
+		break
+	}
 }

@@ -9,7 +9,7 @@ if (i_ex(obj_battlecontroller) && obj_battlecontroller.rouxlsgridenabled == true
 else
     yoffset = lerp(yoffset, 0, 0.25);
 
-yy = __view_get(e__VW.YView, 0);
+yy = cameray();
 y = yy + 40 + yoffset;
 
 draw_sprite(spr_tensionbar, 1, 0, 0);

@@ -14,7 +14,7 @@
   "option_windows_display_name":"DELTARUNE",
   "option_windows_enable_steam":false,
   "option_windows_executable_name":"${project_name}.exe",
-  "option_windows_icon":"${base_options_dir}/windows/icons/icon.ico",
+  "option_windows_icon":"${options_dir}/windows/icons/icon.ico",
   "option_windows_installer_finished":"${base_options_dir}/windows/installer/finished.bmp",
   "option_windows_installer_header":"${base_options_dir}/windows/installer/header.bmp",
   "option_windows_interpolate_pixels":false,

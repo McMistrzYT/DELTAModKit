@@ -1,7 +1,5 @@
-function scr_armorinfo_mine()
-{
-    for (i = 0; i < 6; i += 1)
-    {
+function scr_armorinfo_mine(){
+    for (i = 0; i < DRCharacter.__MAX__; i += 1) {
         scr_armorinfo(global.chararmor1[i]);
         chararmor1name[i] = armornametemp;
         chararmor1desc[i] = armordesctemp;
@@ -49,9 +47,8 @@ function scr_armorinfo_mine()
     }
 }
 
-function scr_armorinfo_all()
-{
-    for (i = 0; i < 48; i += 1)
+function scr_armorinfo_all(){
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i += 1)
     {
         scr_armorinfo(global.armor[i]);
         armorname[i] = armornametemp;
@@ -122,7 +119,7 @@ function scr_armorget(arg0)
         var __itemcount = 0;
         __armor[0] = arg0;
         
-        for (__i = 0; __i < 48; __i++)
+        for (__i = 0; __i < INVENTORYMAX_ARMORANDWEAPONS; __i++)
         {
             if (global.armor[__i] != 0)
             {
@@ -131,13 +128,13 @@ function scr_armorget(arg0)
             }
         }
         
-        if (__itemcount >= 48)
+        if (__itemcount >= INVENTORYMAX_ARMORANDWEAPONS)
         {
             noroom = 1;
         }
         else
         {
-            for (__i = 0; __i < 48; __i++)
+            for (__i = 0; __i < INVENTORYMAX_ARMORANDWEAPONS; __i++)
             {
                 if (__i <= __itemcount)
                     global.armor[__i] = __armor[__i];
@@ -148,20 +145,17 @@ function scr_armorget(arg0)
     }
     else if (legacy)
     {
-        loop = 1;
-        global.armor[48] = 999;
+        loop = true;
+        global.armor[INVENTORYMAX_ARMORANDWEAPONS] = 999;
         
-        while (loop == 1)
-        {
-            if (global.armor[__i] == 0)
-            {
+        while (loop) {
+            if (global.armor[__i] == 0) {
                 global.armor[__i] = arg0;
                 break;
             }
             
-            if (__i == 48)
-            {
-                noroom = 1;
+            if (__i == INVENTORYMAX_ARMORANDWEAPONS) {
+                noroom = true;
                 break;
             }
             

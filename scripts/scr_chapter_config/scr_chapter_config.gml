@@ -1,13 +1,12 @@
 function scr_chapter_config() {
 	global.chapter = 4;
-	global.versionno = "v0.90-modkit-3";
+	global.versionno = "v0.901-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
 	global.isStartingRoomDarkWorld = false;
 }
 
 function scr_chapter_get_recruit_color(chapter) {
-	
 	switch (chapter) {
 		case 1: return c_purple;
 		case 2: return c_aqua;
@@ -18,8 +17,7 @@ function scr_chapter_get_recruit_color(chapter) {
 	return c_black;
 }
 
-function scr_gamestart_chapter_override()
-{
+function scr_gamestart_chapter_override(){
     global.plot = 0;
     global.char[0] = DRCharacter.Kris;
     global.char[1] = DRCharacter.Susie;
@@ -53,8 +51,7 @@ function scr_gamestart_chapter_override()
     if (global.flag[64] < 24)
         global.flag[64] = 24;
     
-    if (global.chapter == 3)
-    {
+    if (global.chapter == 3) {
         global.flag[1173] = 0;
         global.flag[1174] = 0;
         global.flag[1194] = 0;

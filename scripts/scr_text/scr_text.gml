@@ -6,7 +6,7 @@ function scr_text_extra(msc){
 		// begin it at 10000 to not interfere with any original scr_text data if you plan on porting
 		// that from deltarune
 		
-		case 10000: {
+		case SCRTEXT_Choices_ExampleChoice: {
 			scr_speaker("no_name");
 			global.choicemsg[0] = "#Choicers";
 			global.choicemsg[1] = "#Are done#like this";
@@ -17,7 +17,7 @@ function scr_text_extra(msc){
 			break;	
 		}
 		
-		case 10001: {
+		case SCRTEXT_Choices_ExampleChoice+1: {
 			msgset(0, "* (You chose the option \"" + string_replace(global.choicemsg[global.choice], "#", " ") + "\")/%");
 			break;
 		}
@@ -35,3 +35,5 @@ function scr_text(msc) {
 	// !MOD! !PATCH! patch this func
 	scr_text_extra(msc);
 }
+
+#macro SCRTEXT_Choices_ExampleChoice 10000

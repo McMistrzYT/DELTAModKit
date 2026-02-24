@@ -110,127 +110,81 @@ if (global.interact == 0 && freeze == 0)
         }
     }
     
-    if (!canrun)
-        run = 0;
+    if (!canrun) run = false;
     
-    if (run == 1)
-    {
-        if (darkmode == 0)
-        {
-            wspeed = bwspeed + 1;
-            
-            if (runtimer > 10)
-                wspeed = bwspeed + 2;
-            
-            if (runtimer > 60)
-                wspeed = bwspeed + 3;
-        }
-        
-        if (darkmode == 1)
-        {
-            wspeed = bwspeed + 2;
-            
-            if (runtimer > 10)
-                wspeed = bwspeed + 4;
-            
-            if (runtimer > 60)
-                wspeed = bwspeed + 5;
-        }
+    if (run == true) {
+		var multiply = 1
+		if darkmode  multiply += darkrunmultiplierchangeamt
+		
+		var changeamt = runspeedadder
+		if (runtimer > 10) changeamt += runspeedadder;
+		if (runtimer > 60) changeamt += runspeedadder;
+		
+		wspeed = bwspeed + round(changeamt * multiply)		
     }
     
-    if (run == 0)
-        wspeed = bwspeed;
+    if (run == false)		wspeed = bwspeed;
+    if (climbing == true)	wspeed = ceil(wspeed * 0.7);
     
-    if (climbing == 1)
-        wspeed = ceil(wspeed * 0.7);
-    
-    if (left_h())
-        press_l = 1;
-    
-    if (right_h())
-        press_r = 1;
-    
-    if (up_h())
-        press_u = 1;
-    
-    if (down_h())
-        press_d = 1;
+    if left_h()  press_l = true;
+    if right_h() press_r = true;
+    if up_h()    press_u = true;
+    if down_h()  press_d = true;
     
     px = 0;
     py = 0;
     pressdir = -1;
     
-    if (press_r == 1)
-    {
+    if (press_r == true) {
         px = wspeed;
         pressdir = 1;
     }
     
-    if (press_l == 1)
-    {
+    if (press_l == true) {
         px = -wspeed;
         pressdir = 3;
     }
     
-    if (press_d == 1)
-    {
+    if (press_d == true) {
         py = wspeed;
         pressdir = 0;
     }
     
-    if (press_u == 1)
-    {
+    if (press_u == true) {
         py = -wspeed;
         pressdir = 2;
     }
     
-    if (nopress == 1 && pressdir != -1)
+    if (nopress == true && pressdir != -1)
         global.facing = pressdir;
     
-    if (global.facing == 2)
-    {
-        if (press_d == 1)
-            global.facing = 0;
-        
-        if (press_u == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 2) {
+        if (press_d == 1)					global.facing = 0;
+        if (press_u == 0 && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 0)
-    {
-        if (press_u == 1)
-            global.facing = 2;
-        
-        if (press_d == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 0) {
+        if (press_u == true)					global.facing = 2;
+        if (press_d == false && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 3)
-    {
-        if (press_r == 1)
-            global.facing = 1;
-        
-        if (press_l == 0 && pressdir != -1)
-            global.facing = pressdir;
+    if (global.facing == 3) {
+        if (press_r == true)					global.facing = 1;
+        if (press_l == false && pressdir != -1) global.facing = pressdir;
     }
     
-    if (global.facing == 1)
-    {
-        if (press_l == 1)
+    if (global.facing == 1) {
+        if (press_l == true)
             global.facing = 3;
         
-        if (press_r == 0 && pressdir != -1)
+        if (press_r == false && pressdir != -1)
             global.facing = pressdir;
     }
     
-    if (press_r == 1)
-        swordfacing = 1;
+    if (press_r == true) swordfacing = 1;
+    if (press_l == true) swordfacing = -1;
     
-    if (press_l == 1)
-        swordfacing = -1;
-    
-    if (swordmode == 1)
-    {
+    if (swordmode == true) {
         if (button1_p() && swordcon == 0 && global.interact == 0)
         {
             global.interact = 4;
@@ -252,23 +206,22 @@ if (global.interact == 0 && freeze == 0)
             image_speed = 0.5;
             swordtimer = 0;
             swordcon = 1;
-            press_l = 0;
-            press_r = 0;
-            press_u = 0;
-            press_d = 0;
+            press_l = false;
+            press_r = false;
+            press_u = false;
+            press_d = false;
             //swordhitbox = instance_create(slashmarker.x, slashmarker.y, obj_swordhitbox);
             //swordhitbox.image_xscale = slashmarker.image_xscale;
             //swordhitbox.image_yscale = image_yscale;
         }
     }
     
-    nopress = 0;
-    xmeet = 0;
-    ymeet = 0;
-    xymeet = 0;
+    nopress = false;
+    xmeet = false;
+    ymeet = false;
+    xymeet = false;
     
-    if (floorheight == 0)
-    {
+    if (floorheight == 0) {
         var checkcol = true;
         
         if (scr_debug() && noclip)
@@ -276,236 +229,51 @@ if (global.interact == 0 && freeze == 0)
         
         if (checkcol)
         {
-            if (place_meeting(x + px, y + py, obj_solidblock))
-            {
-                xymeet = 1;
-                
-                if (scr_debug() && noclip)
-                    xymeet = 0;
-            }
-            
-            if (place_meeting(x + px, y, obj_solidblock))
-            {
-                if (place_meeting(x + px, y, obj_solidblock))
-                {
-                    for (g = wspeed; g > 0; g -= 1)
-                    {
-                        mvd = 0;
-                        
-                        if (press_d == 0 && !place_meeting(x + px, y - g, obj_solidblock))
-                        {
-                            y -= g;
-                            py = 0;
-                            mvd = 1;
-                            break;
-                        }
-                        
-                        if (press_u == 0 && mvd == 0 && !place_meeting(x + px, y + g, obj_solidblock))
-                        {
-                            y += g;
-                            py = 0;
-                            break;
-                        }
-                    }
-                }
-                
-                xmeet = 1;
-                bkx = 0;
-                
-                if (px > 0)
-                {
-                    for (var i = px; i >= 0; i -= 1)
-                    {
-                        if (!place_meeting(x + i, y, obj_solidblock))
-                        {
-                            px = i;
-                            bkx = 1;
-                            break;
-                        }
-                    }
-                }
-                
-                if (px < 0)
-                {
-                    for (var i = px; i <= 0; i += 1)
-                    {
-                        if (!place_meeting(x + i, y, obj_solidblock))
-                        {
-                            px = i;
-                            bkx = 1;
-                            break;
-                        }
-                    }
-                }
-                
-                if (bkx == 0)
-                    px = 0;
-            }
-            
-            if (place_meeting(x, y + py, obj_solidblock))
-            {
-                ymeet = 1;
-                bky = 0;
-                
-                if (place_meeting(x, y + py, obj_solidblock))
-                {
-                    for (g = wspeed; g > 0; g -= 1)
-                    {
-                        mvd = 0;
-                        
-                        if (press_r == 0 && !place_meeting(x - g, y + py, obj_solidblock))
-                        {
-                            x -= g;
-                            px = 0;
-                            mvd = 1;
-                            break;
-                        }
-                        
-                        if (mvd == 0 && press_l == 0 && !place_meeting(x + g, y + py, obj_solidblock))
-                        {
-                            x += g;
-                            px = 0;
-                            break;
-                        }
-                    }
-                }
-                
-                if (py > 0)
-                {
-                    for (var i = py; i >= 0; i -= 1)
-                    {
-                        if (!place_meeting(x, y + i, obj_solidblock))
-                        {
-                            py = i;
-                            bky = 1;
-                            break;
-                        }
-                    }
-                }
-                
-                if (py < 0)
-                {
-                    for (var i = py; i <= 0; i += 1)
-                    {
-                        if (!place_meeting(x, y + i, obj_solidblock))
-                        {
-                            py = i;
-                            bky = 1;
-                            break;
-                        }
-                    }
-                }
-                
-                if (bky == 0)
-                    py = 0;
-            }
-            
-            if (place_meeting(x + px, y + py, obj_solidblock))
-            {
-                xymeet = 1;
-                bkxy = 0;
-                var i = px;
-                j = py;
-                
-                while (j != 0 || i != 0)
-                {
-                    if (!place_meeting(x + i, y + j, obj_solidblock))
-                    {
-                        px = i;
-                        py = j;
-                        bkxy = 1;
-                        break;
-                    }
-                    
-                    if (abs(j) >= 1)
-                    {
-                        if (j > 0)
-                            j -= 1;
-                        
-                        if (j < 0)
-                            j += 1;
-                    }
-                    else
-                    {
-                        j = 0;
-                    }
-                    
-                    if (abs(i) >= 1)
-                    {
-                        if (i > 0)
-                            i -= 1;
-                        
-                        if (i < 0)
-                            i += 1;
-                    }
-                    else
-                    {
-                        i = 0;
-                    }
-                }
-                
-                if (bkxy == 0)
-                {
-                    px = 0;
-                    py = 0;
-                }
-            }
+			scr_defaultprimarycollisioncode(obj_solidblock)
         }
-    }
-    else
-    {
+    } else {
         var _hedge = bbox_right;
         var _vedge = bbox_bottom;
         var _goingright = 0;
         var _goingdown = 0;
-        var _checkobj = 535;
+        var _checkobj = asset_get_index("obj_heightfloor");
         
-        if (px > 0)
-        {
+        if (px > 0) {
             _goingright = 1;
             _hedge = bbox_right;
         }
         
-        if (px < 0)
-        {
+        if (px < 0) {
             _goingright = -1;
             _hedge = bbox_left;
         }
         
-        if (py > 0)
-        {
+        if (py > 0) {
             _goingdown = 1;
             _vedge = bbox_bottom;
         }
         
-        if (py < 0)
-        {
+        if (py < 0) {
             _goingdown = -1;
             _vedge = bbox_top;
         }
         
-        if (!check_heightfloor(px, 0, _checkobj))
-        {
-            for (g = wspeed; g > 0; g -= 1)
-            {
-                mvd = 0;
+        if (!check_heightfloor(px, 0, _checkobj)) {
+            for (g = wspeed; g > 0; g -= 1) {
+                mvd = false;
                 
-                if (press_d == 0)
-                {
-                    if (check_heightfloor(px, -g, _checkobj))
-                    {
+                if (press_d == false) {
+					if (check_heightfloor(px, -g, _checkobj)) {
                         y -= g;
                         py = 0;
                         _vedge = bbox_top;
-                        mvd = 1;
+                        mvd = true;
                         break;
                     }
-                }
+				}
                 
-                if (press_u == 0)
-                {
-                    if (check_heightfloor(px, g, _checkobj))
-                    {
+                if (press_u == false) {
+                    if (check_heightfloor(px, g, _checkobj)) {
                         y += g;
                         py = 0;
                         _vedge = bbox_bottom;
@@ -514,59 +282,50 @@ if (global.interact == 0 && freeze == 0)
                 }
             }
             
-            xmeet = 1;
-            bkx = 0;
+            xmeet = true;
+            bkx = false;
             
-            if (px > 0)
-            {
-                for (var i = px; i >= 0; i -= 1)
-                {
+            if (px > 0) {
+                for (var i = px; i >= 0; i -= 1) {
                     if (check_heightfloor(i, 0, _checkobj))
                     {
                         px = i;
-                        bkx = 1;
+                        bkx = true;
                         break;
                     }
                 }
             }
             
-            if (px < 0)
-            {
-                for (var i = px; i <= 0; i += 1)
-                {
+            if (px < 0) {
+                for (var i = px; i <= 0; i += 1) {
                     if (check_heightfloor(i, 0, _checkobj))
                     {
                         px = i;
-                        bkx = 1;
+                        bkx = true;
                         break;
                     }
                 }
             }
             
-            if (bkx == 0)
-                px = 0;
+            if (bkx == false) px = 0;
         }
         
-        if (!check_heightfloor(0, py, _checkobj))
-        {
-            ymeet = 1;
-            bky = 0;
+        if (!check_heightfloor(0, py, _checkobj)) {
+            ymeet = true;
+            bky = false;
             
-            for (g = wspeed; g > 0; g -= 1)
-            {
-                mvd = 0;
+            for (g = wspeed; g > 0; g -= 1) {
+                mvd = false;
                 
-                if (press_r == 0 && check_heightfloor(-g, py, _checkobj))
-                {
+                if (press_r == false && check_heightfloor(-g, py, _checkobj)) {
                     x -= g;
                     px = 0;
                     _hedge = bbox_left;
-                    mvd = 1;
+                    mvd = true;
                     break;
                 }
                 
-                if (mvd == 0 && press_l == 0 && check_heightfloor(g, py, _checkobj))
-                {
+                if (mvd == false && press_l == false && check_heightfloor(g, py, _checkobj)) {
                     x += g;
                     px = 0;
                     _hedge = bbox_right;
@@ -574,92 +333,64 @@ if (global.interact == 0 && freeze == 0)
                 }
             }
             
-            if (py > 0)
-            {
-                for (var i = py; i >= 0; i -= 1)
-                {
-                    if (check_heightfloor(0, i, _checkobj))
-                    {
+            if (py > 0) {
+                for (var i = py; i >= 0; i -= 1) {
+                    if (check_heightfloor(0, i, _checkobj)) {
                         py = i;
-                        bky = 1;
+                        bky = true;
                         break;
                     }
                 }
             }
             
-            if (py < 0)
-            {
-                for (var i = py; i <= 0; i += 1)
-                {
-                    if (check_heightfloor(0, i, _checkobj))
-                    {
+            if (py < 0) {
+                for (var i = py; i <= 0; i += 1) {
+                    if (check_heightfloor(0, i, _checkobj)) {
                         py = i;
-                        bky = 1;
+                        bky = true;
                         break;
                     }
                 }
             }
             
-            if (bky == 0)
-                py = 0;
+            if (bky == false) py = 0;
         }
         
-        if (!check_heightfloor(px, 0, _checkobj))
-        {
-            xymeet = 1;
-            bkxy = 0;
+        if (!check_heightfloor(px, 0, _checkobj)) {
+            xymeet = true;
+            bkxy = false;
             var i = px;
             j = py;
             
-            while (j != 0 || i != 0)
-            {
-                if (check_heightfloor(i, j, _checkobj))
-                {
+            while (j != 0 || i != 0) {
+                if (check_heightfloor(i, j, _checkobj)) {
                     px = i;
                     py = j;
-                    bkxy = 1;
+                    bkxy = true;
                     break;
                 }
                 
-                if (abs(j) >= 1)
-                {
-                    if (j > 0)
-                        j -= 1;
-                    
-                    if (j < 0)
-                        j += 1;
-                }
-                else
-                {
-                    j = 0;
-                }
+                if (abs(j) >= 1) {
+                    if (j > 0) j -= 1;
+                    if (j < 0) j += 1;
+                }       else   j = 0;
                 
-                if (abs(i) >= 1)
-                {
-                    if (i > 0)
-                        i -= 1;
-                    
-                    if (i < 0)
-                        i += 1;
-                }
-                else
-                {
-                    i = 0;
-                }
+                if (abs(i) >= 1) {
+                    if (i > 0) i -= 1;
+                    if (i < 0) i += 1;
+                }       else   i = 0;
             }
             
-            if (bkxy == 0)
-            {
+            if (bkxy == false) {
                 px = 0;
                 py = 0;
             }
         }
     }
     
-    runmove = 0;
+    runmove = false;
     
-    if (run == 1 && xmeet == 0 && ymeet == 0 && xymeet == 0)
-    {
+    if (run == 1 && xmeet == 0 && ymeet == 0 && xymeet == 0) {
         if (abs(px) > 0 || abs(py) > 0)
         {
             runmove = 1;
@@ -680,78 +411,9 @@ if (global.interact == 0 && freeze == 0)
     y += py;
 }
 
-if (fun == 0)
-{
-    walk = 0;
-    
-    if (x != nowx && nopress == 0)
-        walk = 1;
-    
-    if (y != nowy && nopress == 0)
-        walk = 1;
-    
-    if (walk == 1)
-        walkbuffer = 6;
-    
-    if (walkbuffer > 3 && fun == 0)
-    {
-        walktimer += 1.5;
-        
-        if (runmove == 1)
-            walktimer += 1.5;
-        
-        if (walktimer >= 40)
-            walktimer -= 40;
-        
-        if (walktimer < 10)
-            image_index = 0;
-        
-        if (walktimer >= 10)
-            image_index = 1;
-        
-        if (walktimer >= 20)
-            image_index = 2;
-        
-        if (walktimer >= 30)
-            image_index = 3;
-    }
-    
-    if (walkbuffer <= 0 && fun == 0 && climbing == 0)
-    {
-        if (walktimer < 10)
-            walktimer = 9.5;
-        
-        if (walktimer >= 10 && walktimer < 20)
-            walktimer = 19.5;
-        
-        if (walktimer >= 20 && walktimer < 30)
-            walktimer = 29.5;
-        
-        if (walktimer >= 30)
-            walktimer = 39.5;
-        
-        image_index = 0;
-    }
-    
-    walkbuffer -= 0.75;
-}
-
-if (fun == 0)
-{
-    if (global.facing == 0)
-        sprite_index = dsprite;
-    
-    if (global.facing == 1)
-        sprite_index = rsprite;
-    
-    if (global.facing == 2)
-        sprite_index = usprite;
-    
-    if (global.facing == 3)
-        sprite_index = lsprite;
-    
-    if (climbing == 1)
-        sprite_index = climbsprite;
+if (fun == false) {
+	scr_overworldcharwalking_shared(global.facing)
+    if (climbing == true) sprite_index = climbsprite;
 }
 
 if (stepping == 1 && fun == 0)

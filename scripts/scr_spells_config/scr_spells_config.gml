@@ -78,8 +78,9 @@ function scr_spellinfo(spellid)
             spelltarget = 2;
             cost = 125;
             
-            if (global.charweapon[DRCharacter.Susie] == 7)
-                cost = 100;
+            var tocheck = global.charweapon[DRCharacter.Susie]
+			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
+            if (tocheck == DRWeapon.Devilsknife) cost = 100;
             
             spellusable = 0;
             break;
@@ -136,8 +137,9 @@ function scr_spellinfo(spellid)
             spelltarget = 2;
             cost = 40;
             
-            if (global.charweapon[DRCharacter.Noelle] == 13)
-                cost *= 0.5;
+            var tocheck = global.charweapon[DRCharacter.Noelle]
+			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
+            if (tocheck == DRWeapon.ThornRing) cost *= 0.5;
             
             spellusable = 0;
             break;
@@ -149,9 +151,10 @@ function scr_spellinfo(spellid)
             spelldesc = "Deals the fatal damage to#all of the enemies.";
             spelltarget = 0;
             cost = global.maxtension * 2;
-            
-            if (global.charweapon[DRCharacter.Noelle] == 13)
-                cost *= 0.5;
+			
+            var tocheck = global.charweapon[DRCharacter.Noelle]
+			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
+            if (tocheck == DRWeapon.ThornRing) cost *= 0.5;
             
             spellusable = 0;
             break;
@@ -165,6 +168,17 @@ function scr_spellinfo(spellid)
             cost = 225 - round(global.flag[1045] * 2.5);
             spellusable = 0;
             break;
+			
+			
+        case DRSpell.Spare:
+            spellname = "Spare";
+            spellnameb = "Spare";
+            spelldescb = "Spares#enemy";
+            spelldesc = "The spare button.";
+            spelltarget = 0;
+            cost = 0;
+            spellusable = 0;
+            break;
     }
 }
 
@@ -174,6 +188,11 @@ function scr_spell_get_battle_use_text(spellid) {
 	switch (spellid) {
 		default: {
 			msgset(0, stringsetsub("* ~1 cast ~2!/%", global.charname[global.char[caster]], string_upper(spellname)));
+			break;
+		}
+		
+		case DRSpell.None: {
+			msgset(0, stringsetsub("* ~1 cast nothing?!/%", global.charname[global.char[caster]]));			
 			break;
 		}
 		
@@ -246,6 +265,7 @@ function scr_spell_use_action(casterid, spellid) {
 	switch (spell) {
 		default:
 		case DRSpell.None:
+			global.spelldelay = 10
             break;
         
         case DRSpell.RudeSword: {

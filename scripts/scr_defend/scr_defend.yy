@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_script_repeat",
+  "%Name":"scr_defend",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_script_repeat",
+  "name":"scr_defend",
   "parent":{
-    "name":"Engine",
-    "path":"folders/DELTARUNE/Scripts/Engine.yy",
+    "name":"System",
+    "path":"folders/DELTARUNE/Scripts/Battle/System.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -526,20 +526,14 @@ if (con == 33)
     {
         if (skiprunback == 1)
         {
-            var _offset = 13;
-            
-            //if (room == room_schooldoor)
-            //    _offset = 0;
+            var _offset = transtimeoffset_baseval + transtimeoffset_addskiprunback;
             
             if (timer == (36 + _offset))
                 snd_play(snd_dtrans_flip);
         }
         else
         {
-            var _offset = 10;
-            
-            //if (room == room_schooldoor)
-            //    _offset = 0;
+            var _offset = transtimeoffset_baseval;
             
             if (timer == (39 + _offset))
                 snd_play(snd_dtrans_flip);
@@ -686,11 +680,11 @@ if (con == 34)
 
 if (sus_draw == 1)
 {
-    /*if (instance_exists(obj_kris_headobj))
+    if object_exists(asset_get_index("obj_kris_headobj")) && (instance_exists(obj_kris_headobj))
     {
         obj_kris_headobj.x = kris_x + 14;
         obj_kris_headobj.y = kris_y - 2;
-    }*/
+    }
     
     if (global.darkzone == 0)
     {

@@ -1,7 +1,7 @@
 panx = 0;
 pany = 0;
-startx = __view_get(e__VW.XView, 0);
-starty = __view_get(e__VW.YView, 0);
+startx = camerax();
+starty = cameray();
 finalx = x;
 finaly = y;
 panmax = 1;

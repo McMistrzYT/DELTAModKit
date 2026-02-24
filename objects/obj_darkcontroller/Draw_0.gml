@@ -1,10 +1,9 @@
-xx = __view_get(e__VW.XView, 0);
-yy = __view_get(e__VW.YView, 0);
+xx = camerax();
+yy = cameray();
 tpoff = (tp - tpy) + yy;
 bpoff = -bp + bpy + yy;
 
-if (drawchar == 1)
-{
+if (drawchar == true) {
     draw_set_color(c_black);
     draw_rectangle(xx - 10, (yy + 480) - bp - 1, xx + 650, yy + 500, false);
     draw_set_color(c_black);
@@ -12,10 +11,9 @@ if (drawchar == 1)
     scr_charbox();
     
     if (global.menuno == 0)
-        deschaver = 0;
+        deschaver = false; // Restore Top Menu Visibility
     
-    if (deschaver == 0)
-    {
+    if (deschaver == false) {
         draw_sprite_ext(menu_sprite, global.menucoord[0], xx + 20, (yy + tp) - 56, 2, 2, 0, c_white, 1);
         msprite[0] = spr_darkitembt;
         msprite[1] = spr_darkequipbt;
@@ -23,23 +21,16 @@ if (drawchar == 1)
         msprite[3] = spr_darktechbt;
         msprite[4] = spr_darkconfigbt;
         
-        for (i = 0; i < 5; i += 1)
-        {
-            off = 1;
-            
-            if (global.menucoord[0] == i)
-                off = 0;
-            
-            if ((global.menuno - 1) == i)
-                off = 2;
+		var spacing = 100
+		
+        for (i = 0; i < 5; i += 1) {
+            off = 1; // Default
+            if (global.menucoord[0] == i) off = 0; // Hovering Option
+            if ((global.menuno - 1) == i) off = 2; // In Menu.
             
             spritemx = 0;
-            
-            if (i >= 2)
-                spritemx = -100;
-            
-            if (i != 2)
-                draw_sprite_ext(msprite[i], off, xx + 120 + (i * 100) + spritemx, (yy + tp) - 60, 2, 2, 0, c_white, 1);
+            if (i >= 2) spritemx = -spacing; // Remove Talk Button Visually.
+            if (i != 2) draw_sprite_ext(msprite[i], off, xx + 120 + (i * spacing) + spritemx, (yy + tp) - 60, 2, 2, 0, c_white, 1);
         }
         
         var ymod = 0;
@@ -56,8 +47,7 @@ if (drawchar == 1)
     }
 }
 
-if (global.menuno == 5)
-{
+if (global.menuno == 5) {
     var lang_off = langopt([90, 410, 420], [85, 412, 422]);
     draw_set_color(c_black);
     draw_rectangle(xx + 60, yy + lang_off[0], xx + 580, yy + lang_off[1], false);
@@ -72,27 +62,12 @@ if (global.menuno == 5)
         draw_text(xx + 270, yy + 100, string_hash_to_newline("CONFIG"));
         audvol = string(round(abs(global.flag[17] * 100))) + "%";
         musvol = string(round(abs(global.flag[16] * 100))) + "%";
-        runoff = "OFF";
+        runoff = global.flag[11] ? "ON" : "OFF";
+        flashoff = global.flag[8] ? "ON" : "OFF";
+        shakeoff = global.flag[12] ? "ON" : "OFF";
         
-        if (global.flag[11] == 1)
-            runoff = "ON";
-        
-        flashoff = "OFF";
-        
-        if (global.flag[8] == 1)
-            flashoff = "ON";
-        
-        shakeoff = "OFF";
-        
-        if (global.flag[12] == 1)
-            shakeoff = "ON";
-        
-        if (!global.is_console)
-        {
-            fullscreenoff = "OFF";
-            
-            if (window_get_fullscreen())
-                fullscreenoff = "ON";
+        if (!global.is_console){
+            fullscreenoff = window_get_fullscreen() ? "ON" : "OFF";
         }
         
         draw_sprite(spr_heart, 0, _heartXPos, yy + 160 + (global.submenucoord[30] * 35));
@@ -134,9 +109,11 @@ if (global.menuno == 5)
         }
     }
     
-    if (global.submenu == 34)
-    {
-    }
+    if (global.submenu == 34) {
+		// Survey Program Code, In Release Deltarune these Lines were completely deleted (Not just Commented Out, but Deleted, Brought over incase if someone wanted to Restore this.)
+		//draw_set_color(c_white)
+		//draw_text(xx + 200, yy + 150, string_hash_to_newline(stringsetsubloc("Hold ESC at any time#to quit the program.# # #Press [~1] to return.", global.asc_def[global.input_k[5]], "obj_darkcontroller_slash_Draw_0_gml_101_0")))
+	}
     
     if (global.submenu == 35)
     {
@@ -305,14 +282,13 @@ if (global.menuno == 4)
     draw_set_font(global.mainbig_font);
     draw_text(xx + 130, yy + 105, string_hash_to_newline(global.charname[charcoord]));
     
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < array_length(global.char); i += 1) {
         chosen = 0.4;
         
         if (i == coord)
             chosen = 1;
-        
-        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        var headspritedata = scr_character_getdarkheadsprite(global.char[i])
+        draw_sprite_ext(headspritedata[0], headspritedata[1], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 20)
@@ -408,36 +384,29 @@ if (global.menuno == 4)
     draw_text(xx + 230, ch_y[2], string_hash_to_newline(floor(magsum)));
     var spell_xoff = langopt(0, -10);
     
-    for (i = 0; i < 6; i += 1)
-    {
-        if (global.spell[charcoord][i] > DRSpell.None)
-        {
+    for (i = 0; i < 6; i += 1) {
+        if (global.spell[charcoord][i] > DRSpell.None) {
             g = 0;
             
-            if (global.spellusable[charcoord][i] == 0)
+            if (global.spellusable[charcoord][i] == false)
                 g = 1;
             
             if (global.spellcost[charcoord][i] > global.tension)
                 g = 1;
             
-            if (g == 0)
-                draw_set_color(c_white);
+            if (g == 0) draw_set_color(c_white);
+            if (g == 1) draw_set_color(c_gray); // Can't Cast Right now (Low Overworld TP or Unusable Spell)
             
-            if (g == 1)
-                draw_set_color(c_gray);
-            
-            if (g == 0)
-                draw_set_color(c_white);
-            
-            if (global.lang == "ja")
-                draw_text(xx + 310, ch_y[i], string_hash_to_newline(string(round((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%"));
-            else
-                draw_text(xx + 340, ch_y[i], string_hash_to_newline(string(round((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%"));
-            
-            if (global.lang == "ja")
-                draw_text(xx + 390 + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
-            else
-                draw_text(xx + 410 + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
+			var costX = 340
+			var nameX = 410
+			
+			if global.lang == "ja" {
+				costX = 120
+				nameX = 390
+			}
+			
+			draw_text(xx + costX, ch_y[i], string_hash_to_newline(string(round((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%"));
+            draw_text(xx + nameX + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
         }
     }
     
@@ -499,89 +468,53 @@ if (global.menuno == 2)
     var charname_xoff = langopt(0, -25);
     draw_text(xx + 135 + charname_xoff, yy + 107, string_hash_to_newline(global.charname[charcoord]));
     
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < 3; i += 1) {
         chosen = 0.4;
         
-        if (i == coord)
-            chosen = 1;
+        if (i == coord) chosen = 1;
+		
+		var headspritedata = scr_character_getdarkheadsprite(global.char[i])
         
-        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        draw_sprite_ext(headspritedata[0], headspritedata[1], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 10)
         draw_sprite(spr_heart_harrows, menusiner / 20, 100 + xx + (coord * 50), 142 + yy);
     
-    if (global.submenu != 11)
-    {
-        bicon = charcoord - 1;
-        
-        if (charcoord == 4)
-            bicon = 5;
-        
-        draw_sprite_ext(spr_dmenu_equip, bicon, xx + 302, yy + 108, 2, 2, 0, c_white, 1);
-        draw_sprite_ext(spr_dmenu_equip, 3, xx + 302, yy + 142, 2, 2, 0, c_white, 1);
-        draw_sprite_ext(spr_dmenu_equip, 4, xx + 302, yy + 172, 2, 2, 0, c_white, 1);
-    }
-    
-    if (global.submenu == 11)
-    {
-        bicon = charcoord - 1;
-        
-        if (charcoord == 4)
-            bicon = 5;
-        
-        if (global.submenucoord[11] == 0)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 122);
-        else
-            draw_sprite_ext(spr_dmenu_equip, bicon, xx + 302, yy + 108, 2, 2, 0, c_white, 1);
-        
-        if (global.submenucoord[11] == 1)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 152);
-        else
-            draw_sprite_ext(spr_dmenu_equip, 3, xx + 302, yy + 142, 2, 2, 0, c_white, 1);
-        
-        if (global.submenucoord[11] == 2)
-            draw_sprite(spr_heart, 0, xx + 308, yy + 182);
-        else
-            draw_sprite_ext(spr_dmenu_equip, 4, xx + 302, yy + 172, 2, 2, 0, c_white, 1);
-    }
-    
-    if (charweaponname[charcoord] != " ")
-    {
-        draw_text(xx + 365, yy + 112, string_hash_to_newline(charweaponname[charcoord]));
-        draw_item_icon(xx + 343, yy + 118, charweaponicon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 112, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
-    
-    if (global.chararmor1[charcoord] != 0)
-    {
-        draw_text(xx + 365, yy + 142, string_hash_to_newline(chararmor1name[charcoord]));
-        draw_item_icon(xx + 343, yy + 148, chararmor1icon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 142, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
-    
-    if (global.chararmor2[charcoord] != 0)
-    {
-        draw_text(xx + 365, yy + 172, string_hash_to_newline(chararmor2name[charcoord]));
-        draw_item_icon(xx + 343, yy + 178, chararmor2icon[charcoord]);
-    }
-    else
-    {
-        draw_set_color(c_dkgray);
-        draw_text(xx + 365, yy + 172, string_hash_to_newline("(Nothing)"));
-        draw_set_color(c_white);
-    }
+	var slots = scr_character_darkmenu_geticondatareader(charcoord)
+		
+	for (var i = 0; i < array_length(slots); ++i) {
+		try {
+			var slot = slots[i]
+			var sprite = slot.sprite
+			var offset_x = slot.spriteoffset[0]
+			var offset_y = slot.spriteoffset[1]
+			var image = slot.imageindex
+			var _x = xx + 365
+			var _y = yy + 112 + (30 * i)
+			var scale = slot.scale
+			var text = slot.text
+			if global.submenu == 11 && global.submenucoord[11] == i {
+				sprite = spr_heart
+				offset_x = -57
+				offset_y = 10
+				image = 0
+				scale = 1
+			}
+			
+			draw_sprite_ext(sprite, image, _x + offset_x, _y + offset_y, scale, scale, 0, c_white, 1)
+			
+			if text != " " {
+				draw_text(_x, _y, string_hash_to_newline(text));
+				draw_item_icon(_x - 22, _y + 6, slot.weaponicon);
+			} else {
+			    draw_set_color(c_dkgray);
+			    draw_text(_x, _y, string_hash_to_newline("(Nothing)"));
+			    draw_set_color(c_white);
+			}
+		} catch (ex) {
+			show_debug_message("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
+	}
     
     var eq_xoff = langopt(0, -6);
     

@@ -1,90 +1,43 @@
-function scr_boltcheck(arg0)
-{
-    pressbuffer[global.char[arg0]] = 5;
+function scr_boltcheck(partyslot){
+    pressbuffer[global.char[partyslot]] = 5;
     qualifybolt = -1;
     close = 99;
     topclose = 99;
     
-    for (i = 0; i < bolttotal; i += 1)
-    {
-        if (boltchar[i] == arg0 && boltalive[i] == 1)
-        {
+    for (i = 0; i < bolttotal; i += 1) 
+		if (boltchar[i] == partyslot && boltalive[i] == true) {
             close = boltframe[i] - boltx;
             
-            if (close < 15 && close > -5)
-            {
-                if (close < topclose)
-                {
-                    topclose = close;
-                    qualifybolt = i;
-                }
+            if (close < 15 && close > -5) && (close < topclose) {
+                topclose = close;
+                qualifybolt = i;
             }
         }
-    }
     
-    if (qualifybolt != -1)
-    {
-        p = abs(topclose);
-        burstbolt = instance_create((x + 80 + (boltframe[qualifybolt] * boltspeed)) - (boltx * boltspeed), y + (38 * arg0), obj_burstbolt);
-        
-        if (p == 0)
-        {
-            points[arg0] += 150;
-            
-            with (burstbolt)
-                image_blend = c_yellow;
-            
-            with (burstbolt)
-                mag = 0.2;
-        }
-        
-        if (p == 1)
-            points[arg0] += 120;
-        
-        if (p == 2)
-            points[arg0] += 110;
-        
-        if (p >= 3)
-        {
-            points[arg0] += 100 - (abs(topclose) * 2);
-            burstbolt.image_blend = boltcolor[arg0];
-        }
-        
-        if (p >= 15)
-            burstbolt.image_blend = charcolor[arg0];
-        
-        boltalive[qualifybolt] = 0;
+    if (qualifybolt != -1) {
+        scr_boltburstsharedcode(qualifybolt, partyslot)
     }
 }
 
-function scr_boltcheck_onebutton()
-{
+function scr_boltcheck_onebutton(){
     dualbolt = -1;
     dualboltid = -1;
-    pressbuffer[0] = 5;
-    pressbuffer[1] = 5;
-    pressbuffer[2] = 5;
-    pressbuffer[3] = 5;
+	for (i = 0; i < DRCharacter.__MAX__; ++i) pressbuffer[i] = 5;
     qualifybolt = -1;
     close = 99;
     topclose = 999;
     
-    for (i = 0; i < bolttotal; i += 1)
-    {
-        if (boltalive[i] == 1)
-        {
+    for (i = 0; i < bolttotal; i += 1) {
+        if (boltalive[i] == true){
             close = boltframe[i] - boltx;
             
-            if (close < 15 && close > -5)
-            {
-                if (close == topclose)
-                {
-                    dualbolt = 1;
+            if (close < 15 && close > -5) {
+                if (close == topclose) {
+                    dualbolt = true;
                     dualboltid = i;
                 }
                 
-                if (close < topclose)
-                {
+                if (close < topclose) {
                     topclose = close;
                     qualifybolt = i;
                 }
@@ -92,73 +45,26 @@ function scr_boltcheck_onebutton()
         }
     }
     
-    if (qualifybolt != -1)
-    {
+    if (qualifybolt != -1) {
         bc = boltchar[qualifybolt];
-        p = abs(topclose);
-        burstbolt = instance_create((x + 80 + (boltframe[qualifybolt] * boltspeed)) - (boltx * boltspeed), y + (38 * bc), obj_burstbolt);
-        
-        if (p == 0)
-        {
-            points[bc] += 150;
-            
-            with (burstbolt)
-                image_blend = c_yellow;
-            
-            with (burstbolt)
-                mag = 0.2;
-        }
-        
-        if (p == 1)
-            points[bc] += 120;
-        
-        if (p == 2)
-            points[bc] += 110;
-        
-        if (p >= 3)
-        {
-            points[bc] += 100 - (abs(topclose) * 2);
-            burstbolt.image_blend = boltcolor[bc];
-        }
-        
-        if (p >= 15)
-            burstbolt.image_blend = charcolor[bc];
-        
-        boltalive[qualifybolt] = 0;
-        
-        if (dualbolt == 1)
-        {
-            bc = boltchar[dualboltid];
-            p = abs(topclose);
-            burstbolt = instance_create((x + 80 + (boltframe[dualboltid] * boltspeed)) - (boltx * boltspeed), y + (38 * bc), obj_burstbolt);
-            
-            if (p == 0)
-            {
-                points[bc] += 150;
-                
-                with (burstbolt)
-                    image_blend = c_yellow;
-                
-                with (burstbolt)
-                    mag = 0.2;
-            }
-            
-            if (p == 1)
-                points[bc] += 120;
-            
-            if (p == 2)
-                points[bc] += 110;
-            
-            if (p >= 3)
-            {
-                points[bc] += 100 - (abs(topclose) * 2);
-                burstbolt.image_blend = boltcolor[bc];
-            }
-            
-            if (p >= 15)
-                burstbolt.image_blend = charcolor[bc];
-            
-            boltalive[dualboltid] = 0;
-        }
+		scr_boltburstsharedcode(qualifybolt, bc)
+        if (dualbolt == true) scr_boltburstsharedcode(dualboltid, boltchar[dualboltid])
     }
+}
+
+function scr_boltburstsharedcode(boltid, boltchar) {
+		p = abs(topclose);
+        burstbolt = instance_create((x + 80 + (boltframe[boltid] * boltspeed)) - (boltx * boltspeed), y + (38 * boltchar), obj_burstbolt);
+        
+        if (p == 0) {
+            points[boltchar] += 150;
+            with (burstbolt) {image_blend = c_yellow; mag = 0.2;}
+        }
+        
+        if (p == 1) points[boltchar] += 120;
+        if (p == 2) points[boltchar] += 110;
+        if (p >= 3){points[boltchar] += 100 - (abs(boltchar) * 2); burstbolt.image_blend = boltcolor[boltchar];}
+        if (p >= 15) burstbolt.image_blend = charcolor[boltchar];
+        
+        boltalive[boltid] = false;	
 }

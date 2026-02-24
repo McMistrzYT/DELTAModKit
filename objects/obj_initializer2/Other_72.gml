@@ -25,6 +25,7 @@ if (ds_map_find_value(async_load, "id") == global.savedata_async_id)
         global_flagname_init();
         //scr_84_init_localization();
         //scr_84_load_ini();
+		scr_enemy_defeatrunanimations()
         scr_gamestart();
         //pal_swap_init_system(18);
         global.game_won = scr_completed_chapter_any_slot(global.chapter);

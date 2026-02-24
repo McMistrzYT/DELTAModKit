@@ -36,23 +36,24 @@ if (con == 10)
             visible = 0;
     }
     
-    /*with (obj_caterpillarchara)
-    {
-        if (visible == 1)
-        {
-            me = scr_dark_marker_depth(x, y, 510000, sprite_index);
-            visible = 0;
+    with (obj_caterpillarchara) {
+        if (visible == true && !fun) {
+			follow = false
+			fun = true
+			ignoredepth = true
+			image_index = 0
+			depth += 510000
+            //me = scr_dark_marker_depth(x, y, 510000, sprite_index);
+            //visible = false;
             
-            if (name == "ralsei")
-            {
-                me.sprite_index = spr_ralsei_wave_start;
-                me.image_speed = 0.2;
+            if (name == "ralsei") {
+	            sprite_index = spr_ralsei_wave_start;
+	            image_speed = 0.2;
                 
-                with (me)
-                    scr_script_delayed(scr_var, 15, "sprite_index", spr_ralsei_wave_down);
+	            scr_script_delayed(scr_var, 15, "sprite_index", spr_ralsei_wave_down);
             }
         }
-    }*/
+    }
     
     contimer = 0;
     con = 11;

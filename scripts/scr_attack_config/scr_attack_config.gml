@@ -21,13 +21,13 @@ function scr_bullet_pattern(bulletPatternId) {
 			var yy = lengthdir_y(radius, dir);
 			
 			// bullet maker, check out obj_dbullet_maker which you can use as a base
-			bm = instance_create(obj_heart.x + 8 + xx, obj_heart.y + 8 + yy, obj_dbullet_maker);
-			bm.grazepoints = grazepoints;
-			bm.damage = damage;
-			bm.target = target;
+			if i_ex(obj_heart) {
+				bm = instance_create(obj_heart.x + 8 + xx, obj_heart.y + 8 + yy, obj_dbullet_maker);
+				scr_bullet_inherit(bm)
 			
-			if bm.y < __view_get(e__VW.YView, 0) + 40
-				bm.y = __view_get(e__VW.YView, 0) + 40;
+				if bm.y < cameray() + 40
+					bm.y = cameray() + 40;
+			}
 			break;
 		}
 		
@@ -41,9 +41,10 @@ function scr_bullet_pattern(bulletPatternId) {
 			
 			if choose(0, 1, 2, 3) == 3 xx = -10 + random(20);
 			
-			d = instance_create(obj_heart.x + 8 + xx, obj_heart.y + 8 + yy, obj_dbullet_vert);
-			d.damage = damage;
-			d.target = target;
+			if i_ex(obj_heart) {
+				d = instance_create(obj_heart.x + 8 + xx, obj_heart.y + 8 + yy, obj_dbullet_vert);
+				scr_bullet_inherit(d)
+			}
 			break;
 		}
 		

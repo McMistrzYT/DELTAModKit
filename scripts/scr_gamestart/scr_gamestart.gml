@@ -95,7 +95,7 @@ function scr_gamestart()
     {
         global.heromakex[i] = 100;
         global.heromakey[i] = 200;
-        global.charauto[i] = 0;
+        global.charauto[i] = false;
         global.charmove[i] = 0;
         global.charcantarget[i] = 0;
         global.chardead[i] = 0;
@@ -122,7 +122,7 @@ function scr_gamestart()
     for (i = 0; i < 72; i++)
         global.pocketitem[i] = DRItem.None;
     
-    for (i = 0; i < 48; i++)
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i++)
     {
         global.weapon[i] = DRWeapon.None;
         global.armor[i] = DRArmor.None;

@@ -1,5 +1,5 @@
-xx = __view_get(e__VW.XView, 0);
-yy = __view_get(e__VW.YView, 0);
+xx = camerax();
+yy = cameray();
 siner += (bgspeed / 2);
 siner2 += bgspeed;
 

@@ -68,20 +68,8 @@ function scr_mnendturn()
             }
         }
         
-        if (global.charmove[0] == 0 || global.charauto[global.char[0]] == 1)
-            global.charturn = 1;
-        
-        if (global.charturn == 1)
-        {
-            if (global.charmove[1] == 0 || global.charauto[global.char[1]] == 1)
-                global.charturn = 2;
-        }
-        
-        if (global.charturn == 2)
-        {
-            if (global.charmove[2] == 0 || global.charauto[global.char[2]] == 1)
-                skip = 1;
-        }
+		global.charturn = -1
+		scr_nexthero()
         
         for (i = 0; i < 3; i += 1)
         {
@@ -108,9 +96,8 @@ function scr_mnendturn()
 				acting[i] = 0;
         }
         
-        if (skip == 1)
-        {
-            if (global.char[0] == DRCharacter.Susie && global.charauto[DRCharacter.Susie] == 1)
+        if (skip == 1) {
+			if (global.char[0] == DRCharacter.Susie && global.charauto[DRCharacter.Susie] == 1)
             {
                 global.acting[0] = 1;
                 global.myfight = 3;
@@ -127,48 +114,55 @@ function scr_mnendturn()
     }
 }
 
-function scr_endturn()
-{
-    for (i = 0; i < 12; i += 1)
-        global.item[i] = tempitem[i][global.charturn];
+function scr_endturn(){
+	if global.charturn < array_length(tempitem[i])
+    for (i = 0; i < 12; i += 1) global.item[i] = tempitem[i][global.charturn];
     
     for (i = 0; i < 12; i += 1)
-    {
         for (j = 0; j < 3; j += 1)
             tempitem[i][j] = global.item[i];
-    }
     
-    moveswapped = 0;
+    moveswapped = false;
     
-    with (obj_writer)
-        instance_destroy();
+    with (obj_writer) instance_destroy();
+    with (obj_face) instance_destroy();
+    with (obj_smallface) instance_destroy();
     
-    with (obj_face)
-        instance_destroy();
+    global.attacking = false;
     
-    with (obj_smallface)
-        instance_destroy();
-    
-    global.attacking = 0;
-    
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < 3; i += 1) {
         global.monsterattackname[i] = " ";
+		var character = global.char[i]
         
-        if (global.charauto[global.char[i]] == 1 && global.hp[global.char[i]] > 0)
-        {
-            if (global.monster[2] == 1)
-                global.chartarget[i] = 2;
-            
-            if (global.monster[1] == 1)
-                global.chartarget[i] = 1;
-            
-            if (global.monster[0] == 1)
-                global.chartarget[i] = 0;
+        if (global.charauto[character] == true && global.hp[character] > 0 && character > 0) {
+			var dat = scr_character_autotype(character)
+			global.charaction[i] = dat[0]
+			global.acting[i] = true
+			switch dat[0] {
+				default: break case 1:
+				global.charaction[i] = 0
+				for (j = 0; j < array_length(global.monster); ++j) { if global.monster[j] global.chartarget[i] = j break }
+				break case 2: 
+					global.charspecial[i] = global.spell[character][scr_wrap_newer(dat[1], 0, array_length(global.spell[character]))] 
+					var lowesthp = int64(99999999)
+					for (j = 0; j < array_length(global.char); ++j) {
+					    if lowesthp > global.hp[global.char[j]] { global.chartarget[i] = j lowesthp = global.hp[global.char[j]]}
+					}
+				break case 4: scr_defend(i, false) 
+				break case 10: 
+					global.charspecial[i] = DRSpell.Spare 
+					global.charaction[i] = 2 
+					var foundone = false
+					for (j = 0; j < array_length(global.monster) && !foundone; ++j) {
+					    if (global.mercymod[j] >= 100 && global.monster[j]) {foundone = true global.chartarget[i] = j}
+					}
+					if !foundone global.charaction[i] = 0
+				break
+			}
         }
         
         if (global.charaction[i] == 1)
-            global.attacking = 1;
+            global.attacking = true;
     }
     
     __noactors = 1;
@@ -248,128 +242,75 @@ function scr_retarget(arg0)
     global.chartarget[arg0] = thistarget;
 }
 
-function scr_retarget_spell()
-{
-    cancelattack = 0;
+function scr_retarget_spell() {
+    cancelattack = true;
     
-    if (star == 0)
-    {
-        if (global.monster[0] == 0)
-            star = 1;
-    }
-    
-    if (star == 1)
-    {
-        if (global.monster[1] == 0)
-            star = 2;
-    }
-    
-    if (star == 2)
-    {
-        if (global.monster[2] == 0)
-            star = 3;
-        
-        if (star == 3 && global.monster[0] == 1)
-            star = 0;
-        
-        if (star == 3 && global.monster[1] == 1)
-            star = 1;
-        
-        if (star == 3)
-            cancelattack = 1;
-    }
+	for (var i = 0; i < array_length(global.monster); ++i) {
+		var truei = (star + i) % array_length(global.monster)
+	    if global.monster[truei] == true{
+			cancelattack = false
+			star = truei
+			break
+		}
+	}
 }
 
-function scr_ambush()
-{
-    with (obj_writer)
-        instance_destroy();
+function scr_ambush() {
+    with (obj_writer) instance_destroy();
+    with (obj_face) instance_destroy();
     
-    with (obj_face)
-        instance_destroy();
-    
-    global.charturn = 3;
+    global.charturn = array_length(global.charmove);
     global.mnfight = 1;
     global.myfight = -1;
     
-    with (obj_monsterparent)
-        ambushed = 1;
+    with (obj_monsterparent) ambushed = true;
 }
 
-function scr_nexthero()
-{
-    moveswapped = 0;
+function scr_nexthero() {
+    moveswapped = false;
     prevturn = global.charturn;
-    
-    if (global.charturn == 0)
-    {
-        moveswapped = 1;
-        
-        if (global.charmove[1] == 1 && scr_charcan(1))
-            global.charturn = 1;
-        else if (global.charmove[2] == 1 && scr_charcan(2))
-            global.charturn = 2;
-        else
-            scr_endturn();
-    }
-    
-    if (global.charturn == 1 && moveswapped == 0)
-    {
-        moveswapped = 1;
-        
-        if (scr_charcan(2) && global.acting[1] == 0)
-            global.charturn = 2;
-        else
-            scr_endturn();
-    }
     
     var endturn = false;
     
-    if ((global.charturn == 2 && moveswapped == 0) || endturn == true)
-        scr_endturn();
+	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
+		moveswapped = true
+		if i >= array_length(global.charmove) {endturn = true global.charturn = i} // No one Left
+		else if scr_charcan(i) {
+			global.charturn = i
+		} else if global.char[i] > DRCharacter.None { // This Character Cannot Move. (Try Next Character)
+			moveswapped = false
+			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
+		}
+	}
+	
+    if (endturn == true) scr_endturn();
+    if (moveswapped == true) global.bmenuno = 0;
     
-    if (moveswapped == 1)
-        global.bmenuno = 0;
-    
-    if (global.charturn > 0)
-    {
+    if (prevturn >= 0 && !endturn) {
         global.temptension[global.charturn] = global.tension;
-        
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][global.charturn] = tempitem[i][prevturn];
+        for (i = 0; i < 12; i += 1) tempitem[i][global.charturn] = tempitem[i][prevturn];
     }
+	
+	return endturn
 }
 
-function scr_prevhero()
-{
+function scr_prevhero() {
     prevturn = global.charturn;
-    moveswapped = 0;
+    moveswapped = false;
     
-    if (global.charturn == 1)
-    {
-        if (global.charmove[0] == 1)
-        {
-            global.charturn = 0;
-            moveswapped = 1;
-        }
-    }
+	if global.charturn > 0 { // No need to run Calculations if we know it'll fail anyways.
+		for (var i = global.charturn - 1; i >= 0 && !moveswapped; --i) {
+			if scr_charcan(i) {
+				global.charturn = i
+				moveswapped = true
+			}
+		}
+	}
     
-    if (global.charturn == 2)
-    {
-        moveswapped = 1;
-        
-        if (global.charmove[1] == 1 && global.acting[1] == 0)
-            global.charturn = 1;
-        else if (global.charmove[0] == 1)
-            global.charturn = 0;
-    }
-    
-    if (moveswapped == 1)
-    {
+    if (moveswapped == true) {
         global.bmenuno = 0;
-		
-		with (obj_monsterparent)
-			acting[global.char[global.charturn]] = 0;
+		with (obj_monsterparent) acting[global.char[global.charturn]] = false;
+		with (obj_monsterparent) acting[global.char[other.prevturn]] = false;
         
         global.actingsingle[global.charturn] = 0;
         global.actingsimul[global.charturn] = 0;
@@ -377,54 +318,34 @@ function scr_prevhero()
         global.chartarget[global.charturn] = 0;
         global.charaction[global.charturn] = 0;
         global.charspecial[global.charturn] = 0;
-        movenoise = 1;
-    }
+        movenoise = true;
     
-    if (idefendedthisturn > 0)
-    {
-        idefendedthisturn--;
-        mercytotal -= 40;
+	    if (idefendedthisturn > 0) {
+	        idefendedthisturn--;
+	        mercytotal -= 40;
+	    }
+		
+		global.acting[prevturn] = false
+		global.faceaction[prevturn] = 0
+		global.charspecial[prevturn] = 0
+		global.chartarget[prevturn] = 0
+	    for (i = 0; i < 12; i += 1) tempitem[i][0] = global.item[i];
+	    global.tension = global.temptension[global.charturn];
     }
-    
-    if (global.charturn == 0)
-    {
-        with (obj_monsterparent)
-            for (i = 0; i < DRCharacter.__MAX__; i++)
-				acting[i] = 0;
-        
-        global.acting[0] = 0;
-        global.acting[1] = 0;
-        global.acting[2] = 0;
-        global.faceaction[1] = 0;
-        global.chartarget[1] = 0;
-        global.charaction[1] = 0;
-        global.charspecial[1] = 0;
-        global.faceaction[2] = 0;
-        global.tension = global.temptension[0];
-        
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][0] = global.item[i];
-    }
-    else
-    {
-        global.tension = global.temptension[global.charturn];
-        
-        for (i = 0; i < 12; i += 1)
-            tempitem[i][global.charturn] = tempitem[i][global.charturn - 1];
-    }
+	
+	return moveswapped
 }
 
-function scr_actselect(arg0, arg1)
-{
-    if (i_ex(global.monsterinstance[arg0]))
-		global.monsterinstance[arg0].acting[global.char[global.charturn]] = arg1 + 1;
+function scr_actselect(star, action) {
+    if (i_ex(global.monsterinstance[star]))
+		global.monsterinstance[star].acting[global.char[global.charturn]] = action + 1;
     
     /*if (global.char[global.charturn] == DRCharacter.Kris)
     {
-        global.actingsimul[0] = actsimul[arg1];
+        global.actingsimul[0] = actsimul[action];
         global.acting[0] = 1;
         global.actingsingle[0] = 1;
-        global.actingtarget[global.charturn] = arg0;
+        global.actingtarget[global.charturn] = star;
         
         for (i = 0; i < 3; i += 1)
         {
@@ -437,28 +358,26 @@ function scr_actselect(arg0, arg1)
     }
     else*/
     {
-        global.actingtarget[global.charturn] = arg0;
+        global.actingtarget[global.charturn] = star;
         global.actingsingle[global.charturn] = 1;
-        global.actingsimul[global.charturn] = actsimul[arg1];
+        global.actingsimul[global.charturn] = actsimul[action];
         global.faceaction[global.charturn] = 6;
         global.charaction[global.charturn] = 9;
     }
 }
 
-function scr_nextact()
-{
+function scr_nextact() {
 	show_debug_message("------------ scr_nextact")
     global.currentactingchar = 0;
 	
-    global.acting[0] = 0;
-    global.acting[1] = 0;
-    global.acting[2] = 0;
+    global.acting[0] = false;
+    global.acting[1] = false;
+    global.acting[2] = false;
     //global.actingsingle[global.currentactingchar] = 0;
 	
     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
     
-    with (__minstance)
-    {
+    with (__minstance) {
 		//acting[DRCharacter.Kris] = 0;
 		for (i = 1; i < DRCharacter.__MAX__; i++) {
 			//acting[i] = 0;
@@ -468,8 +387,7 @@ function scr_nextact()
     
     var singleactcomplete = 0;
 	show_debug_message("global.currentactingchar = {0}", global.currentactingchar);
-    while (global.currentactingchar < 3)
-    {
+    while (global.currentactingchar < 3) {
 			show_debug_message("global.actingsingle[{0}] = {1}", global.currentactingchar, global.actingsingle[global.currentactingchar]);
             if (global.actingsingle[global.currentactingchar] == 1)
             {
@@ -481,7 +399,7 @@ function scr_nextact()
 				show_debug_message("actcon[{0}] = {1}", global.char[global.currentactingchar], 1);
 				
 				//if (global.actingsimul[global.currentactingchar] == 0)
-					singleactcomplete = 1;
+					singleactcomplete = true;
 					
 				global.actingsingle[global.currentactingchar] = 0;
 				break;
@@ -513,8 +431,7 @@ function scr_nextact()
     }
 }
 
-function scr_act_simul()
-{
+function scr_act_simul(){
 	show_debug_message("------------ scr_act_simul")
 	__simulcount = 0;
     
@@ -546,9 +463,8 @@ function scr_act_simul()
 	show_debug_message("------------")
 }
 
-function scr_damage_enemy(arg0, arg1)
-{
-    dm = instance_create(global.monsterx[arg0], (global.monstery[arg0] + 20) - (global.hittarget[arg0] * 20), obj_dmgwriter);
+function scr_damage_enemy(star, damage){
+    dm = instance_create(global.monsterx[star], (global.monstery[star] + 20) - (global.hittarget[star] * 20), obj_dmgwriter);
     
     /*if (caster < 4)
     {
@@ -563,56 +479,48 @@ function scr_damage_enemy(arg0, arg1)
 	dm.type = 0;
 	dm.char = global.char[caster];
     
-    dm.damage = arg1;
-    global.monsterhp[arg0] -= arg1;
+    dm.damage = damage;
+    global.monsterhp[star] -= damage;
     
-    if (arg1 > 0)
-    {
-        with (global.monsterinstance[arg0])
+    if (damage > 0) {
+        with (global.monsterinstance[star])
         {
             shakex = 9;
             state = 3;
             hurttimer = 30;
         }
         
-        if (i_ex(global.monsterinstance[arg0]))
-            global.monsterinstance[arg0].hurtamt = arg1;
+        if (i_ex(global.monsterinstance[star])) global.monsterinstance[star].hurtamt = damage;
     }
     
-    global.hittarget[arg0] += 1;
+    global.hittarget[star] += 1;
     
-    if (arg1 == 0)
-    {
-        with (global.monsterinstance[arg0])
-        {
+    if (damage == 0) {
+        with (global.monsterinstance[star]) {
             hurtamt = 0;
             
-            if (hurttimer <= 15 && candodge == 1)
-            {
+            if (hurttimer <= 15 && candodge == true) {
                 dodgetimer = 0;
                 state = 4;
             }
         }
     }
     
-    var a = 0;
+    var a = false; // if A is not false it WILL not allow death.
     
-    if (global.monsterhp[arg0] <= 0 && a == 0)
-    {
-        with (global.monsterinstance[arg0])
+    if (global.monsterhp[star] <= 0 && a == false) {
+        with (global.monsterinstance[star])
             scr_monsterdefeat();
     }
 }
 
-function scr_turntimer(arg0)
-{
-    if (global.turntimer < arg0)
-        global.turntimer = arg0;
+function scr_turntimer(time){
+    if (global.turntimer < time)
+        global.turntimer = time;
 }
 
-function scr_bulletspawner(arg0, arg1, arg2)
-{
-    __dc = instance_create(arg0, arg1, arg2);
+function scr_bulletspawner(x, y, obj){
+    __dc = instance_create(x, y, obj);
     __dc.creator = myself;
     __dc.creatorid = id;
     __dc.target = mytarget;
@@ -620,8 +528,7 @@ function scr_bulletspawner(arg0, arg1, arg2)
     return __dc;
 }
 
-function scr_simultext(arg0)
-{
+function scr_simultext(arg0){
     __yoffset = simulorder[arg0] * 30;
     global.typer = 4;
     battlewriter = instance_create(xx + 30, yy + 376 + __yoffset, obj_writer);
@@ -650,28 +557,18 @@ function scr_enemyhurt_tired_after_damage(arg0)
         scr_monster_make_tired(myself);
 }
 
-function scr_enemy_hurt()
-{
+function scr_enemy_hurt(){
     hurttimer -= 1;
     
     if (hurttimer < 0)
-    {
         state = 0;
-    }
-    else
-    {
-        if (global.monster[myself] == 0)
-            scr_defeatrun();
+    else {
+        if (global.monster[myself] == 0) scr_defeatrun();
         
         hurtshake += 1;
         
-        if (hurtshake > 1)
-        {
-            if (shakex > 0)
-                shakex -= 1;
-            
-            if (shakex < 0)
-                shakex += 1;
+        if (hurtshake > 1) {
+			if abs(shakex) > 0 shakex -= sign(shakex)
             
             shakex = -shakex;
             hurtshake = 0;
@@ -679,86 +576,88 @@ function scr_enemy_hurt()
     }
 }
 
-function scr_defeatrun()
-{
-    var __frozen;
-    
-    if (object_is_ancestor(object_index, obj_monsterparent))
-    {
-        __frozen = 0;
-        
-        if (global.flag[51 + myself] == 6)
-            __frozen = 1;
-        
-        if (__frozen == 1)
-        {
-            _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
-            _rtext.image_index = 12;
-            
-            if (recruitable == 1)
-                global.flag[global.monstertype[myself] + 600] = -1;
-            
-            global.flag[63] = 1;
-        }
-        
-        if (recruitable == 1 && global.flag[61] == 0 && __frozen == 0)
-        {
-            global.flag[63] = 1;
-            
-            if (global.flag[global.monstertype[myself] + 600] != -1)
-            {
-                global.flag[global.monstertype[myself] + 600] = -1;
-                _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
-                _rtext.image_index = 7;
-            }
-        }
-    }
-    else
-    {
-        fatal = 0;
-    }
-		
+function scr_defeatrun(){
+	if !variable_struct_exists(self, "__frozen")   __frozen = false
+	if !variable_struct_exists(self, "_spared")		_spared = false
+	if !variable_struct_exists(self, "fatal")		  fatal = false
+	if variable_struct_exists(self, "myself") {
+		switch global.flag[51 + myself] {
+			case MONSTERS_DEFEATTYPES_Frozen: __frozen = true break;
+			
+			case MONSTERS_DEFEATTYPES_Pacify:
+			case MONSTERS_DEFEATTYPES_Spare: _spared = true break;
+		}
+	}
 	
-    if (!__frozen)
-    {
-        if (fatal == 1)
-            defeatanim = instance_create(x, y, obj_deathanim);
-        else
-            defeatanim = instance_create(x, y, obj_defeatanim);
+	if (object_is_ancestor(object_index, obj_monsterparent)) {
+        
+		var messageanimindex = -1
+		var brokenbond = true // By default a Bond is likely broken.
+			
+	    if __frozen messageanimindex = 12 // Make Status Text "Frozen."
+		if _spared brokenbond = false
+		
+		if brokenbond {
+	        global.flag[63] = true;
+	        if (global.flag[global.monstertype[myself] + 600] != -1 && recruitable) {
+				global.flag[global.monstertype[myself] + 600] = -1;
+				if messageanimindex < 0 messageanimindex = 7
+			}
+		}
+		if messageanimindex >= 0 {
+	            _rtext = instance_create(global.monsterx[myself], global.monstery[myself] - 40, obj_recruitanim);
+	            _rtext.image_index = messageanimindex;	
+		}
     }
-    else
-    {
-        defeatanim = instance_create(x, y, obj_frozennpc);
-        defeatanim.depth = depth;
-        defeatanim.inbattle = 1;
-    }
-    
-    defeatanim.sprite_index = sprite_index;
-    defeatanim.sprite_index = hurtsprite;
+    else fatal = false
+	
+	
+	var highestpriority_id = 0
+	var highestpriority = 0
+	
+	var animdat = scr_getdefeatanimationdataarray()
+	
+	//var debugrandomchoice = true
+	//if debugrandomchoice highestpriority_id = irandom(array_length(animdat))
+	//else
+	for (var i = 0; i < array_length(animdat); ++i) {
+		with animdat[i] {
+			try {
+				if highestpriority <= priority && method(other, condition)() {
+					highestpriority_id = i
+					highestpriority = priority
+				}
+			} catch (ex) {
+				show_debug_message("Animation with object index of " + string(object) + " Had an Error when trying to get, Removing from List.\n----------------------------\n{0}", ex.longMessage)
+				array_delete(animdat, i, 1)
+				i--
+			}
+		}
+	}
+	_spritetochangeto = hurtsprite
+	
+    var defeatanim_data = animdat[highestpriority_id]
+    var defeatanim = instance_create(x, y, defeatanim_data.object)
+	with defeatanim_data method(other, postcreate)(defeatanim)
+	
+    defeatanim.sprite_index = _spritetochangeto;
     defeatanim.image_index = 0;
     defeatanim.image_xscale = image_xscale;
     defeatanim.image_yscale = image_yscale;
     instance_destroy();
 }
 
-function scr_randomtarget_old()
-{
-    abletotarget = 1;
+function scr_randomtarget_old() {
+    abletotarget = false;
 	
-	if (global.charcantarget[0] == 0 && global.charcantarget[1] == 0 && global.charcantarget[2] == 0)
-		abletotarget = 0;
+	for (var i = 0; i < array_length(global.charcantarget); ++i) {
+	    if global.charcantarget[i] abletotarget = true
+	}
     
-    mytarget = choose(0, 1, 2);
+    mytarget = irandom(array_length(global.charcantarget)-1);
     
-    if (abletotarget == 1)
-    {
-        while (global.charcantarget[mytarget] == 0)
-            mytarget = choose(0, 1, 2);
-    }
-    else
-    {
-        mytarget = 3;
-    }
+    if (abletotarget == true) while (global.charcantarget[mytarget] == false) mytarget = irandom(array_length(global.charcantarget)-1);
+    else mytarget = 3;
     
-    global.targeted[mytarget] = 1;
+    global.targeted[mytarget] = true;
 }

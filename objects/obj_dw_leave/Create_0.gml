@@ -18,10 +18,6 @@ kris_y = y - 80;
 sus_x = x - 60;
 sus_y = y - 94;
 unlock_mode = global.plot >= 242;
-nextroom = room_lw_test;
-
-//if (unlock_mode)
-//    nextroom = 261;
 
 if (scr_havechar(DRCharacter.Susie))
 {
