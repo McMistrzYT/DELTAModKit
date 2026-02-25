@@ -789,13 +789,10 @@ function scr_hero_rendercharboxicons(charIdx) {
 		if glowing draw_sprite_ext(sprite, 2, _x, _y, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
 	}
 	
-	var buttonspecial = [
-		-1,
-		_glowfunc,
-		-1,
-		_glowfunc,
-		-1,
-	]
+	var specialbuttons = {
+		"1": _glowfunc,
+		"3": _glowfunc,
+	}
 	
 	switch charIdx {
 		default:
@@ -808,7 +805,7 @@ function scr_hero_rendercharboxicons(charIdx) {
 				//var _x = xx + xchunk + (15 + (i*buttonsize)) + icon_offset // Uncomment to revert to Normal X Pos Code
 				//var _y = (485 - bp) + yy								     // Uncomment to revert to Normal Y Pos Code
 			    draw_sprite(sprite, btc[i], _x, _y);
-				try { buttonspecial[i](sprite, _x, _y, i) } catch (ex) {}
+				if variable_struct_exists(specialbuttons, string(i)) try { variable_struct_get(specialbuttons, string(i))(sprite, _x, _y, i) } catch (ex) {}
 				//show_debug_message("CHAR: {3}, SPRITE: {0}, CenterX:{1}, CenterY:{2}", sprite_get_name(sprite), (_x - xchunk - xx - icon_offset) + sprite_get_width(sprite)/2, (_y + bp - yy) + sprite_get_height(sprite)/2, global.charname[charIdx + 1])				
 			}
 		break
