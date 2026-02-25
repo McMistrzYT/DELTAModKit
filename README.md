@@ -9,7 +9,7 @@ The most robust, feature-complete DELTARUNE GameMaker Studio 2 decompilation / p
 
 ## Usage
 To start playing around with DELTAModKit, you have to download [GameMaker Beta](https://gamemaker.io/en/download/windows/beta/GameMaker.exe). The project uses the latest **BETA** version `Beta v2024.1400.0.899`. 
-It will not work on older versions, including but not limited to the LTS version that Release Deltarune uses, as there is some functions in use that does not exist in that, such as room_get_info.
+It will not work on older versions without modification to the modifications, including but not limited to the LTS version that Release Deltarune uses, as there is some functions in use that does not exist in that, such as room_get_info.
 
 1. Clone the repository onto your PC.
 2. Create a `datafiles` folder at the root of the project.
