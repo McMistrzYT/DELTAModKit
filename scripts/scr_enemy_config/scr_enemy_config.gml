@@ -68,7 +68,7 @@ function scr_monstersetup()
             global.monsterhp[myself] = 130;
             global.monsterat[myself] = 7;
             global.monsterdf[myself] = 0;
-            global.monsterexp[myself] = 0;
+            global.monsterexp[myself] = 10;
             global.monstergold[myself] = 20;
             global.sparepoint[myself] = 10;
             global.mercymod[myself] = 0;

@@ -296,7 +296,7 @@ if (global.menuno == 4)
     
     var ch_yoff = yy + 230;
     var ch_vspace = langopt(25, 28);
-    var falselv = "1";
+    falselv = "1";
     
     if (global.chapter == 2)
     {

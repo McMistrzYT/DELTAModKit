@@ -35,37 +35,50 @@ if (victory == 1 && victoried == 0)
         global.monstergold[3] *= 1 + (scr_armorcheck_equipped_party(DRArmor.Dealmaker) * 0.3);
         global.monstergold[3] = floor(global.monstergold[3]);
         
-        if (global.flag[37] == 1)
-            global.monstergold[3] = 0;
+        if (global.flag[37] == 1) global.monstergold[3] = 0;
         
         global.gold += global.monstergold[3];
         global.xp += global.monsterexp[3];
         
-        if (global.gold < 0)
-            global.gold = 0;
+        if (global.gold < 0) global.gold = 0;
         
         global.fc = 0;
         global.fe = 0;
-        global.battlemsg[0] = stringsetsub("* You won^1!&* Got ~1 EXP and ~2 D$./%", string(global.monsterexp[3]), string(global.monstergold[3]));
         
-        if (global.flag[37] == 1)
-            global.battlemsg[0] = "* You won the battle!/%";
-        
-        if (global.flag[63] == true)
-        {
-            var gainedstats = scr_levelup();
-            
-            if (gainedstats)
-            {
-                global.battlemsg[0] = stringsetsub("* You won^1!&* Got ~1 D$^1.&* You became stronger./%", string(global.monstergold[3]));
-                
-                //if (scr_havechar(DRCharacter.Noelle))
-                //    global.battlemsg[0] = stringsetsub("* You won^1!&* Got ~1 D$^1.&* Noelle became stronger./%", string(global.monstergold[3]));
-                
-                var lvsnd = snd_play_pitch(snd_dtrans_lw, 2);
-                snd_volume(lvsnd, 0.7, 0);
-            }
+		var msg = ""
+		var stats = [string(global.monsterexp[3]) + " EXP", string(global.monstergold[3]) + " D$"]
+		if global.flag[37] stats = []
+		
+        if (global.flag[63] == true) {
+			var gainedstats = scr_levelup()
+			if (gainedstats || global.chapter != 3) { // It only checks if it actually made you stronger in Chapter 3.
+				msg = "* You became stronger."
+		        var lvsnd = snd_play_pitch(snd_dtrans_lw, 2);
+		        snd_volume(lvsnd, 0.7, 0);
+			}
         }
+		
+		
+		for (var i = 0; i < array_length(global.char); ++i) {
+			var _msgcheck = scr_character_get_custom_battleendmessage(global.char[i], global.flag[50])
+			if is_string(_msgcheck) msg = _msgcheck
+		}
+		
+		var gottenstring = ""
+		if array_length(stats) > 0 {
+			gottenstring = "&* Got "
+			for (var i = 0; i < array_length(stats); ++i) { 
+				var statstring = stats[i]
+				var endingmark = ", "
+				if i == 0 endingmark = ""
+				else if i == array_length(stats) - 1 endingmark = (i > 1 ? ", and " : " and ")
+				gottenstring += endingmark + statstring
+			}
+			gottenstring += "^1."
+		}
+		
+        global.battlemsg[0] = ("* You won^1!" + gottenstring + "&" + msg + "/%");
+        if (global.flag[37] == 1) global.battlemsg[0] = "* You won the battle!&" + msg + "/%";
         
         global.battletyper = 4;
         global.msg[0] = global.battlemsg[0];

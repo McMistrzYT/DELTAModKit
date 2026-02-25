@@ -589,6 +589,18 @@ function scr_character_get_rank(charIdx) {
 			break;
 		}
 		
+		case DRCharacter.Noelle: {
+			var falselv = max(global.chapter - 1, 1)
+			
+			char_desc = stringsetsub("LV~1 Snowcaster#Might be able to#use some cool moves.", falselv);
+			falselv += 1
+			if (global.charweapon[charIdx] == DRWeapon.ThornRing) char_desc = stringsetsubloc("LV~1 Ice Trancer#Receives pain to#become stronger.", falselv, "obj_darkcontroller_slash_Draw_0_gml_384_0") // Thorn Ring
+			else if (global.flag[925] > 0)						  char_desc = stringsetsubloc("LV~1 Frostmancer#Freezes the enemy.", falselv, "obj_darkcontroller_slash_Draw_0_gml_383_0") // Froze a Enemy.
+			else if (global.flag[921] == 1)						  char_desc = stringsetsubloc("LV~1 Moss Neutral#Neither chaotic nor#lawful to moss.", falselv, "obj_darkcontroller_slash_Draw_0_gml_385_0")
+			
+			break;
+		}
+		
 		case DRCharacter.Starwalker: {
 			char_desc = "LV99 Starwalker#Starwalker";
 			break;
@@ -642,6 +654,22 @@ function scr_character_get_powers(charIdx) {
 			break;
 		}
 		
+		case DRCharacter.Noelle: {
+			coldness_amount = clamp(47 + (global.flag[925] * 7), 47, 100)
+			boldness_amount = min(-12 + ((global.plot - 70) * 3), 100)
+			_powers[0] = [c_dkgray, "???", function(ch_y) {
+					draw_text(xx + 100, ch_y, string_hash_to_newline(stringsetloc("Coldness ", "obj_darkcontroller_slash_Draw_0_gml_388_0")))
+					draw_item_icon(xx + 74, ch_y + 6, 17)
+					draw_text(xx + 230, ch_y, string_hash_to_newline(coldness_amount))
+			}];
+			_powers[1] = [c_dkgray, "???", function(ch_y) {
+					draw_text(xx + 100, ch_y, string_hash_to_newline(stringsetloc("Boldness ", "obj_darkcontroller_slash_Draw_0_gml_388_0")))
+					draw_item_icon(xx + 74, ch_y + 6, 16)
+					draw_text(xx + 230, ch_y, string_hash_to_newline(boldness_amount))
+			}];
+			break;
+		}
+		
 		case DRCharacter.Starwalker: {
 			_powers[0] = [c_white, "Stars", function (ch_y) {
 				draw_set_color(c_white);
@@ -654,9 +682,7 @@ function scr_character_get_powers(charIdx) {
 			break;
 		}
 		
-		default:
-		case DRCharacter.Noelle: {
-			// im too lazy, do it yourself
+		default: {
 			_powers[0] = false;
 			_powers[1] = false;
 			break;
@@ -781,6 +807,7 @@ function scr_hero_rendercharboxicons(charIdx) {
 		spr_btdefend,
 	]
 	
+	// Unhardcodes the Glow from the Spare and Mercy Button
 	var _glowfunc = function(sprite, _x, _y, i) {
 		var glowing = false
 		if gc != charpos[c] exit;
@@ -803,11 +830,18 @@ function scr_hero_rendercharboxicons(charIdx) {
 				var _x = xx + xchunk + round((buttoncenterx - sprite_get_width(sprite)/2) + (buttonsize * xmulti)) + icon_offset
 				var _y = (buttoncentery - sprite_get_height(sprite)/2) - bp + yy
 				//var _x = xx + xchunk + (15 + (i*buttonsize)) + icon_offset // Uncomment to revert to Normal X Pos Code
-				//var _y = (485 - bp) + yy								     // Uncomment to revert to Normal Y Pos Code
-			    draw_sprite(sprite, btc[i], _x, _y);
+				//var _y = (485 - bp) + yy
+				draw_sprite(sprite, btc[i], _x, _y);
 				if variable_struct_exists(specialbuttons, string(i)) try { variable_struct_get(specialbuttons, string(i))(sprite, _x, _y, i) } catch (ex) {}
 				//show_debug_message("CHAR: {3}, SPRITE: {0}, CenterX:{1}, CenterY:{2}", sprite_get_name(sprite), (_x - xchunk - xx - icon_offset) + sprite_get_width(sprite)/2, (_y + bp - yy) + sprite_get_height(sprite)/2, global.charname[charIdx + 1])				
 			}
 		break
+	}
+}
+
+function scr_character_get_custom_battleendmessage(charIdx, battleendtype = MONSTERS_DEFEATTYPES_None) {
+	switch charIdx {
+		case DRCharacter.Noelle: if (battleendtype == MONSTERS_DEFEATTYPES_Frozen) return "* Noelle became stronger."
+		default: return false
 	}
 }
