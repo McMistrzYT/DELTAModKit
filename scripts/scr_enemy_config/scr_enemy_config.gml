@@ -362,10 +362,13 @@ function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = g
 	}
 }
 
-function scr_chaseenemy_init() {	
+function scr_chaseenemy_init() {
 	if extflag == "ModularEnemies" {
 		sprite_index = spr_diamond_overworld
 		myencounter = DREncounter.TestEnemies
+		alerttype = 2
+		pacetype = pacetype_movesin_vertical
+		offscreen_frozen = 0
 	}
 }
 
@@ -473,7 +476,7 @@ function scr_chaseenemy_pacetype(Type) {
 	#macro pacetype_movesin 7
 	#macro pacetype_movesin_duplicated 7.1
 	#macro pacetype_movesin_flipped 7.5
-	#macro pacetype_movesin_differentspeed 8
+	#macro pacetype_movesin_vertical 8
 	
 	switch Type {
 		default: if DEBUGMODE && scr_debug() show_debug_message("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
@@ -488,6 +491,25 @@ function scr_chaseenemy_pacetype(Type) {
 		case pacetype_circlearound: {
 			hspeed = sin(pacetimer / 24) * 4
 			vspeed = cos(pacetimer / 24) * 4			
+		break}
+		case pacetype_upanddown: {
+			if (pacetimer == 1)  vspeed = 6
+			if (pacetimer == 25) vspeed = -6
+			if (y < ystart) pacetimer = 0			
+		break}
+		case pacetype_standinplace: {
+			cancelwalk = 1
+			walk_index += 0.25			
+		break}
+		case pacetype_movesin:
+		case pacetype_movesin_duplicated: {
+			hspeed = -sin(pacetimer / 30) * 10	
+		break}
+		case pacetype_movesin_flipped: {
+			hspeed = sin(pacetimer / 30) * 10
+		break}
+		case pacetype_movesin_vertical: {
+			vspeed = -sin(pacetimer / 25) * 12.5			
 		break}
 	}
 }

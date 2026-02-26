@@ -55,36 +55,6 @@ if (frozen == 0) {
 		
 		scr_chaseenemy_pacetype(pacetype)
 		
-		if (pacetype == 5)
-		{
-			if (pacetimer == 1)
-				vspeed = 6
-			
-			if (pacetimer == 25)
-				vspeed = -6
-			
-			if (y < ystart)
-				pacetimer = 0
-		}
-		
-		if (pacetype == 6)
-		{
-			cancelwalk = 1
-			walk_index += 0.25
-		}
-		
-		if (pacetype == 7)
-			hspeed = -sin(pacetimer / 30) * 10
-		
-		if (pacetype == 7.1)
-			hspeed = -sin(pacetimer / 30) * 10
-		
-		if (pacetype == 7.5)
-			hspeed = sin(pacetimer / 30) * 10
-		
-		if (pacetype == 8)
-			vspeed = -sin(pacetimer / 25) * 12.5
-		
 		if (pacetype == 9)
 		{
 			if (float != 0)

@@ -24,7 +24,6 @@ drawsiner = 0
 ignorefreeze = 0
 viewblocked = 0
 canAlertThroughWalls = 1
-extflag = 0
 startPath = path_index
 pathProgress = path_position
 pathSpeed = 0

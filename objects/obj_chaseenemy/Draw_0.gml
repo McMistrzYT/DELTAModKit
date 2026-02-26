@@ -72,6 +72,26 @@ if (drawbox) {
 	}
 }
 
+
+exit;
+
 draw_set_color(c_white)
 draw_circle(targetx, targety, 2, true)
 draw_line(x, y, targetx, targety)
+
+var pacetypename = "Unknown | " + string(pacetype)
+try {
+	var pacetypes = []
+	pacetypes[pacetype] = pacetypename
+	pacetypes[pacetype_rightandleftwithpauses] = "pacetype_rightandleftwithpauses"
+	pacetypes[pacetype_circlearound] = "pacetype_circlearound"
+	pacetypes[pacetype_upanddown] = "pacetype_upanddown"
+	pacetypes[pacetype_standinplace] = "pacetype_standinplace"
+	pacetypes[pacetype_movesin] = "pacetype_movesin_horizontal"
+	pacetypes[pacetype_movesin_vertical] = "pacetype_movesin_vertical"
+	pacetypename = pacetypes[pacetype]
+} catch (ex) {
+
+}
+
+draw_text(x, y, pacetypename)
