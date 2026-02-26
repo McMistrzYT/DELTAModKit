@@ -1,9 +1,15 @@
 function global_flagname_init() {
 	global.flagname = array_create(9999, undefined);
-
-	global.flagname[6] = "disable text skip [Broken]"
-	global.flagname[8] = "Simplify VFX"
-	global.flagname[10] = "Has Wrist Protector"
+	#macro Flag_BlockTextSkip_Broken 6
+	#macro Flag_BlockMenu 7
+	#macro Flag_SimplifyVFX 8
+	#macro Flag_BattleMusicPlaying 9
+	#macro Flag_HasAutomasher 10
+	global.flagname[Flag_BlockTextSkip_Broken] = "disable text skip [Broken]"
+	global.flagname[Flag_BlockMenu] = "disable Menu"
+	global.flagname[Flag_SimplifyVFX] = "Simplify VFX"
+	global.flagname[Flag_BattleMusicPlaying] = "Battle Music Playing"
+	global.flagname[Flag_HasAutomasher] = "Has Wrist Protector"
 	global.flagname[11] = "AutoRun"
 	global.flagname[12] = "Disable Screenshake"
 	global.flagname[29] = "Susie Ch1 Eyes"

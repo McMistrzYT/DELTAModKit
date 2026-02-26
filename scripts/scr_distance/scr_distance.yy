@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"distance",
+  "%Name":"scr_distance",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"distance",
+  "name":"scr_distance",
   "parent":{
     "name":"Engine",
     "path":"folders/DELTARUNE/Scripts/Engine.yy",

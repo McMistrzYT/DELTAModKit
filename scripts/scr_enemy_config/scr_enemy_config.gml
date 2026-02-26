@@ -361,3 +361,133 @@ function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = g
 		}
 	}
 }
+
+function scr_chaseenemy_init() {	
+	if extflag == "ModularEnemies" {
+		sprite_index = spr_diamond_overworld
+		myencounter = DREncounter.TestEnemies
+	}
+}
+
+function scr_chaseenemy_chasetype(Type) {
+	var movestopointusingspeed = true
+	switch Type {
+		default:	
+			alerttimer = 0
+			alertcon = 0
+			pacecon = 0
+			movestopointusingspeed = false
+		break
+		
+		case 0: {
+			if (speed < ct0minspeed) speed = ct0minspeed
+			if (speed < ct0topspeed) speed += ct0acc
+		break}
+		case 3: {
+			if (speed < 2) speed = 2
+			if (speed < 4) speed += 0.5
+		break}
+		case 4: {
+			if (speed < 6) speed = 6
+			if (speed < 14) speed += 0.5
+		break}
+		case 5.5: 
+		case 5: {
+			hspeed += lengthdir_x(0.5, point_direction(x, y, targetx, targety))
+			vspeed += lengthdir_y(0.5, point_direction(x, y, targetx, targety))
+			
+			if Type == 5 {
+				if (speed < 4)  speed = 4
+				if (speed < 7)  speed += 0.5
+				if (speed >= 7) speed = 7
+			} else {
+				if (speed < startchasespeed) speed = startchasespeed
+				if (speed != topchasespeed) speed = lerp(speed, topchasespeed, chaseaccel)				
+			}
+		break}
+		case 6: {
+			speed = 8 
+		break}
+		case 7: {
+			if (speed == 0) speed = 6
+			if (speed < 10) speed *= 1.1
+			
+			image_speed = 0.25
+		break}
+		
+		case 9: {
+			hspeed += lengthdir_x(0.5, point_direction(x, y, targetx, targety))
+			vspeed += lengthdir_y(0.5, point_direction(x, y, targetx, targety))
+			speed = clamp(speed, minspeed, maxspeed)
+		break}
+		
+		case 8: {
+			mymidx = x + (sprite_width / 2)
+			mymidy = y + ((bbox_bottom - y) / 2)
+			
+			if (point_distance(mymidx, mymidy, charaHeartX(), charaHeartY()) > 50)
+				direction = point_direction(mymidx, mymidy, charaHeartX(), charaHeartY()) + 180
+			
+			speed = 6
+			movestopointusingspeed = false
+		break}
+		
+		case 1: {
+			movestopointusingspeed = false
+			if (alerttimer == 0) move_towards_point(targetx, targety, 10)
+			
+			alerttimer += 1
+			if (alerttimer >= 20) speed *= 0.75
+			if (alerttimer >= 25) speed = 0
+			if (alerttimer >= 27) alerttimer = 0
+		break}
+		case 2: {
+			movestopointusingspeed = false
+			if (alerttimer == 0) {
+				xnext = 0
+				ynext = 0
+				
+				if (right_h()) xnext =  132
+				if (left_h())  xnext = -132
+				if (down_h())  ynext =  132
+				if (up_h())    ynext = -132
+				move_towards_point(targetx + xnext, targety + ynext, 10)
+			}
+			
+			alerttimer += 1
+			
+			if (alerttimer >= 20) speed *= 0.75
+			if (alerttimer >= 25) speed = 0
+			if (alerttimer >= 27) alerttimer = 0
+		break}
+	}
+	
+	if movestopointusingspeed move_towards_point(targetx, targety, speed)
+}
+	
+function scr_chaseenemy_pacetype(Type) {
+	#macro pacetype_rightandleftwithpauses 1
+	#macro pacetype_circlearound 2
+	#macro pacetype_upanddown 5
+	#macro pacetype_standinplace 6
+	#macro pacetype_movesin 7
+	#macro pacetype_movesin_duplicated 7.1
+	#macro pacetype_movesin_flipped 7.5
+	#macro pacetype_movesin_differentspeed 8
+	
+	switch Type {
+		default: if DEBUGMODE && scr_debug() show_debug_message("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
+		
+		case pacetype_rightandleftwithpauses: {
+			if (pacetimer == 10) hspeed = 2
+			if (pacetimer == 34) hspeed = 0
+			if (pacetimer == 50) hspeed = -2
+			if (pacetimer == 74) hspeed = 0
+			if (pacetimer == 80) pacetimer = 0
+		break}
+		case pacetype_circlearound: {
+			hspeed = sin(pacetimer / 24) * 4
+			vspeed = cos(pacetimer / 24) * 4			
+		break}
+	}
+}

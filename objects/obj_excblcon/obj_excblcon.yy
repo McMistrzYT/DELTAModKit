@@ -31,7 +31,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_exc",
+    "path":"sprites/spr_exc/spr_exc.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
