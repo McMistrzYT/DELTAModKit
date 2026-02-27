@@ -18,16 +18,11 @@ if (encountered == 0)
 			sprite_index = spr_krisb_hurt
 		}
 		
-		with (obj_caterpillarchara)
-		{
+		with (obj_caterpillarchara) {
 			fun = 1
 			scr_shakeobj()
-			
-			if (name == "susie")
-				sprite_index = spr_susie_shock_r
-			
-			if (name == "ralsei")
-				sprite_index = spr_ralsei_hurt_overworld
+				if (name == "susie") sprite_index = spr_susie_shock_r
+				if (name == "ralsei") && scr_asset_exists("spr_ralsei_hurt_overworld") sprite_index = spr_ralsei_hurt_overworld
 		}
 	}
 	

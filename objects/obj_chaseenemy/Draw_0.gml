@@ -72,7 +72,6 @@ if (drawbox) {
 	}
 }
 
-
 exit;
 
 draw_set_color(c_white)

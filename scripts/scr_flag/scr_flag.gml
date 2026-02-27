@@ -18,6 +18,9 @@ function global_flagname_init() {
 	global.flagname[32] = "Party Item Comments"
 	global.flagname[35] = "Game Over Type"
 	global.flagname[21] = "Room Enter Freeze"
+	
+	global.flagname[55] = "Overworld Enemy Encounter X Pos"
+	global.flagname[56] = "Overworld Enemy Encounter Y Pos"
 	// GONER CREATION SYSTEM
 	global.flagname[900] = "GONER HEAD"
 	global.flagname[901] = "GONER BODY"
