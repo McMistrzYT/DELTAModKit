@@ -5,8 +5,7 @@ tpoff = (tp - tpy) + yy;
 bpoff = -bp + bpy + yy;
 var spell_offset = langopt(500, 496);
 
-if (intro == 1)
-{
+if (intro == 1) { // SLIDE UP
     if (bp < (bpy - 1))
     {
         if ((bpy - bp) < 40)
@@ -23,10 +22,8 @@ if (intro == 1)
         intro = 0;
 }
 
-if (intro == 2)
-{
-    if (bp > 0)
-    {
+if (intro == 2) { // SLIDEDOWN
+    if (bp > 0) {
         if (round((bpy - bp) / 5) > 15)
             bp -= round((bpy - bp) / 2.5);
         else
@@ -36,12 +33,6 @@ if (intro == 2)
     {
         bp = 0;
     }
-}
-
-// chapter 3 stuff i removed
-{
-    rouxlserrortimer = 0;
-    rouxlstelegraphcon = 0;
 }
 
 draw_set_color(c_black);
@@ -118,10 +109,10 @@ if (global.bmenuno == 1 || global.bmenuno == 3 || global.bmenuno == 11 || global
                 if (mercydraw == 1)
                 {
                     draw_set_color(c_yellow);
-                    mnamecolor1 = 65535;
+                    mnamecolor1 = c_yellow;
                     
                     if (tireddraw == 0)
-                        mnamecolor2 = 65535;
+                        mnamecolor2 = c_yellow;
                     
                     if (hidemercy == 0)
                         draw_sprite(spr_sparestar, 0, xx + 80 + namewidth + 20, yy + 385 + (i * 30));
@@ -130,25 +121,11 @@ if (global.bmenuno == 1 || global.bmenuno == 3 || global.bmenuno == 11 || global
                 draw_text_colour(xx + 80, yy + 375 + (i * 30), string_hash_to_newline(global.monstername[i]), mnamecolor1, mnamecolor2, mnamecolor2, mnamecolor1, 1);
                 var __drawstatus = 0;
                 
-                if (global.bmenuno == 13)
-                    __drawstatus = 1;
+                if (global.bmenuno == 13) __drawstatus = 1;
                 
                 if (__drawstatus == 0)
                 {
-                    draw_set_color(c_gray);
-                    draw_text(xx + 80 + namewidth + 60, yy + 375 + (i * 30), string_hash_to_newline(global.monstercomment[i]));
-                    
-                    draw_set_color(c_maroon);
-                    draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
-                    draw_set_color(c_lime);
-                    draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 420 + ((global.monsterhp[i] / global.monstermaxhp[i]) * 80), yy + 380 + (i * 30) + 15, false);
-                    draw_set_color(c_white);
-                    draw_text_transformed(xx + 424, yy + 364, "HP", 1, 0.5, 0);
-                    
-                    //if (global.chapter == 3 && i_ex(obj_knight_enemy))
-                    //   draw_text_transformed(xx + 424, yy + 380 + (i * 30), "???", 1, 0.5, 0);
-                    //else
-                        draw_text_transformed(xx + 424, yy + 380 + (i * 30), string(ceil((global.monsterhp[i] / global.monstermaxhp[i]) * 100)) + "%", 1, 0.5, 0);
+					scr_enemy_drawstatus_battle(global.monstertype[i])
                 }
                 else
                 {

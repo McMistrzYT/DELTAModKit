@@ -308,6 +308,27 @@ function scr_enemy_defeatrunanimations(){
 	#endregion
 }
 
+function scr_enemy_drawstatus_battle(enemyId){
+	switch enemyId {
+		default:
+		  // Comment
+          draw_set_color(c_gray);
+          draw_text(xx + 80 + namewidth + 60, yy + 375 + (i * 30), string_hash_to_newline(global.monstercomment[i]));
+          
+		  // HealthBar
+          draw_set_color(c_maroon);
+          draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
+          draw_set_color(c_lime);
+          draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 420 + ((global.monsterhp[i] / global.monstermaxhp[i]) * 80), yy + 380 + (i * 30) + 15, false);
+          draw_set_color(c_white);
+		  
+		  // HP Text
+          draw_text_transformed(xx + 424, yy + 364, "HP", 1, 0.5, 0);
+          draw_text_transformed(xx + 424, yy + 380 + (i * 30), string(ceil((global.monsterhp[i] / global.monstermaxhp[i]) * 100)) + "%", 1, 0.5, 0);
+		break
+	}
+}
+
 // Defeat Run System Core Data Config init
 variable_global_set("@@DefeatAnimationData@@", [])
 
@@ -325,6 +346,7 @@ function scr_getdefeatanimationdataarray() {
 	return 	variable_global_get("@@DefeatAnimationData@@")
 }
 
+// DefeatTypes
 function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[51 + self.myself]) {
 	// For more Precise Control go to 'scr_monster->scr_monsterdefeat' and 'scr_turn->scr_defeatrun'
 	#macro MONSTERS_DEFEATTYPES_None 0
@@ -357,7 +379,7 @@ function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = g
         if (_violenced > 0) global.flag[50] = MONSTERS_DEFEATTYPES_Violence;
 		
 		switch global.flag[50] {
-			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break
+			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break // All Enemies Frozen.
 		}
 	}
 }

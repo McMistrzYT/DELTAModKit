@@ -89,8 +89,7 @@ function scr_monsterdefeat() {
             if (global.monsterhp[myself] <= 0) global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Violence;
         }
         
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Violence)
-        {
+        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Violence) {
             global.flag[40] += 1;
 			
             if (fatal == 1) global.flag[44]++; // Fatal Kills
