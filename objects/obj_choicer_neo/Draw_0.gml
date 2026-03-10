@@ -86,7 +86,7 @@ if (canchoose == 1)
         
         for (var i = 0; i < (choicetotal + 1); i += 1)
         {
-            var choice_color = (mychoice == i) ? 65535 : 16777215;
+            var choice_color = (mychoice == i) ? c_yellow : c_white;
             draw_set_color(choice_color);
             var x_offset = text_pos[i][0];
             var y_offset = text_pos[i][1];

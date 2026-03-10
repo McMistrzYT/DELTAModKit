@@ -60,13 +60,21 @@ if (canchoose == 1)
     }
 }
 
-if (choicerstyle == 0)
-{
+if (choicerstyle == 0) {
     heartposx[0] = xx + (30 * dar);
     heartposy[0] = yy + ((34 + d_add) * dar) + (fighting * 30);
     textposx[0] = heartposx[0] + (16 * dar);
     textposy[0] = yy + ((13 + d_add) * dar) + (fighting * 30);
     
+	if (choicetotal == 0) {
+        var str1width = string_width(string_hash_to_newline(global.choicemsg[0]));
+		mychoice = 0
+        heartposy[0] = yy + ((34 + d_add) * dar) + (fighting * 30);
+		textposx[0] = (xx + camerawidth()/2) - str1width / 2;
+        heartposx[0] = textposx[0] - ((sprite_get_width(heartSprite)+7)*dar);
+		textposy[0] = yy + ((13 + d_add) * dar) + (fighting * 30);
+	}
+	
     if (choicetotal >= 1)
     {
         var str1width = string_width(string_hash_to_newline(global.choicemsg[1]));

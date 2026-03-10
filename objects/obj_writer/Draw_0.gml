@@ -544,18 +544,20 @@ if (view_current == 0)
             
             if (nextchar == "C")
             {
+				show_debug_message("Attempting to create Choicer ID {0}", nextchar2)
                 if (nextchar2 == "1")
                 {
+					show_debug_message("Starting Legacy Choicer", nextchar2)
                     if (instance_exists(obj_choicer_old) == false)
                         choicer = instance_create(0, 0, obj_choicer_old);
                     
                     halt = 5;
                 }
                 
-                if (nextchar2 == "2" || nextchar2 == "3" || nextchar2 == "4")
-                {
-                    if (instance_exists(obj_choicer_neo) == false)
-                    {
+                if (nextchar2 == "2" || nextchar2 == "3" || nextchar2 == "4" || nextchar2 == "0") {
+					if (nextchar2 == "0") nextchar2 = "1"
+					show_debug_message("Starting Choicer with {0} Choices", nextchar2)
+                    if (instance_exists(obj_choicer_neo) == false) {
                         choicer = instance_create(0, 0, obj_choicer_neo);
                         choicer.choicetotal = real(nextchar2) - 1;
                     }
