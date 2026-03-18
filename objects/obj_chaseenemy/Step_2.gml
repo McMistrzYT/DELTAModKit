@@ -32,7 +32,7 @@ if (alertcon >= 1 && frozen == 0 && ignoresolid == 0) {
 	}
 }
 
-if (pacetype == 11)
+if (pacetype == pacetype_followpath)
 {
 	if (global.interact == 0)
 	{

@@ -1,0 +1,24 @@
+{
+  "$GMPath":"",
+  "%Name":"path_chaseenemy_dwtestloop",
+  "closed":true,
+  "kind":1,
+  "name":"path_chaseenemy_dwtestloop",
+  "parent":{
+    "name":"Paths",
+    "path":"folders/Custom/Paths.yy",
+  },
+  "points":[
+    {"speed":100.0,"x":860.0,"y":340.0,},
+    {"speed":100.0,"x":915.0,"y":344.0,},
+    {"speed":100.0,"x":935.0,"y":399.0,},
+    {"speed":100.0,"x":917.0,"y":455.0,},
+    {"speed":100.0,"x":860.0,"y":460.0,},
+    {"speed":100.0,"x":800.0,"y":455.0,},
+    {"speed":100.0,"x":780.0,"y":405.0,},
+    {"speed":100.0,"x":795.0,"y":348.0,},
+  ],
+  "precision":3,
+  "resourceType":"GMPath",
+  "resourceVersion":"2.0",
+}

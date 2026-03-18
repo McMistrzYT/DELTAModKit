@@ -1,7 +1,8 @@
 function scr_npc_setup() {
 	var handled = true;
 	
-	switch (room) {
+	switch (room) { // In Older Versions this was Broken, and went Unused.
+		/*
 		case room_dw_test: {
 			// set dark world room "room_dw_test" appearance here
 			sprite_index = spr_maus_idle;
@@ -12,7 +13,7 @@ function scr_npc_setup() {
 			// set light world room "room_lw_test" appearance here
 			sprite_index = spr_virovirokun_idle;
 			break;
-		}
+		}*/
 		
 		default: handled = false; break;	
 	}

@@ -1,5 +1,4 @@
-function scr_mnendturn()
-{
+function scr_mnendturn(){
     /*if (global.char[0] == 2)
         sus = 0;
     
@@ -245,7 +244,7 @@ function scr_retarget(arg0)
 function scr_retarget_spell() {
     cancelattack = true;
     
-	for (var i = 0; i < array_length(global.monster); ++i) {
+	for (i = 0; i < array_length(global.monster); ++i) {
 		var truei = (star + i) % array_length(global.monster)
 	    if global.monster[truei] == true{
 			cancelattack = false
@@ -272,7 +271,7 @@ function scr_nexthero() {
     
     var endturn = false;
     
-	for (var i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
+	for (i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
 		moveswapped = true
 		if i >= array_length(global.charmove) {endturn = true global.charturn = i} // No one Left
 		else if scr_charcan(i) {
@@ -299,7 +298,7 @@ function scr_prevhero() {
     moveswapped = false;
     
 	if global.charturn > 0 { // No need to run Calculations if we know it'll fail anyways.
-		for (var i = global.charturn - 1; i >= 0 && !moveswapped; --i) {
+		for (i = global.charturn - 1; i >= 0 && !moveswapped; --i) {
 			if scr_charcan(i) {
 				global.charturn = i
 				moveswapped = true
@@ -650,7 +649,7 @@ function scr_defeatrun(){
 function scr_randomtarget_old() {
     abletotarget = false;
 	
-	for (var i = 0; i < array_length(global.charcantarget); ++i) {
+	for (i = 0; i < array_length(global.charcantarget); ++i) {
 	    if global.charcantarget[i] abletotarget = true
 	}
     

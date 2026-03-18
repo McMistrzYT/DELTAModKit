@@ -15,9 +15,10 @@ enum DRSpell {
 	
 	Spare = 100,
 }
-
-function scr_spellinfo(spellid)
-{
+/// @desc Get Information about Spells, Includes Names, Descriptions, Who it Targets, and its Cost
+/// @arg Spell The Spell Index
+function scr_spellinfo(spellid){
+	var tocheck;
     cost = -1;
     spelltarget = 1;
     spellname = " ";
@@ -78,7 +79,7 @@ function scr_spellinfo(spellid)
             spelltarget = 2;
             cost = 125;
             
-            var tocheck = global.charweapon[DRCharacter.Susie]
+            tocheck = global.charweapon[DRCharacter.Susie]
 			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
             if (tocheck == DRWeapon.Devilsknife) cost = 100;
             
@@ -137,7 +138,7 @@ function scr_spellinfo(spellid)
             spelltarget = 2;
             cost = 40;
             
-            var tocheck = global.charweapon[DRCharacter.Noelle]
+            tocheck = global.charweapon[DRCharacter.Noelle]
 			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
             if (tocheck == DRWeapon.ThornRing) cost *= 0.5;
             
@@ -152,7 +153,7 @@ function scr_spellinfo(spellid)
             spelltarget = 0;
             cost = global.maxtension * 2;
 			
-            var tocheck = global.charweapon[DRCharacter.Noelle]
+            tocheck = global.charweapon[DRCharacter.Noelle]
 			if variable_instance_exists(self, "caster") tocheck = global.char[caster]
             if (tocheck == DRWeapon.ThornRing) cost *= 0.5;
             
@@ -182,6 +183,8 @@ function scr_spellinfo(spellid)
     }
 }
 
+/// @desc Prepare Text for a Specific Spell ID from the Argument
+/// @arg Spell The Spell Index
 function scr_spell_get_battle_use_text(spellid) {
 	scr_spellinfo(spellid);
 	
@@ -257,7 +260,10 @@ function scr_spell_get_battle_use_text(spellid) {
 		}
 	}
 }
-	
+
+/// @desc Casts a Spell in Battle, May Cause issues if you do not have the proper variables.
+/// @arg Caster The Hero Casting this Spell
+/// @arg Spell The Spell that they shall Cast
 function scr_spell_use_action(casterid, spellid) {
 	spell = spellid;
 	caster = casterid;

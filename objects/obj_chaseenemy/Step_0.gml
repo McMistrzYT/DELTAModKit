@@ -87,21 +87,6 @@ if (frozen == 0) {
 				move_towards_point(obj_mainchara.x, obj_mainchara.y, 4)
 		}
 		
-		if (pacetype == 11)
-		{
-			cancelwalk = 1
-			image_speed = 0.25
-			
-			if (pathSpeed == 0)
-				pathSpeed = 6
-			
-			if (direction >= 136 && direction <= 225)
-				facing = 0
-			
-			if (direction >= 306 || direction <= 45)
-				facing = 1
-		}
-		
 		if (pacetype == 12)
 		{
 			hspeed = -sin(pacetimer / 30) * 10
@@ -395,7 +380,7 @@ if (frozen == 0) {
 		alerttimer = 0
 		alertcon = 1
 		
-		if (pacetype == 11)
+		if (pacetype == pacetype_followpath)
 			path_end()
 		
 		if (alertskip == 0)

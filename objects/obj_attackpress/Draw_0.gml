@@ -137,13 +137,13 @@ if (active == 1)
     imagetimer += 1;
     boltx += 1;
 	
-	for (var i = 0; i < array_length(pressbuffer); ++i)	pressbuffer[i]--
+	for (i = 0; i < array_length(pressbuffer); ++i)	pressbuffer[i]--
     
     if (imagetimer > 1) imagetimer = 0;
     
     goahead = true;
     
-	for (var i = 0; i < array_length(havechar) && goahead; ++i) {
+	for (i = 0; i < array_length(havechar) && goahead; ++i) {
 	    if havechar[i] && !attacked[i] goahead = false // Let AutoChars Attack
 	}
     

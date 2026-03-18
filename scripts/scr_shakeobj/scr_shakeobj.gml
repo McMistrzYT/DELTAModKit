@@ -1,5 +1,4 @@
-function scr_shakeobj()
-{
+function scr_shakeobj(argument0 = undefined, argument1 = undefined, argument2 = undefined) {
     var _shakeobj = instance_create(x, y, obj_shakeobj);
     _shakeobj.target = id;
     

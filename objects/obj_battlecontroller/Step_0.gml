@@ -59,7 +59,7 @@ if (victory == 1 && victoried == 0)
         }
 		
 		
-		for (var i = 0; i < array_length(global.char); ++i) {
+		for (i = 0; i < array_length(global.char); ++i) {
 			var _msgcheck = scr_character_get_custom_battleendmessage(global.char[i], global.flag[50])
 			if is_string(_msgcheck) msg = _msgcheck
 		}
@@ -67,7 +67,7 @@ if (victory == 1 && victoried == 0)
 		var gottenstring = ""
 		if array_length(stats) > 0 {
 			gottenstring = "&* Got "
-			for (var i = 0; i < array_length(stats); ++i) { 
+			for (i = 0; i < array_length(stats); ++i) { 
 				var statstring = stats[i]
 				var endingmark = ", "
 				if i == 0 endingmark = ""

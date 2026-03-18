@@ -14,6 +14,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Custom","folderPath":"folders/Custom.yy","name":"Custom","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Paths","folderPath":"folders/Custom/Paths.yy","name":"Paths","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Custom/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Markers","folderPath":"folders/Custom/Objects/Markers.yy","name":"Markers","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Custom/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -373,6 +374,7 @@
     {"id":{"name":"obj_writer_stay","path":"objects/obj_writer_stay/obj_writer_stay.yy",},},
     {"id":{"name":"obj_writer","path":"objects/obj_writer/obj_writer.yy",},},
     {"id":{"name":"PROCESS_LOGO","path":"objects/PROCESS_LOGO/PROCESS_LOGO.yy",},},
+    {"id":{"name":"path_chaseenemy_dwtestloop","path":"paths/path_chaseenemy_dwtestloop/path_chaseenemy_dwtestloop.yy",},},
     {"id":{"name":"PLACE_FAILURE","path":"rooms/PLACE_FAILURE/PLACE_FAILURE.yy",},},
     {"id":{"name":"PLACE_LOGO","path":"rooms/PLACE_LOGO/PLACE_LOGO.yy",},},
     {"id":{"name":"PLACE_MENU","path":"rooms/PLACE_MENU/PLACE_MENU.yy",},},

@@ -124,13 +124,12 @@ if (havechar[1] == 1 && havechar[2] == 0)
 boltgap = 20;
 boltspeed = 8;
 boltx = 0;
-
-for (var i = 1; i < DRCharacter.__MAX__; ++i) {
+for (i = 1; i < DRCharacter.__MAX__; ++i) {
 	pressbuffer[i-1] = 0;
 }
 	
 bolttotal = 0
-for (var i = 0; i < array_length(global.char); ++i) {
+for (i = 0; i < array_length(global.char); ++i) {
 	boltuse[i] = 0
 	points[i] = 0
 	charbolt[i] = 0

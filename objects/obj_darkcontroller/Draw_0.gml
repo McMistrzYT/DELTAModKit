@@ -483,7 +483,7 @@ if (global.menuno == 2)
     
 	var slots = scr_character_darkmenu_geticondatareader(charcoord)
 		
-	for (var i = 0; i < array_length(slots); ++i) {
+	for (i = 0; i < array_length(slots); ++i) {
 		try {
 			var slot = slots[i]
 			var sprite = slot.sprite
