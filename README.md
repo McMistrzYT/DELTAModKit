@@ -19,7 +19,6 @@ It will not work on older versions without modification to the modifications, in
 ## Adding / Changing Modular Stuff
 The hearts of the modular reimplementations of the character, item, spell and equipment systems all live in the folder `Custom > Scripts > Configs`. I tried naming everything in an easy-to-understand way, but feel free to reach out if you encounter any issues. Provided in the `Custom > Objects` folder is an example cutscene for working with the Cutscene System and some helper markers to assist with character placement in cutscenes
 
-> [!ISSUES]
 ## Known Issues: 
 when an ENEMY is able to be Spared and someone readies up a Spare if Susie Casts Rude Buster It Spares them
 
