@@ -1,3 +1,5 @@
+instancestokill = []
+
 if (global.flag[9] == 1)
 {
     var battlemusicvolume = 0.7;

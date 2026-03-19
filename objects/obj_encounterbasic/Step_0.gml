@@ -49,13 +49,12 @@ if (fightcon == 2)
         counttimer = 0;
         fightcon = 3;
         
-        for (i = 0; i < (count + 1); i += 1)
-        {
-            with (c[i])
-                instance_destroy();
+        var mybattlecon = instance_create(0, 0, obj_battlecontroller);
+		
+        for (i = 0; i < (count + 1); i += 1) {
+			with c[i] { instance_destroy() delete other.c[other.i] }
         }
-        
-        instance_create(0, 0, obj_battlecontroller);
+		
         instance_destroy();
     }
 }

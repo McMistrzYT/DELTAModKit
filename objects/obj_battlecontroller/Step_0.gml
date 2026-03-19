@@ -1125,3 +1125,10 @@ if (scr_debug())
     if (keyboard_check_pressed(vk_f11))
         dolose = true;
 }
+
+while array_length(instancestokill) > 0 {
+	var instance = instancestokill[0]
+	if i_ex(instance) { instance_destroy(instance) }
+	array_delete(instancestokill, 0, 1)
+    delete instance
+}

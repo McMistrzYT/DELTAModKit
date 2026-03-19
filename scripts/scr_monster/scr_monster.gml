@@ -70,11 +70,8 @@ function scr_monster_makeinstance(monsterid)
     global.monsterinstance[monsterid].myself = monsterid;
 	global.monsterinstance[monsterid].enemyId = global.monstertype[monsterid];
     
-    with (global.monsterinstance[monsterid])
-        event_user(12);
-    
-    with (global.monsterinstance[monsterid])
-        event_user(15);
+    with (global.monsterinstance[monsterid]) event_user(12);
+    with (global.monsterinstance[monsterid]) event_user(15);
 }
 
 function scr_monsterdefeat() {

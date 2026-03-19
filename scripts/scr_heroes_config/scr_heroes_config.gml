@@ -843,7 +843,7 @@ function scr_hero_rendercharboxicons(charIdx) {
 // !!This Change is Not Released Yet into the main DMK stuff!!
 function scr_character_get_custom_battleendmessage(charIdx, battleendtype = MONSTERS_DEFEATTYPES_None) {
 	switch charIdx {
-		case DRCharacter.Noelle: if (battleendtype == MONSTERS_DEFEATTYPES_Frozen) return "* Noelle became stronger."
-		default: return false
+		case DRCharacter.Noelle: if (battleendtype == MONSTERS_DEFEATTYPES_Frozen) return "* Noelle became stronger." // Technically in Normal Deltarune this also appears if Noelle is there when you "Violenced" an Enemy.
+		default: return false // No Custom BMessage
 	}
 }
