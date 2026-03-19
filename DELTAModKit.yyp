@@ -486,6 +486,7 @@
     {"id":{"name":"scr_tension","path":"scripts/scr_tension/scr_tension.yy",},},
     {"id":{"name":"scr_text","path":"scripts/scr_text/scr_text.yy",},},
     {"id":{"name":"scr_turn","path":"scripts/scr_turn/scr_turn.yy",},},
+    {"id":{"name":"scr_unlabeledbattle_config","path":"scripts/scr_unlabeledbattle_config/scr_unlabeledbattle_config.yy",},},
     {"id":{"name":"scr_var","path":"scripts/scr_var/scr_var.yy",},},
     {"id":{"name":"scr_weaponinfo","path":"scripts/scr_weaponinfo/scr_weaponinfo.yy",},},
     {"id":{"name":"scr_weapons_config","path":"scripts/scr_weapons_config/scr_weapons_config.yy",},},

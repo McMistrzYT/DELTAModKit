@@ -230,6 +230,8 @@ if (global.ambush == 2)
 disablesusieact = 0;
 mercytotal = 0;
 idefendedthisturn = 0;
+
+// Leftover Chapter 3:
 ypostenna = 0;
 oopsallacts = 0;
 spadebuttonenabled = false;
@@ -272,12 +274,12 @@ dogselectedcount = 0;
 
 if (global.chapter == 3)
 {
-    battletimer = 0;
-    battleseconds = 0;
-    battleminutes = 0;
-    boardend = 0;
-    global.boardbattleresult = "won";
-    rabbickvar = choose(0, 1);
+	battletimer = 0;
+	battleseconds = 0;
+	battleminutes = 0;
+	boardend = 0;
+	global.boardbattleresult = "won";
+	rabbickvar = choose(0, 1);
 }
 
 tripticket = 0;
@@ -286,9 +288,9 @@ triptickettimer = 0;
 
 if (global.chapter == 3)
 {
-    if (global.encounterno == 131 || global.encounterno == 126 || global.encounterno == 125)
-    {
-        if (scr_keyitemcheck(DRKeyItem.TripTicket))
-            tripticket = 1;
-    }
+	if (global.encounterno == 131 || global.encounterno == 126 || global.encounterno == 125)
+	{
+	    if (scr_keyitemcheck(DRKeyItem.TripTicket))
+	        tripticket = 1;
+	}
 }

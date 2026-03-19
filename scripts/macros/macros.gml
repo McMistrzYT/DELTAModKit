@@ -3,7 +3,6 @@ function macros(){
 	#macro Debug:DEBUGMODE true
 	
 	
-	
 	#macro PrimaryBattleMusic "rudebuster_boss.ogg"
 	#macro INVENTORYMAX_ARMORANDWEAPONS 48
 	

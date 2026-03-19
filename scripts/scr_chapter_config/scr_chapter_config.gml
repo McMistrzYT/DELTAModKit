@@ -1,5 +1,6 @@
 function scr_chapter_config() {
-	global.chapter = 4;
+	#macro CHAPTERINDEX 4
+	global.chapter = CHAPTERINDEX;
 	global.versionno = "v0.901-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
@@ -58,8 +59,7 @@ function scr_gamestart_chapter_override(){
         global.flag[1196] = 0;
         global.flag[1198] = 0;
         
-        for (var i = 0; i < 20; i++)
-            global.battlegrade[i] = "Z";
+        for (var i = 0; i < 20; i++) global.battlegrade[i] = "Z";
         
         global.swordboardeath = 0;
         // scr_funnytext_init_sounds();

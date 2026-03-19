@@ -14,84 +14,73 @@ y = yy + 40 + yoffset;
 
 draw_sprite(spr_tensionbar, 1, 0, 0);
 
-if (abs(apparent - global.tension) < 20)
-    apparent = global.tension;
+if (abs(apparent - global.tension) < 20) apparent = global.tension;
 
-if (apparent < global.tension)
-    apparent += 20;
+if (apparent < global.tension) apparent += 20;
 
-if (apparent > global.tension)
-    apparent -= 20;
+if (apparent > global.tension) apparent -= 20;
 
 if (apparent != current)
 {
     changetimer += 1;
     
-    if (changetimer > 15)
-    {
-        if ((apparent - current) > 0)
-            current += 2;
+	var maxchangetypes = 5
+	
+    if (changetimer > 15) {
+		for (i = maxchangetypes-1; i >= 0; --i) {
+			var amt = max(i+1, 2) * (sign(apparent - current))
+			var weirdmaththatshouldlaterbereplacedwithworsebutmorereadablemath = round( // Math Using Desmos, Should Figure out cleaner Math Later.
+			(((5/12)*i)^4) - 
+			(((20/12)*i)^3) - 
+			(((55/12)*i)^2) -  
+			(((80/12)*i)^1)) // Desmos Equation: \operatorname{round}\left(0.416667x^{4}-1.66667x^{3}+4.58333x^{2}+6.66667x\right)
+		    if (abs(apparent - current) > weirdmaththatshouldlaterbereplacedwithworsebutmorereadablemath) current += amt;
+		}
+		/* // LEGACY
+        if ((apparent - current) > 0)    current += 2;
+        if ((apparent - current) > 10)   current += 2;
+        if ((apparent - current) > 25)   current += 3;
+        if ((apparent - current) > 50)   current += 4;
+        if ((apparent - current) > 100)  current += 5;
+		
+        if ((apparent - current) < 0)    current -= 2;
+        if ((apparent - current) < -10)  current -= 2;
+        if ((apparent - current) < -25)  current -= 3;
+        if ((apparent - current) < -50)  current -= 4;
+        if ((apparent - current) < -100) current -= 5;
+		*/
         
-        if ((apparent - current) > 10)
-            current += 2;
-        
-        if ((apparent - current) > 25)
-            current += 3;
-        
-        if ((apparent - current) > 50)
-            current += 4;
-        
-        if ((apparent - current) > 100)
-            current += 5;
-        
-        if ((apparent - current) < 0)
-            current -= 2;
-        
-        if ((apparent - current) < -10)
-            current -= 2;
-        
-        if ((apparent - current) < -25)
-            current -= 3;
-        
-        if ((apparent - current) < -50)
-            current -= 4;
-        
-        if ((apparent - current) < -100)
-            current -= 5;
-        
-        if (abs(apparent - current) < 3)
-            current = apparent;
+        if (abs(apparent - current) < 3) current = apparent;
     }
 }
 
-if (current > 0)
-{
+if (current > 0) {
     if (apparent < current)
     {
-        draw_set_color(c_red);
+        draw_set_color(barcolors[0]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((current / global.maxtension) * sprite_height), false);
-        draw_set_color(c_orange);
+        draw_set_color(barcolors[1]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((apparent / global.maxtension) * sprite_height), false);
     }
     
     if (apparent > current)
     {
-        draw_set_color(c_white);
+        draw_set_color(barcolors[2]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((apparent / global.maxtension) * sprite_height), false);
-        draw_set_color(c_orange);
+        draw_set_color(barcolors[1]);
         
         if (maxed == 1)
-            draw_set_color(merge_color(c_yellow, c_orange, 0.5));
+            draw_set_color(merge_color(barcolors[3], barcolors[1], 0.5));
         
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((current / global.maxtension) * sprite_height), false);
     }
     
     if (apparent == current)
     {
-        draw_set_color(c_orange);
+        draw_set_color(barcolors[1]);
         
         if (maxed == 1)
-            draw_set_color(merge_color(c_yellow, c_orange, 0.5));
+            draw_set_color(merge_color(barcolors[3], barcolors[1], 0.5));
         
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((current / global.maxtension) * sprite_height), false);
     }
@@ -115,7 +104,7 @@ if (shit == 2)
 if (global.tensionselect > 0)
 {
     tsiner += 1;
-    draw_set_color(c_white);
+    draw_set_color(barcolors[2]);
     draw_set_alpha(abs(sin(tsiner / 8) * 0.5) + 0.2);
     theight = (0 + sprite_height) - ((current / global.maxtension) * sprite_height);
     theight2 = theight + ((global.tensionselect / global.maxtension) * sprite_height);
