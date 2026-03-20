@@ -10,8 +10,8 @@ function scr_tensionbar_colors_init(){
 	global.barcolors = []
 	global.defaultbarcolor = DRTENSIONCOLOR.Orange
 
-
 	scr_tensionbar_createcolor(c_red, c_orange, c_yellow, merge_color(c_red, c_black, 0.5), c_white, "TensionLight", DRTENSIONCOLOR.Orange)
+	scr_tensionbar_createcolor(c_blue, merge_color(c_blue, c_teal, 0.5), c_teal, #000080, c_white, "TensionDark", DRTENSIONCOLOR.Blue)
 }
 
 // TENSIONBAR_COLORS_BASEFUNCTIONS

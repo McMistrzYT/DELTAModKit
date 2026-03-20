@@ -12,21 +12,20 @@ else
 yy = cameray();
 y = yy + 40 + yoffset;
 
+gpu_set_fog(1, barcolors[4], 0, 0)
 draw_sprite(spr_tensionbar, 1, 0, 0);
+gpu_set_fog(0, c_white, 0, 0)
 
 if (abs(apparent - global.tension) < 20) apparent = global.tension;
-
 if (apparent < global.tension) apparent += 20;
-
 if (apparent > global.tension) apparent -= 20;
 
-if (apparent != current)
-{
+if (apparent != current) {
     changetimer += 1;
     
-	var maxchangetypes = 5
-	
     if (changetimer > 15) {
+		var maxchangetypes = 5
+		
 		for (i = maxchangetypes-1; i >= 0; --i) {
 			var amt = max(i+1, 2) * (sign(apparent - current))
 			var weirdmaththatshouldlaterbereplacedwithworsebutmorereadablemath = round( // Math Using Desmos, Should Figure out cleaner Math Later.
@@ -55,16 +54,14 @@ if (apparent != current)
 }
 
 if (current > 0) {
-    if (apparent < current)
-    {
+    if (apparent < current) {
         draw_set_color(barcolors[0]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((current / global.maxtension) * sprite_height), false);
         draw_set_color(barcolors[1]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((apparent / global.maxtension) * sprite_height), false);
     }
     
-    if (apparent > current)
-    {
+    if (apparent > current) {
         draw_set_color(barcolors[2]);
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((apparent / global.maxtension) * sprite_height), false);
         draw_set_color(barcolors[1]);
@@ -75,8 +72,7 @@ if (current > 0) {
         draw_rectangle(3, (0 + sprite_height) - 1, (0 + sprite_width) - 1, (0 + sprite_height) - ((current / global.maxtension) * sprite_height), false);
     }
     
-    if (apparent == current)
-    {
+    if (apparent == current) {
         draw_set_color(barcolors[1]);
         
         if (maxed == 1)
