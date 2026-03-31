@@ -22,12 +22,10 @@ function scr_gameover() {
         global.tempflag[9] = 1;
         global.fighting = 0;
         global.interact = 0;
-        for (var i = 0; i < DRHero.__MAX__; i++)
-			global.hp[i] = 1;
+        for (var i = 0; i < DRHero.__MAX__; i++) global.hp[i] = 1;
         __room = room;
         
-        if (global.chapter == 2)
-        {
+        if (global.chapter == 2) {
             with (instance_create(0, 0, obj_persistentfadein))
                 image_alpha = 1.2;
         }

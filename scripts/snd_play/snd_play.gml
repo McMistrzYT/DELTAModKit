@@ -105,10 +105,10 @@ function snd_resume(arg0) {
 }
 
 function snd_init(songname) {
-	var dir = "mus/";
+	var dir = MusicFolder;
     
     if (global.launcher)
-        dir = working_directory + "../mus/";
+        dir = working_directory + "../" + MusicFolder;
     
     initsongvar = dir + songname;
     if file_exists(initsongvar)

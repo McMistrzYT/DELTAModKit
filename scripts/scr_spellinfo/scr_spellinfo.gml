@@ -41,14 +41,11 @@ function scr_spellmenu_setup(){
             __actnamecheck = 1;
     }
     
-    for (__charIdx = 0; __charIdx < 3; __charIdx++)
-    {
-        for (__actIdx = 0; __actIdx < 6; __actIdx++)
-        {
+    for (__charIdx = 0; __charIdx < 3; __charIdx++) {
+        for (__actIdx = 0; __actIdx < 6; __actIdx++) {
             global.battlespell[__charIdx][__actIdx] = DRSpell.None;
             
-            if (global.canact[global.char[__charIdx]][0][__actIdx] == 1)
-            {
+            if (global.canact[global.char[__charIdx]][0][__actIdx] == 1) {
                 global.battlespell[__charIdx][__actIdx] = -1;
                     
                 if (global.battleactcount[__charIdx] < (__actIdx + 1))

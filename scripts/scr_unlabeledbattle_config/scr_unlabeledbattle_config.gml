@@ -1,17 +1,21 @@
 // !!WARNING, things in here May be Moved to new Scripts once there is more similar battle related things!!
 #region TENSIONBAR
 
-	enum DRTENSIONCOLOR {
-		Orange = 0,
-		Blue,
-	}
+enum DRTENSIONCOLOR {
+	Orange = 0,
+	Blue,
+}
 
+// Chapter 1 Accurate Settings: {EnableTensionbarAlphaFix 1, EnableTensionbarSlicedCorners 0}
+// Chapter 2+Accurate Settings: {EnableTensionbarAlphaFix 0, EnableTensionbarSlicedCorners 1}
+#macro EnableTensionbarAlphaFix 1
+#macro EnableTensionbarSlicedCorners 0
 function scr_tensionbar_colors_init(){
 	global.barcolors = []
 	global.defaultbarcolor = DRTENSIONCOLOR.Orange
 
-	scr_tensionbar_createcolor(c_red, c_orange, c_yellow, merge_color(c_red, c_black, 0.5), c_white, "TensionLight", DRTENSIONCOLOR.Orange)
-	scr_tensionbar_createcolor(c_blue, merge_color(c_blue, c_teal, 0.5), c_teal, #000080, c_white, "TensionDark", DRTENSIONCOLOR.Blue)
+	scr_tensionbar_createcolor(c_red, c_orange, c_yellow, c_maroon, c_white, "TensionLight", DRTENSIONCOLOR.Orange)
+	scr_tensionbar_createcolor(c_blue, merge_color(c_blue, c_teal, 0.5), c_teal, c_navy, c_white, "TensionDark", DRTENSIONCOLOR.Blue)
 }
 
 // TENSIONBAR_COLORS_BASEFUNCTIONS
@@ -22,8 +26,8 @@ function scr_tensionbar_colors_init(){
 /// @arg Backing The Color for the Background of the TensionBar
 /// @arg Glow The Usually White Line seen on the Bar
 /// @arg Name The Name of the TensionBar Color (Shows up in Debug Logs)
-/// @arg ID The ID the Bar is assigned To
-function scr_tensionbar_createcolor(usedtp, currenttp, maxtp, backing, glow, name, colorid = array_length(global.barcolors)) {	var color = {}
+/// @arg ID The ID the Bar is assigned To 
+function scr_tensionbar_createcolor(usedtp = c_red, currenttp = c_orange, maxtp = c_yellow, backing = merge_color(c_red, c_black, 0.5), glow = c_white, name = "UNDEFINED", colorid = array_length(global.barcolors)) {	var color = {}
 	color.usedtp = usedtp
 	color.currenttp = currenttp
 	color.maxtp = maxtp

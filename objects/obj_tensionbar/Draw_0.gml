@@ -1,5 +1,4 @@
-if (!surface_exists(healthbar_surf))
-    healthbar_surf = surface_create(96, 250);
+if (!surface_exists(healthbar_surf)) healthbar_surf = surface_create(96, 250);
 
 surface_set_target(healthbar_surf);
 draw_clear_alpha(c_white, 0);
@@ -101,19 +100,31 @@ if (global.tensionselect > 0)
 {
     tsiner += 1;
     draw_set_color(barcolors[2]);
-    draw_set_alpha(abs(sin(tsiner / 8) * 0.5) + 0.2);
+	//gpu_set_blendmode_ext(bm_dest_colour, bm_src_alpha)
+	var truealpha = abs(sin(tsiner / 8) * 0.5) + 0.2
+	var color = barcolors[2]
     theight = (0 + sprite_height) - ((current / global.maxtension) * sprite_height);
     theight2 = theight + ((global.tensionselect / global.maxtension) * sprite_height);
     
-    if (theight2 > ((0 + sprite_height) - 1))
-    {
+    if (theight2 > ((0 + sprite_height) - 1)) {
         theight2 = (0 + sprite_height) - 1;
-        draw_set_color(c_dkgray);
-        draw_set_alpha(0.7);
+		color = merge_color(barcolors[2], c_black, 0.64);
+		truealpha = 0.7
     }
     
+	//draw_set_color(merge_color(c_black, color, clamp(truealpha, 0, 1)))
+	draw_set_color(color)
+	draw_set_alpha(truealpha)
+	
     draw_rectangle(3, theight2, (0 + sprite_width) - 1, theight, false);
     draw_set_alpha(1);
+	if EnableTensionbarAlphaFix {
+		// Only Writes the Alpha, no Color Difference because adding Zero (c_black) to any Number doesn't add anything.
+		gpu_set_blendmode(bm_add)
+		draw_set_color(c_black)
+		draw_rectangle(3, theight2, (0 + sprite_width) - 1, theight, false);
+	}
+	gpu_set_blendmode(bm_normal)
 }
 else
 {
@@ -124,9 +135,11 @@ if (apparent > 20 && apparent < global.maxtension)
     draw_sprite(spr_tensionmarker, 0, 3, (0 + sprite_height) - ((current / global.maxtension) * sprite_height));
 
 draw_sprite(spr_tensionbar, 0, 0, 0);
-gpu_set_blendmode(bm_subtract);
-draw_sprite_ext(spr_tensionbar_cutout, 0, 0, 0, 1, 1, 0, c_white, 1);
-gpu_set_blendmode(bm_normal);
+if EnableTensionbarSlicedCorners {
+	gpu_set_blendmode(bm_subtract);
+	draw_sprite_ext(spr_tensionbar_cutout, 0, 0, 0, 1, 1, 0, c_white, 1);
+	gpu_set_blendmode(bm_normal);
+}
 surface_reset_target();
 draw_surface(healthbar_surf, x, y);
 draw_sprite(spr_tplogo, 0, x - 30, y + 30);

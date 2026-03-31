@@ -180,7 +180,7 @@ if (global.bmenuno == 1 || global.bmenuno == 3 || global.bmenuno == 11 || global
     }
 }
 
-if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 1)
+if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 1) // Spell, Char Acts Blocked
 {
     thischar = global.char[global.charturn];
     spellcoord = global.bmenucoord[2][global.charturn];
@@ -246,7 +246,7 @@ if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 1)
     draw_text(xx + spell_offset, yy + 440, string_hash_to_newline(string(thiscost) + "% TP"));
 }
 
-if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 0)
+if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 0) // Spell, Char Acts Allowed
 {
     thischar = global.charturn;
     spellcoord = global.bmenucoord[2][global.charturn];

@@ -1,7 +1,7 @@
 function scr_chapter_config() {
 	#macro CHAPTERINDEX 4
 	global.chapter = CHAPTERINDEX;
-	global.versionno = "v0.901-modkit-3";
+	global.versionno = "v0.902-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
 	global.isStartingRoomDarkWorld = false;

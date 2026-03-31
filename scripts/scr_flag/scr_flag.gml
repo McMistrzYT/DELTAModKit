@@ -1,23 +1,51 @@
-function global_flagname_init() {
+enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
+		BlockTextSkip = 6,
+		BlockMenu, // 7
+		Setting_SimplifyVFX,// 8
+		BattleMusicPlaying,// 9
+		CanAutomash,// 10
+		Setting_AutoRun,// 11
+		DisableScreenShake, // Simplify VFX also does this
+		MultiKeyAttack,// 13
+		RememberLastOption_Battle,// 14
+		Setting_SFXVolume, // 15, Was Removed from Option Menu before Survey Program Release, Likely since Toby didn't want to Mark Every Sound Effect as the Sound Effect Audio Group
+		Setting_MUSVolume, // 16, Probably was Removed due to SFX being removed
+		Setting_MASTERVolume, // 17
+		
+		DialogueFlag = 20, // Controlled by Writer via using the \M0 to \m9 Text Commands
+		RoomEnterFreezeTimer, // 21
+		BlockSoulSlow, // 22
+		
+		Chapter1SusieRevealedEyes = 29,
+		Chapter1RalseiFaceOutfit, // 0 is Hat, 1 is Hooded, 2 is Hatless
+		KrisMakeAudibleFootsteps, // 31
+		PartyCommentonItems, // 32
+		ChoiceTimer, // 33
+		HideCharacterActs, // 34
+		GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
+		FailedBattle,
+}
+
+function global_flagname_init() {	
 	global.flagname = array_create(9999, undefined);
-	#macro Flag_BlockTextSkip_Broken 6
-	#macro Flag_BlockMenu 7
-	#macro Flag_SimplifyVFX 8
-	#macro Flag_BattleMusicPlaying 9
-	#macro Flag_HasAutomasher 10
-	global.flagname[Flag_BlockTextSkip_Broken] = "disable text skip [Broken]"
-	global.flagname[Flag_BlockMenu] = "disable Menu"
-	global.flagname[Flag_SimplifyVFX] = "Simplify VFX"
-	global.flagname[Flag_BattleMusicPlaying] = "Battle Music Playing"
-	global.flagname[Flag_HasAutomasher] = "Has Wrist Protector"
-	global.flagname[11] = "AutoRun"
-	global.flagname[12] = "Disable Screenshake"
-	global.flagname[29] = "Susie Ch1 Eyes"
-	global.flagname[30] = "Ralsei Ch1 Hat"
-	global.flagname[31] = "Footsteps"
-	global.flagname[32] = "Party Item Comments"
-	global.flagname[35] = "Game Over Type"
-	global.flagname[21] = "Room Enter Freeze"
+	global.flagname[DRFLAG.BlockTextSkip] = "disable text skip [Broken?]"
+	global.flagname[DRFLAG.BlockMenu] = "disable Menu"
+	global.flagname[DRFLAG.Setting_SimplifyVFX] = "Simplify VFX"
+	global.flagname[DRFLAG.BattleMusicPlaying] = "Battle Music Playing"
+	global.flagname[DRFLAG.CanAutomash] = "Has Wrist Protector"
+	global.flagname[DRFLAG.Setting_AutoRun] = "AutoRun"
+	global.flagname[DRFLAG.DisableScreenShake] = "Disable Screenshake"
+	
+	global.flagname[DRFLAG.RoomEnterFreezeTimer] = "Room Enter Freeze Timer"
+	
+	global.flagname[DRFLAG.Chapter1SusieRevealedEyes] = "Susie Ch1 Eyes"
+	global.flagname[DRFLAG.Chapter1RalseiFaceOutfit] = "Ralsei Ch1 Hat"
+	global.flagname[DRFLAG.KrisMakeAudibleFootsteps] = "Footsteps"
+	global.flagname[DRFLAG.PartyCommentonItems] = "Party Item Comments"
+	global.flagname[DRFLAG.ChoiceTimer] = "Choice Timer"
+	global.flagname[DRFLAG.HideCharacterActs] = "Hide CharActs from Spell Menu"
+	global.flagname[DRFLAG.GameOverType] = "Game Over Type"
+	global.flagname[DRFLAG.FailedBattle] = "Lost Battle (No Reload)"
 	
 	global.flagname[55] = "Overworld Enemy Encounter X Pos"
 	global.flagname[56] = "Overworld Enemy Encounter Y Pos"
@@ -55,8 +83,8 @@ function global_flagname_init() {
 	global.flagname[407] = "Blue Checkmark 2"
 	global.flagname[420] = "Blue Checkmark 3"
 	// Battles
-	global.flagname[13] = "Multikey Attack"
-	global.flagname[14] = "Remember Last Option [Battle]"
+	global.flagname[DRFLAG.MultiKeyAttack] = "Multikey Attack"
+	global.flagname[DRFLAG.RememberLastOption_Battle] = "Remember Last Option [Battle]"
 	global.flagname[22] = "Block Soul Slow"
 	global.flagname[34] = "CharAction"
 	global.flagname[36] = "Failed Dojo"

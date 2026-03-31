@@ -223,7 +223,7 @@ if (global.myfight == 0)
         with (obj_smallface) depth = 3;
     }
     
-    if (global.bmenuno == 2 && global.flag[34] == 1) // Spells
+    if (global.bmenuno == 2 && global.flag[34] == 1) // Spells (No Char Acts)
     {
         with (battlewriter)
             skipme = 1;
@@ -340,7 +340,7 @@ if (global.myfight == 0)
         }
     }
     
-    if (global.bmenuno == 2 && global.flag[34] == 0) // Spells (?)
+    if (global.bmenuno == 2 && global.flag[34] == 0) // Spells (Char Acts Active)
     {
         with (battlewriter)
             skipme = 1;
