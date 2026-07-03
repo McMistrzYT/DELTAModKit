@@ -273,8 +273,7 @@ function scr_84_debug(stepmode) {
 			global.chemg_menu_depth = 0			
 		})
 		
-		// LTS 2026+ CONSOLE (not in lts 2022 so it will only be added here)
-		if global.chemg_menu_runtimeyear == "2026" {
+		if global.chemg_menu_runtimeyear > "2023" {
 		    group = ds_list_create();
 		    scr_84_push(parent);
 			var consoledata = __createoptiondata(function(item, name) { // Variable exists just for readability lol
