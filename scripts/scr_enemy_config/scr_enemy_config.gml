@@ -301,10 +301,10 @@ function scr_enemy_process_phase(enemyId, phase) {
 
 function scr_enemy_defeatrunanimations(){
 	#region Base Deltarune
-		scr_createdefeatanimation(obj_defeatanim, function() { return true     })     // Lowest Priorty, Default Battle Run
-		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    }, 10) // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
-		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen }, 60, function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
-		scr_createdefeatanimation(obj_spareanim,  function() { return _spared  }, 100,function(instance) { _spritetochangeto = sparedsprite }) // Frozen Solid.
+		scr_createdefeatanimation(obj_defeatanim, function() { return true     })       // Lowest Priorty, Default Battle Run
+		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    },  10)  // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
+		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen },  60,  function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
+		scr_createdefeatanimation(obj_spareanim,  function() { return __spared  }, 100, function(instance) { _spritetochangeto = sparedsprite }) // Spared and Pacified.
 	#endregion
 }
 
@@ -467,6 +467,7 @@ function scr_chaseenemy_chasetype(Type) {
 			if (alerttimer >= 25) speed = 0
 			if (alerttimer >= 27) alerttimer = 0
 		break}
+		
 		case 2: {
 			movestopointusingspeed = false
 			if (alerttimer == 0) {
@@ -491,6 +492,7 @@ function scr_chaseenemy_chasetype(Type) {
 	if movestopointusingspeed move_towards_point(targetx, targety, speed)
 }
 	
+/// @desc Not all pacetypes are here yet, mainly because of how many there is
 function scr_chaseenemy_pacetype(Type) {
 	#macro pacetype_rightandleftwithpauses 1
 	#macro pacetype_circlearound 2
@@ -500,8 +502,15 @@ function scr_chaseenemy_pacetype(Type) {
 	#macro pacetype_movesin_duplicated 7.1
 	#macro pacetype_movesin_flipped 7.5
 	#macro pacetype_movesin_vertical 8
+	#macro pacetype_leftrightmove 9
+	#macro pacetype_leftrightmove_alt 9.5
+	#macro pacetype_slidetokris 10
 	
 	#macro pacetype_followpath 11
+	#macro pacetype_doublesiner 12	
+	#macro pacetype_hovering 13
+	
+	
 	
 	switch Type {
 		default: if DEBUGMODE && scr_debug() show_debug_message("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
@@ -536,7 +545,27 @@ function scr_chaseenemy_pacetype(Type) {
 		case pacetype_movesin_vertical: {
 			vspeed = -sin(pacetimer / 25) * 12.5			
 		break}
+		case pacetype_leftrightmove: {
+			if (float != 0) y = yy - (sin(pacetimer / 5) * float)
 			
+			hspeed = sin(pacetimer / (pacespeed * 30)) * (moveradius / 20)
+			pacespeed = 0.8
+		break}
+		
+		case pacetype_leftrightmove_alt: {
+			if (float != 0) y = yy - sin(pacetimer / float)
+			
+			hspeed = 2 * (sin(pacetimer / 24) * (moveradius / 20))
+		break}
+		case pacetype_slidetokris: {
+			if (pacecon2 == 0) {
+				if (vspeed > 0) vspeed *= 0.9
+				
+				if (vspeed <= 0.5 && pacecon2 == 0) pacecon2 = 1
+			}
+			
+			if (pacecon2 == 1) move_towards_point(obj_mainchara.x, obj_mainchara.y, 4)			
+		break}
 		case pacetype_followpath: {
 			cancelwalk = 1
 			image_speed = 0.25
@@ -549,6 +578,15 @@ function scr_chaseenemy_pacetype(Type) {
 			
 			if (direction >= 306 || direction <= 45)
 				facing = 1			
+		break}
+		case pacetype_doublesiner: {
+			hspeed = -sin(pacetimer / 30) * 10
+			vspeed = (-sin(pacetimer / 12) * 12.5) / 10
+		break}
+		case pacetype_hovering: {
+			t = (t + increment) % 360
+			shift = amplitude * dsin(t)
+			y = yy + shift
 		break}
 	}
 }

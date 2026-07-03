@@ -1,10 +1,7 @@
-if (encounterflag > 0 && init == 0)
-{
-	if (global.flag[encounterflag] == 1)
-		instance_destroy()
+if (encounterflag > 0 && init == 0) {
+	if (global.flag[encounterflag] == MONSTERS_DEFEATTYPES_Violence) instance_destroy()
 	
-	if (global.flag[encounterflag] == 6)
-	{
+	if (global.flag[encounterflag] == MONSTERS_DEFEATTYPES_Frozen) {
 		if (frozensprite == 0) frozensprite = touchsprite
 		
 		frozennpc = instance_create(x, y, obj_frozennpc)
@@ -21,21 +18,17 @@ if (autodepth == 1)	scr_depth_alt()
 targetx = (obj_mainchara.x + (obj_mainchara.sprite_width / 2)) + (sprite_xoffset) - (sprite_width / 2)
 targety = (obj_mainchara.bbox_bottom - sprite_height) + (sprite_yoffset)
 
-if (global.interact == 0 || global.interact == 4)
+if (global.interact == 0 || global.interact == 4) frozen = 0
+
+if (scr_outside_camera(200) && offscreen_frozen == 1) 
+	frozen = 1 
+else 
 	frozen = 0
 
-if (scr_outside_camera(200) && offscreen_frozen == 1)
-	frozen = 1
-else
-	frozen = 0
+if (global.interact != 0 && global.interact != 4) frozen = 1
 
-if (global.interact != 0 && global.interact != 4)
-	frozen = 1
-
-if (frozen == 1 && ignorefreeze == 0)
-{
-	if (hadfrozen == 0)
-	{
+if (frozen == 1 && ignorefreeze == 0) {
+	if (hadfrozen == 0) {
 		remspeed = speed
 		speed = 0
 		hadfrozen = 1
@@ -44,8 +37,7 @@ if (frozen == 1 && ignorefreeze == 0)
 
 if (frozen == 0) {
 	if (hadfrozen == 1) {
-		if (speed == 0)
-			speed = remspeed
+		if (speed == 0) speed = remspeed
 		
 		hadfrozen = 0
 	}
@@ -54,51 +46,6 @@ if (frozen == 0) {
 		pacetimer += 1
 		
 		scr_chaseenemy_pacetype(pacetype)
-		
-		if (pacetype == 9)
-		{
-			if (float != 0)
-				y = yy - (sin(pacetimer / 5) * float)
-			
-			hspeed = sin(pacetimer / (pacespeed * 30)) * (moveradius / 20)
-			pacespeed = 0.8
-		}
-		
-		if (pacetype == 9.5)
-		{
-			if (float != 0)
-				y = yy - sin(pacetimer / float)
-			
-			hspeed = 2 * (sin(pacetimer / 24) * (moveradius / 20))
-		}
-		
-		if (pacetype == 10)
-		{
-			if (pacecon2 == 0)
-			{
-				if (vspeed > 0)
-					vspeed *= 0.9
-				
-				if (vspeed <= 0.5 && pacecon2 == 0)
-					pacecon2 = 1
-			}
-			
-			if (pacecon2 == 1)
-				move_towards_point(obj_mainchara.x, obj_mainchara.y, 4)
-		}
-		
-		if (pacetype == 12)
-		{
-			hspeed = -sin(pacetimer / 30) * 10
-			vspeed = (-sin(pacetimer / 12) * 12.5) / 10
-		}
-		
-		if (pacetype == 13)
-		{
-			t = (t + increment) % 360
-			shift = amplitude * dsin(t)
-			y = yy + shift
-		}
 		
 		if (pacetype == 14)
 		{

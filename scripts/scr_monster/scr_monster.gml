@@ -55,7 +55,7 @@ function scr_monster_add(arg0, arg1)
 }
 
 function scr_spareanim() {
-	_spared = true
+	__spared = true
 	scr_defeatrun()
 }
 

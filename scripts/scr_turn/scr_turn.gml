@@ -577,14 +577,14 @@ function scr_enemy_hurt(){
 
 function scr_defeatrun(){
 	if !variable_struct_exists(self, "__frozen")   __frozen = false
-	if !variable_struct_exists(self, "_spared")		_spared = false
+	if !variable_struct_exists(self, "__spared")   __spared = false
 	if !variable_struct_exists(self, "fatal")		  fatal = false
 	if variable_struct_exists(self, "myself") {
 		switch global.flag[51 + myself] {
 			case MONSTERS_DEFEATTYPES_Frozen: __frozen = true break;
 			
 			case MONSTERS_DEFEATTYPES_Pacify:
-			case MONSTERS_DEFEATTYPES_Spare: _spared = true break;
+			case MONSTERS_DEFEATTYPES_Spare: __spared = true break;
 		}
 	}
 	
@@ -594,7 +594,7 @@ function scr_defeatrun(){
 		var brokenbond = true // By default a Bond is likely broken.
 			
 	    if __frozen messageanimindex = 12 // Make Status Text "Frozen."
-		if _spared brokenbond = false
+		if __spared brokenbond = false
 		
 		if brokenbond {
 	        global.flag[63] = true;
