@@ -413,6 +413,21 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 	}
 }
 
+function scr_caterpillar_getactorvariable(name) {
+	switch string(name) {
+		case "kris": return "kr"
+		case "susie": return "su"
+		case "ralsei": return "ra"
+		case "noelle": return "noe"
+		
+		// Custom
+		case "starwalker": return "star"
+	}
+	
+	return undefined
+}
+
+
 function scr_character_set_caterpillar_offsets(charIdx) {
 	// All Alignment Values have been Changed for Lightworld Scale, and will be Resized to Dark At the end of This Script.
 	#region Default Caterpillar

@@ -3,8 +3,9 @@ scr_input_manager_process();
 if (!paused) global.time += 1;
 else return;
 
-if (scr_debug())
-{
+if (scr_debug()) {
+    if (scr_84_debug(1)) exit;
+	
     if (sunkus_kb_check_pressed(117) && quicksaved == 22)
     {
         quicksaved = 1;
@@ -121,7 +122,7 @@ if (scr_debug())
     }
 }
 
-if (sunkus_kb_check(27))
+if (sunkus_kb_check(vk_escape))
 {
     if (quit_timer < 0)
         quit_timer = 0;

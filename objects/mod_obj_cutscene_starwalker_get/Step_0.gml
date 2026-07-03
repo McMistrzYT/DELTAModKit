@@ -7,7 +7,7 @@ if con == 0 && obj_mainchara.x < x {
 	
 	star = 0;
 	star_actor = getsStarwalker ?
-		instance_create(mod_obj_marker_z.x, mod_obj_marker_z.y, obj_actor) :
+		instance_create(i_ex(mod_obj_marker_z) ? mod_obj_marker_z.x : 0, i_ex(mod_obj_marker_z) ? mod_obj_marker_z.y : 0, obj_actor) :
 		instance_create(obj_caterpillarchara.x, obj_caterpillarchara.y, obj_actor);
 		
 	scr_character_set_caterpillar_sprites(DRCharacter.Starwalker)
@@ -18,13 +18,13 @@ if con == 0 && obj_mainchara.x < x {
 	scr_actor_setup_nofacing(star, star_actor, "starwalker");
 	
 	c_pannable(true);
-	c_panobj(mod_obj_marker_k, 35);
+	c_panobj(i_ex(mod_obj_marker_k) ? mod_obj_marker_k : obj_mainchara, 35);
 	
 	c_sel(kr);
-		c_walktoobject(mod_obj_marker_a, 0, 0, 35);
+		c_walktoobject(i_ex(mod_obj_marker_a) ? mod_obj_marker_a : obj_mainchara, 0, 0, 35);
 		
 	c_sel(star);
-		c_walktoobject(mod_obj_marker_b, 0, 0, 35);
+		c_walktoobject(i_ex(mod_obj_marker_b) ? mod_obj_marker_b : obj_mainchara, 0, 0, 35);
 		
 	c_wait(35);
 	
@@ -52,10 +52,10 @@ if con == 0 && obj_mainchara.x < x {
 	}
 	
 	c_sel(su);
-	c_walktoobject(mod_obj_marker_c, 0, 0, 35);
+	c_walktoobject(i_ex(mod_obj_marker_c) ? mod_obj_marker_c : obj_mainchara, 0, 0, 35);
 			
 	c_sel(ra);
-	c_walktoobject(mod_obj_marker_d, 0, 0, 35);
+	c_walktoobject(i_ex(mod_obj_marker_d) ? mod_obj_marker_d : obj_mainchara, 0, 0, 35);
 	
 	c_wait(35);
 	
