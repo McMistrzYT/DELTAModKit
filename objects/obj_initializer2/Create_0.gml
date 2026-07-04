@@ -1,4 +1,5 @@
 global.is_console = /*scr_is_switch_os() || */os_type == os_ps4 || os_type == os_ps5;
+global.runtimeyear = string_split(GM_runtime_version, ".", 0)[0]
 
 global.charname = [];
 repeat DRCharacter.__MAX__ array_push(global.charname, "???")

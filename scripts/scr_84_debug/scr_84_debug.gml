@@ -1,6 +1,5 @@
 function scr_84_debug(stepmode) {
 	if (!variable_global_exists("chemg_menu_depth")) {
-		global.chemg_menu_runtimeyear = string_split(GM_runtime_version, ".", 0)[0]
 		global.chemg_menu_console_active = 0
 		global.chemg_menu_indices = array_create(0)
 		global.chemg_menu_indices[0] = 0
@@ -18,8 +17,6 @@ function scr_84_debug(stepmode) {
 				execute: executemethod
 			}
 		}
-		
-		
 		
 		var groupdata = __createoptiondata(function(item, name) {
 			global.chemg_menu_indices[global.chemg_menu_depth] = 0
@@ -273,7 +270,7 @@ function scr_84_debug(stepmode) {
 			global.chemg_menu_depth = 0			
 		})
 		
-		if global.chemg_menu_runtimeyear > "2023" {
+		if global.runtimeyear > "2023" {
 		    group = ds_list_create();
 		    scr_84_push(parent);
 			var consoledata = __createoptiondata(function(item, name) { // Variable exists just for readability lol
@@ -522,3 +519,64 @@ function scr_84_get_sound(soundname) {
 
 function scr_84_get_sprite(spritename) { return ds_map_find_value(global.chemg_sprite_map, spritename); }
 function scr_84_is_digit(letter) { return letter >= "0" && letter <= "9"; }
+
+/// @arg FileName
+function scr_84_load_map_json(argument0){
+	var filename = argument0
+	
+	if (file_exists(filename))
+	{
+		var file_buffer = buffer_load(filename)
+		var json = buffer_read(file_buffer, buffer_string)
+		buffer_delete(file_buffer)
+		return json_decode(json);
+	}
+	else
+	{
+		show_debug_message("file: " + filename + "does not exist")
+		return json_decode("{}");
+	}
+}
+
+
+function scr_84_lang_load(){
+	var name = "lang_" + global.lang + ".json"
+	var orig_filename = working_directory + "lang/" + name
+	var new_filename = working_directory + "lang-new/" + name
+	var filename = orig_filename
+	var type = "orig"
+	var orig_map = json_decode("{}")
+	
+	if (!is_english()) {
+		show_debug_message("loading lang: " + orig_filename)
+		orig_map = scr_84_load_map_json(orig_filename)
+		
+		if (file_exists(new_filename)) {
+			var new_map = scr_84_load_map_json(new_filename)
+			var new_date = real(ds_map_find_value(new_map, "date"))
+			var orig_date = real(ds_map_find_value(orig_map, "date"))
+			show_debug_message("orig_date: " + string(orig_date))
+			show_debug_message(" new_date: " + string(new_date))
+			
+			if (new_date > orig_date) {
+				show_debug_message("using new language file")
+				ds_map_destroy(orig_map)
+				orig_map = new_map
+				filename = new_filename
+				type = "new(" + string(new_date) + ")"
+			} else {
+				show_debug_message("using orig language file")
+			}
+		}
+		
+		ds_map_destroy(global.lang_map)
+		global.lang_map = orig_map
+		
+		if (!is_english()) {
+			global.jp_data_loaded = true
+			show_debug_message("loaded: " + filename + ", entries: " + string(ds_map_size(global.lang_map)))
+		}
+	}
+	
+	return type;
+}

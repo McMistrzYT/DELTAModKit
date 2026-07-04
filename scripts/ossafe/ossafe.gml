@@ -380,9 +380,8 @@ function ossafe_file_text_close(arg0)
     }
 }
 
-function langopt(en, ja) {
-    return (global.lang == "ja") ? ja : en;
-}
+function is_english() { return langopt(true, false)	}
+function langopt(en, ja) { return (global.lang == "ja") ? ja : en; }
 
 function scr_timedisp(frames) {
     var minutes = floor(frames / 1800);
@@ -736,4 +735,14 @@ function ossafe_fill_rectangle_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6, a
     }
     
     draw_rectangle_color(x1, y1, x2, y2, col1, col2, col3, col4, outline);
+}
+
+function scr_change_language(){
+	global.lang = langopt("ja", "en")
+	
+	ossafe_ini_open("true_config.ini")
+	ini_write_string("LANG", "LANG", global.lang)
+	ossafe_ini_close()
+	ossafe_savedata_save()
+	if scr_asset_exists("scr_84_init_localization") scr_84_init_localization()
 }
