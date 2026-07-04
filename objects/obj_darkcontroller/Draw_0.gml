@@ -580,25 +580,24 @@ if (global.menuno == 2)
     
     if (global.submenu == 12 || global.submenu == 13 || global.submenu == 14)
     {
-        var __equipmenumax = 47;
+        var __equipmenumax = (INVENTORYMAX_ARMORANDWEAPONS - 1);
         var scroll_xoff = langopt(0, 50);
-        
-        if (global.submenu == 12)
-            pm = 0;
-        else
-            pm = 1;
+		var scrolloptionsvisibleatonce = 5
+		var scrollheight = 110 + scrolloptionsvisibleatonce
+		
+		pm = global.submenu == 12 ? 0 : 1
+		
+		var scrollposy = (pagemax[pm] * (scrollheight / ( __equipmenumax - scrolloptionsvisibleatonce)))
         
         draw_sprite(spr_heart, 0, xx + 344 + eq_xoff, yy + 240 + ((global.submenucoord[global.submenu] - pagemax[pm]) * 27));
         draw_set_color(c_dkgray);
-        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + 115, false);
+        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + scrollheight, false);
         draw_set_color(c_white);
-        draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + (pagemax[pm] * 2.738095238095238)) - 1, xx + 560 + scroll_xoff, yy + 263 + (pagemax[pm] * 2.738095238095238) + 1, false);
+        draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + scrollposy) - 1, xx + 560 + scroll_xoff, yy + 263 + scrollposy + 1, false);
+		        
+        if (pagemax[pm] > 0) draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, (yy + 250) - (sin(cur_jewel / 12) * 3), 1, -1, 0, c_white, 1);
         
-        if (pagemax[pm] > 0)
-            draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, (yy + 250) - (sin(cur_jewel / 12) * 3), 1, -1, 0, c_white, 1);
-        
-        if ((5 + pagemax[pm]) < __equipmenumax)
-            draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, yy + 385 + (sin(cur_jewel / 12) * 3), 1, 1, 0, c_white, 1);
+        if ((scrolloptionsvisibleatonce + pagemax[pm]) < __equipmenumax) draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, yy + 385 + (sin(cur_jewel / 12) * 3), 1, 1, 0, c_white, 1);
     }
     
     draw_set_color(c_white);

@@ -13,11 +13,13 @@ function scr_chapter_get_recruit_color(chapter) {
 		case 2: return c_aqua;
 		case 3: return c_green;
 		case 4: return c_blue;
+		case 5: return c_yellow;
 	}
 	
 	return c_black;
 }
 
+/// @desc This is ran when loading a save from a previous Chapter and in scr_gamestart
 function scr_gamestart_chapter_override(){
     global.plot = 0;
     global.char[0] = DRCharacter.Kris;

@@ -8,8 +8,8 @@ enum DRTENSIONCOLOR {
 
 // Chapter 1 Accurate Settings: {EnableTensionbarAlphaFix 1, EnableTensionbarSlicedCorners 0}
 // Chapter 2+Accurate Settings: {EnableTensionbarAlphaFix 0, EnableTensionbarSlicedCorners 1}
-#macro EnableTensionbarAlphaFix 1
-#macro EnableTensionbarSlicedCorners 0
+#macro EnableTensionbarAlphaFix 0
+#macro EnableTensionbarSlicedCorners 1
 function scr_tensionbar_colors_init(){
 	global.barcolors = []
 	global.defaultbarcolor = DRTENSIONCOLOR.Orange

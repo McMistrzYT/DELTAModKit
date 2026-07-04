@@ -522,43 +522,32 @@ function scr_load_chapter2()
     global.grazesize = ossafe_file_text_read_real(myfileid);
     ossafe_file_text_readln(myfileid);
     
-    if (global.is_console)
-    {
+    if (global.is_console){
         var item_list = scr_ds_list_read(myfileid);
-        
-        for (i = 0; i < ds_list_size(item_list); i += 1)
-            global.item[i] = ds_list_find_value(item_list, i);
-        
+        for (i = 0; i < ds_list_size(item_list); i += 1) global.item[i] = ds_list_find_value(item_list, i);
         ds_list_destroy(item_list);
+		
         ossafe_file_text_readln(myfileid);
         var keyitem_list = scr_ds_list_read(myfileid);
-        
-        for (i = 0; i < ds_list_size(keyitem_list); i += 1)
-            global.keyitem[i] = ds_list_find_value(keyitem_list, i);
-        
+        for (i = 0; i < ds_list_size(keyitem_list); i += 1) global.keyitem[i] = ds_list_find_value(keyitem_list, i);
         ds_list_destroy(keyitem_list);
+		
         ossafe_file_text_readln(myfileid);
         var weapon_list = scr_ds_list_read(myfileid);
-        
-        for (i = 0; i < ds_list_size(weapon_list); i += 1)
-            global.weapon[i] = ds_list_find_value(weapon_list, i);
-        
+        for (i = 0; i < ds_list_size(weapon_list); i += 1) global.weapon[i] = ds_list_find_value(weapon_list, i);
         ds_list_destroy(weapon_list);
+		
         ossafe_file_text_readln(myfileid);
         var armor_list = scr_ds_list_read(myfileid);
-        
-        for (i = 0; i < ds_list_size(armor_list); i += 1)
-            global.armor[i] = ds_list_find_value(armor_list, i);
-        
+        for (i = 0; i < ds_list_size(armor_list); i += 1) global.armor[i] = ds_list_find_value(armor_list, i);
         ds_list_destroy(armor_list);
+		
         ossafe_file_text_readln(myfileid);
         var pocket_list = scr_ds_list_read(myfileid);
-        
-        for (i = 0; i < ds_list_size(pocket_list); i += 1)
-            global.pocketitem[i] = ds_list_find_value(pocket_list, i);
-        
+        for (i = 0; i < ds_list_size(pocket_list); i += 1) global.pocketitem[i] = ds_list_find_value(pocket_list, i);
         ds_list_destroy(pocket_list);
         ossafe_file_text_readln(myfileid);
+		
     }
     else
     {

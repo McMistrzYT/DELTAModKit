@@ -52,8 +52,7 @@ function get_chapter_switch_parameters()
 }
 
 
-function scr_gamestart()
-{
+function scr_gamestart() {
 	__global_object_depths();
 	global.main_font = fnt_main;
 	global.mainbig_font = fnt_mainbig;
@@ -62,13 +61,8 @@ function scr_gamestart()
     global.filechoice = 0;
     global.plot = 0;
     global.truename = "";
-    global.othername[0] = "";
-    global.othername[1] = "";
-    global.othername[2] = "";
-    global.othername[3] = "";
-    global.othername[4] = "";
-    global.othername[5] = "";
-    global.othername[6] = "";
+	global.othername = array_create(7, "");
+	
     global.townname = " ";
     global.time = 0;
     global.fighting = 0;
@@ -91,8 +85,7 @@ function scr_gamestart()
     global.tension = 0;
     global.maxtension = 250;
     
-    for (i = 0; i < 3; i += 1)
-    {
+    for (i = 0; i < 3; i += 1){
         global.heromakex[i] = 100;
         global.heromakey[i] = 200;
         global.charauto[i] = false;
@@ -122,8 +115,7 @@ function scr_gamestart()
     for (i = 0; i < 72; i++)
         global.pocketitem[i] = DRItem.None;
     
-    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i++)
-    {
+    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i++) {
         global.weapon[i] = DRWeapon.None;
         global.armor[i] = DRArmor.None;
     }
@@ -142,8 +134,7 @@ function scr_gamestart()
     global.keyitem[11] = DRKeyItem.None;
     global.keyitem[12] = DRKeyItem.None;
     
-    for (i = 0; i < DRCharacter.__MAX__; i += 1)
-    {
+    for (i = 0; i < DRCharacter.__MAX__; i += 1) {
         global.hp[i] = 200;
         global.maxhp[i] = 250;
         global.at[i] = 10;
@@ -157,8 +148,7 @@ function scr_gamestart()
         global.charname[i] = " ";
 		global.charauto[i] = false;
         
-        for (q = 0; q < 4; q += 1)
-        {
+        for (q = 0; q < 4; q += 1){
             global.itemat[i][q] = 0;
             global.itemdf[i][q] = 0;
             global.itemmag[i][q] = 0;
@@ -249,8 +239,7 @@ function scr_gamestart()
     global.msc = 0;
     global.msgno = 0;
     
-    for (i = 0; i < 10; i += 1)
-    {
+    for (i = 0; i < 10; i += 1) {
         global.writersnd[i] = snd_noise;
         global.writerimg[i] = spr_btact;
         global.writerobj[i] = obj_funnytext;
@@ -282,14 +271,8 @@ function scr_gamestart()
     global.smcolor[1] = c_white;
     global.smstring[1] = " ";
     
-    for (i = 0; i < 100; i += 1)
-        global.msg[i] = "%%";
+    global.msg = array_create(100, "%%");
     
-    global.msg[0] = " ";
-    global.msg[1] = " ";
-    global.msg[2] = " ";
-    global.msg[3] = " ";
-    global.msg[4] = " ";
     global.currentsong[0] = 0;
     global.currentsong[1] = 0;
     global.batmusic[0] = 0;
@@ -314,9 +297,6 @@ function scr_gamestart()
     
     for (i = 0; i < 20; i += 1)
         global.menucoord[i] = 0;
-    
-    for (i = 0; i < 100; i += 1)
-        global.msg[i] = " ";
     
     global.choicemsg[0] = "Yes";
     global.choicemsg[1] = "No";
@@ -359,8 +339,7 @@ function scr_gamestart()
     global.flag[224] = floor(random(31));
     global.flag[225] = floor(random(31));
     
-    if (global.chapter >= 2)
-    {
+    if (global.chapter >= 2) {
         global.flag[605] = 1;
         global.flag[606] = 1;
         global.flag[611] = 1;
@@ -375,8 +354,7 @@ function scr_gamestart()
         global.flag[803] = 5;
     }
     
-    if (global.chapter >= 3)
-    {
+    if (global.chapter >= 3) {
         global.flag[457] = 1;
         global.flag[632] = 1;
         global.flag[633] = 1;

@@ -81,16 +81,13 @@ function scr_lweapon_can_equip(arg0)
     return have_dw_weapon;
 }
 
-function scr_equip_dw_weapon_by_lw_id(arg0)
-{
+function scr_equip_dw_weapon_by_lw_id(arg0){
     var weapon = get_weapon_by_lw_id(arg0);
     var old_equip = global.charweapon[1];
     global.charweapon[1] = weapon.dw_id;
     
-    for (var i = 0; i < array_length(global.weapon); i++)
-    {
-        if (global.weapon[i] == weapon.dw_id)
-        {
+    for (var i = 0; i < array_length(global.weapon); i++){
+        if (global.weapon[i] == weapon.dw_id) {
             global.weapon[i] = old_equip;
             break;
         }

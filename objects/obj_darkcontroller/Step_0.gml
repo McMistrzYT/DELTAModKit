@@ -1317,23 +1317,18 @@ if (global.interact == 5) { // If Menu is Open
                 
                 hold_down += 1;
                 
-                if (hold_down >= 8)
-                {
+                if (hold_down >= 8){
                     _down_pressed = 1;
                     hold_down = 6;
                 }
                 
-                var __equipmenumax = 47;
+                var __equipmenumax = (INVENTORYMAX_ARMORANDWEAPONS - 1);
                 
-                if (global.submenucoord[global.submenu] < __equipmenumax && _down_pressed == 1)
-                {
+                if (global.submenucoord[global.submenu] < __equipmenumax && _down_pressed == 1){
                     movenoise = 1;
                     
-                    if (global.submenu == 12)
-                        nextone = global.weapon[global.submenucoord[global.submenu + 1]];
-                    
-                    if (global.submenu == 13 || global.submenu == 14)
-                        nextone = global.armor[global.submenucoord[global.submenu + 1]];
+                    if (global.submenu == 12) nextone = global.weapon[global.submenucoord[global.submenu + 1]];
+                    if (global.submenu == 13 || global.submenu == 14) nextone = global.armor[global.submenucoord[global.submenu + 1]];
                     
                     global.submenucoord[global.submenu] += 1;
                     
