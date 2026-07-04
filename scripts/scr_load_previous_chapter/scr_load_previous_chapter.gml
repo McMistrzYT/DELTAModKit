@@ -567,7 +567,7 @@ function scr_load_chapter2()
             ossafe_file_text_readln(myfileid);
         }
         
-        for (j = 0; j < 72; j += 1)
+        for (j = 0; j < INVENTORYMAX_STORAGEARRAYSIZE; j += 1)
         {
             global.pocketitem[j] = ossafe_file_text_read_real(myfileid);
             ossafe_file_text_readln(myfileid);

@@ -97,28 +97,12 @@ function scr_gamestart() {
         global.faceaction[i] = 0;
         global.charcond[i] = 0;
     }
-    
-    global.item[0] = DRItem.None;
-    global.item[1] = DRItem.None;
-    global.item[2] = DRItem.None;
-    global.item[3] = DRItem.None;
-    global.item[4] = DRItem.None;
-    global.item[5] = DRItem.None;
-    global.item[6] = DRItem.None;
-    global.item[7] = DRItem.None;
-    global.item[8] = DRItem.None;
-    global.item[9] = DRItem.None;
-    global.item[10] = DRItem.None;
-    global.item[11] = DRItem.None;
-    global.item[12] = DRItem.None;
-    
-    for (i = 0; i < 72; i++)
-        global.pocketitem[i] = DRItem.None;
-    
-    for (i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i++) {
-        global.weapon[i] = DRWeapon.None;
-        global.armor[i] = DRArmor.None;
-    }
+	
+    global.item = array_create(13, DRItem.None)
+    global.pocketitem = array_create(INVENTORYMAX_STORAGEARRAYSIZE, DRItem.None)
+		
+	global.weapon = array_create(INVENTORYMAX_ARMORANDWEAPONS, DRWeapon.None)
+	global.armor = array_create(INVENTORYMAX_ARMORANDWEAPONS, DRArmor.None)
     
     global.keyitem[0] = DRKeyItem.CellPhone;
     global.keyitem[1] = DRKeyItem.None;

@@ -476,7 +476,7 @@ function scr_saveprocess(arg0) {
         ossafe_file_text_writeln(myfileid);
         scr_ds_list_write(global.armor, INVENTORYMAX_ARMORANDWEAPONS);
         ossafe_file_text_writeln(myfileid);
-        scr_ds_list_write(global.pocketitem, 72);
+        scr_ds_list_write(global.pocketitem, INVENTORYMAX_STORAGEARRAYSIZE);
         ossafe_file_text_writeln(myfileid);
     }
     else
@@ -497,7 +497,7 @@ function scr_saveprocess(arg0) {
             ossafe_file_text_writeln(myfileid);
         }
         
-        for (j = 0; j < 72; j++)
+        for (j = 0; j < INVENTORYMAX_STORAGEARRAYSIZE; j++)
         {
             ossafe_file_text_write_real(myfileid, global.pocketitem[j]);
             ossafe_file_text_writeln(myfileid);
@@ -812,7 +812,7 @@ function scr_load() {
 	            ossafe_file_text_readln(myfileid);
 	        }
         
-	        for (j = 0; j < 72; j += 1)
+	        for (j = 0; j < INVENTORYMAX_STORAGEARRAYSIZE; j += 1)
 	        {
 	            global.pocketitem[j] = ossafe_file_text_read_real(myfileid);
 	            ossafe_file_text_readln(myfileid);

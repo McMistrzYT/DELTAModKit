@@ -51,8 +51,7 @@ function scr_gamestart_chapter_override(){
 	
     scr_itemremove(DRItem.Manual);
     
-    if (global.flag[64] < 24)
-        global.flag[64] = 24;
+    if (global.flag[64] < INVENTORYMAX_STORAGE) global.flag[64] = INVENTORYMAX_STORAGE;
     
     if (global.chapter == 3) {
         global.flag[1173] = 0;
