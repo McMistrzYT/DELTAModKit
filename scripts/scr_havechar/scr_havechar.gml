@@ -74,7 +74,7 @@ function scr_getchar(charid, force = false) {
 	if getchar == false {
 		var charname = "UnknownCharacter | " + string(characterToGet)
 		try { charname = global.charname[characterToGet] } catch (ex) {} // Incase if that charname does not Exist.
-		show_debug_message("Tried to add '{0}' to the party, {1}", charname, force ? "Forcing in anyways." : "But the party was full.")
+		debug_log("Tried to add '{0}' to the party, {1}", charname, force ? "Forcing in anyways." : "But the party was full.")
 		
 		if force {
 			array_push(global.char, characterToGet)

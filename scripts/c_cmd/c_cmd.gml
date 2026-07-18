@@ -1,10 +1,10 @@
 function c_cmd(arg0, arg1, arg2, arg3, arg4)
 {
-	show_debug_message("Trying to schedule command '" + arg0 + "'!");
+	debug_log("Trying to schedule command '" + arg0 + "'!");
 	
     if (instance_exists(obj_cutscene_master))
     {
-		show_debug_message("cutscene master is real!!")
+		debug_log("cutscene master is real!!")
         __cs_i = obj_cutscene_master.maximum_command - 1;
         obj_cutscene_master.command[__cs_i] = arg0;
         obj_cutscene_master.command_arg1[__cs_i] = arg1;

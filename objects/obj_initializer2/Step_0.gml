@@ -11,7 +11,7 @@ if (global.is_console) {
         textures_loaded = loadtex.loaded;
     
     //if (textures_loaded)
-        //show_debug_message_concat("TEXTURES LOADED");
+        //debug_log_concat("TEXTURES LOADED");
     //else
         //exit;
 }
@@ -33,7 +33,7 @@ var CH = string(global.chapter);
 		if global.runtimeyear > "2023" {
 			if array_length(room_get_info(room_intro).instances) <= 0 {
 				menu_go = 2
-				show_debug_message("Intro room has no Instances, Ignoring the possibility of going there in favor of Legend.")
+				debug_log("Intro room has no Instances, Ignoring the possibility of going there in favor of Legend.")
 			} else roomchoice = room_intro;
 		} else {
 			roomchoice = room_intro	

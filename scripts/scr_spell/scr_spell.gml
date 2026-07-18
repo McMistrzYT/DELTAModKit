@@ -6,7 +6,7 @@ function scr_spell(spellid, casterid)
     global.spelldelay = 10;
     var item_use = false;
 	
-	show_debug_message("scr_spell({0}, {1})", spellid, casterid);
+	debug_log("scr_spell({0}, {1})", spellid, casterid);
 	
 	if spellid < 10000
 		scr_spell_use_action(casterid, spellid);

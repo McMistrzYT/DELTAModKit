@@ -45,7 +45,7 @@ if (!global.is_console)
         ini_open("true_config.ini");
         ini_write_real("SCREEN", "FULLSCREEN", nowfullscreen);
         ini_close();
-        show_debug_message("fullscreen switched:" + string(nowfullscreen));
+        debug_log("fullscreen switched:" + string(nowfullscreen));
         
         if (!nowfullscreen)
         {

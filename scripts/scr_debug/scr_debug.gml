@@ -1,5 +1,4 @@
-function scr_debug_print(msg)
-{
+function scr_debug_print(msg){
     if (!scr_debug())
     {
         exit;
@@ -26,7 +25,7 @@ function scr_debug_print(msg)
             debugmessage += ("#" + message[i]);
         }
     }
-    show_debug_message(msg)
+    debug_log(msg)
 }
 
 function print_message(msg)
@@ -145,4 +144,15 @@ function debug_printline(string, yoff)
         draw_set_color(c_white);
 		draw_text(xx, yy, string);
     }
+}
+
+/// @argument Message
+/// @desc a recreation of the debug_log function used for REMOTERune's CatSpeak
+function debug_log(){
+	var arguments = argument_count - 1
+	var main = string(argument[0])
+	for (var i = 0; i < arguments; i++) {
+		main = string_replace_all(main, "{" + string(i) + "}", string(argument[i + 1]))
+	}
+	show_debug_message(main)
 }

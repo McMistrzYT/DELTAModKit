@@ -23,11 +23,11 @@ if global.monster[myself]
 if scr_isphase(DREncounterPhase.Acting)
 {
 	if scr_debug() && !mod_debug_printed {
-		show_debug_message("acting");
-		show_debug_message(acting);
+		debug_log("acting");
+		debug_log(acting);
 	
-		show_debug_message("actcon");
-		show_debug_message(actcon);
+		debug_log("actcon");
+		debug_log(actcon);
 		
 		mod_debug_printed = true;
 	}

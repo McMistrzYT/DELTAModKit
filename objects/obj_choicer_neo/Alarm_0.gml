@@ -2,7 +2,7 @@ var dialoguerObj = obj_dialoguer;
 
 with (dialoguerObj)
 {
-	show_debug_message("DIALOGUER: " + string(global.msc) + " + 1");
+	debug_log("DIALOGUER: " + string(global.msc) + " + 1");
     if (i_ex(writer))
     {
         wwx = writer.x;

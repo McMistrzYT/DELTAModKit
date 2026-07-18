@@ -1,1 +1,1 @@
-show_debug_message("stopping existance");
+debug_log("stopping existance");

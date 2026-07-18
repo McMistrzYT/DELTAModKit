@@ -1459,7 +1459,7 @@ function scr_item_use_action_battle(casterid, itemid) {
 		}
     }
 	
-	show_debug_message("scr_item_use_action_battle({0}, {1}) = {2}", casterid, itemid, item_use);
+	debug_log("scr_item_use_action_battle({0}, {1}) = {2}", casterid, itemid, item_use);
 	return item_use;
 }
 

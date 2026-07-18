@@ -189,7 +189,7 @@ if (frozen == 0) {
 					if (place_meeting(x - leftbound, y, obj_solidblock) || place_meeting(x - leftbound, y, obj_solidenemy) || place_meeting(x - leftbound, y, obj_solidenemy_2) || leftbound >= 480)
 					{
 						leftboundcheck = 1
-						show_debug_message("leftbound:" + string(leftbound))
+						debug_log("leftbound:" + string(leftbound))
 					}
 					else
 					{
@@ -205,7 +205,7 @@ if (frozen == 0) {
 					if (place_meeting(x + rightbound, y, obj_solidblock) || place_meeting(x + rightbound, y, obj_solidenemy) || place_meeting(x + rightbound, y, obj_solidenemy_2) || rightbound >= 480)
 					{
 						rightboundcheck = 1
-						show_debug_message("rightbound:" + string(rightbound))
+						debug_log("rightbound:" + string(rightbound))
 					}
 					else
 					{
@@ -218,7 +218,7 @@ if (frozen == 0) {
 				else
 					moveradius = rightbound - 8
 				
-				show_debug_message("moveradius:" + string(moveradius))
+				debug_log("moveradius:" + string(moveradius))
 				siner = 0
 				pacesinspeed = moveradius / (pacespeed * 3)
 				paceinit = 1

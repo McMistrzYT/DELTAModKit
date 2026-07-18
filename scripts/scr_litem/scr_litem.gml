@@ -74,7 +74,7 @@ function scr_lweapon_can_equip(arg0)
     var have_dw_weapon = false;
     
     if (weapon == -4)
-        show_debug_message("Error: couldn't find light world weapon by id " + string(arg0));
+        debug_log("Error: couldn't find light world weapon by id " + string(arg0));
     else
         have_dw_weapon = scr_weaponcheck_inventory(weapon.dw_id) || scr_weaponcheck_equipped_any(weapon.dw_id) >= 1;
     
@@ -124,7 +124,7 @@ function get_weapon_by_lw_id(arg0)
         if (weapon_id == weapon_list[i].lw_id)
         {
             weapon = weapon_list[i];
-			show_debug_message("{0} == {1}, light world weapon found", weapon_id, weapon_list[i].lw_id);
+			debug_log("{0} == {1}, light world weapon found", weapon_id, weapon_list[i].lw_id);
             break;
         }
     }

@@ -4,4 +4,4 @@ if (free == 1)
 with (myface)
     instance_destroy();
 
-show_debug_message("dialoguer bye")
+debug_log("dialoguer bye")

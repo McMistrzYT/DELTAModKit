@@ -110,9 +110,9 @@ function scr_monsterdefeat() {
                
             if (global.flag[54] != 0) {
                 global.flag[global.flag[54]] = global.flag[50];
-                show_debug_message("=====Encounter Results=====");
-                show_debug_message("encounter flag: global.flag[" + string(global.flag[54]) + "]=" + string(global.flag[50]));
-                show_debug_message("=======");
+                debug_log("=====Encounter Results=====");
+                debug_log("encounter flag: global.flag[" + string(global.flag[54]) + "]=" + string(global.flag[50]));
+                debug_log("=======");
                 global.flag[54] = 0;
             }
         }

@@ -8,7 +8,7 @@ function scr_84_debug(stepmode) {
 		global.chemg_show_room = 1
 		global.chemg_font_test = 0
 		var parent = ds_list_create()
-		show_debug_message("init debug")
+		debug_log("init debug")
 		var group = ds_list_create()
 		
 		var __createoptiondata = function(executemethod = function(item, name) { show_message("ERROR!") }, drawmethod = function(item, name) { return name }) {
@@ -29,7 +29,7 @@ function scr_84_debug(stepmode) {
 			function(item, name) {
 					global.chemg_menu_depth = 0
 					scr_change_language()
-					show_debug_message("switch lang: " + string(global.lang))
+					debug_log("switch lang: " + string(global.lang))
 					room_restart()
 			},
 			function(item, name) { 
@@ -53,7 +53,7 @@ function scr_84_debug(stepmode) {
 			draw_text: function(item, name) {	return name	
 			}, execute: function(item) {
 				var type = scr_84_lang_load()
-				show_debug_message("loaded " + type + " lang file")
+				debug_log("loaded " + type + " lang file")
 				show_message("loaded " + type + " lang file")
 				global.chemg_menu_depth = 0					
 			}
@@ -71,7 +71,7 @@ function scr_84_debug(stepmode) {
 		
 		
 		scr_84_add_menu_item(parent, __createoptiondata(function() {
-				show_debug_message("restart room")
+				debug_log("restart room")
 				room_restart()
 				global.chemg_menu_depth = 0}), "", "restart room")
 				
@@ -265,7 +265,7 @@ function scr_84_debug(stepmode) {
 		})
 		roomtransitiondata_dark = __createoptiondata(function(item, name) {
 			global.darkzone = 1
-			show_debug_message("room_goto: " + name)
+			debug_log("room_goto: " + name)
 			room_goto(item)
 			global.chemg_menu_depth = 0			
 		})
@@ -533,7 +533,7 @@ function scr_84_load_map_json(argument0){
 	}
 	else
 	{
-		show_debug_message("file: " + filename + "does not exist")
+		debug_log("file: " + filename + "does not exist")
 		return json_decode("{}");
 	}
 }
@@ -548,24 +548,24 @@ function scr_84_lang_load(){
 	var orig_map = json_decode("{}")
 	
 	if (!is_english()) {
-		show_debug_message("loading lang: " + orig_filename)
+		debug_log("loading lang: " + orig_filename)
 		orig_map = scr_84_load_map_json(orig_filename)
 		
 		if (file_exists(new_filename)) {
 			var new_map = scr_84_load_map_json(new_filename)
 			var new_date = real(ds_map_find_value(new_map, "date"))
 			var orig_date = real(ds_map_find_value(orig_map, "date"))
-			show_debug_message("orig_date: " + string(orig_date))
-			show_debug_message(" new_date: " + string(new_date))
+			debug_log("orig_date: " + string(orig_date))
+			debug_log(" new_date: " + string(new_date))
 			
 			if (new_date > orig_date) {
-				show_debug_message("using new language file")
+				debug_log("using new language file")
 				ds_map_destroy(orig_map)
 				orig_map = new_map
 				filename = new_filename
 				type = "new(" + string(new_date) + ")"
 			} else {
-				show_debug_message("using orig language file")
+				debug_log("using orig language file")
 			}
 		}
 		
@@ -574,7 +574,7 @@ function scr_84_lang_load(){
 		
 		if (!is_english()) {
 			global.jp_data_loaded = true
-			show_debug_message("loaded: " + filename + ", entries: " + string(ds_map_size(global.lang_map)))
+			debug_log("loaded: " + filename + ", entries: " + string(ds_map_size(global.lang_map)))
 		}
 	}
 	

@@ -1,7 +1,7 @@
 function scr_text_extra(msc){
 	var handled = true;
 	
-	show_debug_message("scr_text_extra(): " + string(msc));
+	debug_log("scr_text_extra(): " + string(msc));
 	switch (msc) {
 		// begin it at 10000 to not interfere with any original scr_text data if you plan on porting
 		// that from deltarune

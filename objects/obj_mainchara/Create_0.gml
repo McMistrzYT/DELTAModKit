@@ -241,8 +241,8 @@ if (global.interact == 3) {
             else
             {
                 setxy(room_width / 2, room_height / 2);
-                show_debug_message("entrance not found, setting to center of room");
-                show_debug_message("entrance requested was global.entrance=" + string(global.entrance));
+                debug_log("entrance not found, setting to center of room");
+                debug_log("entrance requested was global.entrance=" + string(global.entrance));
             }
         }
     }

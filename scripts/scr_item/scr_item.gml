@@ -211,7 +211,7 @@ function scr_itemget(itemid)
             {
                 if (global.pocketitem[__j] == 0)
                 {
-                    show_debug_message("Placed in pocket :" + string(__j));
+                    debug_log("Placed in pocket :" + string(__j));
                     global.pocketitem[__j] = itemid;
                     _pocketed = 1;
                     noroom = 0;
@@ -226,9 +226,9 @@ function scr_itemget(itemid)
     }
     
     script_execute(scr_iteminfo_all);
-    show_debug_message("noroom=" + string(noroom));
-    show_debug_message("_pocketed=" + string(_pocketed));
-    show_debug_message("_noroominventory=" + string(_noroominventory));
+    debug_log("noroom=" + string(noroom));
+    debug_log("_pocketed=" + string(_pocketed));
+    debug_log("_noroominventory=" + string(_noroominventory));
 }
 
 function scr_keyitemget(kitemid)

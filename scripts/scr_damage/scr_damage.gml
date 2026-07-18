@@ -80,7 +80,7 @@ function scr_damage()
             tdamage = ceil((2 * tdamage) / 3);
             
         tdamage = ceil(tdamage * scr_element_damage_reduction(__element, global.char[target]));
-        show_debug_message("The element is: " + string(__element));
+        debug_log("The element is: " + string(__element));
             
         if (tdamage < 1)
             tdamage = 1;

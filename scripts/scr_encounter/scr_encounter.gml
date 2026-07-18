@@ -36,7 +36,7 @@ function scr_encountersetup(encounterid)
 		global.monstermakey[p] = enemytemp[p].yy;
 	}
 	
-	show_debug_message(enemytemp);
+	debug_log(enemytemp);
     
     /*switch (encounterid)
     {

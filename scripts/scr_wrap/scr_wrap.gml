@@ -3,7 +3,7 @@ function scr_wrap(value, _min, _max) {
 	var _range = abs(_max - _min)
 	
 	if (_max <= _min) {
-		show_debug_message("wrap error, min higher than max!")
+		debug_log("wrap error, min higher than max!")
 		return value;
 	} else {
 		while (_val < _min)

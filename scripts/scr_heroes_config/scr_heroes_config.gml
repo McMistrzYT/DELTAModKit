@@ -777,7 +777,7 @@ function scr_character_darkmenu_geticondatareader(charIdx) {
 					weaponicon: variable_struct_get(self, "chararmor" + string(i + 1) + "icon")[charIdx]
 				})
 			} catch (ex) {
-				show_debug_message("Failed to add data for armor icon {0}, reason: {1}", i, ex.longMessage)
+				debug_log("Failed to add data for armor icon {0}, reason: {1}", i, ex.longMessage)
 			}
 		}
 		return slots
@@ -849,7 +849,7 @@ function scr_hero_rendercharboxicons(charIdx) {
 				//var _y = (485 - bp) + yy									 // Uncomment to revert to Normal Y Pos Code
 				draw_sprite(sprite, btc[i], _x, _y);
 				if variable_struct_exists(specialbuttons, string(i)) try { variable_struct_get(specialbuttons, string(i))(sprite, _x, _y, i) } catch (ex) {}
-				//show_debug_message("CHAR: {3}, SPRITE: {0}, CenterX:{1}, CenterY:{2}", sprite_get_name(sprite), (_x - xchunk - xx - icon_offset) + sprite_get_width(sprite)/2, (_y + bp - yy) + sprite_get_height(sprite)/2, global.charname[charIdx + 1])				
+				//debug_log("CHAR: {3}, SPRITE: {0}, CenterX:{1}, CenterY:{2}", sprite_get_name(sprite), (_x - xchunk - xx - icon_offset) + sprite_get_width(sprite)/2, (_y + bp - yy) + sprite_get_height(sprite)/2, global.charname[charIdx + 1])				
 			}
 		break
 	}

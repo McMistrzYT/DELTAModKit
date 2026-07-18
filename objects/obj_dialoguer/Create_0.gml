@@ -45,7 +45,7 @@ boxwidth = -1;
 xoff = 0;
 yoff = 0;
 
-show_debug_message("dialoguer made on depth " + string(depth));
+debug_log("dialoguer made on depth " + string(depth));
 
 function scr_facechoice()
 {

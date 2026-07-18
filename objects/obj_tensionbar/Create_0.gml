@@ -34,12 +34,12 @@ setcolor = function(colorid) {
 				backing,
 				name
 			]
-			show_debug_message("***** TensionBar Color set to (" + string(colorid) + ") | " + name)
+			debug_log("***** TensionBar Color set to (" + string(colorid) + ") | " + name)
 			return self
 		}
 	}
 	catch (ex) {
-		show_debug_message(ex)	
+		debug_log(ex)	
 		return noone // FAILED.
 	}
 }

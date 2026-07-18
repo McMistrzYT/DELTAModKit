@@ -1,13 +1,13 @@
 function scr_cutscene_make() {
 	_cutscene_master = instance_create(0, 0, obj_cutscene_master);
 	_cutscene_master.master_object = id;
-	show_debug_message("i maded :+1:");
+	debug_log("i maded :+1:");
 	return _cutscene_master;
 }
 
 function scr_cutscene_commands()
 {
-	show_debug_message("CUTSCENE COMMANDS: Now processing '" + _c + "'!!");
+	debug_log("CUTSCENE COMMANDS: Now processing '" + _c + "'!!");
 	
     if (_c == "delaycmd")
     {

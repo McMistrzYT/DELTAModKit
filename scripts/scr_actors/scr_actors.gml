@@ -30,10 +30,10 @@ function scr_maincharacters_actors(required = []){
         }
     }
 	
-	show_debug_message(_actorspawned)
+	debug_log(_actorspawned)
 	for (var i = 0; i < array_length(required); i++) {
 		var myname = string(required[i])
-		show_debug_message(myname)
+		debug_log(myname)
 		if !(_actorspawned[$ myname] ?? false) {
 			var myactor = scr_spawnmaincharacteractor(myname)			
 			_actorspawned[$ myname] = true

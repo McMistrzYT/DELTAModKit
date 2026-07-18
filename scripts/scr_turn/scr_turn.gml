@@ -174,9 +174,9 @@ function scr_endturn(){
         if (global.actingsingle[__noactorsi] == 1)
             __noactors = 0;
 			
-		show_debug_message("global.actingsingle[{0}] = {1}", __noactorsi, global.actingsingle[__noactorsi]);
-		show_debug_message("global.acting[{0}] = {1}", __noactorsi, global.acting[__noactorsi]);
-		show_debug_message("global.actingsimul[{0}] = {1}", __noactorsi, global.actingsimul[__noactorsi]);
+		debug_log("global.actingsingle[{0}] = {1}", __noactorsi, global.actingsingle[__noactorsi]);
+		debug_log("global.acting[{0}] = {1}", __noactorsi, global.acting[__noactorsi]);
+		debug_log("global.actingsimul[{0}] = {1}", __noactorsi, global.actingsimul[__noactorsi]);
     }
     
     if (__noactors == 1)
@@ -185,7 +185,7 @@ function scr_endturn(){
     }
     else
     {
-		show_debug_message("Doing acts!");
+		debug_log("Doing acts!");
         global.charturn = 3;
         global.myfight = 3;
         global.currentactingchar = 0;
@@ -278,7 +278,7 @@ function scr_nexthero() {
 			global.charturn = i
 		} else if global.char[i] > DRCharacter.None { // This Character Cannot Move. (Try Next Character)
 			moveswapped = false
-			show_debug_message(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
+			debug_log(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
 		}
 	}
 	
@@ -366,7 +366,7 @@ function scr_actselect(star, action) {
 }
 
 function scr_nextact() {
-	show_debug_message("------------ scr_nextact")
+	debug_log("------------ scr_nextact")
     global.currentactingchar = 0;
 	
     global.acting[0] = false;
@@ -385,9 +385,9 @@ function scr_nextact() {
     }
     
     var singleactcomplete = 0;
-	show_debug_message("global.currentactingchar = {0}", global.currentactingchar);
+	debug_log("global.currentactingchar = {0}", global.currentactingchar);
     while (global.currentactingchar < 3) {
-			show_debug_message("global.actingsingle[{0}] = {1}", global.currentactingchar, global.actingsingle[global.currentactingchar]);
+			debug_log("global.actingsingle[{0}] = {1}", global.currentactingchar, global.actingsingle[global.currentactingchar]);
             if (global.actingsingle[global.currentactingchar] == 1)
             {
 				if (global.actingsimul[global.currentactingchar] != 0) break; // let all simul acts be handled by scr_act_simul
@@ -395,7 +395,7 @@ function scr_nextact() {
 				with (__minstance)
 					actcon[global.char[global.currentactingchar]] = 1;
 					
-				show_debug_message("actcon[{0}] = {1}", global.char[global.currentactingchar], 1);
+				debug_log("actcon[{0}] = {1}", global.char[global.currentactingchar], 1);
 				
 				//if (global.actingsimul[global.currentactingchar] == 0)
 					singleactcomplete = true;
@@ -404,21 +404,21 @@ function scr_nextact() {
 				break;
             }
         global.currentactingchar++;
-		show_debug_message("++global.currentactingchar = {0}", global.currentactingchar);
+		debug_log("++global.currentactingchar = {0}", global.currentactingchar);
     }
 	
 	
-	show_debug_message("singleactcomplete = {0}", singleactcomplete);
-	show_debug_message("------------")
+	debug_log("singleactcomplete = {0}", singleactcomplete);
+	debug_log("------------")
     
     if (!singleactcomplete)
     {
-		show_debug_message("Going to ACT SIMUL phase", singleactcomplete);
+		debug_log("Going to ACT SIMUL phase", singleactcomplete);
         scr_act_simul();
     }
     if (global.currentactingchar >= 3)
     {
-		show_debug_message("Going to ATTACK phase", singleactcomplete);
+		debug_log("Going to ATTACK phase", singleactcomplete);
         with (obj_monsterparent)
         {
 			for (i = 1; i < DRCharacter.__MAX__; i++)
@@ -431,7 +431,7 @@ function scr_nextact() {
 }
 
 function scr_act_simul(){
-	show_debug_message("------------ scr_act_simul")
+	debug_log("------------ scr_act_simul")
 	__simulcount = 0;
     
     for (__ii = global.currentactingchar; __ii < 3; __ii++)
@@ -459,7 +459,7 @@ function scr_act_simul(){
         }
     }
 	
-	show_debug_message("------------")
+	debug_log("------------")
 }
 
 function scr_damage_enemy(star, damage){
@@ -627,7 +627,7 @@ function scr_defeatrun(){
 					highestpriority = priority
 				}
 			} catch (ex) {
-				show_debug_message("Animation with object index of " + string(object) + " Had an Error when trying to get, Removing from List.\n----------------------------\n{0}", ex.longMessage)
+				debug_log("Animation with object index of " + string(object) + " Had an Error when trying to get, Removing from List.\n----------------------------\n{0}", ex.longMessage)
 				array_delete(animdat, i, 1)
 				i--
 			}

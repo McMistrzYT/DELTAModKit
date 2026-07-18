@@ -112,7 +112,7 @@ function scr_monstersetup()
 }
 
 function scr_enemy_process_phase(enemyId, phase) {
-	show_debug_message("scr_enemy_process_phase({0}, {1})", enemyId, phase);
+	debug_log("scr_enemy_process_phase({0}, {1})", enemyId, phase);
 	
 	switch (enemyId) {
 		default:
@@ -141,9 +141,9 @@ function scr_enemy_process_phase(enemyId, phase) {
 				}
 				
 				case DREncounterPhase.CreateBulletArea: {
-					show_debug_message("My Attack Priority, before pass: {0}", myattackpriority);
+					debug_log("My Attack Priority, before pass: {0}", myattackpriority);
 					if !scr_attackpriority(myattackpriority + 1) break;
-					show_debug_message("My Attack Priority, pass: {0}", myattackpriority);
+					debug_log("My Attack Priority, pass: {0}", myattackpriority);
 					
 					if !instance_exists(obj_growtangle) instance_create(camerax() + 320, cameray() + 170, obj_growtangle);
 					
@@ -513,7 +513,7 @@ function scr_chaseenemy_pacetype(Type) {
 	
 	
 	switch Type {
-		default: if DEBUGMODE && scr_debug() show_debug_message("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
+		default: if DEBUGMODE && scr_debug() debug_log("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
 		
 		case pacetype_rightandleftwithpauses: {
 			if (pacetimer == 10) hspeed = 2

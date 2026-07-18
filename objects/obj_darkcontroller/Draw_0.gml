@@ -513,7 +513,7 @@ if (global.menuno == 2)
 			    draw_set_color(c_white);
 			}
 		} catch (ex) {
-			show_debug_message("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
+			debug_log("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
 	}
     
     var eq_xoff = langopt(0, -6);

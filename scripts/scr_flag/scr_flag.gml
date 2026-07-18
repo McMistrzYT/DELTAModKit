@@ -112,7 +112,7 @@ function global_flagname_menu_init(arg0, arg1, arg2, arg3) {
 function debug_message(val)
 {
 	if scr_debug()
-		show_debug_message(val)
+		debug_log(val)
 }
 
 function scr_flag_get(flag)
@@ -145,7 +145,7 @@ function scr_flag_set(flag, value)
     
     if (scr_debug())
     {
-        show_debug_message("*** flag [" + string(flag) + "] updated: " + string(value) + " | " + scr_flag_name_get(flag));
+        debug_log("*** flag [" + string(flag) + "] updated: " + string(value) + " | " + scr_flag_name_get(flag));
     }
 }
 
