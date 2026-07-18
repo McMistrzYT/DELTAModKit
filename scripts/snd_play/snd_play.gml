@@ -109,9 +109,6 @@ function snd_init(songname) {
     
     if (global.launcher)
         dir = working_directory + "../" + MusicFolder;
-	
-	// !!DEBUG REMOVE THIS!!
-	dir = @"D:\SteamLibrary\steamapps\common\DELTARUNE\" + MusicFolder
     
     initsongvar = dir + songname;
     if file_exists(initsongvar)
