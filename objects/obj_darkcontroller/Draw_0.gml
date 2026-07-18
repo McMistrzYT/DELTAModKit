@@ -526,11 +526,9 @@ if (global.menuno == 2)
         {
             g = weaponchar[i][charcoord] == false;
             
-            if (g == 0)
-                draw_set_color(c_white);
+            if (g == 0) draw_set_color(c_white);
             
-            if (g == 1)
-                draw_set_color(c_gray);
+            if (g == 1) draw_set_color(c_gray);
             
             draw_item_icon(xx + 364 + eq_xoff, yy + 236 + (j * ch_vspace), weaponicon[i]);
             
@@ -590,10 +588,24 @@ if (global.menuno == 2)
 		var scrollposy = (pagemax[pm] * (scrollheight / ( __equipmenumax - scrolloptionsvisibleatonce)))
         
         draw_sprite(spr_heart, 0, xx + 344 + eq_xoff, yy + 240 + ((global.submenucoord[global.submenu] - pagemax[pm]) * 27));
-        draw_set_color(c_dkgray);
-        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + scrollheight, false);
-        draw_set_color(c_white);
-        draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + scrollposy) - 1, xx + 560 + scroll_xoff, yy + 263 + scrollposy + 1, false);
+		draw_set_color(c_white);
+		
+		if INVENTORYMAX_ARMORANDWEAPONS <= 12 { 
+			var __scrollbartype2spacing = (scrollheight + scrolloptionsvisibleatonce) / (INVENTORYMAX_ARMORANDWEAPONS)
+	        for (var i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i += 1) {
+	            buff = 0;
+            
+	            if (global.submenucoord[global.submenu] == i) buff += 3;            
+				if (pm ? (global.armor[i]) : global.weapon[i]) == 0 buff -= 1            				
+			
+	            draw_rectangle(((xx + 555) - buff) + scroll_xoff, (yy + 260 + (i * __scrollbartype2spacing)) - buff, xx + 558 + buff + scroll_xoff, yy + 263 + (i * __scrollbartype2spacing) + buff, false);
+	        }
+		} else {
+	        draw_set_color(c_dkgray);
+	        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + scrollheight, false);
+	        draw_set_color(c_white);
+			draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + scrollposy) - 1, xx + 560 + scroll_xoff, yy + 263 + scrollposy + 1, false);
+		}
 		        
         if (pagemax[pm] > 0) draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, (yy + 250) - (sin(cur_jewel / 12) * 3), 1, -1, 0, c_white, 1);
         

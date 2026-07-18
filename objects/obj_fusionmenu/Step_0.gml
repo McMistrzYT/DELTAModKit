@@ -269,11 +269,8 @@ if (init == 0)
 	var _seatcheck = false;
         if (subtype == 2 || subtype == 1)
         {
-            if (subtype == 1)
-                scr_recruit_info_all("total");
-            
-            if (subtype == 2)
-                scr_recruit_info_all("either");
+            if (subtype == 1) scr_recruit_info_all("total");            
+            if (subtype == 2) scr_recruit_info_all("either");
             
             alternateMenu = 1;
         }
