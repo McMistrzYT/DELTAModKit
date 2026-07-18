@@ -1,29 +1,34 @@
 enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
-		BlockTextSkip = 6,
-		BlockMenu, // 7
-		Setting_SimplifyVFX,// 8
-		BattleMusicPlaying,// 9
-		CanAutomash,// 10
-		Setting_AutoRun,// 11
-		DisableScreenShake, // Simplify VFX also does this
-		MultiKeyAttack,// 13
-		RememberLastOption_Battle,// 14
-		Setting_SFXVolume, // 15, Was Removed from Option Menu before Survey Program Release, Likely since Toby didn't want to Mark Every Sound Effect as the Sound Effect Audio Group
-		Setting_MUSVolume, // 16, Probably was Removed due to SFX being removed
-		Setting_MASTERVolume, // 17
+		/* 6 */		BlockTextSkip = 6,
+		/* 7 */		BlockMenu,
+		/* 8 */		Setting_SimplifyVFX,
+		/* 9 */		BattleMusicPlaying,
+		/* 10 */	CanAutomash,
+		/* 11 */	Setting_AutoRun,
+		/* 12 */	DisableScreenShake, // Simplify VFX also does this
+		/* 13 */	MultiKeyAttack,
+		/* 14 */	RememberLastOption_Battle,
+		/* 15  */	Setting_SFXVolume, // Was Removed from Option Menu before Survey Program Release, Likely since Toby didn't want to Mark Every Sound Effect as the Sound Effect Audio Group
+		/* 16  */	Setting_MUSVolume, // Probably was Removed due to SFX being removed
+		/* 17  */	Setting_MASTERVolume,
 		
-		DialogueFlag = 20, // Controlled by Writer via using the \M0 to \m9 Text Commands
-		RoomEnterFreezeTimer, // 21
-		BlockSoulSlow, // 22
+		/* 20 */	DialogueFlag = 20, // Controlled by Writer via using the \M0 to \m9 Text Commands
+		/* 21 */	RoomEnterFreezeTimer,
+		/* 22 */	BlockSoulSlow,
+		/* 23 */	Climb_EverSeenStarterTrig,
+		/* 24 */	Plat_Unlocked,
+		/* 25 */	Plat_SwitchAttackandJump,
+
+		/* 29 */	Chapter1SusieRevealedEyes = 29,
+		/* 30 */	Chapter1RalseiFaceOutfit, // 0 is Hat, 1 is Hooded, 2 is Hatless
+		/* 31 */	KrisMakeAudibleFootsteps,
+		/* 32 */	PartyCommentonItems,
+		/* 33 */	ChoiceTimer,
+		/* 34 */	HideCharacterActs,
+		/* 35 */	GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
+		/* 36 */	FailedBattle,
 		
-		Chapter1SusieRevealedEyes = 29,
-		Chapter1RalseiFaceOutfit, // 0 is Hat, 1 is Hooded, 2 is Hatless
-		KrisMakeAudibleFootsteps, // 31
-		PartyCommentonItems, // 32
-		ChoiceTimer, // 33
-		HideCharacterActs, // 34
-		GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
-		FailedBattle,
+		
 }
 
 function global_flagname_init() {	

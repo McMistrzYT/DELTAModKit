@@ -921,16 +921,12 @@ function scr_load() {
 		__loadedroom = scr_get_room_by_id(global.currentroom)
 	
 		//if (scr_dogcheck()) __loadedroom = PLACE_DOGCHECK
-	    //if (scr_dogcheck())
-	    //    __loadedroom = 83;
     
 	    scr_tempsave();
     
-	    if (global.is_console)
-	        global.tempflag[95] = 1;
+	    if (global.is_console) global.tempflag[95] = 1;
     
-	    if (scr_debug())
-	    {
+	    if (scr_debug()){
 	        if (room_exists(__loadedroom)) {
 	            room_goto(__loadedroom);
 	        } else {
