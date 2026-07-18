@@ -27,7 +27,7 @@ if scr_debug() {
 	var xcent = __view_get(e__VW.WPort, 0) / 2;
 	var balign = __view_get(e__VW.HPort, 0) - th - starty;
 	
-	draw_set_halign(textalign_center);
+	draw_set_halign(fa_center);
 	
 	var _t = string_hash_to_newline("DELTARUNE Ch. " + string(global.chapter) + " " + global.versionno + "#Running in Editor");
 	draw_text(xcent, starty, _t);

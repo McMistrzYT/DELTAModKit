@@ -832,10 +832,9 @@ function scr_hero_rendercharboxicons(charIdx) {
 		if glowing draw_sprite_ext(sprite, 2, _x, _y, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
 	}
 	
-	var specialbuttons = {
-		"1": _glowfunc,
-		"3": _glowfunc,
-	}
+	var specialbuttons = {}
+	variable_struct_set(specialbuttons, "1", _glowfunc)
+	variable_struct_set(specialbuttons, "3", _glowfunc)
 	
 	switch charIdx {
 		default:
