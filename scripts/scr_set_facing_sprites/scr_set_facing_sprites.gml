@@ -389,17 +389,19 @@ function scr_getfacingsprites(nameidentifier){
 		#endregion Berdly
 	#endregion
 
-	#region Ralsei
+	#region Darkners
 		scr_createfacingsprites("ralseinohat", spr_ralsei_walk_down, spr_ralsei_walk_left, spr_ralsei_walk_up, spr_ralsei_walk_right)
 		scr_createfacingspritessubname("ralseihat", "ralseinohat") // Doesn't Exist yet in DELTAMODKIT, So it'll default to Ralsei's Nohat sprite
 		scr_createfacingspritessubname("ralsei", function() {return global.chapter <= 1 ? "ralseihat" : "ralseinohat"})
 	#endregion
 
+	#region Unrelated Npcs
+		scr_createfacingsprites("car", spr_torcar_d, spr_torcar_l, spr_torcar_u, spr_torcar_r)
+	#endregion
+
 	#region Missing from Base DMK
 		if sprite_exists(asset_get_index("spr_toriel_u")) // We can assume Toriel Exists
 			scr_createfacingsprites("toriel", spr_toriel_d, spr_toriel_l, spr_toriel_u, spr_toriel_r)
-		if sprite_exists(asset_get_index("spr_torcar_u")) // We can assume Toriel's Car Exists
-			scr_createfacingsprites("car", spr_torcar_d, spr_torcar_l, spr_torcar_u, spr_torcar_r)
 	#endregion
 
 #endregion

@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Objects",
-    "path":"folders/DELTARUNE/Sprites/Objects.yy",
+    "name":"School",
+    "path":"folders/DELTARUNE/Sprites/World/lightworld/Town/School.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

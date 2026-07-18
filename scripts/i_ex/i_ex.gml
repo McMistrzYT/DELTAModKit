@@ -1,7 +1,5 @@
-function i_ex(arg0)
-{
-    if (arg0 > 0)
-        return instance_exists(arg0);
-    else
-        return false;
+function i_ex(instanceid) {
+    if (instanceid >= 0) return instance_exists(instanceid) else return false;
 }
+
+function d_ex() { return i_ex(obj_dialoguer) }

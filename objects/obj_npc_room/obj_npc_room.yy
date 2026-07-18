@@ -11,8 +11,8 @@
   "name":"obj_npc_room",
   "overriddenProperties":[],
   "parent":{
-    "name":"World",
-    "path":"folders/DELTARUNE/Objects/World.yy",
+    "name":"NPC",
+    "path":"folders/DELTARUNE/Objects/World/NPC.yy",
   },
   "parentObjectId":{
     "name":"obj_interactablesolid",

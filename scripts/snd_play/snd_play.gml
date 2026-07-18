@@ -109,6 +109,9 @@ function snd_init(songname) {
     
     if (global.launcher)
         dir = working_directory + "../" + MusicFolder;
+	
+	// !!DEBUG REMOVE THIS!!
+	dir = @"D:\SteamLibrary\steamapps\common\DELTARUNE\" + MusicFolder
     
     initsongvar = dir + songname;
     if file_exists(initsongvar)
@@ -188,11 +191,11 @@ function soundplay_x(arg0, arg1, arg2)
     snd_play_x(arg0, arg1, arg2);
 }
 
-function mus_loop_ext(arg0, arg1, arg2)
+function mus_loop_ext(music, volume, pitch)
 {
-    snd_volume(arg0, arg1 * global.flag[16], 0);
-    snd_pitch(arg0, arg2);
-    return mus_loop(arg0);
+    snd_volume(music, volume * global.flag[16], 0);
+    snd_pitch(music, pitch);
+    return mus_loop(music);
 }
 
 function snd_stop_all() {

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Objects",
-    "path":"folders/DELTARUNE/Sprites/Objects.yy",
+    "name":"Fountain",
+    "path":"folders/DELTARUNE/Sprites/World/darkworld/Fountain.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

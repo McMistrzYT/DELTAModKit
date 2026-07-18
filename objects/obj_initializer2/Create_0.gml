@@ -83,7 +83,7 @@ else
 {
     global_flagname_init(); // flagnames are stripped
     //scr_84_init_localization(); // no translations im too lazy
-    //pal_swap_init_system(18); // ts gives me nightmares
+    pal_swap_init_system(shd_pal_swapper);
 	scr_enemy_defeatrunanimations()
 	scr_tensionbar_colors_init()
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);

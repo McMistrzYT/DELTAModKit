@@ -1,0 +1,42 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"bg_towntiles_tileset",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":28,
+    "SerialiseWidth":15,
+    "TileCompressedData":[
+      -9,0,6,138,146,147,0,146,147,-9,0,6,104,156,157,0,156,157,-40,0,2,136,137,-13,0,2,137,136,-21,0,4,127,
+      126,127,128,-57,0,-2,75,1,127,-170,0,-2,11,-13,0,2,11,22,-13,0,-2,11,-42,0,1,22,-3,0,
+    ],
+    "TileDataFormat":1,
+  },
+  "name":"bg_towntiles_tileset",
+  "out_columns":16,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Chapter 1",
+    "path":"folders/DELTARUNE/Tilesets/Light World/Tilesets/Chapter 1.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"bg_towntiles",
+    "path":"sprites/bg_towntiles/bg_towntiles.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":20,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":20,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":270,
+}
