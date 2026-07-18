@@ -1,19 +1,25 @@
-function scr_get_room_list()
-{
+function scr_get_room_list(){
 	// MAKE SURE TO ADD ANY ROOMS THAT YOU CAN SAVE IN TO THIS LIST!
 	// OTHERWISE YOU WONT BE ABLE TO LOAD A SAVE SAVED IN THAT ROOM!
-    return [
+	// I WOULD ASSUME THE DELTARUNE TEAM HAS SOMETHING TO DO THIS AUTOMATICALLY BUT WE DO NOT YET!
+	var list = [
 		new scr_room(room_dw_test, 1 + global.chapter * 10000),
-		new scr_room(room_lw_test, 2 + global.chapter * 10000)
+		new scr_room(room_lw_test, 2 + global.chapter * 10000),
 	];
+	
+	if scr_debug() || true { // Test Rooms you want to Load into!
+		array_push(list, new scr_room(room_town_mid, 50022))
+	}
+	
+    return list
 }
 
-function scr_roomname(roomid)
-{
-    roomname = scr_debug() ? "! UNKNOWN ! scr_roomname" : "Dark World...?";
-    
-	var failname = roomname;
+function scr_roomname(roomid){
+    roomname = scr_debug() ? "! UNKNOWN ! scr_roomname" : (global.darkzone ? "Dark World...?" : "Light World...?");
 	
+	if is_string(roomid) { roomid = asset_get_index(roomid) }
+	
+	var failname = roomname;
     switch (roomid) {
 		case 0: roomname = "---"; break;
 		
@@ -21,15 +27,11 @@ function scr_roomname(roomid)
 		case room_lw_test: roomname = "Light World - Testbed"; break;
 	}
 	
-	if roomname == failname
-	{
+	if roomname == failname {
 		var replacementname = failname;
-		with (obj_savepoint)
-		{
-			if CUSTOM
-			{
-				if CUSTOM_PLACENAME != "NULL"
-				{
+		with (obj_savepoint){
+			if CUSTOM {
+				if CUSTOM_PLACENAME != "NULL" {
 					replacementname = CUSTOM_PLACENAME;
 				}
 			}
@@ -40,8 +42,7 @@ function scr_roomname(roomid)
     return roomname;
 }
 
-function scr_get_completed_file_name(ch = 0)
-{
+function scr_get_completed_file_name(ch = 0){
     var _file_name = "";
     
     switch (ch)

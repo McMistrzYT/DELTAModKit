@@ -1,5 +1,5 @@
 function macros(){
-	#macro DEBUGMODE true
+	#macro DEBUGMODE false
 	#macro Debug:DEBUGMODE true
 	
 	#macro MusicFolder "mus/"

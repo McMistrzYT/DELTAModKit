@@ -72,6 +72,7 @@ function scr_gamestart() {
     global.char[2] = DRCharacter.Ralsei;
 	
 	global.lang = "en";
+	global.filechoice_route = ""
 	
     global.gold = 0;
     global.xp = 0;

@@ -173,7 +173,7 @@ else if (menuno == 1)
             draw_set_halign(fa_right);
             draw_text(xl[1], yy + my + numscale(20) + (i * mspace), scr_timedisp(time_file[i]));
             draw_set_halign(fa_center);
-            draw_text(xl[2], yy + my + numscale(52) + (i * mspace), scr_roomname(roome_file[i]));
+            draw_text(xl[2], yy + my + numscale(52) + (i * mspace), roomename_file[i] ?? scr_roomname(roome_file[i]));
             
             var xpo = xx + numscale(320);
             var thisyoff = numscale(20);
@@ -320,7 +320,7 @@ else if (menuno == 1)
         draw_set_halign(fa_right);
         draw_text((xx + numscale(640)) - horzspace, yy + numscale(165), scr_timedisp(time_file[mpos]));
         draw_set_halign(fa_center);
-        draw_text(xx + numscale(320), yy + numscale(195), scr_roomname(roome_file[mpos]));
+        draw_text(xx + numscale(320), yy + numscale(195), roomename_file[mpos] ?? scr_roomname(roome_file[mpos]));
         memfont = draw_get_font();
         
         draw_text(xx + numscale(320), yy + numscale(165), name_file[mpos]);
@@ -469,7 +469,7 @@ else if (menuno == 2)
                 draw_set_halign(fa_right);
                 draw_text(xx + mx + numscale(483), yy + my + numscale(20) + (i * mspace), scr_timedisp(time_file[i]));
                 draw_set_halign(fa_center);
-                draw_text(xx + numscale(320), yy + my + numscale(52) + (i * mspace), scr_roomname(roome_file[i]));
+                draw_text(xx + numscale(320), yy + my + numscale(52) + (i * mspace), roomename_file[i] ?? scr_roomname(roome_file[i]));
                 var memfont = draw_get_font();
                 
                 draw_text(xx + numscale(320), yy + my + numscale(20) + (i * mspace), name_file[i]);

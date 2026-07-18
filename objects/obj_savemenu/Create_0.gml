@@ -97,6 +97,7 @@ for (var i = 0; i < 3; i++)
     love_file[i] = 1;
     time_file[i] = 0;
     roome_file[i] = 0;
+    roomename_file[i] = undefined;
     
     if (ossafe_file_exists("dr.ini"))
     {
@@ -107,6 +108,7 @@ for (var i = 0; i < 3; i++)
         love_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Love", 1);
         time_file[i] = ini_read_real(scr_ini_chapter(global.chapter, i), "Time", 0);
         var room_id = ini_read_real(scr_ini_chapter(global.chapter, i), "Room", scr_get_id_by_room_index(room));
+        roomename_file[i] = ini_read_string(scr_ini_chapter(global.chapter, i), "Room_Name", undefined);
         roome_file[i] = scr_get_room_by_id(room_id);
         ossafe_ini_close();
         ossafe_savedata_save();

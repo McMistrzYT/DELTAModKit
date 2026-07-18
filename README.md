@@ -15,6 +15,7 @@ It will not work on older versions without modification to the modifications, in
 2. Create a `datafiles` folder at the root of the project.
 3. Copy the `mus` folder from your Steam DELTARUNE installation into `datafiles/mus`.
 4. Open the project in GameMaker.
+5. To activate debug mode Switch Config from "Default" to "Debug"
 
 ## Adding / Changing Modular Stuff
 The hearts of the modular reimplementations of the character, item, spell and equipment systems all live in the folder `Custom > Scripts > Configs`. I tried naming everything in an easy-to-understand way, but feel free to reach out if you encounter any issues. Provided in the `Custom > Objects` folder is an example cutscene for working with the Cutscene System and some helper markers to assist with character placement in cutscenes
