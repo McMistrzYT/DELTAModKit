@@ -35,6 +35,9 @@
     "name":"spr_dodgeheart",
     "path":"sprites/spr_dodgeheart/spr_dodgeheart.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_dodgeheartmask",
+    "path":"sprites/spr_dodgeheartmask/spr_dodgeheartmask.yy",
+  },
   "visible":true,
 }
