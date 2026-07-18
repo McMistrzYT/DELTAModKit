@@ -563,6 +563,7 @@
     {"id":{"name":"AUDIO_APPEARANCE","path":"sounds/AUDIO_APPEARANCE/AUDIO_APPEARANCE.yy",},},
     {"id":{"name":"AUDIO_INTRONOISE","path":"sounds/AUDIO_INTRONOISE/AUDIO_INTRONOISE.yy",},},
     {"id":{"name":"snd_b","path":"sounds/snd_b/snd_b.yy",},},
+    {"id":{"name":"snd_bageldefeat","path":"sounds/snd_bageldefeat/snd_bageldefeat.yy",},},
     {"id":{"name":"snd_battleenter","path":"sounds/snd_battleenter/snd_battleenter.yy",},},
     {"id":{"name":"snd_break1","path":"sounds/snd_break1/snd_break1.yy",},},
     {"id":{"name":"snd_break2","path":"sounds/snd_break2/snd_break2.yy",},},
