@@ -1,7 +1,6 @@
 depth = 500000;
 
-if (instance_exists(obj_dw_transition))
-{
+if (instance_exists(obj_dw_transition)) {
     instance_destroy();
     exit;
 }
@@ -17,10 +16,8 @@ kris_x = x - 24;
 kris_y = y - 80;
 sus_x = x - 60;
 sus_y = y - 94;
-unlock_mode = global.plot >= 242;
 
-if (scr_havechar(DRCharacter.Susie))
-{
+if (scr_havechar(DRCharacter.Susie)){
     kris_only = 0;
     kris_x = x + 12;
     kris_y = y - 80;
@@ -36,12 +33,14 @@ particletimer = 0;
 top = 0;
 bottom = 1;
 
-if (instance_number(obj_dw_leave) == 1)
-{
+if (instance_number(obj_dw_leave) == 1){
     toppart = instance_create(x, y, obj_dw_leave);
     toppart.top = 1;
     toppart.bottom = 0;
     toppart.depth = 5000;
+	toppart.nextroom = nextroom
+	toppart.entrance = entrance
+	toppart.gotodark = gotodark
 }
 
 stopcon = 0;

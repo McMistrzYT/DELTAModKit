@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"NPC",
-    "path":"folders/NPC.yy",
+    "path":"folders/DELTARUNE/Objects/World/NPC.yy",
   },
   "parentObjectId":{
     "name":"obj_interactablesolid",
