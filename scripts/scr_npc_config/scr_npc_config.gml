@@ -14,6 +14,10 @@ function scr_npc_setup() {
 			sprite_index = spr_virovirokun_idle;
 			break;
 		}*/
+		case room_diner: {
+			sprite_index = spr_npc_qc
+			break;
+		}
 		
 		default: handled = false; break;	
 	}
@@ -42,6 +46,39 @@ function scr_npc_interact() {
 			msgnext("* Hey,^1 Kris,^1 could you carry me back into the Dark World?/");
 			msgnext("* I don't wanna be here./%");
 			break;
+		}
+		
+		case room_diner: { // QC, Chapter 2 Dialogue
+			global.msg[0] = stringsetloc("* Don't be a stranger now^1, alright^1, hun?/%", "obj_npc_room_slash_Other_10_gml_415_0")
+			
+			
+			if scr_flag_get(DRFLAG.NPC_QC_DinerCh2_CollectedHotChocolate) == 0 {
+				global.msg[0] = stringsetloc("* Hey there^1!&* Haven't seen you in a while^1, hun./", "obj_npc_room_slash_Other_10_gml_421_0")
+				global.msg[1] = stringsetloc("* I remember^1, back on Sundays^1, after service.../", "obj_npc_room_slash_Other_10_gml_423_0")
+				global.msg[2] = stringsetloc("* You and your family would come in and order the special./", "obj_npc_room_slash_Other_10_gml_424_0")
+				global.msg[3] = stringsetloc("* 'Course^1, things happened^1, and then.../", "obj_npc_room_slash_Other_10_gml_425_0")
+				global.msg[4] = stringsetloc("* Y'all..^1.&* Stopped comin' together./", "obj_npc_room_slash_Other_10_gml_426_0")
+				global.msg[5] = stringsetloc("* But every Sunday^1, you and your brother'd still come in./", "obj_npc_room_slash_Other_10_gml_427_0")
+				global.msg[6] = stringsetloc("* He'd order you a hot chocolate.../", "obj_npc_room_slash_Other_10_gml_428_0")
+				global.msg[7] = stringsetloc("* And you two'd sit down at that table in the corner.../", "obj_npc_room_slash_Other_10_gml_429_0")
+				global.msg[8] = stringsetloc("* ... drawin' shapes in the window with your breath./", "obj_npc_room_slash_Other_10_gml_430_0")
+				global.msg[9] = stringsetloc("* .../", "obj_npc_room_slash_Other_10_gml_431_0")
+				global.msg[10] = stringsetloc("* You must really miss him^1, huh?/", "obj_npc_room_slash_Other_10_gml_432_0")
+				global.msg[11] = stringsetloc("* ... Here^1, how about this?/", "obj_npc_room_slash_Other_10_gml_433_0")
+				global.msg[12] = stringsetloc("* (Kris got the Hot Chocolate.)/", "obj_npc_room_slash_Other_10_gml_434_0")
+				global.msg[13] = stringsetloc("* On the house, hun./%", "obj_npc_room_slash_Other_10_gml_435_0")
+				scr_flag_set(DRFLAG.NPC_QC_DinerCh2_CollectedHotChocolate, 1)
+				noroom = 0
+				scr_litemget(1)
+				
+				if (noroom == 1){
+					scr_flag_set(DRFLAG.NPC_QC_DinerCh2_CollectedHotChocolate, 2)
+					global.msg[11] = stringsetloc("* ... You know^1, I'd give you a hot chocolate on the house.../", "obj_npc_room_slash_Other_10_gml_442_0")
+					global.msg[12] = stringsetloc("* ... But it looks like you've got enough things already./", "obj_npc_room_slash_Other_10_gml_443_0")
+					global.msg[13] = stringsetloc("* Take it easy^1, okay^1, hun?/%", "obj_npc_room_slash_Other_10_gml_444_0")
+				}
+			}
+			break;	
 		}
 		
 		default: handled = false; break;	

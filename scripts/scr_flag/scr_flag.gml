@@ -29,6 +29,8 @@ enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
 		/* 36 */	FailedBattle,
 		
 		
+		/* 261 */	NPC_QC_DinerCh2_CollectedHotChocolate = 261,
+		
 }
 
 function global_flagname_init() {	
@@ -87,6 +89,7 @@ function global_flagname_init() {
 	global.flagname[367] = "Blue Checkmark 1"
 	global.flagname[407] = "Blue Checkmark 2"
 	global.flagname[420] = "Blue Checkmark 3"
+	global.flagname[DRFLAG.NPC_QC_DinerCh2_CollectedHotChocolate] = "Ch2 Diner Hot Chocolate"
 	// Battles
 	global.flagname[DRFLAG.MultiKeyAttack] = "Multikey Attack"
 	global.flagname[DRFLAG.RememberLastOption_Battle] = "Remember Last Option [Battle]"
