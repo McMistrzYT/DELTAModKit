@@ -312,9 +312,9 @@ nudgey = 0;
 nudgelerp = 0.1;
 
 
-if scr_flag_get(DRFLAG.HeldOverworldItemIdCashe) > 0 {
-	var overworlditemid = scr_flag_get(DRFLAG.HeldOverworldItemIdCashe)
-	scr_flag_set(DRFLAG.HeldOverworldItemIdCashe, DROverworldItem.None)
+if scr_flag_get(DRFLAG.HeldOverworldItemId_ForceStart) > 0 {
+	var overworlditemid = scr_flag_get(DRFLAG.HeldOverworldItemId_ForceStart)
+	scr_flag_set(DRFLAG.HeldOverworldItemId_ForceStart, DROverworldItem.None)
 	
 	holding_item = scr_overworlditem_create(overworlditemid)
 	
