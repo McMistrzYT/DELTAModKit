@@ -317,7 +317,7 @@ if scr_flag_get(DRFLAG.HeldOverworldItemId_ForceStart) > 0 {
 	scr_flag_set(DRFLAG.HeldOverworldItemId_ForceStart, DROverworldItem.None)
 	
 	holding_item = scr_overworlditem_create(overworlditemid)
-	
+	if i_ex(holding_item) holding_item.held = true
 }
 
 noclip = false;

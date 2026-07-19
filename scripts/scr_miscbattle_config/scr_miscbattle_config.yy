@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_unlabeledbattle_config",
+  "%Name":"scr_miscbattle_config",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_unlabeledbattle_config",
+  "name":"scr_miscbattle_config",
   "parent":{
     "name":"Battles",
     "path":"folders/Custom/Scripts/Configs/Battles.yy",

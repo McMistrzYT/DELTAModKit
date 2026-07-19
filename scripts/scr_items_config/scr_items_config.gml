@@ -1555,7 +1555,6 @@ function scr_overworlditem_create(overworlditemid) {
 		// Custom
 		case DROverworldItem.trashballCh2: {
 			instanceid = instance_create(x, y, mod_obj_holdable_trashball)
-			instanceid.held = true
 		break;}
 		
 	}
