@@ -5,10 +5,16 @@ function scr_get_room_list(){
 	var list = [
 		new scr_room(room_dw_test, 1 + global.chapter * 10000),
 		new scr_room(room_lw_test, 2 + global.chapter * 10000),
+		new scr_room(room_town_mid, 40022),
 	];
 	
-	if scr_debug() || true { // Test Rooms you want to Load into!
-		array_push(list, new scr_room(room_town_mid, 50022))
+	if scr_debug() {
+		/*
+		array_push(list, 
+			// Uncomment debug/test rooms go in here!
+		
+		)
+		*/
 	}
 	
     return list
@@ -25,6 +31,7 @@ function scr_roomname(roomid){
 		
 		case room_dw_test: roomname = "Dark World - Testbed"; break;
 		case room_lw_test: roomname = "Light World - Testbed"; break;
+		case room_town_mid: roomname = "Hometown"; break;
 	}
 	
 	if roomname == failname {

@@ -7,6 +7,8 @@ function scr_save_point_text(){
 			msgset(0, "* You are filled with the power of DELTAModKit./%");
 			break;
 		
+		case room_town_mid: nodialogue = true break;
+		
 		default:
 			nodialogue = false;
 			
