@@ -1,4 +1,4 @@
-if scr_havechar(2) {
+if scr_havechar(DRCharacter.Susie) {
 	USECUSTOMFUNC = true
 	CUSTOM_FUNC = function() {
 		if (read == 0){

@@ -16,7 +16,7 @@ if (con == 1)
         cutscene = 1;
         idealx = other.kris_x_jumpprepare_nosus;
         
-        if (scr_havechar(2))
+        if (scr_havechar(DRCharacter.Susie))
             idealx = other.kris_x_jumpprepare_sus;
         
         scr_move_to_point_over_time(idealx, other.kris_y_jumpprepare, 6);
@@ -49,7 +49,7 @@ if (con == 3)
     
     instance_create(x, y, obj_dw_transition);
     
-    if (scr_havechar(2))
+    if (scr_havechar(DRCharacter.Susie))
     {
         with (su_actor)
             instance_destroy();
@@ -59,7 +59,7 @@ if (con == 3)
     {
         quick_mode = 1;
         
-        if (!scr_havechar(2))
+        if (!scr_havechar(DRCharacter.Susie))
         {
             kris_x = obj_mainchara.x;
             kris_y = obj_mainchara.y;
