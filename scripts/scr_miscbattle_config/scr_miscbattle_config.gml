@@ -44,11 +44,12 @@ function scr_tensionbar_createcolor(usedtp = c_red, currenttp = c_orange, maxtp 
 		Red = 0,
 		Yellow,
 	}
+	
 	function scr_soulmodes_init() {
 		global.soulmodesdata = []
 		global.defaultsoulmode = DRSoulMode.Red
 		
-		scr_soulmodes_createdata(spr_dodgeheart, undefined, undefined, undefined, undefined, "Red", DRSoulMode.Red)
+		scr_soulmodes_createdata(spr_dodgeheart, undefined, undefined, undefined, undefined, "Red", DRSoulMode.Red) 
 		scr_soulmodes_createdata(spr_yellowheart, function() { // Initialization
 			z_hold = 0;
 			siner = 0;
