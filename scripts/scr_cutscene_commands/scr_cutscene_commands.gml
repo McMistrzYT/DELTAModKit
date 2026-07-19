@@ -538,69 +538,30 @@ function scr_cutscene_commands()
         {
             var _snd = snd_play(command_arg1[i]);
             
-            if (command_arg2[i] != 0)
-                snd_volume(_snd, command_arg2[i], 0);
-            
-            if (command_arg2[i] != 0)
-                snd_pitch(_snd, command_arg3[i]);
+            if (command_arg2[i] != 0) snd_volume(_snd, command_arg2[i], 0);
+            if (command_arg2[i] != 0) snd_pitch(_snd, command_arg3[i]);
         }
     }
     
-    if (_c == "mus" || _c == "music")
-    {
-        if (command_arg1[i] == "loop")
-            mus_loop(global.currentsong[1]);
-        
-        if (command_arg1[i] == "play")
-            mus_play(global.currentsong[1]);
-        
-        if (command_arg1[i] == "stop")
-            snd_stop(global.currentsong[1]);
-        
-        if (command_arg1[i] == "free_all")
-            snd_free_all();
-        
-        if (command_arg1[i] == "free")
-            snd_free(global.currentsong[0]);
-        
-        if (command_arg1[i] == "pause")
-            snd_pause(global.currentsong[1]);
-        
-        if (command_arg1[i] == "resume")
-            snd_resume(global.currentsong[1]);
-        
-        if (command_arg1[i] == "init")
-            global.currentsong[0] = snd_init(command_arg2[i]);
-        
-        if (command_arg1[i] == "initplay")
-            mus_initplay(command_arg2[i]);
-        
-        if (command_arg1[i] == "initloop")
-            mus_initloop(command_arg2[i]);
-        
-        if (command_arg1[i] == "volume")
-            mus_volume(global.currentsong[1], command_arg2[i], command_arg3[i]);
-        
-        if (command_arg1[i] == "pitch")
-            snd_pitch(global.currentsong[1], command_arg2[i]);
-        
-        if (command_arg1[i] == "pitchtime")
-            snd_pitch_time(global.currentsong[1], command_arg2[i], command_arg3[i]);
-        
-        if (command_arg1[i] == "loopsfx")
-            mysound = snd_loop(command_arg2[i]);
-        
-        if (command_arg1[i] == "loopsfxpitch")
-            snd_pitch(mysound, command_arg2[i]);
-        
-        if (command_arg1[i] == "loopsfxpitchtime")
-            snd_pitch_time(mysound, command_arg2[i], command_arg3[i]);
-        
-        if (command_arg1[i] == "loopsfxstop")
-            snd_stop(mysound);
-        
-        if (command_arg1[i] == "loopsfxvolume")
-            snd_volume(mysound, command_arg2[i], command_arg3[i]);
+    if (_c == "mus" || _c == "music") {
+        if (command_arg1[i] == "loop")				mus_loop(global.currentsong[1]);        
+        if (command_arg1[i] == "play")				mus_play(global.currentsong[1]);        
+        if (command_arg1[i] == "stop")				snd_stop(global.currentsong[1]);        
+        if (command_arg1[i] == "free_all")			snd_free_all();        
+        if (command_arg1[i] == "free")				snd_free(global.currentsong[0]);        
+        if (command_arg1[i] == "pause")				snd_pause(global.currentsong[1]);        
+        if (command_arg1[i] == "resume")			snd_resume(global.currentsong[1]);        
+        if (command_arg1[i] == "init")				global.currentsong[0] = snd_init(command_arg2[i]);        
+        if (command_arg1[i] == "initplay")			mus_initplay(command_arg2[i]);        
+        if (command_arg1[i] == "initloop")			mus_initloop(command_arg2[i]);        
+        if (command_arg1[i] == "volume")			mus_volume(global.currentsong[1], command_arg2[i], command_arg3[i]);        
+        if (command_arg1[i] == "pitch")				snd_pitch(global.currentsong[1], command_arg2[i]);        
+        if (command_arg1[i] == "pitchtime")			snd_pitch_time(global.currentsong[1], command_arg2[i], command_arg3[i]);        
+        if (command_arg1[i] == "loopsfx")			mysound = snd_loop(command_arg2[i]);        
+        if (command_arg1[i] == "loopsfxpitch")		snd_pitch(mysound, command_arg2[i]);        
+        if (command_arg1[i] == "loopsfxpitchtime")	snd_pitch_time(mysound, command_arg2[i], command_arg3[i]);
+        if (command_arg1[i] == "loopsfxstop")		snd_stop(mysound);
+        if (command_arg1[i] == "loopsfxvolume")		snd_volume(mysound, command_arg2[i], command_arg3[i]);
     }
     
     if (_c == "fadeout")
