@@ -24,7 +24,7 @@ if (init == false){
             break;
     }
     
-    if (image_index != 0) doorEntrance = image_index;
+    if (image_index != 0 && doorEntrance == -1) doorEntrance = image_index;
     
     if (doorSpecial != "none")
     {

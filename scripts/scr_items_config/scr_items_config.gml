@@ -109,6 +109,14 @@ enum DRKeyItem {
 	ClaimbClaws = 31,
 }
 
+enum DROverworldItem {
+	None,
+	
+	// Custom
+	trashballCh2 = 4,
+}
+
+
 function scr_iteminfo(itemid)
 {
 	usable = 0;
@@ -1536,4 +1544,21 @@ function scr_key_item_use_action_overworld(itemid) {
 			scr_itemdialoguer();
 			break;
     }
+}
+
+function scr_overworlditem_create(overworlditemid) {
+	var instanceid = noone
+	
+	switch overworlditemid {
+		default: break
+		
+		// Custom
+		case DROverworldItem.trashballCh2: {
+			instanceid = instance_create(x, y, mod_obj_holdable_trashball)
+			instanceid.held = true
+		break;}
+		
+	}
+	
+	return instanceid
 }

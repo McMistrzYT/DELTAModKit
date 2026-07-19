@@ -35,8 +35,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Custom/Sprites.yy",
+    "name":"Heads",
+    "path":"folders/Custom/Sprites/Menus/Dark Menu/Heroes/Heads.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

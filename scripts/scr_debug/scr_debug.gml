@@ -156,3 +156,11 @@ function debug_log(){
 	}
 	show_debug_message(main)
 }
+
+function show_debug_message_concat(){
+	var msg = ""
+	for (var i = 0; i < argument_count; i++) {
+		msg += string(argument[i])
+	}
+	debug_log(msg)
+}

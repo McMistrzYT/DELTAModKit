@@ -28,8 +28,9 @@ enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
 		/* 35 */	GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
 		/* 36 */	FailedBattle,
 		
-		
 		/* 261 */	NPC_QC_DinerCh2_CollectedHotChocolate = 261,
+		
+		/* 1332 */	HeldOverworldItemIdCashe = 1332,
 		
 }
 
@@ -90,6 +91,7 @@ function global_flagname_init() {
 	global.flagname[407] = "Blue Checkmark 2"
 	global.flagname[420] = "Blue Checkmark 3"
 	global.flagname[DRFLAG.NPC_QC_DinerCh2_CollectedHotChocolate] = "Ch2 Diner Hot Chocolate"
+	global.flagname[DRFLAG.HeldOverworldItemIdCashe] = "Held Overworld Item"
 	// Battles
 	global.flagname[DRFLAG.MultiKeyAttack] = "Multikey Attack"
 	global.flagname[DRFLAG.RememberLastOption_Battle] = "Remember Last Option [Battle]"

@@ -438,12 +438,10 @@ if (stepping == 1 && fun == 0)
     }
 }
 
-if (onebuffer < 0)
-{
-    if (global.interact == 0)
-    {
-        if (button1_p())
-        {
+if (onebuffer < 0){
+    if (global.interact == 0) {
+        if (button1_p()){
+			interactedobject = noone
             thisinteract = 0;
             d = global.darkzone + 1;
             
@@ -560,6 +558,35 @@ if (onebuffer < 0)
                         scr_interact();
                 }
             }
+			
+			if disable_interaction_checks interactedobject = noone
+			
+			if (holding_item != noone && visible && !cutscene){
+				if (!i_ex(interactedobject) || interactedobject.id == holding_item.id || (interactedobject.id != holding_item.id && interactedobject.myinteract < 3)){
+					holding_item.can_use = true
+				
+					if (button1_p()){
+						var use_cancelled = holding_item.on_press()
+						is_using_held_item = use_cancelled != false
+					}
+				
+					if (button1_h() && holding_item != noone && is_using_held_item) holding_item.on_hold()
+				
+					if (button1_r() && holding_item != noone) {
+						holding_item.on_release()
+						is_using_held_item = false
+					}
+				}
+				else {
+					is_using_held_item = false
+					holding_item.can_use = false
+				}
+			}
+			else
+			{
+				is_using_held_item = false
+			}
+			
         }
     }
 }
