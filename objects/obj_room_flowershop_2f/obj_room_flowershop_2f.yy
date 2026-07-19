@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_room_flowershop_1f",
+  "%Name":"obj_room_flowershop_2f",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_room_flowershop_1f",
+  "name":"obj_room_flowershop_2f",
   "overriddenProperties":[],
   "parent":{
     "name":"FShop",
@@ -27,6 +27,7 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"darkmode","filters":[],"listItems":[],"multiselect":false,"name":"darkmode","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"loweredlights","filters":[],"listItems":[],"multiselect":false,"name":"loweredlights","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

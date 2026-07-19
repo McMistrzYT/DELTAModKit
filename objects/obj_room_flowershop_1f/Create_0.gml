@@ -1,7 +1,7 @@
 if darkmode {
 	overlay = scr_marker(-10, -10, spr_whitepixel)
-	overlay.image_xscale = (room_width + 10) + 2
-	overlay.image_yscale = (room_height + 10) + 2
+	overlay.image_xscale = (room_width + 20) + 2
+	overlay.image_yscale = (room_height + 20) + 2
 	overlay.image_blend = merge_color(c_black, c_navy, 0.5)
 	overlay.image_alpha = 0.4
 	overlay.depth = 990

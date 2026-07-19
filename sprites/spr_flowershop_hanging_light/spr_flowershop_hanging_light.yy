@@ -23,7 +23,7 @@
   ],
   "name":"spr_flowershop_hanging_light",
   "nineSlice":null,
-  "origin":0,
+  "origin":1,
   "parent":{
     "name":"FShop",
     "path":"folders/DELTARUNE/Sprites/World/lightworld/Town/FShop.yy",
@@ -75,7 +75,7 @@
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":0,
+    "xorigin":15,
     "yorigin":0,
   },
   "swatchColours":null,

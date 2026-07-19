@@ -1,11 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_room_flowershop_1f",
+  "%Name":"obj_flowershop_hanging_light",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_room_flowershop_1f",
+  "name":"obj_flowershop_hanging_light",
   "overriddenProperties":[],
   "parent":{
     "name":"FShop",
@@ -25,16 +26,14 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[
-    {"$GMObjectProperty":"v2","%Name":"darkmode","filters":[],"listItems":[],"multiselect":false,"name":"darkmode","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
-  ],
+  "properties":[],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_event",
-    "path":"sprites/spr_event/spr_event.yy",
+    "name":"spr_flowershop_hanging_light",
+    "path":"sprites/spr_flowershop_hanging_light/spr_flowershop_hanging_light.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
