@@ -18,6 +18,10 @@ function scr_npc_setup() {
 			sprite_index = spr_npc_qc
 			break;
 		}
+		case room_hospital_lobby: {
+			sprite_index = spr_npc_nurse
+			break;	
+		}
 		
 		default: handled = false; break;	
 	}
@@ -79,6 +83,30 @@ function scr_npc_interact() {
 				}
 			}
 			break;	
+		}
+		
+		case room_hospital_lobby: {
+			
+			global.msg[0] = stringsetloc("* Oh^1, it's you^1.&* Are you here to play the piano again?/", "obj_npc_room_slash_Other_10_gml_796_0")
+			global.msg[1] = stringsetloc("* The patients can't hear it well from here^1, but I personally enjoy it./%", "obj_npc_room_slash_Other_10_gml_797_0")
+		
+			if talked >= 1 {
+				global.msg[0] = stringsetloc("* Sometimes the police chief comes in to play the piano./", "obj_npc_room_slash_Other_10_gml_801_0")
+				global.msg[1] = stringsetloc("* Her playing is nice^1, but when she starts singing.../", "obj_npc_room_slash_Other_10_gml_802_0")
+				global.msg[2] = stringsetloc("* We have to ask her to leave./%", "obj_npc_room_slash_Other_10_gml_803_0")
+			}
+			
+			if talked >= 2 {
+				msgset(0, "* Why is the door Locked?/")	
+				msgnext("* Those Three rooms haven't been implemented Yet./%")
+			}
+			
+			if (tempvar >= 1) {
+				global.msg[0] = stringsetloc("* Hmmm..^1. you usually play the piano a bit more..^1. beautifully./", "obj_npc_room_slash_Other_10_gml_809_0")
+				global.msg[1] = stringsetloc("* Is everything OK^1?&* You DO seem a little sick.../%", "obj_npc_room_slash_Other_10_gml_810_0")
+			}
+			
+			break;
 		}
 		
 		default: handled = false; break;	
