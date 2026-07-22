@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_txtund",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.06530612,
+  "exportDir":"",
+  "name":"snd_txtund",
+  "parent":{
+    "name":"Misc",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/Misc.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_txtund.wav",
+  "volume":1.0,
+}

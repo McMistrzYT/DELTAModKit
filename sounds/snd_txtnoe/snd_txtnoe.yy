@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_txtnoe",
   "parent":{
-    "name":"Dialogue",
-    "path":"folders/DELTARUNE/Sounds/Dark/Dialogue.yy",
+    "name":"Noelle",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/Noelle.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

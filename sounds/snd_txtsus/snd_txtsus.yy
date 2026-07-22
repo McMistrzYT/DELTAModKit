@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_txtsus",
   "parent":{
-    "name":"Dialogue",
-    "path":"folders/DELTARUNE/Sounds/Dark/Dialogue.yy",
+    "name":"Susie",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/Susie.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

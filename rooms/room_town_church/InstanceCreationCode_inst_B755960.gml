@@ -1,0 +1,1 @@
+if !room_exists(doorRoom) { instance_change(obj_soliddark, true) y += 5 }
