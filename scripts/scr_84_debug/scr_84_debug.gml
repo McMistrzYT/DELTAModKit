@@ -124,7 +124,7 @@ function scr_84_debug(stepmode) {
 			itemid = i
 			self.i = 0
 			global.itemname[0] = " "
-			scr_itemnamelist(i, 0)
+			scr_itemnamelist()
 			name = global.itemname[0]
 			
 			if (name == " " || !is_string(name))

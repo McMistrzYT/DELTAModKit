@@ -2,14 +2,15 @@
 /// @arg MessageIndex The Index in the Array the Message goes into, Arrays start at 0
 /// @arg Message The Message to insert into the Array, Used for Dialogue
 /// @arg pointer_null Unused Argument, exists so feather stops complaining due to leftover localization keys when msgsetloc (the Localization Variation of this) instances were replaced with msgset
-function msgset(messageid, text, nullargument_tostopfeathercomplaints = pointer_null){
+function msgset(messageid, text, nullargument = pointer_null){
     global.msgno = messageid;
     global.msg[messageid] = text;
 }
 
 /// @desc MessageNext, sets the Next Message, use MessageSet to start it back off at 0 (or what ever MessageId you force it into)
 /// @arg Message The Message to insert into the Array, Used for Dialogue
-function msgnext(text){
+/// @arg pointer_null Unused Argument, exists so feather stops complaining due to leftover localization keys when msgnextloc (the Localization Variation of this) instances were replaced with msgnext
+function msgnext(text, nullargument = pointer_null){
     global.msgno++;
     msgset(global.msgno, text);
 }

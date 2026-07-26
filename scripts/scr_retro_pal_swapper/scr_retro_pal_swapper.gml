@@ -66,7 +66,7 @@ function pal_swap_init_system(_shader, _html5_sprite_shader, _html5_surface_shad
 }
 	
 ///@func pal_swap_set(palette_sprite_index, palette_index, palette is surface);
-function pal_swap_set(_pal_sprite, _pal_index, _is_surface) {
+function pal_swap_set(_pal_sprite, _pal_index, _is_surface = false) {
 	
 	var _swapper = global.retro_pal_swapper;
 	if(_pal_index == 0) exit;
@@ -130,7 +130,7 @@ function pal_swap_layer_init() {
 
 // @func pal_swap_set_layer(pal_sprite, pal_index, layer_index, pal_is_surface)
 //draws the specified layer using the specified palette in the specified event.
-function pal_swap_set_layer(_pal_sprite, _pal_index, _layer_index, _pal_is_surface) {
+function pal_swap_set_layer(_pal_sprite, _pal_index, _layer_index, _pal_is_surface = false) {
 	var _data = ds_map_find_value(global.retro_pal_swapper.layer_map,_layer_index);
 	if(_data == undefined) return;  //Swapping not enabled on this layer
   
