@@ -135,7 +135,7 @@ function scr_flag_name_get(flag)
 {
     if (!global.is_console)
     {
-        var v = global.flagname[flag];
+        var v = global.flagname[flag]
         return is_undefined(v) ? "*unknown flag*" : v;
     }
     else
@@ -162,4 +162,19 @@ function scr_flag_set(flag, value)
 function scr_setflag(flag, value)
 {
     scr_flag_set(flag, value);
+}
+
+function scr_flag_set_ext(flag, bitmaskindex, newvalue, bytesperindex = 1){
+    if (bitmaskindex < 0)
+        scr_flag_set(arg0, newvalue)
+    else
+        global.flag[flag] = scr_set_bitmask_value(global.flag[flag], bitmaskindex, newvalue, bytesperindex)
+}
+
+
+function scr_flag_get_ext(flag, bitmaskindex, bytesperindex = 1){
+    if (bitmaskindex < 0)
+        scr_flag_get(flag)
+    else
+        return scr_get_bitmask_value(global.flag[flag], bitmaskindex, bytesperindex);
 }

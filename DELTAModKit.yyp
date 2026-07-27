@@ -524,6 +524,7 @@
     {"id":{"name":"scr_battle","path":"scripts/scr_battle/scr_battle.yy",},},
     {"id":{"name":"scr_battlecursor","path":"scripts/scr_battlecursor/scr_battlecursor.yy",},},
     {"id":{"name":"scr_battledebug","path":"scripts/scr_battledebug/scr_battledebug.yy",},},
+    {"id":{"name":"scr_bitmask","path":"scripts/scr_bitmask/scr_bitmask.yy",},},
     {"id":{"name":"scr_boltcheck","path":"scripts/scr_boltcheck/scr_boltcheck.yy",},},
     {"id":{"name":"scr_buttons","path":"scripts/scr_buttons/scr_buttons.yy",},},
     {"id":{"name":"scr_caterpiller_interpolate","path":"scripts/scr_caterpiller_interpolate/scr_caterpiller_interpolate.yy",},},
