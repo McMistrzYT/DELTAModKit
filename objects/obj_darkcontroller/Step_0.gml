@@ -19,8 +19,8 @@ if (global.interact == 5) { // If Menu is Open
             movenoise = true;
             moveamt++
         }
-		if abs(moveamt > 0) && chartotal > 0 {
-			global.submenucoord[global.submenu] = scr_wrap_newer(global.submenucoord[global.submenu] + moveamt, 0, chartotal)
+		if abs(moveamt) > 0 && chartotal > 0 {
+			global.submenucoord[global.submenu] = scr_wrap_newer(global.submenucoord[global.submenu] + moveamt, 0, chartotal - 1)
 		}
         
         if (button1_p() && onebuffer < 0 && twobuffer < 0) {
@@ -82,94 +82,15 @@ if (global.interact == 5) { // If Menu is Open
         }
     }
     
-    if (global.submenu == 6 || global.submenu == 7 || global.menuno == 3)
-    {
+    if (global.submenu == 6 || global.submenu == 7 || global.menuno == 3) {
         global.charselect = 3;
         global.faceaction[0] = 7;
         global.faceaction[1] = 7;
         global.faceaction[2] = 7;
         
-        if (button1_p() && onebuffer < 0 && global.submenu == 6)
-        {
-            onebuffer = 2;
-            global.faceaction[0] = 0;
-            global.faceaction[1] = 0;
-            global.faceaction[2] = 0;
-            scr_itemuse(global.item[global.submenucoord[2]]);
-            
-            if (usable == 1)
-            {
-                //with (obj_event_manager)
-                //   trigger_event(UnknownEnum.Value_0, UnknownEnum.Value_11);
-            }
-            
-            if (usable == 1 && replaceable == 0)
-                scr_itemshift(global.submenucoord[2], 0);
-            else if (replaceable > 0)
-                global.item[global.submenucoord[2]] = replaceable;
-            
-            scr_itemdesc();
-            global.charselect = -1;
-            global.submenu = 2;
-        }
+        if (button1_p() && onebuffer < 0 && global.submenu == 6) { } // Moved [Item Use]
         
-        if (button1_p() && onebuffer < 0 && global.submenu == 7)
-        {
-            onebuffer = 2;
-            global.faceaction[0] = 0;
-            global.faceaction[1] = 0;
-            global.faceaction[2] = 0;
-            throwitem = global.item[global.submenucoord[2]];
-            scr_itemshift(global.submenucoord[2], 0);
-            scr_itemdesc();
-            global.charselect = -1;
-            global.submenu = 3;
-            snd_play(snd_heavyswing);
-            
-            if (throwitem == 4)
-            {
-                if (global.char[2] == 3 || global.char[1] == 3)
-                {
-                    global.interact = 1;
-                    scr_closemenu();
-                    global.fc = 2;
-                    global.typer = 31;
-                    global.fe = 9;
-                    global.msg[0] = stringsetloc("* .../%", "obj_darkcontroller_slash_Step_0_gml_135_0");
-                    
-                    if (global.flag[207] == 1)
-                    {
-                        global.fc = 0;
-                        global.typer = 6;
-                        global.msg[0] = stringsetloc("* (You tossed the Manual hard.^1)&* (Its pages scatter in the wind.)/", "obj_darkcontroller_slash_Step_0_gml_141_0");
-                        scr_ralface(1, 9);
-                        global.msg[2] = stringsetloc("* ............../", "obj_darkcontroller_slash_Step_0_gml_143_0");
-                        global.msg[3] = stringsetloc("\\E5* Umm..^1.&* Th-that's OK^1, Kris^1!&* I can always.../", "obj_darkcontroller_slash_Step_0_gml_144_0");
-                        global.msg[4] = stringsetloc("\\E6* I'll just make a better one next time!/%", "obj_darkcontroller_slash_Step_0_gml_145_0");
-                        global.flag[207] = 2;
-                    }
-                    
-                    if (global.flag[207] == 0)
-                    {
-                        global.fc = 0;
-                        global.typer = 6;
-                        global.msg[0] = stringsetloc("* (You drop the manual on the floor with a resounding thud.)/", "obj_darkcontroller_slash_Step_0_gml_153_0");
-                        scr_ralface(1, 0);
-                        global.msg[2] = stringsetloc("* Hey^1, Kris^1.&* What are you doing...?/", "obj_darkcontroller_slash_Step_0_gml_155_0");
-                        global.msg[3] = stringsetloc("\\E3* Oh no^1!&* Is that the manual?/", "obj_darkcontroller_slash_Step_0_gml_156_0");
-                        global.msg[4] = stringsetloc("\\E1* Looks like you accidentallly dropped it.../", "obj_darkcontroller_slash_Step_0_gml_157_0");
-                        global.msg[5] = stringsetloc("\\E8* Here you go^1, Kris^1!&* You don't wanna lose that!/", "obj_darkcontroller_slash_Step_0_gml_158_0");
-                        scr_noface(6);
-                        global.msg[7] = stringsetloc("* (You got the Manual.^1)&* (Again.)/%", "obj_darkcontroller_slash_Step_0_gml_160_0");
-                        scr_itemget(4);
-                        global.flag[207] = 1;
-                    }
-                    
-                    dl = instance_create(0, 0, obj_dialoguer);
-                    dl.free = 1;
-                }
-            }
-        }
+        if (button1_p() && onebuffer < 0 && global.submenu == 7) { } // Moved [Item Toss]
         
         if (button1_p() && onebuffer < 0 && global.menuno == 3)
         {
@@ -193,14 +114,9 @@ if (global.interact == 5) { // If Menu is Open
             global.faceaction[1] = 0;
             global.faceaction[2] = 0;
             
-            if (global.submenu == 6)
-                global.submenu = 2;
-            
-            if (global.submenu == 7)
-                global.submenu = 3;
-            
-            if (global.menuno == 3)
-                global.menuno = 0;
+            if (global.submenu == 6) global.submenu = 2;            
+            if (global.submenu == 7) global.submenu = 3;            
+            if (global.menuno == 3) global.menuno = 0;
             
             global.charselect = -1;
         }
@@ -946,304 +862,34 @@ if (global.interact == 5) { // If Menu is Open
         }
     }
     
-    if (global.menuno == 1)
-    {
-        if (global.submenu == 2 || global.submenu == 3)
-        {
-            if (left_p() || right_p())
-            {
-                sm = global.submenucoord[2];
-                
-                if (sm == 0 || sm == 2 || sm == 4 || sm == 6 || sm == 8 || sm == 10)
-                {
-                    if (global.item[global.submenucoord[2] + 1] != 0)
-                    {
-                        global.submenucoord[2] += 1;
-                        movenoise = 1;
-                    }
-                }
-                
-                if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                {
-                    global.submenucoord[2] -= 1;
-                    movenoise = 1;
-                }
+    if (global.menuno == 1) {        
+		var menudata = _itemmenuslist[global.submenucoord[1]]
+		var menu = menudata.name
+        var currentsubmenu = global.submenu
+			
+        if (global.submenu == 1){
+			var moveamt = 0
+            if (left_p()){
+                moveamt -= 1;
+                movenoise = 1;
             }
             
-            if (down_p())
-            {
-                sm = global.submenucoord[2];
-                
-                if (sm == 0 || sm == 2 || sm == 4 || sm == 6 || sm == 8)
-                {
-                    if (global.item[global.submenucoord[2] + 2] != 0)
-                    {
-                        global.submenucoord[2] += 2;
-                        movenoise = 1;
-                    }
-                }
-                
-                if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9)
-                {
-                    if (global.item[global.submenucoord[2] + 2] != 0)
-                    {
-                        global.submenucoord[2] += 2;
-                        movenoise = 1;
-                    }
-                    else if (global.item[global.submenucoord[2] + 1] != 0)
-                    {
-                        global.submenucoord[2] += 1;
-                        movenoise = 1;
-                    }
-                }
+            if (right_p()){
+                moveamt += 1;
+                movenoise = 1;
             }
+			
+			if abs(moveamt) > 0 {
+				global.submenucoord[1] = scr_wrap_newer(global.submenucoord[1] + moveamt, 0, _itemmenussize - 1)
+			}
             
-            if (up_p())
-            {
-                sm = global.submenucoord[2];
+            if (button1_p()) {
+                global.submenu = 2;
+                global.submenucoord[global.submenu] = 0
                 
-                if (sm == 2 || sm == 4 || sm == 6 || sm == 8 || sm == 10)
-                {
-                    global.submenucoord[2] -= 2;
-                    movenoise = 1;
-                }
-                
-                if (sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                {
-                    global.submenucoord[2] -= 2;
-                    movenoise = 1;
-                }
-            }
-            
-            if (button2_p() && twobuffer < 0)
-            {
-                cancelnoise = 1;
-                twobuffer = 2;
-                deschaver = 0;
-                global.submenu = 1;
-            }
-        }
-        
-        if (global.submenu == 4)
-        {
-            if (left_p() || right_p())
-            {
-                sm = global.submenucoord[4];
-                
-                if (sm == 0 || sm == 2 || sm == 4 || sm == 6 || sm == 8 || sm == 10)
-                {
-                    if (global.keyitem[global.submenucoord[4] + 1] != 0)
-                    {
-                        global.submenucoord[4] += 1;
-                        movenoise = 1;
-                    }
-                }
-                
-                if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                {
-                    movenoise = 1;
-                    global.submenucoord[4] -= 1;
-                }
-            }
-            
-            if (down_p())
-            {
-                sm = global.submenucoord[4];
-                
-                if (sm == 0 || sm == 2 || sm == 4 || sm == 6 || sm == 8)
-                {
-                    if (global.keyitem[global.submenucoord[4] + 2] != 0)
-                    {
-                        movenoise = 1;
-                        global.submenucoord[4] += 2;
-                    }
-                }
-                
-                if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9)
-                {
-                    if (global.keyitem[global.submenucoord[4] + 2] != 0)
-                    {
-                        global.submenucoord[4] += 2;
-                        movenoise = 1;
-                    }
-                    else if (global.keyitem[global.submenucoord[4] + 1] != 0)
-                    {
-                        movenoise = 1;
-                        global.submenucoord[4] += 1;
-                    }
-                }
-            }
-            
-            if (up_p())
-            {
-                sm = global.submenucoord[4];
-                
-                if (sm == 2 || sm == 4 || sm == 6 || sm == 8 || sm == 10)
-                {
-                    global.submenucoord[4] -= 2;
-                    movenoise = 1;
-                }
-                
-                if (sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                {
-                    global.submenucoord[4] -= 2;
-                    movenoise = 1;
-                }
-            }
-            
-            if (button1_p() && onebuffer < 0)
-            {
-                onebuffer = 2;
-                twobuffer = 1;
-                
-                if (keyitemusable[sm] == 1)
-                {
-                    global.charselect = 3;
-                    scr_itemuse(global.keyitem[sm] + 10000);
-                    global.charselect = -1;
-                }
-                else
-                {
-                    snd_play(snd_cantselect);
-                }
-            }
-            
-            if (button2_p() && twobuffer < 0)
-            {
-                if (global.chapter == 2)
-                {
-                    with (obj_lancergotchi)
-                        instance_destroy();
-                }
-                
-                cancelnoise = 1;
-                twobuffer = 2;
-                deschaver = 0;
-                global.submenu = 1;
-            }
-        }
-        
-        if (global.submenu == 3)
-        {
-            if (button1_p() && onebuffer < 0)
-            {
-                selectnoise = 1;
                 onebuffer = 3;
-                global.submenu = 7;
-            }
-            
-            if (global.item[global.submenucoord[2]] == 0)
-            {
-                if (global.submenucoord[2] == 0)
-                {
-                    global.submenu = 1;
-                    deschaver = 0;
-                    twobuffer = 2;
-                    onebuffer = 2;
-                }
                 
-                if (global.submenucoord[2] > 0)
-                    global.submenucoord[2] -= 1;
-            }
-        }
-        
-        if (global.submenu == 2)
-        {
-            if (button1_p() && onebuffer < 0 && twobuffer < 0)
-            {
-                onebuffer = 3;
-                scr_iteminfo(global.item[global.submenucoord[2]]);
-                
-                if (itemtarget == 1)
-                {
-                    selectnoise = 1;
-                    global.submenu = 5;
-                }
-                
-                if (itemtarget == 2)
-                {
-                    selectnoise = 1;
-                    global.submenu = 6;
-                }
-            }
-            
-            if (global.item[global.submenucoord[2]] == 0)
-            {
-                if (global.submenucoord[2] == 0)
-                {
-                    global.submenu = 1;
-                    deschaver = 0;
-                    twobuffer = 2;
-                    onebuffer = 2;
-                }
-                
-                if (global.submenucoord[2] > 0)
-                    global.submenucoord[2] -= 1;
-            }
-        }
-        
-        if (global.submenu == 1)
-        {
-            if (left_p())
-            {
-                if (global.submenucoord[1] == 0)
-                {
-                    global.submenucoord[1] = 2;
-                    movenoise = 1;
-                }
-                else
-                {
-                    global.submenucoord[1] -= 1;
-                    movenoise = 1;
-                }
-            }
-            
-            if (right_p())
-            {
-                if (global.submenucoord[1] == 2)
-                {
-                    global.submenucoord[1] = 0;
-                    movenoise = 1;
-                }
-                else
-                {
-                    global.submenucoord[1] += 1;
-                    movenoise = 1;
-                }
-            }
-            
-            if (button1_p())
-            {
-                global.submenu = global.submenucoord[1] + 2;
-                
-                if (global.submenu == 4)
-                {
-                    selectnoise = 1;
-                    deschaver = 1;
-                    
-                    if (global.chapter == 2 || global.chapter == 3) && object_exists(asset_get_index("obj_lancergotchi")) {
-                        if (scr_keyitemcheck(DRKeyItem.Lancer)) {
-                            if (!instance_exists(obj_lancergotchi))
-                                instance_create(x, y, obj_lancergotchi);
-                        }
-                    }
-                }
-                
-                if (global.submenu == 2 || global.submenu == 3)
-                {
-                    deschaver = 1;
-                    scr_itemdesc();
-                    
-                    if (global.item[0] == 0)
-                    {
-                        global.submenu = 1;
-                        deschaver = 0;
-                    }
-                    else
-                    {
-                        selectnoise = 1;
-                    }
-                }
+                menudata.init()
             }
             
             if (button2_p() && onebuffer < 0 && twobuffer < 0)
@@ -1255,9 +901,80 @@ if (global.interact == 5) { // If Menu is Open
                 global.charselect = -1;
             }
         }
+	
+		if (global.submenu == 2) {
+            forcecloseitemmenu = 0
+            var moveamt = $0
+            
+            var pos = global.submenucoord[2]
+            var side = floor(pos % 2)
+            
+            var inputted = 0
+            
+            if right_p() { inputted = 1; moveamt += side == 0 ? 1 : -1; side *= -1 }
+            if left_p()  { inputted = 1; moveamt += side == 0 ? 1 : -1; side *= -1 }
+            if up_p()    {
+                inputted = 1 
+                moveamt -= 2
+                if menudata.getvariable(pos + moveamt) <= 0 {
+                    moveamt += 14
+                }
+                
+            }
+            
+            if down_p()                 { 
+                inputted = 1 
+                moveamt += 2
+                if menudata.getvariable(pos + moveamt) <= 0 {
+                    moveamt = -pos
+                    moveamt += side
+                }
+            }
+            
+            if (button1_p() && onebuffer < 0) {
+                onebuffer = 2;
+                twobuffer = 1;
+                with menudata {
+                    slot = global.submenucoord[2]
+                    hovereditemdata = iteminfo(getvariable(slot))
+                    usable = hovereditemdata.usable
+                    button1()
+                }
+            }
+            
+            if inputted movenoise = 1
+            
+            _updatemenupos = 0
+            
+            if abs(moveamt) > 0 {
+                _updatemenupos = 1
+                pos += moveamt
+            }
+            
+            if currentsubmenu != global.submenu || menudata.getvariable(pos) == 0 _updatemenupos = 1
+            
+            if _updatemenupos {
+                while menudata.getvariable(pos) <= 0 {
+                    if pos <= 0 { // Failed
+                        forcecloseitemmenu = 1
+                        break
+                    }
+                    pos--
+                }
+                global.submenucoord[2] = pos
+            }
+            
+            if (button2_p() && twobuffer < 0) || forcecloseitemmenu {
+                cancelnoise = 1;
+                twobuffer = 2;
+                deschaver = 0;
+                global.submenu = 1;
+            }
+            
+        }
     }
-    
-    if (global.menuno == 2)
+	
+	if (global.menuno == 2)
     {
         if (global.submenu == 12 || global.submenu == 13 || global.submenu == 14)
         {
@@ -1580,7 +1297,7 @@ if (global.interact == 5) { // If Menu is Open
             
             if (global.menuno == 1)
             {
-                global.submenu = 1;
+				if _itemmenussize > 0 global.submenu = 1; else snd_play(snd_error)
                 global.submenucoord[1] = 0;
                 global.submenucoord[2] = 0;
                 global.submenucoord[3] = 0;

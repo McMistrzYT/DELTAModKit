@@ -733,3 +733,8 @@ function scr_change_language(){
 	ossafe_savedata_save()
 	if scr_asset_exists("scr_84_init_localization") scr_84_init_localization()
 }
+
+function scr_getitempositiononcenteredlist(middlevalue, distancebetweenitems = 1, itemswidth = 0, currentitem = 0, maxitems = 2) {
+    var changeamt = distancebetweenitems + itemswidth
+    return (middlevalue + (changeamt * (currentitem - (maxitems / 2))))
+}

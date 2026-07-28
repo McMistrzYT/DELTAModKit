@@ -23,18 +23,7 @@ if (apparent != current) {
     changetimer += 1;
     
     if (changetimer > 15) {
-		var maxchangetypes = 5
 		
-		for (i = maxchangetypes-1; i >= 0; --i) {
-			var amt = max(i+1, 2) * (sign(apparent - current))
-			var weirdmaththatshouldlaterbereplacedwithworsebutmorereadablemath = round( // Math Using Desmos, Should Figure out cleaner Math Later.
-			(((5/12)*i)^4) - 
-			(((20/12)*i)^3) - 
-			(((55/12)*i)^2) -  
-			(((80/12)*i)^1)) // Desmos Equation: \operatorname{round}\left(0.416667x^{4}-1.66667x^{3}+4.58333x^{2}+6.66667x\right)
-		    if (abs(apparent - current) > weirdmaththatshouldlaterbereplacedwithworsebutmorereadablemath) current += amt;
-		}
-		/* // LEGACY
         if ((apparent - current) > 0)    current += 2;
         if ((apparent - current) > 10)   current += 2;
         if ((apparent - current) > 25)   current += 3;
@@ -46,7 +35,6 @@ if (apparent != current) {
         if ((apparent - current) < -25)  current -= 3;
         if ((apparent - current) < -50)  current -= 4;
         if ((apparent - current) < -100) current -= 5;
-		*/
         
         if (abs(apparent - current) < 3) current = apparent;
     }

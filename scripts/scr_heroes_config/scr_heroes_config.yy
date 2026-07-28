@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_heroes_config",
   "parent":{
-    "name":"Battles",
-    "path":"folders/Custom/Scripts/Configs/Battles.yy",
+    "name":"Configs",
+    "path":"folders/Custom/Scripts/Configs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

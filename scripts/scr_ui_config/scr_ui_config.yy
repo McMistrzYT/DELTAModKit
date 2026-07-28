@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_save_point_text",
+  "%Name":"scr_ui_config",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_save_point_text",
+  "name":"scr_ui_config",
   "parent":{
-    "name":"World",
-    "path":"folders/Custom/Scripts/Configs/World.yy",
+    "name":"Configs",
+    "path":"folders/Custom/Scripts/Configs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

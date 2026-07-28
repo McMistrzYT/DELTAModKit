@@ -858,44 +858,24 @@ if (global.menuno == 1)
     draw_set_font(global.mainbig_font);
     scr_itemname();
     
-    if (global.submenu == 1)
-        draw_sprite(spr_heart, 0, xx + langopt(155, 134) + (120 * global.submenucoord[1]), yy + 120);
-    
     draw_set_color(c_white);
     var itemoff = langopt([180, 300, 420], [158, 278, 398]);
     
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 0)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
+	var heartx = 0
+	for (var i = 0; i < _itemmenussize; i++) {    
+		var menudata = _itemmenuslist[i]
+		var hovered = global.submenucoord[1] == i
+		if global.submenu > 1 draw_set_color(hovered ? c_orange : c_gray)
+            
+		var myx = scr_getitempositiononcenteredlist(itemmenutopbarcx, itemtopbarspacing, 0, i, _itemmenussize)
+            
+		draw_text(xx + myx, yy + 110, string_hash_to_newline(menudata.getname())); // USE
+           
+		if hovered heartx = myx - 25
+	}
+	if (global.submenu == 1) draw_sprite(spr_heart, 0, xx + heartx, yy + 120);
     
-    draw_text(xx + itemoff[0], yy + 110, string_hash_to_newline("USE"));
-    
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 1)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
-    
-    draw_text(xx + itemoff[1], yy + 110, string_hash_to_newline("TOSS"));
-    
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 2)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
-    
-    draw_text(xx + itemoff[2], yy + 110, string_hash_to_newline("KEY"));
-    
-    if (global.submenu >= 2 && global.submenu <= 6 && global.submenu != 4)
-    {
+	if (global.submenu >= 2 && global.submenu <= 6 && global.submenu != 4){
         sm = global.submenucoord[2];
         yheart = (floor(sm / 2) * 30) + 162 + yy;
         xheart = langopt(120, 72) + xx;
@@ -909,86 +889,66 @@ if (global.menuno == 1)
         draw_set_color(c_white);
         draw_text(xx + 20, yy + 10, string_hash_to_newline(itemdesc[global.submenucoord[2]]));
     }
-    
+	
     if (global.submenu == 7)
     {
         draw_set_color(c_white);
         draw_text(xx + 20, yy + 10, string_hash_to_newline(stringsetsub("Really throw away the#~1?", global.itemname[global.submenucoord[2]])));
     }
-    
-    if (global.submenucoord[1] != 2)
-    {
-        draw_set_color(bcolor);
+    var menudata = _itemmenuslist[global.submenucoord[1]]
+    menudata.xx = xx
+    menudata.yy = yy
+    menudata.bcolor = bcolor
+    menudata.updateitems()
+    var ___itemmenutextshadowdistance = 2
+    /*
+        itemnames = []
+        itemsusable = []    
+    */
+    with menudata {
+        var gray = grayunusableitems && global.submenu != 1
+        //show_message(itemnames)
         
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(148, 94), yy + 154 + (30 * i), string_hash_to_newline(global.itemname[i * 2]));
-            draw_text(xx + 358, yy + 154 + (30 * i), string_hash_to_newline(global.itemname[(i * 2) + 1]));
-        }
-        
-        draw_set_color(c_white);
-        
-        if (global.submenu == 1)
-            draw_set_color(c_gray);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(146, 92), yy + 152 + (30 * i), string_hash_to_newline(global.itemname[i * 2]));
-            draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(global.itemname[(i * 2) + 1]));
-        }
-    }
-    
-    if (global.submenucoord[1] == 2)
-    {
-        scr_keyiteminfo_all();
-        draw_set_color(bcolor);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(148, 94), yy + 154 + (30 * i), string_hash_to_newline(keyitemname[i * 2]));
-            draw_text(xx + 358, yy + 154 + (30 * i), string_hash_to_newline(keyitemname[(i * 2) + 1]));
-        }
-        
-        draw_set_color(c_white);
-        
-        if (global.submenu == 1)
-            draw_set_color(c_gray);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            if (global.submenu == 4)
-            {
-                if (keyitemusable[i * 2] == 1)
-                    draw_set_color(c_white);
-                else
-                    draw_set_color(c_ltgray);
+        if (global.lang == "ja") {
+            draw_set_color(bcolor);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                draw_text(xx + 92 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot]));
+                draw_text(xx + 356 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
             }
             
-            draw_text(xx + langopt(146, 92), yy + 152 + (30 * i), string_hash_to_newline(keyitemname[i * 2]));
-            
-            if (global.submenu == 4)
-            {
-                if (keyitemusable[(i * 2) + 1] == 1)
-                    draw_set_color(c_white);
-                else
-                    draw_set_color(c_ltgray);
-            }
-            
-            draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(keyitemname[(i * 2) + 1]));
-        }
-        
-        if (global.submenu == 4)
-        {
-            sm = global.submenucoord[4];
-            yheart = (floor(sm / 2) * 30) + 162 + yy;
-            xheart = langopt(120, 72) + xx;
-            
-            if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                xheart = langopt(330, 334) + xx;
-            
-            draw_sprite(spr_heart, 0, xheart, yheart);
             draw_set_color(c_white);
-            draw_text(xx + 20, yy + 10, string_hash_to_newline(keyitemdesc[global.submenucoord[4]]));
+            
+            if (!gray) draw_set_color(c_gray);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                if gray draw_set_color(itemsusable[slot] ? c_ltgray : c_white)
+                draw_text(xx + 92, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot]));
+                if gray  draw_set_color(itemsusable[slot + 1] ? c_ltgray : c_white)
+                draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
+        } else {
+            draw_set_color(bcolor);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                draw_text(xx + 146 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot]));
+                draw_text(xx + 356 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
+            
+            draw_set_color(c_white);
+            
+            if (global.submenu == 1) draw_set_color(c_gray);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                if gray draw_set_color(!itemsusable[slot] ? c_ltgray : c_white)
+                draw_text(xx + 146, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot]));
+                if gray draw_set_color(!itemsusable[slot + 1] ? c_ltgray : c_white)
+                draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
         }
     }
 }

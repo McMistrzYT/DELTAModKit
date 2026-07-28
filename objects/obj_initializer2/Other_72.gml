@@ -28,6 +28,7 @@ if (ds_map_find_value(async_load, "id") == global.savedata_async_id)
 		scr_enemy_defeatrunanimations()
 		scr_tensionbar_colors_init()
 		scr_soulmodes_init()
+		scr_darkitemmenu_init()
         scr_gamestart();
         pal_swap_init_system(shd_pal_swapper);
         global.game_won = scr_completed_chapter_any_slot(global.chapter);

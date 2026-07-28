@@ -87,6 +87,7 @@ else
 	scr_enemy_defeatrunanimations()
 	scr_tensionbar_colors_init()
 	scr_soulmodes_init()
+	scr_darkitemmenu_init()
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);
     global.damagefontgold = font_add_sprite_ext(spr_numbersfontbig_gold, "0123456789+-%", 20, 0);
     global.hpfont = font_add_sprite_ext(spr_numbersfontsmall, "0123456789-+", 0, 2);

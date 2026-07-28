@@ -147,14 +147,13 @@ function scr_keyitemshift(arg0, arg1)
     scr_keyiteminfo_all();
 }
 
-function scr_itemdesc()
-{
-    for (i = 0; i < 12; i += 1)
-    {
-        itemid = global.item[i];
-        itemdesc[i] = scr_itemdesc_single(itemid);
+function scr_itemdesc(array = global.item, offset = 0, itemdescholder = scr_itemdesc_single) {
+    for (i = 0; i < array_length(array); i += 1) {
+        itemid = array[i] + offset;
+        itemdesc[i] = itemdescholder(itemid);
     }
 }
+
 
 function scr_itemdialoguer()
 {
@@ -393,8 +392,8 @@ function scr_itemuse(arg0)
     if (global.charselect < 3)
         _gc = global.char[global.charselect];
 	
-	if (w < 10000)
+	if (w < KEYITEMDATASTART)
 		scr_item_use_action_overworld(w);
 	else
-		scr_key_item_use_action_overworld(w - 10000);
+		scr_key_item_use_action_overworld(w - KEYITEMDATASTART);
 }

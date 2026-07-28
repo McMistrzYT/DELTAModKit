@@ -1,4 +1,5 @@
 function macros(){
+	#macro KEYITEMDATASTART 10000
 	#macro DEBUGMODE false
 	#macro Debug:DEBUGMODE true
 	

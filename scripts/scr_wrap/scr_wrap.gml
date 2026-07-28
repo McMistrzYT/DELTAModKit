@@ -53,13 +53,15 @@ function scr_wrap_new() {
 }
 
 
-function scr_wrap_newer(_val, _min, _max){ 
-   try {
-	   if _min > _max {
-			var _oldmin = _min
-			_min = _max
-			_max = _oldmin
-	   }
-		return _max - ((_max - (_val % (_max + 1))) % (_max - _min + 1));
-   } catch (ex) {return 0}
+function scr_wrap_newer(value, _min, _max){
+	if value >= _min && value <= _max return value
+	if value < _min && _max >= infinity return _min
+	if value > _max && _min <= -infinity return _max
+	
+	var __maxmod = (_max + 1 - _min)
+	if __maxmod == 0 return 0
+	value = value % __maxmod
+	value = (_max - (_max - value) % __maxmod)
+	var toreturn = clamp(value, _min, _max)
+	return toreturn ?? value
 }

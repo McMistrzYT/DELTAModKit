@@ -61,8 +61,7 @@ pagemax[1] = 0;
 getmusvol = 1;
 curvol = 1;
 
-for (p = 0; p < DRHero.__MAX__; p++)
-	hpcolor[p] = scr_hero_get_color(p);
+for (p = 0; p < DRHero.__MAX__; p++) hpcolor[p] = scr_hero_get_color(p);
 	
 menu_sprite = spr_darkmenudesc;
 autorun_text = "Auto-Run";
@@ -75,3 +74,10 @@ rouxlsgridenabled = false;
 rouxlsbuttoncount_y = 0;
 disablesusieact = 0;
 dogcon = 0;
+
+_itemmenuslist = variable_global_get("@@DarkItemMenuData@@")
+_itemmenussize = array_length(_itemmenuslist)
+itemdesc = array_create(13, " ")
+
+itemtopbarspacing = clamp(240 - (_itemmenussize * 40), 80, 240)
+itemmenutopbarcx = 328 + (itemtopbarspacing - 88)
