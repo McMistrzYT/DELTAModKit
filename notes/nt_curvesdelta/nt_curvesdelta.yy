@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"v1",
+  "%Name":"nt_curvesdelta",
+  "name":"nt_curvesdelta",
+  "parent":{
+    "name":"Curves",
+    "path":"folders/DELTARUNE/Curves.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

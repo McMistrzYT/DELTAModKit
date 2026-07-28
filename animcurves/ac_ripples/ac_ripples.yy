@@ -1,0 +1,32 @@
+{
+  "$GMAnimCurve":"",
+  "%Name":"ac_ripples",
+  "channels":[
+    {"$GMAnimCurveChannel":"","%Name":"norm","colour":4290799884,"name":"norm","points":[
+        {"th0":-0.1,"th1":0.05,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.010000001,"th1":0.19,"tv0":0.0,"tv1":0.0,"x":0.05,"y":0.24,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":1.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"slow","colour":4281083598,"name":"slow","points":[
+        {"th0":-0.1,"th1":0.01,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.002,"th1":0.198,"tv0":0.0,"tv1":0.0,"x":0.01,"y":0.1,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":1.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"inverse","colour":4279025727,"name":"inverse","points":[
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":0.0,"y":1.0,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"in","colour":4279234797,"name":"in","points":[
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":1.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+  ],
+  "function":2,
+  "name":"ac_ripples",
+  "parent":{
+    "name":"Curves",
+    "path":"folders/DELTARUNE/Curves.yy",
+  },
+  "resourceType":"GMAnimCurve",
+  "resourceVersion":"2.0",
+}

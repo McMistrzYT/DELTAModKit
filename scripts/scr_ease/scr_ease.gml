@@ -263,3 +263,19 @@ function scr_ease_inout(arg0, arg1)
         return 0.5 * (scr_ease_out(arg0, arg1) + 1);
     }
 }
+
+function scr_approach(pointa, pointb, speed){
+	if abs(pointa - pointb) < speed 
+		pointa = pointb
+	else {
+		var changeamt = sign(pointb - pointa) * speed		
+		pointa += changeamt
+	}
+	
+	return pointa;
+}
+
+function scr_approach_curve(pointa, pointb, speed, minincrement = 0.1){
+	return scr_approach(pointa, pointb, max(minincrement, abs(pointb - pointa) / speed));
+}
+
