@@ -17,7 +17,7 @@ To start playing around with DELTAModKit, you have to download [GameMaker Beta](
 5. To activate debug mode Switch Config from "Default" to "Debug"
 
 > [!CAUTION]
-> This current Version of the project contains incomplete changes, such as: Hometown has not been fully added.
+> Hometown has not been fully added yet, so beware of things missing text and rooms not existing yet.
 
 ## Adding / Changing Modular Stuff
 The hearts of the modular reimplementations of the character, item, spell and equipment systems all live in the folder `Custom > Scripts > Configs`. I tried naming everything in an easy-to-understand way, but feel free to reach out if you encounter any issues. Provided in the `Custom > Objects` folder is an example cutscene for working with the Cutscene System and some helper markers to assist with character placement in cutscenes

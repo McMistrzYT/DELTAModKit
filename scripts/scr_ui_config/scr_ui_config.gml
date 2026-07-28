@@ -225,7 +225,6 @@
 }
 	
 #endregion
-
 #region TENSIONBAR
 
 enum DRTensionColor {
