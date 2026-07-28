@@ -55,7 +55,7 @@ if (timer == 15)
             if (i_ex(global.monsterinstance[star]))
             {
                 if (global.monsterinstance[star].freezable == true)
-                    global.flag[51 + star] = MONSTERS_DEFEATTYPES_Frozen;
+                    global.flag[EncountersCore_EncounterResult_Enemy1 + star] = MONSTERS_DEFEATTYPES_Frozen;
             }
         }
         

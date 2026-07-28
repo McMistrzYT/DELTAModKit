@@ -580,7 +580,7 @@ function scr_defeatrun(){
 	if !variable_struct_exists(self, "__spared")   __spared = false
 	if !variable_struct_exists(self, "fatal")		  fatal = false
 	if variable_struct_exists(self, "myself") {
-		switch global.flag[51 + myself] {
+		switch global.flag[EncountersCore_EncounterResult_Enemy1 + myself] {
 			case MONSTERS_DEFEATTYPES_Frozen: __frozen = true break;
 			
 			case MONSTERS_DEFEATTYPES_Pacify:

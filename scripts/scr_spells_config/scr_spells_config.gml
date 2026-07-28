@@ -351,7 +351,7 @@ function scr_spell_use_action(casterid, spellid) {
                             _pspell = instance_create(global.monsterx[myself], global.monstery[myself] + yoffy, obj_pacifyspell);
                             _pspell.con = 20;
                             _pspell.target = id;
-                            global.flag[51 + myself] = 3;
+                            global.flag[EncountersCore_EncounterResult_Enemy1 + myself] = 3;
                             event_user(10);
                             scr_monsterdefeat();
                         }
@@ -582,7 +582,7 @@ function scr_spell_use_action(casterid, spellid) {
                     {
                         with (global.monsterinstance[star])
                         {
-                            global.flag[51 + myself] = 2;
+                            global.flag[EncountersCore_EncounterResult_Enemy1 + myself] = 2;
                             event_user(10);
                             scr_monsterdefeat();
                         }

@@ -21,29 +21,26 @@ function scr_monster_statreset(monsterid)
     scr_monster_actreset(monsterid);
 }
 
-function scr_monster_actreset(arg0)
+function scr_monster_actreset(star)
 {
     for (__fj = 0; __fj < 6; __fj += 1)
         for (__charIdx = DRCharacter.None; __charIdx < DRCharacter.__MAX__; __charIdx++) {
-			global.canact[__charIdx][arg0][__fj] = 0;
-	        global.actname[__charIdx][arg0][__fj] = " ";
-	        global.actactor[__charIdx][arg0][__fj] = 1;
-	        global.actdesc[__charIdx][arg0][__fj] = " ";
-	        global.actcost[__charIdx][arg0][__fj] = 0;
-	        global.actsimul[__charIdx][arg0][__fj] = 0;	
+			global.canact[__charIdx][star][__fj] = 0;
+	        global.actname[__charIdx][star][__fj] = " ";
+	        global.actactor[__charIdx][star][__fj] = 1;
+	        global.actdesc[__charIdx][star][__fj] = " ";
+	        global.actcost[__charIdx][star][__fj] = 0;
+	        global.actsimul[__charIdx][star][__fj] = 0;	
 		}
 }
 
-function scr_monster_add(arg0, arg1)
-{
+function scr_monster_add(type, object){
     __returnid = -1;
     
-    for (__mopenslot = 0; __mopenslot < 3; __mopenslot++)
-    {
-        if (global.monster[__mopenslot] == 0)
-        {
-            global.monstertype[__mopenslot] = arg0;
-            global.monsterinstancetype[__mopenslot] = arg1;
+    for (__mopenslot = 0; __mopenslot < 3; __mopenslot++){
+        if (global.monster[__mopenslot] == 0) {
+            global.monstertype[__mopenslot] = type;
+            global.monsterinstancetype[__mopenslot] = object;
             scr_monster_statreset(__mopenslot);
             scr_monster_makeinstance(__mopenslot);
             __returnid = __mopenslot;
@@ -59,12 +56,10 @@ function scr_spareanim() {
 	scr_defeatrun()
 }
 
-function scr_monster_makeinstance(monsterid)
-{
+function scr_monster_makeinstance(monsterid){
     global.monster[monsterid] = 1;
     
-    with (global.monsterinstance[monsterid])
-        instance_destroy();
+    with (global.monsterinstance[monsterid]) instance_destroy();
     
     global.monsterinstance[monsterid] = instance_create(global.monstermakex[monsterid], global.monstermakey[monsterid], global.monsterinstancetype[monsterid]);
     global.monsterinstance[monsterid].myself = monsterid;
@@ -80,40 +75,37 @@ function scr_monsterdefeat() {
         global.monsterexp[3] += global.monsterexp[myself];
         global.monster[myself] = 0;
         
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_None) {
-            global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Spare;
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_None) {
+            global.flag[EncountersCore_EncounterResult_Enemy1 + myself] = MONSTERS_DEFEATTYPES_Spare;
             
-            if (global.monsterhp[myself] <= 0) global.flag[51 + myself] = MONSTERS_DEFEATTYPES_Violence;
+            if (global.monsterhp[myself] <= 0) global.flag[EncountersCore_EncounterResult_Enemy1 + myself] = MONSTERS_DEFEATTYPES_Violence;
         }
         
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Violence) {
-            global.flag[40] += 1;
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_Violence) {
+            global.flag[DefeatCounter_Violence] += 1;
 			
-            if (fatal == 1) global.flag[44]++; // Fatal Kills
+            if (fatal == 1) global.flag[DefeatCounter_Fatal]++; // Fatal Kills
         }
         
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Spare) global.flag[41] += 1;
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Pacify) global.flag[42] += 1;
-        
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_AutoViolenced) global.flag[43] += 1;
-        
-        if (global.flag[51 + myself] == MONSTERS_DEFEATTYPES_Frozen)
-        {
-            global.flag[45] += 1;
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_Spare) global.flag[DefeatCounter_Spare] += 1;
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_Pacify) global.flag[DefeatCounter_Pacify] += 1;        
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_AutoViolenced) global.flag[DefeatCounter_Violence_Auto] += 1;
+        if (global.flag[EncountersCore_EncounterResult_Enemy1 + myself] == MONSTERS_DEFEATTYPES_Frozen){
+            global.flag[DefeatCounter_Freeze] += 1;
             global.monstergold[3] += 24;
         }
         
         if (scr_monsterpop() == 0) {
 			scr_monster_get_defeattypes("init")
-            for (d_i = 0; d_i < 3; d_i += 1) scr_monster_get_defeattypes("tally", global.flag[51 + d_i])
+            for (d_i = 0; d_i < 3; d_i += 1) scr_monster_get_defeattypes("tally", global.flag[EncountersCore_EncounterResult_Enemy1 + d_i])
             scr_monster_get_defeattypes("updatebattleendflags")
                
-            if (global.flag[54] != 0) {
-                global.flag[global.flag[54]] = global.flag[50];
+            if (global.flag[EncountersCore_EncounterResultForward] != 0) {
+                global.flag[global.flag[EncountersCore_EncounterResultForward]] = global.flag[EncountersCore_EncounterResult_Total];
                 debug_log("=====Encounter Results=====");
-                debug_log("encounter flag: global.flag[" + string(global.flag[54]) + "]=" + string(global.flag[50]));
+                debug_log("encounter flag: global.flag[" + string(global.flag[EncountersCore_EncounterResultForward]) + "]=" + string(global.flag[EncountersCore_EncounterResult_Total]));
                 debug_log("=======");
-                global.flag[54] = 0;
+                global.flag[EncountersCore_EncounterResultForward] = 0;
             }
         }
         
@@ -125,8 +117,7 @@ function scr_monsterpop(){
     return global.monster[0] + global.monster[1] + global.monster[2];
 }
 
-function scr_enemy_object_init()
-{
+function scr_enemy_object_init(){
     becomeflash = 0;
     flash = 0;
     turnt = 0;

@@ -68,7 +68,7 @@ if (!(global.interact == 0 || global.interact == 4))
 
 if (dobattle) {
 	if (encounterflag > 0)
-		global.flag[54] = encounterflag
+		global.flag[EncountersCore_EncounterResultForward] = encounterflag
 	
 	event_user(0)
 }

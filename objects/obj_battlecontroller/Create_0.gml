@@ -39,15 +39,14 @@ global.fighting = 1;
     global.fc = 3;
     global.fe = 4;
     global.flag[62] = 1;
-}
+}*/
 
-if (global.flag[62] == 0)
-{
+if (global.flag[62] == 0){
     global.fe = 0;
     global.fc = 0;
     global.typer = 4;
     global.battletyper = 4;
-}*/
+}
 
 global.flag[62] = 0;
 global.myfight = 0;
@@ -89,10 +88,10 @@ for (i = 0; i < 3; i += 1)
 
 itempage = 0;
 spellpage = 0;
-global.flag[50] = 0;
-global.flag[51] = 0;
-global.flag[52] = 0;
-global.flag[53] = 0;
+global.flag[EncountersCore_EncounterResult_Total] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy1] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy2] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy3] = 0;
 global.flag[63] = 0;
 
 for (i = 0; i < 3; i += 1)

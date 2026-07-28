@@ -36,9 +36,9 @@ function setxy(x, y){
     self.y = y;
 }
 
-function draw_background_tiled_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+function draw_background_tiled_ext(sprite, xoffset, yoffset, xscale, yscale, blend, alpha)
 {
-    draw_sprite_tiled_ext(arg0, 0, arg1, arg2, arg3, arg4, arg5, arg6);
+    draw_sprite_tiled_ext(sprite, 0, xoffset, yoffset, xscale, yscale, blend, alpha);
 }
 
 function scr_moveheart(){
@@ -46,14 +46,11 @@ function scr_moveheart(){
     return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
 }
 
-function ossafe_ini_open(arg0){
-    if (!global.is_console)
-    {
-        ini_open(arg0);
-    }
-    else
-    {
-        var name = string_lower(arg0);
+function ossafe_ini_open(fname){
+    if (!global.is_console) {
+        ini_open(fname);
+    } else {
+        var name = string_lower(fname);
         global.current_ini = name;
         var file = ds_map_find_value(global.savedata, name);
         var data;
@@ -67,13 +64,10 @@ function ossafe_ini_open(arg0){
     }
 }
 
-function ossafe_ini_close()
-{
-    if (!global.is_console)
-    {
+function ossafe_ini_close(){
+    if (!global.is_console) {
         return ini_close();
-    }
-    else if (!is_undefined(global.current_ini))
+    } else if (!is_undefined(global.current_ini))
     {
         ds_map_set(global.savedata, global.current_ini, ini_close());
         global.current_ini = undefined;
@@ -84,15 +78,11 @@ function draw_background_ext(sprite, x, y, xscale, yscale, rot = 0, col = c_whit
     draw_sprite_ext(sprite, 0, x, y, xscale, yscale, rot, col, alpha);
 }
 
-function ossafe_file_text_open_read(arg0)
-{
-    if (!global.is_console)
-    {
-        return file_text_open_read(arg0);
-    }
-    else
-    {
-        var name = string_lower(arg0);
+function ossafe_file_text_open_read(fname){
+    if (!global.is_console) {
+        return file_text_open_read(fname);
+    } else {
+        var name = string_lower(fname);
         var file = ds_map_find_value(global.savedata, name);
         
         if (is_undefined(file))
@@ -102,8 +92,7 @@ function ossafe_file_text_open_read(arg0)
         var num_lines = 0;
         var lines;
         
-        while (string_byte_length(data) > 0)
-        {
+        while (string_byte_length(data) > 0){
             var newline_pos = string_pos("\n", data);
             var line;
             
@@ -143,15 +132,15 @@ function ossafe_file_text_open_read(arg0)
     }
 }
 
-function ossafe_file_text_read_string(arg0)
+function ossafe_file_text_read_string(fname)
 {
     if (!global.is_console)
     {
-        return file_text_read_string(arg0);
+        return file_text_read_string(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         
         if (ds_map_find_value(handle, "line_read"))
             return "";
@@ -167,15 +156,15 @@ function ossafe_file_text_read_string(arg0)
     }
 }
 
-function ossafe_file_text_read_real(arg0)
+function ossafe_file_text_read_real(fname)
 {
     if (!global.is_console)
     {
-        return file_text_read_real(arg0);
+        return file_text_read_real(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         
         if (ds_map_find_value(handle, "line_read"))
             return 0;
@@ -191,15 +180,15 @@ function ossafe_file_text_read_real(arg0)
     }
 }
 
-function ossafe_file_text_readln(arg0)
+function ossafe_file_text_readln(fname)
 {
     if (!global.is_console)
     {
-        return file_text_readln(arg0);
+        return file_text_readln(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         ds_map_set(handle, "line_read", false);
         var line = ds_map_set_post(handle, "line", ds_map_find_value(handle, "line") + 1);
         
@@ -211,10 +200,9 @@ function ossafe_file_text_readln(arg0)
     }
 }
 
-function scr_ds_list_read(arg0)
-{
+function scr_ds_list_read(fname){
     var new_list = ds_list_create();
-    var list_string = ossafe_file_text_read_string(arg0);
+    var list_string = ossafe_file_text_read_string(fname);
     
     if (list_string != "")
         ds_list_read(new_list, list_string);
@@ -226,8 +214,7 @@ function safe_delete(instance) {
     if i_ex(instance) with (instance) instance_destroy();
 }
 
-function ossafe_file_delete(arg0)
-{
+function ossafe_file_delete(arg0){
     if (!global.is_console)
         return file_delete(arg0);
     else if (!is_undefined(ds_map_find_value(global.savedata, arg0)))

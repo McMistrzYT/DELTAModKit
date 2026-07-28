@@ -3,12 +3,13 @@ padding = 5;
 wd = 160;
 
 var i = 0
-
+/*
 for (i = 0; i < button_amount; i++)
 {
-if string_width(button_text[i]) > wd - (padding * 2)
-	wd = string_width(button_text[i]) + (padding * 2)
+if string_width(button_text[i]) > wd - 20
+	wd = string_width(button_text[i]) + 20
 }
+*/
 
 ht = 40 + (bspace * button_amount);
 mx = mouse_x - camerax();
@@ -57,43 +58,26 @@ for (i = 0; i < button_amount; i++)
     }
 }
 
-if !replacedcur
-	window_set_cursor(cr_default)
+if !replacedcur window_set_cursor(cr_default)
 
 draw_set_font(fnt_main);
 
-for (i = 0; i < button_amount; i++)
-{
-    if (button_state[i] == 0)
-    {
-        draw_set_color(c_ltgray);
-    }
+for (i = 0; i < button_amount; i++) {
+    if (button_state[i] == 0) draw_set_color(c_ltgray);    
+    if (button_state[i] == 1) draw_set_color(c_white);    
+    if (button_state[i] == 2) draw_set_color(c_dkgray); 
+	if (button_state[i] == 3) draw_set_color(c_blue);
     
-    if (button_state[i] == 1)
-    {
-        draw_set_color(c_white);
-    }
-    
-    if (button_state[i] == 2)
-    {
-        draw_set_color(c_dkgray);
-    }
-    
-    if (button_state[i] == 3)
-    {
-        draw_set_color(c_blue);
-    }
-    
-    if (i == 0)
-    {
-        draw_set_color(merge_color(draw_get_color(), c_aqua, 0.7));
-    }
+    if (i == 0) draw_set_color(merge_color(draw_get_color(), c_aqua, 0.7));
     
     draw_rectangle(xx + 10, yy + (bspace * i) + padding, (xx + wd) - 10, (yy + 30 + ((bspace + 1) * i)) - padding, false);
     draw_set_color(c_black);
     draw_rectangle(xx + 10, yy + (bspace * i) + padding, (xx + wd) - 10, (yy + 30 + ((bspace + 1) * i)) - padding, true);
     draw_set_color(c_red);
-    draw_text(xx + 10, yy + (bspace * i) + padding, button_text[i]);
+	if string_width(button_text[i]) > wd - 20 {
+		draw_text_width(xx + 10, yy + (bspace * i) + padding, button_text[i], wd - 20)
+	} else draw_text(xx + 10, yy + (bspace * i) + padding, button_text[i]);
+	
     draw_set_color(c_black);
 }
 

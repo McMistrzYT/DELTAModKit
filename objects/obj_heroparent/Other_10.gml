@@ -48,7 +48,7 @@ if (finishattacktimer > 0)
             if (is_auto_susie == 1 && global.monsterhp[global.chartarget[myself]] <= 0)
             {
                 with (global.chartarget[myself])
-                    global.flag[51 + myself] = MONSTERS_DEFEATTYPES_AutoViolenced;
+                    global.flag[EncountersCore_EncounterResult_Enemy1 + myself] = MONSTERS_DEFEATTYPES_AutoViolenced;
             }
             
             if (damage > 0)

@@ -26,8 +26,8 @@ if (encountered == 0)
 		}
 	}
 	
-	global.flag[55] = x
-	global.flag[56] = y
+	global.flag[EncountersCore_EncounterX] = x
+	global.flag[EncountersCore_EncounterY] = y
 	
 	if (washit == 1) global.ambush = 2
 	

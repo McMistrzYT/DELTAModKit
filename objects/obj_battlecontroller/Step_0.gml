@@ -60,7 +60,7 @@ if (victory == 1 && victoried == 0)
 		
 		
 		for (i = 0; i < array_length(global.char); ++i) {
-			var _msgcheck = scr_character_get_custom_battleendmessage(global.char[i], global.flag[50])
+			var _msgcheck = scr_character_get_custom_battleendmessage(global.char[i], global.flag[EncountersCore_EncounterResult_Total])
 			if is_string(_msgcheck) msg = _msgcheck
 		}
 		

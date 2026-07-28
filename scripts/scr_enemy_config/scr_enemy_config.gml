@@ -347,7 +347,7 @@ function scr_getdefeatanimationdataarray() {
 }
 
 // DefeatTypes
-function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[51 + self.myself]) {
+function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[EncountersCore_EncounterResult_Enemy1 + self.myself]) {
 	// For more Precise Control go to 'scr_monster->scr_monsterdefeat' and 'scr_turn->scr_defeatrun'
 	#macro MONSTERS_DEFEATTYPES_None 0
 	#macro MONSTERS_DEFEATTYPES_Violence 1
@@ -372,13 +372,14 @@ function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = g
 			case MONSTERS_DEFEATTYPES_Frozen:	_frozened++		break
 		}
 	}
+	
 	if mode == "all" || mode == "updatebattleendflags" {
-        if (_frozened > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Frozen;
-        if (_pacified > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Pacify;
-        if (_spared > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Spare;
-        if (_violenced > 0) global.flag[50] = MONSTERS_DEFEATTYPES_Violence;
+        if (_frozened > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Frozen;
+        if (_pacified > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Pacify;
+        if (_spared > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Spare;
+        if (_violenced > 0) global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Violence;
 		
-		switch global.flag[50] {
+		switch global.flag[EncountersCore_EncounterResult_Total] {
 			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break // All Enemies Frozen.
 		}
 	}
