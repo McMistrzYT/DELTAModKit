@@ -270,6 +270,8 @@ function scr_84_debug(stepmode) {
 			global.chemg_menu_depth = 0			
 		})
 		
+		__AUTOGENMACRO__84DEBUGROOMDATA__
+		
 		if global.runtimeyear > "2023" {
 		    group = ds_list_create();
 		    scr_84_push(parent);
