@@ -9,8 +9,8 @@
   "name":"obj_astream",
   "overriddenProperties":[],
   "parent":{
-    "name":"Engine",
-    "path":"folders/DELTARUNE/Objects/Engine.yy",
+    "name":"Core",
+    "path":"folders/DELTARUNE/Objects/Engine/Core.yy",
   },
   "parentObjectId":null,
   "persistent":true,

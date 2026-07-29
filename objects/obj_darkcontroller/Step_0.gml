@@ -377,7 +377,7 @@ if (global.interact == 5) { // If Menu is Open
             
             if (!global.is_console)
             {
-                gamepad_exists = false;// obj_gamecontroller.gamepad_active;
+                gamepad_exists = obj_gamecontroller.gamepad_active;
                 gamepad_id = 0;
             }
             
@@ -532,7 +532,7 @@ if (global.interact == 5) { // If Menu is Open
                     }
                 }
                 
-                /*if (obj_gamecontroller.gamepad_active && control_select_con == 1)
+                if (obj_gamecontroller.gamepad_active && control_select_con == 1)
                 {
                     for (var i = 0; i < array_length(gamepad_controls); i++)
                     {
@@ -542,7 +542,7 @@ if (global.interact == 5) { // If Menu is Open
                             control_select_con = 2;
                         }
                     }
-                }*/
+                }
             }
             
             if (button1_p() && control_select_con == 0 && onebuffer < 0)
@@ -651,8 +651,7 @@ if (global.interact == 5) { // If Menu is Open
                 {
                     dupe = -1;
                     
-                    //if (new_gamepad_key == gp_shoulderlb)
-                    //    obj_gamecontroller.gamepad_shoulderlb_reassign = 1;
+                    if (new_gamepad_key == gp_shoulderlb) obj_gamecontroller.gamepad_shoulderlb_reassign = 1;
                     
                     for (var i = 0; i < 7; i += 1)
                     {
@@ -694,7 +693,7 @@ if (global.interact == 5) { // If Menu is Open
                 for (var i = 0; i < 10; i += 1)
                     ini_write_real("GAMEPAD_CONTROLS", string(i), global.input_g[i]);
                 
-                ini_write_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", 0/*obj_gamecontroller.gamepad_shoulderlb_reassign*/);
+                ini_write_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign);
                 ini_close();
                 controls_quitmenu = 0;
                 control_select_con = 0;

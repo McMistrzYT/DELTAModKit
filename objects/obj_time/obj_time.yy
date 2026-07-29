@@ -16,8 +16,8 @@
   "name":"obj_time",
   "overriddenProperties":[],
   "parent":{
-    "name":"Engine",
-    "path":"folders/DELTARUNE/Objects/Engine.yy",
+    "name":"InputControllers",
+    "path":"folders/DELTARUNE/Objects/Engine/Core/InputControllers.yy",
   },
   "parentObjectId":null,
   "persistent":true,

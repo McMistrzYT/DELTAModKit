@@ -117,7 +117,7 @@ if (global.menuno == 5) {
     
     if (global.submenu == 35)
     {
-        var is_dualshock = false;//global.gamepad_type == "Sony DualShock 4" || global.gamepad_type == "DualSense Wireless Controller";
+        var is_dualshock = global.gamepad_type == "Sony DualShock 4" || global.gamepad_type == "DualSense Wireless Controller";
         var _yOffset = (global.lang == "en") ? 0 : -4;
         var _headerOffset = (is_dualshock && global.lang == "ja") ? -5 : 0;
         draw_set_color(c_white);
@@ -133,8 +133,7 @@ if (global.menuno == 5) {
         {
             draw_text(xx + 325, yy + 100 + _headerOffset, string_hash_to_newline("Key"));
             
-            //if (obj_gamecontroller.gamepad_active)
-            //    draw_text(xx + 435, yy + 100 + _headerOffset, string_hash_to_newline("Gamepad"));
+            if (obj_gamecontroller.gamepad_active) draw_text(xx + 435, yy + 100 + _headerOffset, string_hash_to_newline("Gamepad"));
         }
         
         my_function[0] = "DOWN";
@@ -167,11 +166,8 @@ if (global.menuno == 5) {
         {
             draw_set_color(c_white);
             
-            if (global.submenucoord[35] == i)
-                draw_set_color(c_aqua);
-            
-            if (global.submenucoord[35] == i && control_select_con == 1)
-                draw_set_color(c_red);
+            if (global.submenucoord[35] == i) draw_set_color(c_aqua);            
+            if (global.submenucoord[35] == i && control_select_con == 1) draw_set_color(c_red);
             
             if (i == 7 && control_flash_timer > 0)
                 draw_set_color(merge_color(c_aqua, c_yellow, (control_flash_timer / 10) - 0.1));
@@ -189,17 +185,14 @@ if (global.menuno == 5) {
                 draw_text(xx + 105, yy + 140 + (i * (28 + line_padding)) + _yOffset, string_hash_to_newline(my_function[i]));
             }
             
-            if (i < 7)
-            {
-                /*if (is_dualshock)
-                {
+            if (i < 7) {
+                if (is_dualshock) {
                     var _sprite = scr_getbuttonsprite(global.input_g[i], false);
                     var _sprite_height = 29;
                     var _xPos = xx + 465;
                     var _yPos = yy + 139;
                     
-                    if (_sprite == button_ps4_dpad_up || _sprite == button_ps4_dpad_down || _sprite == button_ps4_dpad_left || _sprite == button_ps4_dpad_right)
-                    {
+                    if (_sprite == button_ps4_dpad_up || _sprite == button_ps4_dpad_down || _sprite == button_ps4_dpad_left || _sprite == button_ps4_dpad_right){
                         _sprite_height = 30;
                         _yPos = _textYPos + 0.5;
                         _xPos = xx + 463;
@@ -213,36 +206,19 @@ if (global.menuno == 5) {
                     
                     draw_sprite_ext(_sprite, 0, _xPos, _yPos + (i * (_sprite_height + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
                     
-                    if (!global.is_console)
-                        draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
-                }
-                else if (global.is_console)
-                {
-                    if (obj_gamecontroller.gamepad_active)
-                    {
-                        var _sprite = (scr_getbuttonsprite(global.input_g[i], false) != noone) ? scr_getbuttonsprite(global.input_g[i], false) : button_switch_left_0;
-                        var _xPos = (global.lang == "en") ? (xx + 475) : (xx + 465);
-                        
-                        if (_sprite == button_switch_lStickClick_0 || _sprite == button_switch_rStickClick_0)
-                            _xPos -= 3;
-                        
-                        draw_sprite_ext(_sprite, 0, _xPos, yy + 144 + (i * (28 + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
-                    }
-                }
-                else*/
-                {
+                    if (!global.is_console) draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
+                } else {
                     draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
                     
-                    /*if (obj_gamecontroller.gamepad_active)
+                    if (obj_gamecontroller.gamepad_active)
                     {
                         var _sprite = scr_getbuttonsprite(global.input_g[i], false);
                         var _xPos = (global.lang == "en") ? (xx + 475) : (xx + 465);
                         
-                        if (sprite_get_width(_sprite) < 12)
-                            _xPos += 2;
+                        if (sprite_get_width(_sprite) < 12) _xPos += 2;
                         
                         draw_sprite_ext(_sprite, 0, _xPos, yy + 144 + (i * (28 + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
-                    }*/
+                    }
                 }
             }
         }

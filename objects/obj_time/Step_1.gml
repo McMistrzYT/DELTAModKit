@@ -73,7 +73,7 @@ if (scr_debug()) {
         
         with (all)
         {
-            if (object_index != obj_time && object_index != (asset_get_index("obj_gamecontroller")))
+            if (object_index != obj_time && object_index != obj_gamecontroller)
                 instance_change(obj_doom, false);
         }
         
@@ -148,8 +148,7 @@ for (var i = 0; i < 10; i += 1)
 
 gamepad_check_timer += 1;
 
-if (gamepad_check_timer >= 90) && object_exists(asset_get_index("obj_gamecontroller"))
-{
+if (gamepad_check_timer >= 90){
     if (!gamepad_is_connected(obj_gamecontroller.gamepad_id))
     {
         var gp_num = gamepad_get_device_count();
@@ -173,22 +172,17 @@ if (gamepad_check_timer >= 90) && object_exists(asset_get_index("obj_gamecontrol
     gamepad_check_timer = 0;
 }
 
-if object_exists(asset_get_index("obj_gamecontroller")) && (obj_gamecontroller.gamepad_active == 1 && quicksaved != 2)
+if (obj_gamecontroller.gamepad_active == 1 && quicksaved != 2)
 {
     for (var i = 0; i < 4; i += 1)
     {
         if (sunkus_kb_check(global.input_k[i]) || (i_ex(obj_gamecontroller) && (gamepad_button_check(obj_gamecontroller.gamepad_id, global.input_g[i]) || scr_gamepad_axis_check(obj_gamecontroller.gamepad_id, i))))
         {
-            if (global.input_held[i] == 0)
-                global.input_pressed[i] = 1;
+            if (global.input_held[i] == 0) global.input_pressed[i] = 1;
             
             global.input_held[i] = 1;
-        }
-        else
-        {
-            if (global.input_held[i] == 1)
-                global.input_released[i] = 1;
-            
+        } else {
+            if (global.input_held[i] == 1) global.input_released[i] = 1;            
             global.input_held[i] = 0;
         }
     }

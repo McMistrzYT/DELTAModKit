@@ -20,12 +20,14 @@ if ((!start != undefined) && (end != undefined)) {
 	console.log("found autogenerate area.")
 	var macrodatas = [
 		function() { // __AUTOGENMACRO__84DEBUGROOMDATA__
-			var data = "group = ds_list_create(); scr_84_add_menu_item(parent, groupdata, group, \"Rooms\"); scr_84_push(parent); parent = group; "
+			var data = ""
 			var Path_Rooms = path.join(cwd(), "rooms")
 			var folderlist = fs.readdirSync(Path_Rooms);
 			if (folderlist != undefined) {
+				data += "group = ds_list_create(); scr_84_add_menu_item(parent, groupdata, group, \"Rooms\"); scr_84_push(parent); parent = group; "
+				console.log("scanning room folder")
 				var generatedfilelist = {}
-				console.log(folderlist)
+				//console.log(folderlist)
 				for (var j = 0; j < folderlist.length; j++) {
 					var RoomName = folderlist[j].toString()
 					var Path_Room = path.join(Path_Rooms, RoomName, RoomName + ".yy")
@@ -41,20 +43,24 @@ if ((!start != undefined) && (end != undefined)) {
 				
 				var folders = Object.keys(generatedfilelist)
 				
+				console.log("Creating Rooms list")
 				for (var j = 0; j < folders.length; j++) {
 					var foldername = folders[j].toString()
 					data += "group = ds_list_create(); scr_84_add_menu_item(parent, groupdata, group, \"" + foldername + "\"); scr_84_push(parent); parent = group; "
 					for (var jj = 0; jj < generatedfilelist[foldername].length; jj++) {
-						console.log(generatedfilelist[foldername][jj])
+						//console.log(generatedfilelist[foldername][jj])
 						var name = generatedfilelist[foldername][jj][0].toString()
 						var isdark = generatedfilelist[foldername][jj][1] == true
-						console.log("name: " + name + ", DarkZone: " + isdark.toString())
-						data += "scr_84_add_menu_item(parent, " + (isdark ? "roomtransitiondata_dark" : "roomtransitiondata_light") + ", " + name + ", \"" + name + "\")"
+						//console.log("name: " + name + ", DarkZone: " + isdark.toString())
+						data += "scr_84_add_menu_item(parent, " + (isdark ? "roomtransitiondata_dark" : "roomtransitiondata_light") + ", " + name + ", \"" + name + "\"); "
 					}
-					data += "parent = scr_84_pop()"
+					data += "parent = scr_84_pop(); "
 				}
+				data += "parent = scr_84_pop()"
+			} else {
+				console.log("FolderList is undefined")
 			}
-			data += "parent = scr_84_pop();"
+			
 			return data
 		}
 	]
