@@ -12,61 +12,41 @@ if string_width(button_text[i]) > wd - 20
 */
 
 ht = 40 + (bspace * button_amount);
-mx = mouse_x - camerax();
-my = mouse_y - cameray();
+mx = ((mouse_x - camerax()) / camerawidth()) * 640;
+my = ((mouse_y - cameray()) / cameraheight()) * 480;
 draw_set_color(c_black);
 draw_rectangle(xx - 4, yy - 4, xx + wd + 4, yy + ht + 4, false);
 draw_set_color(c_ltgray);
 draw_rectangle(xx, yy, xx + wd, yy + ht, false);
 
-var replacedcur = false
+replacedcur = false
 
-
-for (i = 0; i < button_amount; i++)
-{
-    button_state[i] = 0;
-    if (point_in_rectangle(mx, my, xx + 10, yy + (bspace * i) + padding, (xx + wd) - 10, yy + ((bspace + 1) * i) + bspace))
-    {
+for (i = 0; i < button_amount; i++){
+    button_state[i] = ____DEBUGWINDOWS__BUTTONSTATES.Base;
+    if (point_in_rectangle(mx, my, xx + 10, yy + (bspace * i) + padding, (xx + wd) - 10, yy + ((bspace + 1) * i) + bspace)) {
+		var hover = button_data[i][$ "hover"] ?? function() {}
+		hover(button_data[i])
+		/*
         if (i > 0)
         {
-            button_state[i] = 1;
-			replacedcur = true
-			window_set_cursor(cr_handpoint);
-            if (mouse_check_button(mb_left))
-            {
-			if i == 0
-				window_set_cursor(cr_drag);
-                button_state[i] = 2;
-            }
             
-            if (mouse_check_button_released(mb_left))
-            {
-                button_state[i] = 3;
-                button_clicked[i] = 1;
-            }
         }
         else
         {
-            button_state[i] = 1;
-            
-            if (mouse_check_button(mb_left))
-            {
-                button_clicked[i] = 1;
-                button_state[i] = 3;
-            }
         }
+		*/
     }
 }
 
-if !replacedcur window_set_cursor(cr_default)
+if !replacedcur && window_get_cursor() != cr_default window_set_cursor(cr_default)
 
 draw_set_font(fnt_main);
 
 for (i = 0; i < button_amount; i++) {
-    if (button_state[i] == 0) draw_set_color(c_ltgray);    
-    if (button_state[i] == 1) draw_set_color(c_white);    
-    if (button_state[i] == 2) draw_set_color(c_dkgray); 
-	if (button_state[i] == 3) draw_set_color(c_blue);
+    if (button_state[i] == ____DEBUGWINDOWS__BUTTONSTATES.Base)		draw_set_color(c_ltgray);    
+    if (button_state[i] == ____DEBUGWINDOWS__BUTTONSTATES.Hovered)	draw_set_color(c_white);    
+    if (button_state[i] == ____DEBUGWINDOWS__BUTTONSTATES.Held)		draw_set_color(c_dkgray); 
+	if (button_state[i] == ____DEBUGWINDOWS__BUTTONSTATES.Released) draw_set_color(c_blue);
     
     if (i == 0) draw_set_color(merge_color(draw_get_color(), c_aqua, 0.7));
     
@@ -81,38 +61,19 @@ for (i = 0; i < button_amount; i++) {
     draw_set_color(c_black);
 }
 
-if (button_clicked[0] == 1)
-{
-    if (mouse_check_button(mb_left))
-    {
-        xx += (mx - remmx);
-        yy += (my - remmy);
-    }
-    else
-    {
-        button_clicked[0] = 0;
-    }
+for (i = 0; i < button_amount; i++) {
+	var update = button_data[i][$ "update"] ?? function() {}
+	update(button_data[i])
+	if button_clicked[i] {
+		var execute = button_data[i][$ "execute"] ?? function() {}
+		var release = execute(button_data[i]) ?? true
+		if release button_clicked[i] = false
+	}
 }
 
+/*
 if (type == 0)
 {
-    if (button_clicked[1] == 1)
-    {
-        if (i_ex(obj_debug_xy))
-        {
-            if (i_ex(obj_debug_xy.selected_object))
-            {
-                checksprite = asset_get_index(get_string("Enter new sprite_index.", ""));
-                
-                if (checksprite != -1)
-                {
-                    obj_debug_xy.selected_object.sprite_index = checksprite;
-                }
-            }
-        }
-        
-        button_clicked[1] = 0;
-    }
     
     if (button_clicked[2] == 1)
     {
@@ -343,8 +304,9 @@ else if (type == 1)
         button_clicked[5] = 0;
     }
 }
+*/
 
-xx = clamp(xx, 40, 500);
-yy = clamp(yy, 40, 340);
-remmx = mouse_x - camerax();
-remmy = mouse_y - cameray();
+xx = clamp(xx, minx, maxx);
+yy = clamp(yy, miny, maxy);
+remmx = mx
+remmy = my

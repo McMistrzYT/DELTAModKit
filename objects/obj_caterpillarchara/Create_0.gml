@@ -33,7 +33,7 @@ pr = parent.rsprite;
 pl = parent.lsprite;
 pu = parent.usprite;
 
-maxtarget = 75 * array_length(global.char)
+maxtarget = max(12 * array_length(global.char), 72)
 
 for (i = 0; i < maxtarget; i += 1) {
     remx[i] = parent.x;

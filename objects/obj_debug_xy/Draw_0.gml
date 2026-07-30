@@ -158,32 +158,20 @@ draw_set_color(make_color_hsv(siner * 6, 255, 255));
 draw_line_width(x + 7, y + 7, x + 3, y + 3, 3);
 old_right_click = false;
 
-if (!old_right_click)
-{
-    if (mouse_check_button_pressed(mb_right))
-    {
+if (!old_right_click) {
+    if (mouse_check_button_pressed(mb_right)) {
         main_focus = false;
         
-        if (!i_ex(obj_debug_windows))
-        {
+        if (!i_ex(obj_debug_windows)) {
             instance_create(0, 0, obj_debug_windows);
             
-            if (!i_ex(selected_object))
-            {
-                obj_debug_windows.type = 1;
+            if (!i_ex(selected_object)) {
+                obj_debug_windows.type = ____DEBUGWINDOWS__TYPES.NoObject;
             }
             
-            with (obj_debug_windows)
-            {
-                event_user(15);
-            }
-        }
-        else
-        {
-            with (obj_debug_windows)
-            {
-                instance_destroy();
-            }
+            with (obj_debug_windows) event_user(15);
+        } else {
+            with (obj_debug_windows) instance_destroy();
         }
     }
 }
