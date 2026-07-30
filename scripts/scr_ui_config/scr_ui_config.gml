@@ -190,13 +190,15 @@
     
     data.getvariable = method(data, function(slot) {
         var vari = getarray()
-        if slot < 0 || slot >= array_length(vari) return 0
-        if vari[slot] == 999 return 0 // 999 is for some reason a Placeholder Value Toby Uses, like when Games use $FF as the ending for a List, but toby just never checks for this??
-        return vari[slot]
+	    if slot < 0 || slot >= array_length(vari) return 0
+	    if vari[slot] == 999 return 0 // 999 is for some reason a Placeholder Value Toby Uses, like when Games use $FF as the ending for a List, but toby just never checks for this??
+	    return vari[slot]
     })
     
     data.getarray = method(data, function() {
-        return variable_struct_get(self.isglobal ? global : parent, variable)
+		var arr = variable_struct_get(self.isglobal ? global : parent, variable)
+		if is_array(arr) return arr
+        return [arr]
     })
     
     data.setvariable = method(data, function(slot, value) {

@@ -1,28 +1,17 @@
 _selected_string = "No object!#MouseL:Choose&Drag#MouseR:Drag From Anchor";
 
-if (i_ex(selected_object))
-{
+if (i_ex(selected_object)) {
     so = selected_object;
     sox = selected_object.x;
     soy = selected_object.y;
     
-    if (xy_camera_relative == 1)
-    {
-        sox -= camerax()
-    }
+    if (xy_camera_relative == 1) {
+		sox -= camerax()    
+		soy -= cameray()
+	}
     
-    if (xy_camera_relative == 1)
-    {
-        soy -= cameray()
-    }
-    
-    if (xy_camera_relative == 2)
-    {
+    if (xy_camera_relative == 2) {
         sox -= so.xstart;
-    }
-    
-    if (xy_camera_relative == 2)
-    {
         soy -= so.ystart;
     }
     

@@ -291,7 +291,7 @@ function scr_84_debug(stepmode) {
 	
 	if (stepmode) return global.chemg_menu_depth > 0;
 	
-	if ((gamepad_button_check_pressed(obj_gamecontroller.gamepad_id, gp_stickr) && global.chemg_menu_depth == 0) || keyboard_check_pressed(ord("Q"))){
+	if (gamepad_button_check_pressed(obj_gamecontroller.gamepad_id, gp_stickr) || keyboard_check_pressed(ord("Q"))){
 		global.chemg_menu_depth = 1
 		global.chemg_interact = global.interact
 		global.chemg_yoffset = 0
@@ -357,13 +357,9 @@ function scr_84_debug(stepmode) {
 			{
 				choice.execute(choice_data, choice_name)
 			}
-			else if (btn2press || gamepad_button_check_pressed(obj_gamecontroller.gamepad_id, gp_face1))
-			{
-				if (global.chemg_menu_depth > 0)
-					global.chemg_menu_depth -= 1
-			
-				if (global.chemg_menu_depth == 0)
-					global.interact = global.chemg_interact
+			else if (btn2press || gamepad_button_check_pressed(obj_gamecontroller.gamepad_id, gp_face1)){
+				if (global.chemg_menu_depth > 0) global.chemg_menu_depth -= 1			
+				if (global.chemg_menu_depth == 0) global.interact = global.chemg_interact
 			}
 		
 		}

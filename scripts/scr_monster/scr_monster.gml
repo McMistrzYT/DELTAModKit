@@ -270,9 +270,8 @@ function draw_monster_body_part(arg0, arg1, arg2, arg3)
         draw_sprite_ext_flash(arg0, arg1, arg2, arg3, image_xscale, image_yscale, image_angle, image_blend, (-cos(fsiner / 5) * 0.4) + 0.6);
 }
 
-function draw_sprite_ext_flash(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-{
-    gpu_set_fog(true, arg7, 0, 1);
-    draw_sprite_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+function draw_sprite_ext_flash(sprite, subimg, x, y, xscale, yscale, rot, col, alpha){
+    gpu_set_fog(true, col, 0, 1);
+    draw_sprite_ext(sprite, subimg, x, y, xscale, yscale, rot, col, alpha);
     gpu_set_fog(false, c_black, 0, 0);
 }

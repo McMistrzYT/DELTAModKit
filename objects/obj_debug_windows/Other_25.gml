@@ -1,19 +1,17 @@
-if (type == 0)
-{
-    button_amount = 6;
-    button_text[1] = "Change Sprite Index";
-    button_text[2] = "Change Variable (num)";
-    button_text[3] = "Change Variable (string)";
-    button_text[4] = "Watch Variable";
-    button_text[5] = "DELETE OBJECT";
-}
-
-if (type == 1)
-{
-    button_amount = 6;
-    button_text[1] = "Set Flag";
-    button_text[2] = "Watch Flag";
-    button_text[3] = "Set/Check Global Var";
-    button_text[4] = "Select Object";
-    button_text[5] = "Instance Create";
+button_amount = 1
+switch type {
+	case 0:
+		_addbuttontext("Change Sprite Index")
+		_addbuttontext("Change Variable (num)")
+		_addbuttontext("Change Variable (string)")
+		_addbuttontext("Watch Variable")
+		_addbuttontext("DELETE OBJECT")
+	break	
+	case 1:
+		_addbuttontext("Set Flag")
+		_addbuttontext("Watch Flag")
+		_addbuttontext("Set/Check Global Var")
+		_addbuttontext("Select Object")
+		_addbuttontext("Instance Create")	
+	break
 }

@@ -1,7 +1,4 @@
-if (instance_number(object_index) > 1)
-{
-    instance_destroy();
-}
+if (instance_number(object_index) > 1) { instance_destroy(); exit; }
 
 selected_object = noone;
 mouse_held = 0;
@@ -14,12 +11,7 @@ actor_debug_x = 0;
 actor_debug_y = 0;
 actor_debug_xstart = 0;
 actor_debug_ystart = 0;
-gridsize = 20;
-
-if (global.darkzone == false)
-{
-    gridsize = 10;
-}
+gridsize = global.darkzone == false ? 10 : 20;
 
 main_focus = true;
 mousebuffer = 3;
