@@ -1,22 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_frozennpc",
+  "%Name":"obj_readable",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":10,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_frozennpc",
+  "name":"obj_readable",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"NPC",
+    "path":"folders/DELTARUNE/Objects/World/NPC.yy",
   },
   "parentObjectId":{
-    "name":"obj_readable",
-    "path":"objects/obj_readable/obj_readable.yy",
+    "name":"obj_interactable",
+    "path":"objects/obj_interactable/obj_interactable.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -35,7 +34,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_interactable",
+    "path":"sprites/spr_interactable/spr_interactable.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -1,10 +1,10 @@
-function scr_encountersetup(encounterid)
-{
+function scr_encountersetup(encounterid){
     xx = camerax();
     yy = cameray();
     
-    for (i = 0; i < 3; i += 1)
-    {
+	var herocount = real(global.char[0] > DRCharacter.None) + real(global.char[1] > DRCharacter.None) + real(global.char[2] > DRCharacter.None)
+	
+    for (i = 0; i < 3; i += 1) {
         global.heromakex[i] = xx + 80;
         global.heromakey[i] = yy + 50 + (80 * i);
         global.monsterinstancetype[i] = obj_baseenemy;
@@ -15,15 +15,12 @@ function scr_encountersetup(encounterid)
     
     global.monstertype[1] = 0;
     global.monstertype[2] = 0;
-    
-    if (global.char[0] != DRCharacter.None && global.char[1] == DRCharacter.None && global.char[2] == DRCharacter.None)
-        global.heromakey[0] = yy + 140;
-    
-    if (global.char[0] != DRCharacter.None && global.char[1] != DRCharacter.None && global.char[2] == DRCharacter.None)
-    {
-        global.heromakey[0] = yy + 100;
+	
+	if herocount < 3 {
+		global.heromakey[0] = yy + 100;
         global.heromakey[1] = yy + 180;
-    }
+		if herocount < 2 global.heromakey[0] = yy + 140;
+	}
     
     global.battlemsg[0] = "* It is known.";
 	

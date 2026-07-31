@@ -6,6 +6,7 @@ function scr_charbox(){
 		
 		xchunk = floor(((camerawidth()/2) + (changeamt * (curhero - (chartotal / 2))))); // 320 is the middle of the screen.
 		c = global.char[curhero] - 1;
+		if c < 0 continue;
 		charpos[c] = curhero;
 		charcolor = scr_hero_get_color(c);
         gc = global.charturn;

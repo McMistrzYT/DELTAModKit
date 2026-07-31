@@ -943,20 +943,18 @@ function scr_load() {
 	}
 }
 
-function scr_tempsave()
-{
+function scr_tempsave(){
     filechoicebk2 = global.filechoice;
     global.filechoice = 9;
     scr_saveprocess(global.filechoice);
     global.filechoice = filechoicebk2;
 }
 
-function scr_ini_chapter(arg0, arg1)
-{
-    if (arg0 >= 2)
-        return "G_" + string(arg0) + "_" + string(arg1);
+function scr_ini_chapter(chapter, slot){
+    if (chapter >= 2)
+        return "G_" + string(chapter) + "_" + string(slot) + global.filechoice_route;
     else
-        return "G" + string(arg1);
+        return "G" + string(slot) + global.filechoice_route;
 }
 
 function scr_get_room_by_id(arg0) {

@@ -433,6 +433,7 @@
     {"id":{"name":"obj_panner","path":"objects/obj_panner/obj_panner.yy",},},
     {"id":{"name":"obj_persistentfadein","path":"objects/obj_persistentfadein/obj_persistentfadein.yy",},},
     {"id":{"name":"obj_readable_room1","path":"objects/obj_readable_room1/obj_readable_room1.yy",},},
+    {"id":{"name":"obj_readable","path":"objects/obj_readable/obj_readable.yy",},},
     {"id":{"name":"obj_recruitanim","path":"objects/obj_recruitanim/obj_recruitanim.yy",},},
     {"id":{"name":"obj_regularbullet","path":"objects/obj_regularbullet/obj_regularbullet.yy",},},
     {"id":{"name":"obj_returnheart","path":"objects/obj_returnheart/obj_returnheart.yy",},},

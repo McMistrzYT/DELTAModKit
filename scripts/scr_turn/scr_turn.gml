@@ -273,12 +273,12 @@ function scr_nexthero() {
     
 	for (i = global.charturn + 1; i <= array_length(global.charmove) && !moveswapped; ++i) {
 		moveswapped = true
-		if i >= array_length(global.charmove) {endturn = true global.charturn = i} // No one Left
+		if i >= array_length(global.charmove) {endturn = true global.charturn = i; moveswapped = false} // No one Left
 		else if scr_charcan(i) {
 			global.charturn = i
-		} else if global.char[i] > DRCharacter.None { // This Character Cannot Move. (Try Next Character)
+		} else { // This Character Cannot Move. (Try Next Character)
 			moveswapped = false
-			debug_log(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
+			if global.char[i] > DRCharacter.None debug_log(stringsetsub("Hero '~1' Cannot Move.", global.charname[global.char[i]]))
 		}
 	}
 	
