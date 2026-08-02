@@ -5,7 +5,7 @@
 The most robust, feature-complete DELTARUNE GameMaker Studio 2 decompilation / port, enhanced with a multitude of tweaks designed to make the game easier to mod.
 
 > [!CAUTION]
-> This project does NOT allow for piracy of DELTARUNE Chapter 3 and 4. It is simply a base from which you can start building your own DELTARUNE chapter/fangame. Most assets which have been included in the project can be found in the free Steam demo for Chapter 1 and 2.
+> This project does NOT allow for piracy of DELTARUNE. It is simply a base from which you can start building your own DELTARUNE chapter/fangame. Most assets which have been included in the project can be found in the free Steam demo for Chapter 1 and 2.
 
 ## Usage
 To start playing around with DELTAModKit, you have to download [GameMaker Beta](https://gamemaker.io/en/download/windows/beta/GameMaker.exe). The project uses the latest **BETA** version `Beta v2024.1400.0.838`. It will not work on non-Beta versions.
