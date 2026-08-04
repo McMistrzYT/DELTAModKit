@@ -66,11 +66,14 @@ if ((!start != undefined) && (end != undefined)) {
 					for (var j = 0; j < nodes.length; j++) {
 						var roomdata = nodes[j].roomId
 						var RoomName = roomdata.name
-						var Path_Room = path.join(cwd(), roomdata.path)						
+						var Path_Room = path.join(cwd(), roomdata.path)
+						
 						var STRDAT = fs.readFileSync(Path_Room).toString()
 						var DATA = JSON.parse(STRDAT.replace(/,(\s*[}\]])/g, '$1'));
 						
+						var parentpath = DATA.parent.path.toString();
 						var parentname = DATA.parent.name.toString();
+						if (!parentpath.startsWith("folders/") || parentname.toLowerCase() == "rooms") parentname = "%%FOLDERROOT%%"
 						var dark = (STRDAT.match("obj_darkcontroller") != undefined)
 						
 						if (!(parentname in generatedfilelist)) { generatedfilelist[parentname] = [] }
@@ -84,7 +87,7 @@ if ((!start != undefined) && (end != undefined)) {
 					console.log("Creating Rooms list")
 					for (var j = 0; j < folders.length; j++) {
 						var foldername = folders[j].toString()
-						data += "group = ds_list_create(); scr_84_add_menu_item(parent, groupdata, group, \"" + foldername + "\"); scr_84_push(parent); parent = group; "
+						if (foldername !== "%%FOLDERROOT%%") data += "group = ds_list_create(); scr_84_add_menu_item(parent, groupdata, group, \"" + foldername + "\"); scr_84_push(parent); parent = group; "
 						for (var jj = 0; jj < generatedfilelist[foldername].length; jj++) {
 							//console.log(generatedfilelist[foldername][jj])
 							var name = generatedfilelist[foldername][jj][0].toString()
@@ -92,7 +95,7 @@ if ((!start != undefined) && (end != undefined)) {
 							//console.log("name: " + name + ", DarkZone: " + isdark.toString())
 							data += "scr_84_add_menu_item(parent, " + (isdark ? "roomtransitiondata_dark" : "roomtransitiondata_light") + ", " + name + ", \"" + name + "\"); "
 						}
-						data += "parent = scr_84_pop(); "
+						if (foldername !== "%%FOLDERROOT%%") data += "parent = scr_84_pop(); "
 					}
 					data += "parent = scr_84_pop()"
 				} else {
