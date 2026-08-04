@@ -738,3 +738,6 @@ function scr_getitempositiononcenteredlist(middlevalue, distancebetweenitems = 1
     var changeamt = distancebetweenitems + itemswidth
     return (middlevalue + (changeamt * (currentitem - (maxitems / 2))))
 }
+
+function d3d_set_fog(enable, col, start, _end){ gpu_set_fog(enable, col, start, _end) }
+function draw_set_blend_mode(blendmode){ gpu_set_blendmode(blendmode) }

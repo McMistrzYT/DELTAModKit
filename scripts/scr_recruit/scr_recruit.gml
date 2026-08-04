@@ -1,11 +1,7 @@
-function scr_recruit()
-{
-    if (recruitable == 1 && global.flag[61] == 0)
-    {
-        if (global.flag[global.monstertype[myself] + 600] >= 0 && global.flag[global.monstertype[myself] + 600] < 1 && recruitcount > 0)
-        {
-            if (recruitcount == -1)
-            {
+function scr_recruit(){
+    if (recruitable == 1 && global.flag[DRFLAG.BlockRecruiting] == 0) {
+        if (global.flag[global.monstertype[myself] + 600] >= 0 && global.flag[global.monstertype[myself] + 600] < 1 && recruitcount > 0){
+            if (recruitcount == -1){
                 scr_recruit_info(global.monstertype[myself]);
                 recruitcount = _recruitcount;
             }

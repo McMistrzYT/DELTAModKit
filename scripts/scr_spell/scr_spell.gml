@@ -1,5 +1,5 @@
-function scr_spell(spellid, casterid)
-{
+/// @desc Casts the Spell ID (add [SCRSPELL_ItemsStart] to call Item Code)
+function scr_spell(spellid, casterid){
     spell = spellid;
     caster = casterid;
     star = global.chartarget[casterid];
@@ -8,23 +8,19 @@ function scr_spell(spellid, casterid)
 	
 	debug_log("scr_spell({0}, {1})", spellid, casterid);
 	
-	if spellid < 10000
+	if spellid < SCRSPELL_ItemsStart
 		scr_spell_use_action(casterid, spellid);
 	else
-		item_use = scr_item_use_action_battle(casterid, spellid - 10000);
+		item_use = scr_item_use_action_battle(casterid, spellid - SCRSPELL_ItemsStart);
 }
 
-function scr_spellconsumeb()
-{
+function scr_spellconsumeb(){
     global.tension -= floor(floor((cost / global.maxtension) * 100) * 2.5);
     global.faceaction[global.charturn] = 2;
     global.charaction[global.charturn] = 2;
     
-    if (global.flag[34] == 1)
-        global.charspecial[global.charturn] = global.spell[global.char[global.charturn]][global.bmenucoord[2][global.charturn]];
-    
-    if (global.flag[34] == 0)
-        global.charspecial[global.charturn] = global.battlespell[global.charturn][global.bmenucoord[2][global.charturn]];
+    if (global.flag[34] == 1) global.charspecial[global.charturn] = global.spell[global.char[global.charturn]][global.bmenucoord[2][global.charturn]];    
+    if (global.flag[34] == 0) global.charspecial[global.charturn] = global.battlespell[global.charturn][global.bmenucoord[2][global.charturn]];
     
     global.tensionselect = 0;
     
@@ -52,7 +48,7 @@ function scr_itemconsumeb()
 {
     global.faceaction[global.charturn] = 3;
     global.charaction[global.charturn] = 4;
-    global.charspecial[global.charturn] = tempitem[global.bmenucoord[4][global.charturn]][global.charturn] + 10000;
+    global.charspecial[global.charturn] = tempitem[global.bmenucoord[4][global.charturn]][global.charturn] + SCRSPELL_ItemsStart;
     
     if (usable == 1 && replaceable == 0)
         scr_itemshift_temp(global.bmenucoord[4][global.charturn], global.charturn);

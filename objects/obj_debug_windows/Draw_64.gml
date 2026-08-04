@@ -24,7 +24,7 @@ replacedcur = false
 for (i = 0; i < button_amount; i++){
     button_state[i] = ____DEBUGWINDOWS__BUTTONSTATES.Base;
     if (point_in_rectangle(mx, my, xx + 10, yy + (bspace * i) + padding, (xx + wd) - 10, yy + ((bspace + 1) * i) + bspace)) {
-		var hover = button_data[i][$ "hover"] ?? function() {}
+		var hover = button_data[i][$ "hover"] ?? function(mydata) {}
 		hover(button_data[i])
 		/*
         if (i > 0)
@@ -62,10 +62,10 @@ for (i = 0; i < button_amount; i++) {
 }
 
 for (i = 0; i < button_amount; i++) {
-	var update = button_data[i][$ "update"] ?? function() {}
+	var update = button_data[i][$ "update"] ?? function(mydata) {}
 	update(button_data[i])
 	if button_clicked[i] {
-		var execute = button_data[i][$ "execute"] ?? function() {}
+		var execute = button_data[i][$ "execute"] ?? function(mydata) {}
 		var release = execute(button_data[i]) ?? true
 		if release button_clicked[i] = false
 	}

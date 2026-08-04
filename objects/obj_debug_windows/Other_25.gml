@@ -96,7 +96,7 @@ switch type {
             if variable_global_exists(varname) {
                 var varval = variable_global_get(varname);
                 var newval = other._stringgettype("The value of " + varname + " is " + string(varval) + ". What to set it to?\nuse \"This for strings!\"\n[ \"This\", \"for\", \"arrays!\", 1225 ] and this: 124512125 for numbers", "");
-                variable_global_set(varname, real(newval));
+                variable_global_set(varname, newval);
             } else show_message("No variable exists. Zannen.");		
 		})
 		_addbutton("Select Object", function() {

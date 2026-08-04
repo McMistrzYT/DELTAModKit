@@ -15,7 +15,7 @@ function scr_spellinfo_all() {
     }
 }
 
-/// @desc Gets the Text for the Spell ID (add 10,000 to call Item Text)
+/// @desc Gets the Text for the Spell ID (add [SCRSPELL_ItemsStart] to call Item Text)
 /// @arg spell The Spell ID
 /// @arg caster The Slot that the Spell is being casted From
 function scr_spelltext(spellid, spellcaster) {
@@ -24,10 +24,10 @@ function scr_spelltext(spellid, spellcaster) {
     star = global.chartarget[spellcaster];
     spelltext = " ";
 	
-	if spellid < 10000
+	if spellid < SCRSPELL_ItemsStart
 		scr_spell_get_battle_use_text(spellid);
 	else
-		scr_item_get_battle_use_text(spellid - 10000);
+		scr_item_get_battle_use_text(spellid - SCRSPELL_ItemsStart);
 }
 
 /// @desc Setup the Spell Menu.

@@ -13,6 +13,7 @@ battlemode = 0;
 battleheart = instance_create(x, y, obj_overworldheart);
 battleheart.image_alpha = 0;
 battleheart.image_speed = 0;
+battleheart.owner = id
 battlealpha = 0;
 becamebattle = 0;
 sliding = 0;
@@ -83,6 +84,19 @@ if darkmode {
     image_xscale = 2;
     image_yscale = 2;
 }
+
+heartxoffset = 6
+heartyoffset = 20
+heartoutlinecolor = c_red
+usprite_heart = spr_krisu_heart
+dsprite_heart = spr_krisd_heart
+rsprite_heart = spr_krisr_heart
+lsprite_heart = spr_krisl_heart
+heartsprite = global.darkzone ? spr_heart_outline2 : spr_heartsmall
+enable_battleautoheartoutline = false
+
+darkrunmultiplierchangeamt = 0.8	// Default == 0.8
+runspeedadder = 1					// Default == 1
 
 scr_character_set_caterpillar_offsets(global.char[0])
 scr_character_set_caterpillar_sprites(global.char[0])
@@ -265,6 +279,9 @@ if (global.interact == 3) {
 	}
 }
 
+x -= halign
+y -= valign
+
 initwd = sprite_width;
 initht = sprite_height;
 mywidth = sprite_width;
@@ -332,6 +349,3 @@ if (scr_debug()) {
 		}
 	}
 }
-
-darkrunmultiplierchangeamt = 0.8	// Default == 0.8
-runspeedadder = 1					// Default == 1

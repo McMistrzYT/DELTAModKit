@@ -27,12 +27,18 @@ enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
 		/* 34 */	HideCharacterActs,
 		/* 35 */	GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
 		/* 36 */	FailedBattle,
+		/* 37 */	IsDojoBattle,
+		/* 38 */	SkipBattleMessage,		
+		/* 39 */	ForceEndBattle,
 		
 		// Array Type Flag, Length == 10, may have unused Values
 		/* 40 */	__DefeatCountersStart__ = 40,
 		
 		// Array Type Flag, Length == 13, may have unused Values
 		/* 50 */	__EncountersCoreStart__ = 50,
+		
+		
+		/* 61 */	BlockRecruiting = 61,
 		
 		/* 261 */	NPC_QC_DinerCh2_CollectedHotChocolate = 261,
 		
@@ -134,10 +140,8 @@ function global_flagname_init() {
 		global.flagname[DRFLAG.MultiKeyAttack] = "Multikey Attack"
 		global.flagname[DRFLAG.RememberLastOption_Battle] = "Remember Last Option [Battle]"
 		global.flagname[22] = "Block Soul Slow"
-		global.flagname[34] = "CharAction"
-		global.flagname[36] = "Failed Dojo"
-		global.flagname[37] = "Dojo Battle"
-		global.flagname[39] = "Technically Won/Force Win"
+		global.flagname[DRFLAG.IsDojoBattle] = "Dojo Battle"
+		global.flagname[DRFLAG.ForceEndBattle] = "ForceEnd"
 	
 		//global.flagname[40] = "Fled Or Fatal Kill Enemies"
 		//global.flagname[41] = "Spared Enemies"

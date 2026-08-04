@@ -15,8 +15,7 @@ function scr_mnendturn(){
     if (scr_monsterpop() == 0)
         techwon = 1;
     
-    if (global.flag[39] == 1)
-        techwon = 1;
+    if (global.flag[DRFLAG.ForceEndBattle] == 1) techwon = 1;
     
     if (techwon == 1)
         scr_wincombat();

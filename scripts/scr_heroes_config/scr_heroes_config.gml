@@ -349,6 +349,7 @@ function scr_hero_set_sprites(heroObject) {
 }
 
 function scr_character_set_caterpillar_sprites(charIdx) {
+	enable_battleautoheartoutline = true
 	switch (charIdx) {
 		case DRCharacter.Kris: {
 			name = "kris";
@@ -357,6 +358,11 @@ function scr_character_set_caterpillar_sprites(charIdx) {
 			dsprite = global.darkzone ? spr_krisd_dark : spr_krisd
 			rsprite = global.darkzone ? spr_krisr_dark : spr_krisr
 			lsprite = global.darkzone ? spr_krisl_dark : spr_krisl
+			usprite_heart = spr_krisu_heart
+			dsprite_heart = spr_krisd_heart
+			rsprite_heart = spr_krisr_heart
+			lsprite_heart = spr_krisl_heart
+			enable_battleautoheartoutline = false
 			
 			break;
 		}
@@ -431,32 +437,40 @@ function scr_caterpillar_getactorvariable(name) {
 function scr_character_set_caterpillar_offsets(charIdx) {
 	// All Alignment Values have been Changed for Lightworld Scale, and will be Resized to Dark At the end of This Script.
 	#region Default Caterpillar
-	depthbonus = 5
-    halign = 3
-    valign = 6;
-	timebetweenwalkframes = 10;
-	var autoresizeoffsets = true
+		depthbonus = 5
+	    halign = 3
+	    valign = 6;
+		timebetweenwalkframes = 10;
+		var autoresizeoffsets = true
 	#endregion
 	switch charIdx {
 			case DRCharacter.Kris: {
 				halign = 0
 				valign = 0
+				heartxoffset = 6
+				heartyoffset = 20
 				depthbonus = 0
 				break
 			}
 		
 			case DRCharacter.Susie: { // Susie Uses Default Horizontal alignment and Vertical Alignment
-				if global.darkzone == true depthbonus -= 60;	
+				if global.darkzone == true depthbonus -= 60;
+				heartxoffset = 9
+				heartyoffset = 25
 				break
 			}
 			case DRCharacter.Ralsei: {
 				depthbonus -= 80
+				heartxoffset = 6.5
+				heartyoffset = 25
 		        halign = 1;
 		        valign = 6;
 				break
 			}
 			case DRCharacter.Noelle: {
 				depthbonus -= 5
+				heartxoffset = 7.5
+				heartyoffset = 30
 		        halign = 2
 		        valign = 9
 				break

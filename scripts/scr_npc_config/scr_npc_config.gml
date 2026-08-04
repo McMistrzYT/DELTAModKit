@@ -95,12 +95,12 @@ function scr_npc_interact() {
 				global.msg[1] = stringsetloc("* Her playing is nice^1, but when she starts singing.../", "obj_npc_room_slash_Other_10_gml_802_0")
 				global.msg[2] = stringsetloc("* We have to ask her to leave./%", "obj_npc_room_slash_Other_10_gml_803_0")
 			}
-			
+			/*
 			if talked >= 2 {
 				msgset(0, "* Why is the door Locked?/")	
 				msgnext("* Those Three rooms haven't been implemented Yet./%")
 			}
-			
+			*/
 			if (tempvar >= 1) {
 				global.msg[0] = stringsetloc("* Hmmm..^1. you usually play the piano a bit more..^1. beautifully./", "obj_npc_room_slash_Other_10_gml_809_0")
 				global.msg[1] = stringsetloc("* Is everything OK^1?&* You DO seem a little sick.../%", "obj_npc_room_slash_Other_10_gml_810_0")

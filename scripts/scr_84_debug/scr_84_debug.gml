@@ -22,7 +22,7 @@ function scr_84_debug(stepmode) {
 			global.chemg_menu_indices[global.chemg_menu_depth] = 0
 			global.chemg_menu_depth += 1
 		}, function(item, name) {
-			return "[" + string(name) + "]"
+			return "[" + string(name) + "... ]"
 		})
 		
 		langdata = __createoptiondata(

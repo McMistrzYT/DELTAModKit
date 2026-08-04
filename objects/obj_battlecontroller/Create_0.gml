@@ -208,8 +208,8 @@ for (i = 0; i < DRHero.__MAX__; i++) {
 	hpcolorsoft[i] = merge_color(hpcolor[i], c_white, 0.5);
 }
 
-global.flag[36] = 0;
-global.flag[39] = 0;
+global.flag[DRFLAG.FailedBattle] = 0;
+global.flag[DRFLAG.ForceEndBattle] = 0;
 
 if (global.ambush == 1)
 {

@@ -1,0 +1,9 @@
+destroyoffscreen = true
+tolerance = 32
+camera_lock = false
+camera_lock_xwas = -1
+camera_lock_ywas = -1
+__silhouette = spr_nothing
+active = 1
+target = 3
+damage = 1

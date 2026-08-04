@@ -648,10 +648,10 @@ if (type == 2)
     {
         global.ambush = dojoEncounterAmbush[menuCoord[0]];
         global.encounterno = dojoEncounter[menuCoord[0]];
-        global.flag[35] = 1;
-        global.flag[37] = 1;
-        global.flag[38] = 1;
-        global.flag[61] = 1;
+        global.flag[DRFLAG.GameOverType] = DRGAMEOVERTYPES.DojoFail;
+        global.flag[DRFLAG.IsDojoBattle] = 1;
+        global.flag[DRFLAG.SkipBattleMessage] = 1;
+        global.flag[DRFLAG.BlockRecruiting] = 1;
         scr_battle(global.encounterno, 3, 0, 0, 0);
         
         with (obj_npc_dojo)

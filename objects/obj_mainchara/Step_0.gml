@@ -602,23 +602,24 @@ if (climbbuffer <= 0)
 with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0))
     event_user(9);
 
-if (battlemode == 1)
-{
+var hx = heartxoffset * image_xscale
+var hy = heartyoffset * image_yscale
+
+heartxoffset = 6
+heartyoffset = 20
+
+if (battlemode == 1) {
     global.inv -= 1;
     
-    if (global.inv < 0)
-    {
-		if object_exists(asset_get_index("obj_overworldbulletparent"))
-		{
-	        with (collision_rectangle(x + 12, y + 40, x + 27, y + 49, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
-        
-	        with (collision_line(x + 12, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
-        
-	        with (collision_line(x + 26, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
-		}
+    if (global.inv < 0) {
+		var soulboxright = hx + (7.5 * image_xscale)
+		var soulboxbottom = hy + (4.5 * image_yscale)
+		var soullinesmiddle = hx + (3.5 * image_xscale)
+		var soullinesright = hx + (7 * image_xscale)
+		var soullinesbottom = hy + (8.5 * image_yscale)
+	    with collision_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, obj_overworldbulletparent, 1, 0)								event_user(5);        
+	    with collision_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)					event_user(5);        
+	    with collision_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)		event_user(5);
     }
 }
 

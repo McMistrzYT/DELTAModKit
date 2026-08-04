@@ -28,7 +28,7 @@ xx = clamp(xx, minx, maxx);
 yy = clamp(yy, miny, maxy);
 type = ____DEBUGWINDOWS__TYPES.ObjectSelected;
 
-_addbutton = function(name, execute = function() {}, init = function() {}) {
+_addbutton = function(name, execute = function(mydata) {}, init = function(mydata) {}) {
 	button_text[button_amount] = name
 	button_clicked[button_amount] = false
 	button_state[button_amount] = ____DEBUGWINDOWS__BUTTONSTATES.Base
@@ -84,7 +84,7 @@ _process_stringtype = function(value, forcetype = "") {
 	for (var i = 1; i <= string_length(value); i++) {
 		var char = string_char_at(value, i)
 		var include = true
-		if !((char >= "0" && char <= "9") || (char == "." || char == "-")) onlynumbers = false;
+		if !((char >= "0" && char <= "9") || (char == "." || char == "-") || char == " ") onlynumbers = false;
 		if onlyspaces == true {
 			onlyspaces = false
 			switch char {
@@ -144,7 +144,7 @@ _process_stringtype = function(value, forcetype = "") {
 				var good = false
 				if (char >= "0" && char <= "9") { good = true containsnumbers = true }
 				if (char == "." || char == "-") { good = true }
-								
+				
 				if good sanitized += char
 			}
 			value = 0
@@ -152,6 +152,7 @@ _process_stringtype = function(value, forcetype = "") {
 		break;
 		case "arr":
 		case "array":
+			if !is_array(value) value = [value]
 		break;
 	}
 	return value

@@ -35,7 +35,7 @@ if (victory == 1 && victoried == 0)
         global.monstergold[3] *= 1 + (scr_armorcheck_equipped_party(DRArmor.Dealmaker) * 0.3);
         global.monstergold[3] = floor(global.monstergold[3]);
         
-        if (global.flag[37] == 1) global.monstergold[3] = 0;
+        if (global.flag[DRFLAG.IsDojoBattle] == 1) global.monstergold[3] = 0;
         
         global.gold += global.monstergold[3];
         global.xp += global.monsterexp[3];
@@ -47,7 +47,7 @@ if (victory == 1 && victoried == 0)
         
 		var msg = ""
 		var stats = [string(global.monsterexp[3]) + " EXP", string(global.monstergold[3]) + " D$"]
-		if global.flag[37] stats = []
+		if global.flag[DRFLAG.IsDojoBattle] stats = []
 		
         if (global.flag[63] == true) {
 			var gainedstats = scr_levelup()
@@ -78,14 +78,14 @@ if (victory == 1 && victoried == 0)
 		}
 		
         global.battlemsg[0] = ("* You won^1!" + gottenstring + "&" + msg + "/%");
-        if (global.flag[37] == 1) global.battlemsg[0] = "* You won the battle!&" + msg + "/%";
+        if (global.flag[DRFLAG.IsDojoBattle] == 1) global.battlemsg[0] = "* You won the battle!&" + msg + "/%";
         
         global.battletyper = 4;
         global.msg[0] = global.battlemsg[0];
         global.typer = global.battletyper;
         lastbattlewriter = scr_battletext();
         
-        if (global.flag[38] == 1)
+        if (global.flag[DRFLAG.SkipBattleMessage] == 1)
         {
             with (lastbattlewriter)
                 instance_destroy();
