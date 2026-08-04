@@ -515,14 +515,20 @@ if (battlemode == 1) {
     global.inv -= 1;
     
     if (global.inv < 0) {
-		var soulboxright = hx + (7.5 * image_xscale)
-		var soulboxbottom = hy + (4.5 * image_yscale)
-		var soullinesmiddle = hx + (3.5 * image_xscale)
-		var soullinesright = hx + (7 * image_xscale)
-		var soullinesbottom = hy + (8.5 * image_yscale)
-	    with collision_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, obj_overworldbulletparent, 1, 0)								event_user(5);        
-	    with collision_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)					event_user(5);        
-	    with collision_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)		event_user(5);
+		if OverworldBattleMode_UsebattleheartasHitbox {
+			with battleheart {
+				with instance_place(x, y, obj_overworldbulletparent) event_user(5)
+			}
+		} else {
+			var soulboxright = hx + (7.5 * image_xscale)
+			var soulboxbottom = hy + (4.5 * image_yscale)
+			var soullinesmiddle = hx + (3.5 * image_xscale)
+			var soullinesright = hx + (7 * image_xscale)
+			var soullinesbottom = hy + (8.5 * image_yscale)
+		    with collision_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, obj_overworldbulletparent, 1, 0)								event_user(5);        
+		    with collision_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)					event_user(5);        
+		    with collision_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)		event_user(5);
+		}
     }
 }
 

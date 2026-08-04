@@ -19,6 +19,7 @@ function macros(){
 	
 	#macro IncludeRemovedDebugSoulSlowLock 1
 	#macro DamageInLightDeductsFromLightHP 1 // if 0 it'll do the normal behavior of only dealing with Dark HP
+	#macro OverworldBattleMode_UsebattleheartasHitbox 1 // Normal Behavior in Deltarune is a very badly made hitbox.
 	
 	#region global.interact modes
 	// Base Deltarune

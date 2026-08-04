@@ -52,14 +52,22 @@ battleheart.y = y + hy;
 if (battlemode == 4){
     draw_set_color(c_lime);
     draw_set_alpha(0.5);
-	var soulboxright = hx + (7.5 * image_xscale)
-	var soulboxbottom = hy + (4.5 * image_yscale)
-	var soullinesmiddle = hx + (3.5 * image_xscale)
-	var soullinesright = hx + (7 * image_xscale)
-	var soullinesbottom = hy + (8.5 * image_yscale)
-	draw_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, false)
-	draw_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom)
-	draw_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom)
+	if OverworldBattleMode_UsebattleheartasHitbox {
+		with battleheart {
+			gpu_set_fog(true, c_lime, 0, 1)
+			draw_sprite_ext(mask_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_lime, 0.5)
+			gpu_set_fog(false, c_white, 0, 0)
+		}
+	} else {
+		var soulboxright = hx + (7.5 * image_xscale)
+		var soulboxbottom = hy + (4.5 * image_yscale)
+		var soullinesmiddle = hx + (3.5 * image_xscale)
+		var soullinesright = hx + (7 * image_xscale)
+		var soullinesbottom = hy + (8.5 * image_yscale)
+		draw_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, false)
+		draw_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom)
+		draw_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom)
+	}
     draw_set_alpha(1);
 }
 
