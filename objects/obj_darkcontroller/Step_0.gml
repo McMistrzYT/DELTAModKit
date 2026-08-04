@@ -822,7 +822,7 @@ if (global.interact == 5) { // If Menu is Open
                 global.submenucoord[20] -= 1;
                 
                 if (global.submenucoord[20] < 0)
-                    global.submenucoord[20] = chartotal - 1;
+                    global.submenucoord[20] = max(chartotal - 1, 0);
                 
                 if (chartotal >= 2)
                     dograndom = ceil(random(100));
@@ -1214,7 +1214,7 @@ if (global.interact == 5) { // If Menu is Open
                 global.submenucoord[10] -= 1;
                 
                 if (global.submenucoord[10] < 0)
-                    global.submenucoord[10] = chartotal - 1;
+                    global.submenucoord[10] = max(chartotal - 1, 0);
             }
             
             if (right_p())

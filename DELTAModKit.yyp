@@ -312,6 +312,7 @@
     {"id":{"name":"obj_battleback","path":"objects/obj_battleback/obj_battleback.yy",},},
     {"id":{"name":"obj_battleblcon","path":"objects/obj_battleblcon/obj_battleblcon.yy",},},
     {"id":{"name":"obj_battlecontroller","path":"objects/obj_battlecontroller/obj_battlecontroller.yy",},},
+    {"id":{"name":"obj_battleheartspawnmarker","path":"objects/obj_battleheartspawnmarker/obj_battleheartspawnmarker.yy",},},
     {"id":{"name":"obj_battlesolid","path":"objects/obj_battlesolid/obj_battlesolid.yy",},},
     {"id":{"name":"obj_bg_palette_swap","path":"objects/obj_bg_palette_swap/obj_bg_palette_swap.yy",},},
     {"id":{"name":"obj_bulletgenparent","path":"objects/obj_bulletgenparent/obj_bulletgenparent.yy",},},

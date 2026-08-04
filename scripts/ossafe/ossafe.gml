@@ -43,7 +43,22 @@ function draw_background_tiled_ext(sprite, xoffset, yoffset, xscale, yscale, ble
 
 function scr_moveheart(){
     global.inv = 0;
-    return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
+	var pos = scr_heartgetspawnpos()
+    return instance_create(pos.x, pos.y, obj_moveheart);
+}
+
+function scr_heartgetspawnpos(){
+	var vec = new Vector2(camerax() - 20, cameray() + (cameraheight()/2) - 10)
+	with obj_herokris {
+		vec.x = x + 10
+		vec.y = y + 40
+	}
+	with obj_battleheartspawnmarker {
+		vec.x = x
+		vec.y = y
+	}
+	return vec
+	
 }
 
 function ossafe_ini_open(fname){

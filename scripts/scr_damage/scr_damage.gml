@@ -321,7 +321,7 @@ function scr_damage_all(proportion = 1){
             damage = remdamage;
             var _inverse_proportion = 1 - proportion;
             var _damscale = global.hp[global.char[ti]] / global.maxhp[global.char[ti]];
-            var _dammod = (_damscale * _inverse_proportion) + (1 * arg0);
+            var _dammod = (_damscale * _inverse_proportion) + (1 * proportion);
             damage *= _dammod;
             target = ti;
             
@@ -333,12 +333,12 @@ function scr_damage_all(proportion = 1){
     }
 }
 
-function scr_dead(arg0) {
-	global.charmove[arg0] = 0;
-	global.charcantarget[arg0] = 0;
-	global.chardead[arg0] = 1;
-	global.charaction[arg0] = 0;
-	global.charspecial[arg0] = 0;
+function scr_dead(slot) {
+	global.charmove[slot] = 0;
+	global.charcantarget[slot] = 0;
+	global.chardead[slot] = 1;
+	global.charaction[slot] = 0;
+	global.charspecial[slot] = 0;
 }
 
 function scr_damage_all_overworld(){

@@ -604,6 +604,10 @@ function scr_character_get_rank(charIdx) {
 	char_desc = "LV1 ";
 	
 	switch (charIdx) {
+		case DRCharacter.None: {
+			char_desc = "LV? What#But There was no#one there."
+			break;
+		}
 		case DRCharacter.Kris: {
 			char_desc = stringsetsub("LV~1 Tactician#Commands the party#by ACTs.", global.chapter);
 			break;
