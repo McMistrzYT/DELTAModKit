@@ -43,6 +43,7 @@ enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
 		/* 261 */	NPC_QC_DinerCh2_CollectedHotChocolate = 261,
 		
 		/* 1332 */	HeldOverworldItemId_ForceStart = 1332,
+		/* 1324 */	SunState = 1324,
 }
 // array macros
 #region __DefeatCountersStart__

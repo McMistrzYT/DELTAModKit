@@ -1,5 +1,6 @@
 /// @desc Dialogue is Added Here Normally, but as this is DMK not DR it will usually be done via Variables!
 myinteract = 3
+_unfreeze = -1
 global.msc = 0
 global.typer = 5
 if (global.darkzone == 1) global.typer = 6
@@ -32,7 +33,9 @@ if (skip == 0) mydialoguer = instance_create(0, 0, obj_dialoguer)
 
 read += 1
 
-if (skip == 1){
+if _unfreeze == -1 _unfreeze = skip
+
+if (_unfreeze == 1){
 	global.interact = 0
 	skip = 0
 }

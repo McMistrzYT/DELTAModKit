@@ -35,8 +35,11 @@ function scr_npc_interact() {
 	switch (room) {
 		case room_dw_test: {
 			// set dialogue here
-			msgset(0, "* Ay, boss!^2 Welcome to the Testbed room!/");
-			msgnext("* Here you can test out all the things DELTAModKit offers!/");
+			scr_smallface(0, "ralsei", 2, "right", "bottom", "Bottom Right")
+			scr_smallface(1, "ralsei", 18, "right", "bottom", "(That's what this#is, Susie)")
+			scr_smallface(2, "susie", 3, "left", "bottom", "What's a#DELTAModKit?")
+			msgset(0, "* Ay, boss!^2 \\f0Welcome to the Testbed room!/");
+			msgnext("* Here you can test out all the things DELTAModKit\\f2 offers\\f1!/");
 			msgnext("* .../");
 			msgnext("* Oh, and hey, if you wanna see how my dialogue works.../");
 			msgnext("* You should check out scr_npc_config./");

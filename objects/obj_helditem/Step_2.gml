@@ -17,12 +17,9 @@ var cutscene = false
 
 if (i_ex(obj_mainchara)) cutscene = obj_mainchara.cutscene
 
-if (!cutscene && !override_facing)
-{
-	if (global.facing == 0) { }
-	
-	if (global.facing == 2) { }
-	
+if (!cutscene && !override_facing) {
+	if (global.facing == 0) { }	
+	if (global.facing == 2) { }	
 	if (global.facing == 1) image_xscale = x_scale	
 	if (global.facing == 3) image_xscale = -x_scale
 }

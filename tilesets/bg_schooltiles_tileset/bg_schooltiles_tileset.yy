@@ -1,0 +1,43 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"bg_schooltiles_tileset",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":36,
+    "SerialiseWidth":18,
+    "TileCompressedData":[
+      5,0,147,146,147,146,-14,0,4,157,156,157,158,-108,0,-2,156,1,157,-22,0,6,138,146,147,0,146,147,-12,0,
+      6,104,156,157,0,156,157,-49,0,2,136,137,-16,0,2,137,136,-21,0,10,126,127,126,127,0,0,127,126,127,128,
+      -69,0,-2,75,1,127,-203,0,-2,11,-16,0,2,11,22,-16,0,-2,11,-51,0,1,22,-3,0,
+    ],
+    "TileDataFormat":1,
+  },
+  "name":"bg_schooltiles_tileset",
+  "out_columns":10,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Chapter 1",
+    "path":"folders/DELTARUNE/Tilesets/Light World/Tilesets/Chapter 1.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"bg_schooltiles",
+    "path":"sprites/bg_schooltiles/bg_schooltiles.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":20,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":20,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":108,
+}
