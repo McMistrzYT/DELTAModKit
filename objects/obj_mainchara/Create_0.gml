@@ -127,10 +127,10 @@ if (global.interact == 3) {
     
 	if (global.entrance > 0)
 	{
-	    if (global.flag[21] <= 0)
+	    if (global.flag[DRFLAG.RoomEnterFreezeTimer] <= 0)
 	    {
 	        global.interact = 0;
-	        global.flag[21] = -10;
+	        global.flag[DRFLAG.RoomEnterFreezeTimer] = -10;
 	        roomenterfreezeend = 1;
 	    }
         
@@ -349,3 +349,5 @@ if (scr_debug()) {
 		}
 	}
 }
+
+interactfacingrectanglebounds = [0, 0, 0, 0]

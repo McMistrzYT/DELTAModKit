@@ -66,16 +66,15 @@ function scr_gamestart_chapter_override(){
         // scr_funnytext_init_sounds();
     }
     
-    if (global.chapter > 2)
-    {
+    if (global.chapter > 2){
         global.flag[7] = 0;
         global.flag[9] = 1;
         global.flag[10] = 1;
         global.flag[16] = 0.85;
         global.flag[17] = 0.6;
         global.flag[20] = 0;
-        global.flag[21] = 0;
-        global.flag[31] = 1;
-        global.flag[32] = 0;
+        global.flag[DRFLAG.RoomEnterFreezeTimer] = 0;
+        global.flag[DRFLAG.BlockFootsteps] = 1;
+        global.flag[DRFLAG.BlockPartyItemComments] = 0;
     }
 }

@@ -26,8 +26,7 @@ function scr_itemcomment(charid, msg)
     itemcomment.msg = msg;
     itemcomment.who = charid;
     
-    if (global.flag[32] == 1)
-    {
+    if (global.flag[DRFLAG.BlockPartyItemComments] == 1) {
         with (itemcomment)
             instance_destroy();
     }

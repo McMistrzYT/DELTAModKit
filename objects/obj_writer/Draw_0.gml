@@ -566,37 +566,8 @@ if (view_current == 0)
                 }
             }
             
-            if (nextchar == "M")
-            {
-                if (nextchar2 == "0")
-                    global.flag[20] = 0;
-                
-                if (nextchar2 == "1")
-                    global.flag[20] = 1;
-                
-                if (nextchar2 == "2")
-                    global.flag[20] = 2;
-                
-                if (nextchar2 == "3")
-                    global.flag[20] = 3;
-                
-                if (nextchar2 == "4")
-                    global.flag[20] = 4;
-                
-                if (nextchar2 == "5")
-                    global.flag[20] = 5;
-                
-                if (nextchar2 == "6")
-                    global.flag[20] = 6;
-                
-                if (nextchar2 == "7")
-                    global.flag[20] = 7;
-                
-                if (nextchar2 == "8")
-                    global.flag[20] = 8;
-                
-                if (nextchar2 == "9")
-                    global.flag[20] = 9;
+            if (nextchar == "M") {
+				if nextchar2 >= "0" && nextchar2 <= "9" global.flag[20] = real(nextchar2)
             }
             
             if (nextchar == "S")

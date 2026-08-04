@@ -7,4 +7,4 @@ else if (is_string(doorEntrance)){
 
 if (doorSound2 != -1) snd_play(doorSound2);
 if (doorFacing != -1) global.facing = doorFacing;
-if (doorPostDelay > 1) global.flag[21] = doorPostDelay; else global.flag[21] = -10;
+if (doorPostDelay > 1) global.flag[DRFLAG.RoomEnterFreezeTimer] = doorPostDelay; else global.flag[DRFLAG.RoomEnterFreezeTimer] = -10;

@@ -21,8 +21,8 @@ enum DRFLAG { // NOT EVEN CLOSE TO ALL FLAGS!
 
 		/* 29 */	Chapter1SusieRevealedEyes = 29,
 		/* 30 */	Chapter1RalseiFaceOutfit, // 0 is Hat, 1 is Hooded, 2 is Hatless
-		/* 31 */	KrisMakeAudibleFootsteps,
-		/* 32 */	PartyCommentonItems,
+		/* 31 */	BlockFootsteps,
+		/* 32 */	BlockPartyItemComments,
 		/* 33 */	ChoiceTimer,
 		/* 34 */	HideCharacterActs,
 		/* 35 */	GameOverType,  // 0 is True GameOver, 1 is End Battle Without Gameover Screen Sets Failed Battle Flag to 1, 2 is Reload Room with entire party at 1 HP
@@ -92,8 +92,8 @@ function global_flagname_init() {
 	
 		global.flagname[DRFLAG.Chapter1SusieRevealedEyes] = "Susie Ch1 Eyes"
 		global.flagname[DRFLAG.Chapter1RalseiFaceOutfit] = "Ralsei Ch1 Hat"
-		global.flagname[DRFLAG.KrisMakeAudibleFootsteps] = "Footsteps"
-		global.flagname[DRFLAG.PartyCommentonItems] = "Party Item Comments"
+		global.flagname[DRFLAG.BlockFootsteps] = "No Footsteps"
+		global.flagname[DRFLAG.BlockPartyItemComments] = "Block Party Item Comments"
 		global.flagname[DRFLAG.ChoiceTimer] = "Choice Timer"
 		global.flagname[DRFLAG.HideCharacterActs] = "Hide CharActs from Spell Menu"
 		global.flagname[DRFLAG.GameOverType] = "Game Over Type"

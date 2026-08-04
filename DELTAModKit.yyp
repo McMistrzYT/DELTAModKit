@@ -701,6 +701,8 @@
     {"id":{"name":"snd_spell_pacify","path":"sounds/snd_spell_pacify/snd_spell_pacify.yy",},},
     {"id":{"name":"snd_spellcast","path":"sounds/snd_spellcast/snd_spellcast.yy",},},
     {"id":{"name":"snd_splat","path":"sounds/snd_splat/snd_splat.yy",},},
+    {"id":{"name":"snd_step1","path":"sounds/snd_step1/snd_step1.yy",},},
+    {"id":{"name":"snd_step2","path":"sounds/snd_step2/snd_step2.yy",},},
     {"id":{"name":"snd_swallow","path":"sounds/snd_swallow/snd_swallow.yy",},},
     {"id":{"name":"snd_swing","path":"sounds/snd_swing/snd_swing.yy",},},
     {"id":{"name":"snd_tensionhorn","path":"sounds/snd_tensionhorn/snd_tensionhorn.yy",},},
