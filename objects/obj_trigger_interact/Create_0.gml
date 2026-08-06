@@ -1,0 +1,15 @@
+myinteract = 0
+con = 0
+timer = 0
+strict = true
+image_speed = 0
+issolid = false
+mysolid = noone
+collision_lenient = false
+init = 0
+face0allowed = true
+face1allowed = true
+face2allowed = true
+face3allowed = true
+marker = noone
+markerstick = false

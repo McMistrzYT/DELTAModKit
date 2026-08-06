@@ -6,8 +6,8 @@
   "name":"obj_trigger",
   "overriddenProperties":[],
   "parent":{
-    "name":"Misc",
-    "path":"folders/DELTARUNE/Objects/World/Misc.yy",
+    "name":"Triggers",
+    "path":"folders/DELTARUNE/Objects/World/Triggers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

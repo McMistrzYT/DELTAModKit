@@ -1,0 +1,1 @@
+safe_delete(mysolid)
