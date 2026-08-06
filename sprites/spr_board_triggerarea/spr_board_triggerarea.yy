@@ -52,8 +52,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"DELTAModKit",
-    "path":"DELTAModKit.yyp",
+    "name":"Editor",
+    "path":"folders/DELTARUNE/Sprites/Editor.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
