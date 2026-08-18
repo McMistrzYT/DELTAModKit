@@ -1,25 +1,31 @@
-if (canchoose == 1)
-{
+if (canchoose == 1) {
+	draw_set_font(font)
     var drawstyle = 0;
     
     textx = xx;
     texty = yy;
-    
-    if (drawstyle == 0)
-    {
-        for (var i = 0; i < (choicetotal + 1); i += 1)
-        {
+	
+    if (drawstyle == 0) {
+		var memalign = { h: draw_get_halign(), v: draw_get_valign() }
+		
+		if (neostyle == 1) {
+			draw_set_halign(fa_center)
+			draw_set_valign(fa_middle)
+		}
+		
+        for (var i = 0; i < (choicetotal + 1); i += 1) {
             draw_set_color((mychoice == i) ? c_yellow : c_white);
             textx = textposx[i];
             texty = textposy[i];
             draw_text(textx, texty, string_hash_to_newline(global.choicemsg[i]));
         }
-        
-        draw_sprite_ext(heartSprite, 0, hx, hy, image_xscale, image_yscale, 0, c_white, 1);
+		
+		draw_set_halign(memalign.h)
+		draw_set_valign(memalign.v)        
+        draw_sprite_ext(heartSprite, 0, hx, hy, image_xscale, image_yscale, 0, heartCol, 1);
     }
     
-    if (drawstyle == 1)
-    {
+    if (drawstyle == 1) {
         var midy = (yy + 60) - 1;
         var bhx = xx + 182;
         var bhy = midy - 8;
@@ -47,29 +53,24 @@ if (canchoose == 1)
         
         draw_set_halign(fa_left);
         draw_set_valign(fa_top);
+		
+        if (mychoice == 0) bhx = (xx + 154) - string_width(string_hash_to_newline(global.choicemsg[0])) - 20;
         
-        if (mychoice == 0)
-            bhx = (xx + 154) - string_width(string_hash_to_newline(global.choicemsg[0])) - 20;
+        if (mychoice == 1) bhx = (xx + 230) - 20;
         
-        if (mychoice == 1)
-            bhx = (xx + 230) - 20;
-        
-        if (mychoice == 2)
-        {
+        if (mychoice == 2) {
             bhx = (xx + 192) - round(string_width(string_hash_to_newline(global.choicemsg[2])) / 2) - 20;
             bhy = (midy - 38) + 1;
         }
         
-        if (mychoice == 3)
-        {
+        if (mychoice == 3) {
             bhx = (xx + 192) - round(string_width(string_hash_to_newline(global.choicemsg[3])) / 2) - 20;
             bhy = ((midy + 18) - 1) + 6;
         }
         
-        if (choicerstyle == 1)
-            bhy -= 2;
+        if (choicerstyle == 1) bhy -= 2;
         
-        draw_sprite_ext(heartSprite, 0, bhx, bhy, image_xscale, image_yscale, 0, c_white, 1);
+        draw_sprite_ext(heartSprite, 0, bhx, bhy, image_xscale, image_yscale, 0, heartCol, 1);
     }
     
     if (drawstyle == 2)

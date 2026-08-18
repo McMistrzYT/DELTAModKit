@@ -267,3 +267,12 @@ function scr_tensionbar_createcolor(usedtp = c_red, currenttp = c_orange, maxtp 
 	return color
 }
 #endregion
+#region MISC
+	enum DRChoicerNeoStyle {
+		Old,
+		New
+	}
+	// Ch4- & Battles: Old
+	// Ch5+: New
+	#macro DefaultChoicerStyle DRChoicerNeoStyle.Old
+#endregion
