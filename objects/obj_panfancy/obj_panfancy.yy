@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_panner",
+  "%Name":"obj_panfancy",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_panner",
+  "name":"obj_panfancy",
   "overriddenProperties":[],
   "parent":{
     "name":"Sub",
@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_emote_ellipsis",
-    "path":"sprites/spr_emote_ellipsis/spr_emote_ellipsis.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":false,
 }

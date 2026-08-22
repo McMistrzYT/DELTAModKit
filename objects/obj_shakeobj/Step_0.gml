@@ -5,7 +5,7 @@ if (active == 1)
 {
     if (i_ex(target))
     {
-        shakeamt -= shakereduct;
+        shakeamt -= shakereduct ?? 1;
         on *= -1;
         target.x = nowx + (shakeamt * on);
         

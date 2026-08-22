@@ -1,12 +1,11 @@
-function scr_cutscene_make() {
+function scr_cutscene_make(){
 	_cutscene_master = instance_create(0, 0, obj_cutscene_master);
 	_cutscene_master.master_object = id;
-	debug_log("i maded :+1:");
+	print_message("***** Cutscene Started")
 	return _cutscene_master;
 }
 
-function scr_cutscene_commands()
-{
+function scr_cutscene_commands(){
 	debug_log("CUTSCENE COMMANDS: Now processing '" + _c + "'!!");
 	
     if (_c == "delaycmd")
@@ -31,10 +30,10 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "walk")
-    {
-        if (!instant)
-        {
+	#region WALK
+	
+    if (_c == "walk") {
+        if (!instant) {
             actor_move = instance_create(0, 0, obj_move_actor);
             actor_move.target = command_actor[i];
             actor_move.direction_word = command_arg1[i];
@@ -51,8 +50,7 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "walkto")
-    {
+    if (_c == "walkto") {
         var _object = command_arg1[i];
         var _tx = _object.x + command_arg2[i];
         var _ty = _object.y + command_arg3[i];
@@ -125,70 +123,43 @@ function scr_cutscene_commands()
             command_actor[i].y = command_arg2[i];
         }
     }
+	
+	#endregion
     
-    if (_c == "msgset")
-        msgset(command_arg1[i], command_arg2[i]);
+	#region Dialoguer
+    if (_c == "msgset") msgset(command_arg1[i], command_arg2[i]);    
+    if (_c == "msgnext") msgnext(command_arg1[i]);
     
-    if (_c == "msgnext")
-        msgnext(command_arg1[i]);
-    
-    if (_c == "talk")
-    {
-        if (!instant)
-        {
+    if (_c == "talk") {
+        if (!instant) {
 			// i dread dialogue in this game
             mydialoguer = instance_create(0, 0, obj_dialoguer);
             
-            if (msgside >= 0)
-                mydialoguer.side = msgside;
-            
-            if (stay)
-                mydialoguer.stay = stay;
-            
-            if (runcheck)
-                mydialoguer.runcheck = runcheck;
-            
-            if (preventcskip)
-                mydialoguer.preventcskip = preventcskip;
+            if (msgside >= 0) mydialoguer.side = msgside;            
+            if (stay) mydialoguer.stay = stay;            
+            if (runcheck) mydialoguer.runcheck = runcheck;            
+            if (preventcskip) mydialoguer.preventcskip = preventcskip;
             
             mydialoguer.zurasu = zurasu;
             stay = 0;
         }
     }
     
-    //if (_c == "msgface")
-    //  scr_anyface(command_arg1[i], command_arg2[i], command_arg3[i]);
+    if (_c == "msgface") scr_anyface(command_arg1[i], command_arg2[i], command_arg3[i]);    
+    if (_c == "msgfacenext") scr_anyface_next(command_arg1[i], command_arg2[i]);
     
-    //if (_c == "msgfacenext")
-    //    scr_anyface_next(command_arg1[i], command_arg2[i]);
-    
-    if (_c == "msgside")
-    {
-        if (command_arg1[i] == "any")
-            msgside = -1;
-        
-        if (command_arg1[i] == "top")
-            msgside = 0;
-        
-        if (command_arg1[i] == "bottom")
-            msgside = 1;
-        
-        if (command_arg1[i] == "zurasuon")
-            zurasu = 1;
-        
-        if (command_arg1[i] == "zurasuoff")
-            zurasu = 0;
+    if (_c == "msgside") {
+        if (command_arg1[i] == "any") msgside = -1;        
+        if (command_arg1[i] == "top") msgside = 0;        
+        if (command_arg1[i] == "bottom") msgside = 1;        
+        if (command_arg1[i] == "zurasuon") zurasu = 1;        
+        if (command_arg1[i] == "zurasuoff") zurasu = 0;
     }
     
-    if (_c == "msgstay")
-        stay = command_arg1[i];
-    
-    if (_c == "msgruncheck")
-        runcheck = command_arg1[i];
-    
-    if (_c == "msgpreventcskip")
-        preventcskip = command_arg1[i];
-    
+    if (_c == "msgstay") stay = command_arg1[i];    
+    if (_c == "msgruncheck") runcheck = command_arg1[i];    
+    if (_c == "msgpreventcskip") preventcskip = command_arg1[i];
+	
     if (_c == "emote")
     {
         if (!instant)
@@ -211,33 +182,29 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "speaker")
-        scr_speaker(command_arg1[i]);
+    if (_c == "speaker") scr_speaker(command_arg1[i]);
     
-    if (_c == "fe") // fein fein fein fein fein
-    {
+    if (_c == "fe") { // faceemotion
         global.fe = command_arg1[i];
         
-        if (command_arg2[i] != -2)
-            global.fc = command_arg2[i];
+        if (command_arg2[i] != -2) global.fc = command_arg2[i];
     }
     
-    if (_c == "msc")
-    {
+    if (_c == "msc") {
         global.msc = command_arg1[i];
         scr_text(global.msc);
     }
+    #endregion
     
-    if (_c == "instancecreate")
-    {
+    if (_c == "instancecreate") {
         _instance = instance_create(command_arg1[i], command_arg2[i], command_arg3[i]);
         
-        if (i_ex(master_object))
-            master_object.cutscene_instance = _instance;
+        if (i_ex(master_object)) master_object.cutscene_instance = _instance;
     }
     
-    if (_c == "varadd")
-    {
+	
+	#region VAR
+    if (_c == "varadd") {
         __chosenid = 0;
         
         if (command_arg1[i] == 0)
@@ -260,51 +227,30 @@ function scr_cutscene_commands()
         _c = "var";
     }
     
-    if (_c == "varto")
-    {
-        __chosenid = 0;
-        
-        if (command_arg1[i] == 0)
-            __chosenid = command_actor[i];
-        else
-            __chosenid = command_arg1[i];
+    if (_c == "varto") {
+        __chosenid = command_arg1[i] == 0 ? command_actor[i] : command_arg1[i];
         
         command_arg3[i] = variable_instance_get(__chosenid, command_arg2[i]);
         _c = "var";
     }
     
-    if (_c == "var")
-    {
-        if (instant)
-        {
-            if (command_arg5[i] != 0)
-            {
+    if (_c == "var") {
+        if (instant) {
+            if (command_arg5[i] != 0) {
                 command_arg3[i] = command_arg4[i];
                 command_arg5[i] = 0;
             }
         }
         
-        __chosenid = 0;
+        __chosenid = command_arg1[i] == 0 ? command_actor[i] : command_arg1[i];
         
-        if (command_arg1[i] == 0)
-            __chosenid = command_actor[i];
-        else
-            __chosenid = command_arg1[i];
-        
-        if (command_arg5[i] == 0)
-        {
+        if (command_arg5[i] == 0) {
             variable_instance_set(__chosenid, command_arg2[i], command_arg3[i]);
-        }
-        else if (command_arg6[i] == 0)
-        {
+        } else if (command_arg6[i] == 0) {
             scr_lerpvar_instance(__chosenid, command_arg2[i], command_arg3[i], command_arg4[i], command_arg5[i]);
-        }
-        else if (!is_string(command_arg6[i]))
-        {
+        } else if (!is_string(command_arg6[i])) {
             scr_lerpvar_instance(__chosenid, command_arg2[i], command_arg3[i], command_arg4[i], command_arg5[i], command_arg6[i], "in");
-        }
-        else
-        {
+        } else {
             var __easetype = real(string_digits(command_arg6[i]));
             
             if (string_char_at(command_arg6[i], 1) == "-")
@@ -318,8 +264,7 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "script")
-    {
+    if (_c == "script") {
         if (command_arg3[i] != -10)
         {
             var __sarg1 = command_arg2[i];
@@ -329,77 +274,49 @@ function scr_cutscene_commands()
             var __sarg5 = command_arg6[i];
             var __sarg_counted = 3;
             
-            if (command_arg4[i] == -3.14)
-                __sarg_counted--;
+            if (command_arg4[i] == -pi) __sarg_counted--;            
+            if (command_arg5[i] == -pi) __sarg_counted--;            
+            if (command_arg6[i] == -pi) __sarg_counted--;
             
-            if (command_arg5[i] == -3.14)
-                __sarg_counted--;
-            
-            if (command_arg6[i] == -3.14)
-                __sarg_counted--;
-            
-            if (command_arg3[i] == 0)
-            {
-                if (__sarg_counted == 0)
-                {
-                    with (command_arg1[i])
-                        script_execute(__sarg1);
+            if (command_arg3[i] == 0) {
+                if (__sarg_counted == 0) {
+                    with (command_arg1[i]) script_execute(__sarg1);
                 }
                 
-                if (__sarg_counted == 1)
-                {
-                    with (command_arg1[i])
-                        script_execute(__sarg1, __sarg3);
+                if (__sarg_counted == 1) {
+                    with (command_arg1[i]) script_execute(__sarg1, __sarg3);
                 }
                 
-                if (__sarg_counted == 2)
-                {
-                    with (command_arg1[i])
-                        script_execute(__sarg1, __sarg3, __sarg4);
+                if (__sarg_counted == 2) {
+                    with (command_arg1[i]) script_execute(__sarg1, __sarg3, __sarg4);
                 }
                 
-                if (__sarg_counted == 3)
-                {
-                    with (command_arg1[i])
-                        script_execute(__sarg1, __sarg3, __sarg4, __sarg5);
+                if (__sarg_counted == 3) {
+                    with (command_arg1[i]) script_execute(__sarg1, __sarg3, __sarg4, __sarg5);
+                }
+            } else {
+                if (__sarg_counted == 0) {
+                    with (command_arg1[i]) scr_script_repeat(__sarg1, -1, __sarg2);
+                }
+                
+                if (__sarg_counted == 1) {
+                    with (command_arg1[i]) scr_script_repeat(__sarg1, -1, __sarg2, __sarg3);
+                }
+                
+                if (__sarg_counted == 2) {
+                    with (command_arg1[i]) scr_script_repeat(__sarg1, -1, __sarg2, __sarg3, __sarg4);
+                }
+                
+                if (__sarg_counted == 3) {
+                    with (command_arg1[i]) scr_script_repeat(__sarg1, -1, __sarg2, __sarg3, __sarg4, __sarg5);
                 }
             }
-            else
-            {
-                if (__sarg_counted == 0)
-                {
-                    with (command_arg1[i])
-                        scr_script_repeat(__sarg1, -1, __sarg2);
-                }
-                
-                if (__sarg_counted == 1)
-                {
-                    with (command_arg1[i])
-                        scr_script_repeat(__sarg1, -1, __sarg2, __sarg3);
-                }
-                
-                if (__sarg_counted == 2)
-                {
-                    with (command_arg1[i])
-                        scr_script_repeat(__sarg1, -1, __sarg2, __sarg3, __sarg4);
-                }
-                
-                if (__sarg_counted == 3)
-                {
-                    with (command_arg1[i])
-                        scr_script_repeat(__sarg1, -1, __sarg2, __sarg3, __sarg4, __sarg5);
-                }
-            }
-        }
-        else
-        {
+        } else {
             var __commandtarget = command_arg1[i];
             var __commandscript = command_arg2[i];
             
-            with (obj_script_delayed)
-            {
-                if (script == __commandscript && target == __commandtarget)
-                {
+            with (obj_script_delayed) {
+                if (script == __commandscript && target == __commandtarget) {
                     instance_destroy();
                     alarm[0] = -5;
                     max_time = -300;
@@ -408,134 +325,94 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "globalvar")
-        variable_global_set(command_arg1[i], command_arg2[i]);
+    if (_c == "globalvar") variable_global_set(command_arg1[i], command_arg2[i]);
+	#endregion
     
-    if (_c == "autowalk")
-    {
+	#region Actor
+    if (_c == "autowalk") {
         command_actor[i].auto_facing = command_arg1[i];
         command_actor[i].auto_walk = command_arg1[i];
     }
     
-    if (_c == "autofacing")
-        command_actor[i].auto_facing = command_arg1[i];
+    if (_c == "autofacing") command_actor[i].auto_facing = command_arg1[i];    
+    if (_c == "autodepth") command_actor[i].auto_depth = command_arg1[i];    
+    if (_c == "depth") command_actor[i].depth = command_arg1[i];
     
-    if (_c == "autodepth")
-        command_actor[i].auto_depth = command_arg1[i];
+    if (_c == "depthobject") command_actor[i].depth = command_arg1[i].depth + command_arg2[i];
     
-    if (_c == "depth")
-        command_actor[i].depth = command_arg1[i];
-    
-    if (_c == "depthobject")
-        command_actor[i].depth = command_arg1[i].depth + command_arg2[i];
-    
-    if (_c == "flip")
-    {
+    if (_c == "flip") {
         command_actor[i].__flipvalue = command_arg1[i];
         
-        with (command_actor[i])
-            scr_flip(__flipvalue);
+        with (command_actor[i]) scr_flip(__flipvalue);
     }
     
-    if (_c == "facing")
-    {
-        if (command_arg1[i] == "l" || command_arg1[i] == "d" || command_arg1[i] == "r" || command_arg1[i] == "u")
-        {
+    if (_c == "facing") {
+        if (command_arg1[i] == "l" || command_arg1[i] == "d" || command_arg1[i] == "r" || command_arg1[i] == "u") {
             scr_actor_facing(command_actor[i], command_arg1[i]);
-        }
-        else
-        {
+        } else {
             command_actor[i]._setfacing = command_arg1[i];
             
-            with (command_actor[i])
-                scr_set_facing_sprites(_setfacing);
+            with (command_actor[i]) scr_set_facing_sprites(_setfacing);
         }
     }
     
-    if (_c == "halt")
-    {
-        with (command_actor[i])
-            scr_halt();
+    if (_c == "halt") {
+        with (command_actor[i]) scr_halt();
     }
     
-    if (_c == "spin")
-    {
-        if (i_ex(command_actor[i]))
-            command_actor[i].spinspeed = command_arg1[i];
+    if (_c == "spin") {
+        if (i_ex(command_actor[i])) command_actor[i].spinspeed = command_arg1[i];
     }
     
-    if (_c == "stick")
-    {
-        if (command_arg1[i] == "on")
-        {
+    if (_c == "stick") {
+        if (command_arg1[i] == "on") {
             var _stickobj = command_arg2[i];
             var _stickdepth = command_arg3[i];
             
-            with (command_actor[i])
-                scr_stickto(_stickobj, _stickdepth);
-        }
-        else
-        {
+            with (command_actor[i]) scr_stickto(_stickobj, _stickdepth);
+        } else{
             with (command_actor[i])
                 scr_stickto_stop();
         }
     }
+    if (_c == "sprite") command_actor[i].sprite_index = command_arg1[i];
     
-    if (_c == "sprite")
-        command_actor[i].sprite_index = command_arg1[i];
-    
-    if (_c == "specialsprite")
-    {
+    if (_c == "specialsprite") {
         command_actor[i].sprite_index = command_actor[i].specialsprite[command_arg1[i]];
         command_actor[i].specialspriteno = command_arg1[i];
     }
     
-    if (_c == "tenna")
-    {
-        if (i_ex(obj_actor_tenna))
-        {
+    if (_c == "tenna") {
+        if (i_ex(obj_actor_tenna)) {
             var targetTenna = obj_actor_tenna;
             
-            if (command_actor[i].object_index == obj_actor_tenna)
-                targetTenna = command_actor[i];
-            
-            if (command_arg1[i] == "preset")
-                targetTenna.preset = command_arg2[i];
-            
-            if (command_arg1[i] == "sprite")
-            {
+            if (command_actor[i].object_index == obj_actor_tenna) targetTenna = command_actor[i];            
+            if (command_arg1[i] == "preset") targetTenna.preset = command_arg2[i];            
+            if (command_arg1[i] == "sprite") {
                 targetTenna.bounce = 1;
                 targetTenna.sprite_index = command_arg2[i];
             }
         }
     }
     
-    if (_c == "visible")
-        command_actor[i].visible = command_arg1[i];
+    if (_c == "visible") command_actor[i].visible = command_arg1[i];    
+    if (_c == "imagespeed") command_actor[i].image_speed = command_arg1[i];    
+    if (_c == "imageindex") command_actor[i].image_index = command_arg1[i];
     
-    if (_c == "imagespeed")
-        command_actor[i].image_speed = command_arg1[i];
-    
-    if (_c == "imageindex")
-        command_actor[i].image_index = command_arg1[i];
-    
-    if (_c == "animate")
-    {
-        if (i_ex(command_actor[i]) && !instant)
-        {
+    if (_c == "animate") {
+        if (i_ex(command_actor[i]) && !instant) {
             command_actor[i].__arg0 = command_arg1[i];
             command_actor[i].__arg1 = command_arg2[i];
             command_actor[i].__arg2 = command_arg3[i];
             
-            with (command_actor[i])
-                scr_animate(__arg0, __arg1, __arg2);
+            with (command_actor[i]) scr_animate(__arg0, __arg1, __arg2);
         }
     }
+	#endregion
     
-    if (_c == "soundplay")
-    {
-        if (!instant)
-        {
+	#region Audio
+    if (_c == "soundplay") {
+        if (!instant) {
             var _snd = snd_play(command_arg1[i]);
             
             if (command_arg2[i] != 0) snd_volume(_snd, command_arg2[i], 0);
@@ -563,21 +440,18 @@ function scr_cutscene_commands()
         if (command_arg1[i] == "loopsfxstop")		snd_stop(mysound);
         if (command_arg1[i] == "loopsfxvolume")		snd_volume(mysound, command_arg2[i], command_arg3[i]);
     }
+	#endregion
+	#region Camera
     
-    if (_c == "fadeout")
-    {
-        if (command_arg1[i] > 0)
-        {
+    if (_c == "fadeout") {
+        if (command_arg1[i] > 0) {
             __fadeouter = scr_fadeout(command_arg1[i]);
             
-            if (command_arg2[i] != 0)
-                __fadeouter.image_blend = command_arg2[i];
+            if (command_arg2[i] != 0) __fadeouter.image_blend = command_arg2[i];
         }
         
-        if (command_arg1[i] < 0)
-        {
-            if (instance_exists(obj_fadeout))
-            {
+        if (command_arg1[i] < 0) {
+            if (instance_exists(obj_fadeout)) {
                 obj_fadeout.image_alpha = 1;
                 obj_fadeout.fadespeed = 1 / command_arg1[i];
                 obj_fadeout.fadein = 1;
@@ -585,63 +459,71 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "panspeed")
-    {
-        if (!instant)
-        {
+    if (_c == "panspeed") {
+        if (!instant) {
             scr_pan(command_arg1[i], command_arg2[i], command_arg3[i]);
-        }
-        else
-        {
+        } else {
             camerax_set(camerax() + (command_arg1[i] * command_arg3[i]));
             cameray_set(cameray() + (command_arg2[i] * command_arg3[i]));
         }
     }
     
-    if (_c == "pan")
-    {
-        if (!instant)
-        {
+    if (_c == "pan") {
+        if (!instant) {
             scr_pan_lerp(command_arg1[i], command_arg2[i], command_arg3[i]);
-        }
-        else
-        {
+        } else {
             camerax_set(command_arg1[i]);
             cameray_set(command_arg2[i]);
         }
     }
-    
-    if (_c == "panobj")
-    {
+	
+	if (_c == "panfancy") {
+		with (obj_panfancy) instance_destroy()
+		
+		with (instance_create_depth(0, 0, 0, obj_panfancy)) {
+			camx = other.command_arg1[other.i]
+			camy = other.command_arg2[other.i]
+			targtime = other.command_arg3[other.i]
+			camstruct = other.command_arg4[other.i]
+		}
+	}    
+    if (_c == "panobj") {
         scr_pan_to_obj(command_arg1[i], command_arg2[i]);
         
-        if (instant)
-        {
-            with (obj_panner)
-            {
+        if (instant) {
+            with (obj_panner) {
                 camerax_set(finalx);
                 cameray_set(finaly);
                 instance_destroy();
             }
         }
     }
+	
+	if (_c == "panfancyobj") {
+		with (obj_panfancy) instance_destroy()
+		
+		with (instance_create_depth(0, 0, 0, obj_panfancy)) {
+			var obj = other.command_arg1[other.i]
+			var ___cam = scr_getcam()
+			camx = obj.x - floor((___cam.w / 2) - ((obj.sprite_width / 2) - (sprite_get_xoffset(obj.sprite_index) * obj.image_xscale)))
+			camy = obj.y - floor((___cam.h / 2) - ((obj.sprite_height / 2) - (sprite_get_yoffset(obj.sprite_index) * obj.image_yscale)))
+			camx = clamp(camx, 0, room_width - ___cam.w)
+			camy = clamp(camy, 0, room_height - ___cam.h)
+			targtime = other.command_arg2[other.i]
+			camstruct = other.command_arg3[other.i]
+		}
+	}
     
-    if (_c == "pannable")
-    {
-        if (instance_exists(obj_mainchara))
-            obj_mainchara.cutscene = command_arg1[i];
+    if (_c == "pannable") {
+        if (instance_exists(obj_mainchara)) obj_mainchara.cutscene = command_arg1[i];
     }
     
-    if (_c == "shake")
-    {
-        if (!instant)
-            instance_create(0, 0, obj_shake);
+    if (_c == "shake") {
+        if (!instant) instance_create(0, 0, obj_shake);
     }
     
-    if (_c == "shakex")
-    {
-        if (!instant)
-        {
+    if (_c == "shakex") {
+        if (!instant) {
             myshake = instance_create(0, 0, obj_shake);
             myshake.shakex = command_arg1[i];
             myshake.shakey = command_arg2[i];
@@ -649,71 +531,52 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "shakeobj")
-    {
-        if (command_arg1[i] == 0)
-        {
-            if (!instant)
-            {
-                with (command_actor[i])
-                    scr_shakeobj();
+    if (_c == "shakeobj") {
+        if (command_arg1[i] == 0) {
+            if (!instant) {
+                with (command_actor[i]) scr_shakeobj();
             }
-        }
-        else
-        {
+        } else {
             var _shakeamt = command_arg1[i];
             var _shakespeed = command_arg2[i];
             var _shakereduct = command_arg3[i];
             
-            if (!instant)
-            {
-                with (command_actor[i])
-                    scr_shakeobj_x(_shakeamt, _shakespeed, _shakereduct);
+            if (!instant) {
+                with (command_actor[i]) scr_shakeobj_x(_shakeamt, _shakespeed, _shakereduct);
             }
         }
     }
-    
-    if (_c == "jump")
-    {
-        if (i_ex(command_actor[i]))
-        {
+    #endregion
+	#region Position
+    if (_c == "jump") {
+        if (i_ex(command_actor[i])) {
             command_actor[i].__arg0 = command_arg1[i];
             command_actor[i].__arg1 = command_arg2[i];
             command_actor[i].__arg2 = command_arg3[i];
             command_actor[i].__arg3 = command_arg4[i];
             
-            if (!instant)
-            {
-                with (command_actor[i])
-                    scr_jump_to_point(__arg0, __arg1, __arg2, __arg3);
-            }
-            else
-            {
+            if (!instant) {
+                with (command_actor[i]) scr_jump_to_point(__arg0, __arg1, __arg2, __arg3);
+            } else {
                 command_actor[i].x = command_arg1[i];
                 command_actor[i].y = command_arg2[i];
             }
         }
     }
     
-    if (_c == "jumpinplace")
-    {
-        if (i_ex(command_actor[i]))
-        {
+    if (_c == "jumpinplace") {
+        if (i_ex(command_actor[i])) {
             command_actor[i].__arg0 = command_arg1[i];
             command_actor[i].__arg1 = command_arg2[i];
             
-            if (!instant)
-            {
-                with (command_actor[i])
-                    scr_jump_in_place(__arg0, __arg1);
+            if (!instant) {
+                with (command_actor[i]) scr_jump_in_place(__arg0, __arg1);
             }
         }
     }
     
-    if (_c == "jumpsprite")
-    {
-        if (i_ex(command_actor[i]))
-        {
+    if (_c == "jumpsprite") {
+        if (i_ex(command_actor[i])) {
             command_actor[i].__arg0 = command_arg1[i];
             command_actor[i].__arg1 = command_arg2[i];
             command_actor[i].__arg2 = command_arg3[i];
@@ -721,89 +584,66 @@ function scr_cutscene_commands()
             command_actor[i].__arg4 = command_arg5[i];
             command_actor[i].__arg5 = command_arg6[i];
             
-            if (!instant)
-            {
-                with (command_actor[i])
-                    scr_jump_to_point_sprite(__arg0, __arg1, __arg2, __arg3, __arg4, __arg5);
-            }
-            else
-            {
+            if (!instant) {
+                with (command_actor[i]) scr_jump_to_point_sprite(__arg0, __arg1, __arg2, __arg3, __arg4, __arg5);
+            } else {
                 command_actor[i].x = command_arg1[i];
                 command_actor[i].y = command_arg2[i];
             }
         }
     }
     
-    if (_c == "addxy")
-    {
+    if (_c == "addxy") {
         command_actor[i].x += command_arg1[i];
         command_actor[i].y += command_arg2[i];
     }
     
-    if (_c == "setxy")
-    {
+    if (_c == "setxy") {
         command_actor[i].x = command_arg1[i];
         command_actor[i].y = command_arg2[i];
     }
     
-    if (_c == "arg_objectxy")
-    {
+    if (_c == "arg_objectxy") {
         command_arg1[i + 1] = command_arg1[i].x + command_arg2[i];
         command_arg2[i + 1] = command_arg1[i].y + command_arg3[i];
     }
+	#endregion
+	#region Actor Conversion
     
-    if (_c == "actortoobject")
-    {
+    if (_c == "actortoobject") {
         instance_create(command_actor[i].x, command_actor[i].y, command_arg1[i]);
         command_actor[i].visible = 0;
     }
     
-    if (_c == "actortokris")
-    {
-        for (jjj = 0; jjj < 20; jjj++)
-        {
-            if (actor_name[jjj] == "kris" && i_ex(actor_id[jjj]))
-            {
+    if (_c == "actortokris") {
+        for (jjj = 0; jjj < 20; jjj++) {
+            if (actor_name[jjj] == "kris" && i_ex(actor_id[jjj])) {
                 obj_mainchara.x = actor_id[jjj].x;
                 obj_mainchara.y = actor_id[jjj].y;
                 obj_mainchara.visible = 1;
                 actor_id[jjj].visible = 0;
                 
-                if (actor_id[jjj].facing == "d")
-                    global.facing = 0;
-                
-                if (actor_id[jjj].facing == "r")
-                    global.facing = 1;
-                
-                if (actor_id[jjj].facing == "u")
-                    global.facing = 2;
-                
-                if (actor_id[jjj].facing == "l")
-                    global.facing = 3;
+                if (actor_id[jjj].facing == "d") global.facing = 0;                
+                if (actor_id[jjj].facing == "r") global.facing = 1;                
+                if (actor_id[jjj].facing == "u") global.facing = 2;                
+                if (actor_id[jjj].facing == "l") global.facing = 3;
             }
         }
     }
     
-    if (_c == "actortocaterpillar")
-    {
+    if (_c == "actortocaterpillar") {
         _caterpillar_moved = 0;
         
-        for (lll = 0; lll < 2; lll++)
-        {
-            if (i_ex(global.cinstance[lll]))
-            {
-                for (jjj = 0; jjj < 20; jjj++)
-                {
-                    if (actor_name[jjj] == global.cinstance[lll].name && i_ex(actor_id[jjj]))
-                    {
-                        if (global.cinstance[lll].x != actor_id[jjj].x)
-                        {
+        for (lll = 0; lll < 2; lll++) {
+            if (i_ex(global.cinstance[lll])) {
+                for (jjj = 0; jjj < 20; jjj++) {
+                    if (actor_name[jjj] == global.cinstance[lll].name && i_ex(actor_id[jjj])) {
+                        if (global.cinstance[lll].x != actor_id[jjj].x) {
                             global.cinstance[lll].x = actor_id[jjj].x;
                             _caterpillar_moved = 1;
                         }
                         
-                        if (global.cinstance[lll].y != actor_id[jjj].y)
-                        {
+                        if (global.cinstance[lll].y != actor_id[jjj].y) {
                             global.cinstance[lll].y = actor_id[jjj].y;
                             _caterpillar_moved = 1;
                         }
@@ -816,15 +656,12 @@ function scr_cutscene_commands()
             }
         }
         
-        if (_caterpillar_moved == 1)
-        {
-            with (obj_caterpillarchara)
-                scr_caterpillar_interpolate();
+        if (_caterpillar_moved == 1) {
+            with (obj_caterpillarchara) scr_caterpillar_interpolate();
         }
     }
-    
-    if (_c == "saveload")
-    {
+    #endregion
+    if (_c == "saveload") {
         //if (command_arg1[i] == "save")
         //    scr_cutscene_savestate();
         
@@ -838,40 +675,33 @@ function scr_cutscene_commands()
         actor_selected_id = actor_id[command_arg1[i]];
     }
     
-    if (_c == "waitcustom")
-    {
-        with (master_object)
-            customcon = 1;
+	#region WAIT
+    if (_c == "waitcustom") {
+        with (master_object) customcon = 1;
         
         cs_wait_custom = 1;
         waiting = 1;
         breakme = 1;
     }
     
-    if (_c == "waitdialoguer")
-    {
-        if (!instant)
-        {
+    if (_c == "waitdialoguer") {
+        if (!instant) {
             waiting = 1;
             cs_wait_dialogue = 1;
             breakme = 1;
         }
     }
     
-    if (_c == "waitbox")
-    {
-        if (!instant)
-        {
+    if (_c == "waitbox") {
+        if (!instant) {
             waiting = 1;
             cs_wait_box = command_arg1[i];
             breakme = 1;
         }
     }
     
-    if (_c == "waitboxend")
-    {
-        if (!instant)
-        {
+    if (_c == "waitboxend") {
+        if (!instant) {
             waiting = 1;
             cs_wait_box = command_arg1[i];
             cs_wait_box_end = true;
@@ -879,8 +709,7 @@ function scr_cutscene_commands()
         }
     }
     
-    if (_c == "waitif")
-    {
+    if (_c == "waitif") {
         cs_wait_if = 1;
         cs_wait_if_objectid = command_arg1[i];
         cs_wait_if_varname = command_arg2[i];
@@ -890,20 +719,19 @@ function scr_cutscene_commands()
         breakme = 1;
     }
     
-    if (_c == "wait")
-    {
+    if (_c == "wait") {
         cs_wait_amount = command_arg1[i];
         
-        if (instant)
-            cs_wait_amount = 1;
+        if (instant) cs_wait_amount = 1;
         
         cs_wait_timer = 0;
         waiting = 1;
         breakme = 1;
     }
+	#endregion
     
-    if (_c == "terminate")
-    {
+	#region TERMINATE
+    if (_c == "terminate") {
         terminate_this_frame = 1;
         breakme = 1;
     }
@@ -914,21 +742,18 @@ function scr_cutscene_commands()
         terminate_this_frame = 1;
         breakme = 1;
     }
+	#endregion
     
-    if (_c == "debug_print")
-        debug_print(command_arg1[i]);
+    if (_c == "debug_print") debug_print(command_arg1[i]);
     
-    if (_c == "customfunc")
-    {
+    if (_c == "customfunc") {
         if (object_index == obj_cutscene_delaycmd)
         {
             if (command_arg1[i] != -1)
                 command_arg2[i](command_arg1[i]);
             else
                 command_arg2[i]();
-        }
-        else if (array_length(customfuncs) > 0)
-        {
+        } else if (array_length(customfuncs) > 0) {
             if (command_arg1[i] != -1)
                 customfuncs[0](command_arg1[i]);
             else

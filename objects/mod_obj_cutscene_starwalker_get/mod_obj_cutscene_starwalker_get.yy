@@ -9,8 +9,8 @@
   "name":"mod_obj_cutscene_starwalker_get",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Custom/Objects.yy",
+    "name":"Cutscenes",
+    "path":"folders/Custom/Objects/Cutscenes.yy",
   },
   "parentObjectId":null,
   "persistent":false,

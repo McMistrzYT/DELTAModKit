@@ -55,3 +55,13 @@ function scr_outside_camera() {
 
 	return _offcamera;
 }
+
+function scr_getcam(cameraid = 0){
+	var ___cam = {
+		x: camerax(cameraid),
+		y: cameray(cameraid),
+		w: camerawidth(cameraid),//(640 * (2 - (global.darkzone == 0))) / 2,
+		h: cameraheight(cameraid)//(480 * (2 - (global.darkzone == 0))) / 2
+	}
+	return ___cam;
+}

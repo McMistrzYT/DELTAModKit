@@ -1,16 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"obj_panner",
+  "%Name":"obj_example_cutscene",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_panner",
+  "name":"obj_example_cutscene",
   "overriddenProperties":[],
   "parent":{
-    "name":"Sub",
-    "path":"folders/DELTARUNE/Cutscenes/Sub.yy",
+    "name":"Cutscenes",
+    "path":"folders/Custom/Objects/Cutscenes.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_emote_ellipsis",
-    "path":"sprites/spr_emote_ellipsis/spr_emote_ellipsis.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
