@@ -1,7 +1,7 @@
 function scr_cutscene_make(){
 	_cutscene_master = instance_create(0, 0, obj_cutscene_master);
 	_cutscene_master.master_object = id;
-	print_message("***** Cutscene Started")
+	debug_print("***** Cutscene Started")
 	return _cutscene_master;
 }
 
