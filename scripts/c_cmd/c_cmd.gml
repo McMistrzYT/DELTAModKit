@@ -29,7 +29,6 @@ function c_cmd_x(command = "terminate", command_arg1 = 0, command_arg2 = 0, comm
     }
 }
 
-
 function c_sel(target) { c_cmd("select", target, 0, 0, 0); }
 function c_wait(time) { c_cmd("wait", time, 0, 0, 0); }
 function c_visible(is_visible) { c_cmd("visible", is_visible, 0, 0, 0); }
@@ -40,9 +39,14 @@ function c_imageindex(new_index){ c_cmd("imageindex", new_index, 0, 0, 0) }
 function c_flip(sidetoflip) { c_cmd("flip", sidetoflip, 0, 0, 0) }
 function c_spin(arg0) { c_cmd("spin", arg0, 0, 0, 0) }
 function c_specialsprite(arg0) { c_cmd("specialsprite", arg0, 0, 0, 0) }
+function c_delayfacing(time, dir){ c_cmd_x("delaycmd", time, "facing", dir, 0, 0, 0) }
+function c_facing(dir) { c_cmd("facing", dir, 0, 0, 0); }
 
 function c_walkdirect(xx, yy, t) { c_cmd("walkdirect", xx, yy, t, 0); }
 function c_walkdirect_wait(xx, yy, time) { c_walkdirect(xx, yy, time); c_wait(time); }
+function c_walkdirect_speed_wait(xx, yy, wait){ // ???
+	c_cmd("walkdirect", xx, yy, -wait, 1)
+}
 function c_walk(dir, spd, time) { c_cmd("walk", dir, spd, time, 0); }
 function c_actortokris() { c_cmd("actortokris", 0, 0, 0, 0); }
 function c_actortocaterpillar() { c_cmd("actortocaterpillar", 0, 0, 0, 0); }
@@ -70,7 +74,6 @@ function c_arg_objectxy(arg0, arg1, arg2) { c_cmd("arg_objectxy", arg0, arg1, ar
 
 
 function c_wait_if(inst, var_name, condition, value) { c_cmd("waitif", inst, var_name, condition, value); }
-function c_facing(dir) { c_cmd("facing", dir, 0, 0, 0); }
 
 function c_customfunc(func, arg1 = -1) { with (obj_cutscene_master) { array_push(customfuncs, func); } c_cmd("customfunc", arg1, 0, 0, 0); }
 function c_delay_customfunc(t, func, arg2 = -1) { c_cmd_x("delaycmd", t, "customfunc", arg2, func, 0, 0); }
@@ -93,9 +96,15 @@ function c_msgnext(msg) { c_cmd("msgnext", msg, 0, 0, 0); }
 function c_msgsetloc(idx, msg, loc_id) { c_msgset(idx, msg); }
 function c_msgnextloc(msg, loc_id) { c_msgnext(msg); }
 function c_msgside(side) { c_cmd("msgside", side, 0, 0, 0); }
+function c_msgzurasu(active){
+	if (active == 1)
+		c_cmd("msgside", "zurasuon", 0, 0, 0)
+	else
+		c_cmd("msgside", "zurasuoff", 0, 0, 0)
+}
 function c_msc(idx) { c_cmd("msc", idx, 0, 0, 0); }
 function c_speaker(speak) { c_cmd("speaker", speak, 0, 0, 0); }
-function c_facenext(speakerchar, emotionid) { c_cmd("speaker", speakerchar, emotionid, 0, 0); }
+function c_facenext(speakerchar, emotionid) { c_cmd("msgfacenext", speakerchar, emotionid, 0, 0); }
 function c_talk() { c_cmd("talk", 0, 0, 0, 0); }
 function c_waittalk() { c_cmd("waitdialoguer", 0, 0, 0, 0); }
 function c_wait_talk() { c_cmd("waitdialoguer", 0, 0, 0, 0) }
@@ -301,3 +310,19 @@ function c_shakestep(arg0, arg1){
 function c_shake(){ c_cmd("shake", 0, 0, 0, 0) }
 function c_shakeobj(){ c_cmd("shakeobj", 0, 0, 0, 0) }
 function c_shakeobj_instance(instance){ c_cmd("shakeobj_instance", instance, 0, 0, 0) }
+
+function c_soundplay(audio){ c_cmd("soundplay", audio, 0, 0, 0) }
+function c_sndplay(audio){ c_soundplay(audio) }
+function c_snd_play(audio){ c_soundplay(audio) }
+function c_sound_play(audio){ c_soundplay(audio) }
+
+function c_soundplay_x(audio, volume, pitch){ c_cmd("soundplay", audio, volume, pitch, 0) }
+function c_snd_play_x(audio, volume, pitch){ c_soundplay_x(audio, volume, pitch) }
+function c_sndplay_x(audio, volume, pitch){ c_soundplay_x(audio, volume, pitch) }
+function c_sound_play_x(audio, volume, pitch){ c_soundplay_x(audio, volume, pitch) }
+function c_mus(type){ c_cmd("mus", type, 0, 0, 0) }
+/// @desc c_mus except for ones with additional arguments
+function c_mus2(type, typearg1 = 0, typearg2 = 0){ 	c_cmd("mus", type, typearg1, typearg2, 0) }
+
+function c_soundplay_wait(audio){ c_cmd("soundplay", audio, 0, 0, 0) c_wait(round(audio_sound_length(audio) * room_speed)) }
+function c_playsound_wait(audio){ c_soundplay_wait(audio) }

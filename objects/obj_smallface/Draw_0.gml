@@ -43,8 +43,7 @@ if (drawsurf) {
 var truex = x + cxoff
 var truey = y + cyoff
 
-if (facealpha < 1)
-	facealpha += 0.2
+if (facealpha < 1) facealpha += 0.2
 
 draw_sprite_ext(sprite_index, image_index, truex, truey, image_xscale, image_yscale, image_angle, image_blend, facealpha)
 draw_set_alpha(facealpha)
