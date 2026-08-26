@@ -43,7 +43,7 @@ function scr_maincharacters_actors(required = []){
 	
 }
 
-/// @desc Called by scr_maincharacters_actors Do not call on its own
+/// @desc Called by scr_maincharacters_actors Do not call on its own unless you know what you're doing
 function scr_spawnmaincharacteractor(myname, actorbaseinstance = noone){
 	var hasbaseobject = i_ex(actorbaseinstance)
 	if !hasbaseobject actorbaseinstance = new Vector2(0, 0)
