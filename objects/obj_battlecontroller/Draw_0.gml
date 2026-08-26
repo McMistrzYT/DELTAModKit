@@ -76,8 +76,8 @@ if (global.bmenuno == 1 || global.bmenuno == 3 || global.bmenuno == 11 || global
                 draw_set_color(c_white);
                 mercydraw = 0;
                 tireddraw = 0;
-                mnamecolor1 = 16777215;
-                mnamecolor2 = 16777215;
+                mnamecolor1 = c_white;
+                mnamecolor2 = c_white;
                 aqcolor = merge_color(c_aqua, c_blue, 0.3);
                 
                 if (global.charturn == 2)

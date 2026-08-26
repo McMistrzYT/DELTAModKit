@@ -6,8 +6,8 @@
   "name":"obj_battleheartspawnmarker",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"System",
+    "path":"folders/DELTARUNE/Objects/Battle/System.yy",
   },
   "parentObjectId":null,
   "persistent":false,

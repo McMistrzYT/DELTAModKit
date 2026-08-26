@@ -85,8 +85,7 @@ function scr_spawnmaincharacteractor(myname, actorbaseinstance = noone){
 	return nullactordata[$ "instance"]
 }
 
-function scr_actor_setup(actid, actinst, actname)
-{
+function scr_actor_setup(actid, actinst, actname){
     _actorid = actid;
     _actorinstance = actinst;
     _actorname = actname;
@@ -100,8 +99,7 @@ function scr_actor_setup(actid, actinst, actname)
     }
 }
 
-function scr_actor_setup_nofacing(actid, actinst, actname)
-{
+function scr_actor_setup_nofacing(actid, actinst, actname){
     _actorid = actid;
     _actorinstance = actinst;
     _actorname = actname;
@@ -111,8 +109,7 @@ function scr_actor_setup_nofacing(actid, actinst, actname)
 	_actorinstance.number = actid;
 }
 
-function scr_findactor(arg0)
-{
+function scr_findactor(arg0){
     with (obj_cutscene_master)
     {
         __foundactor = -1;
@@ -125,4 +122,20 @@ function scr_findactor(arg0)
         
         return __foundactor;
     }
+}
+
+/// @arg BaseElement Can be either an instance or an SpriteAsset from an ASSETS Layer
+function scr_actor_quick_setup(baseelement, actorid, actorname, actordepth = "auto"){
+	var __actor = instance_create(baseelement.x, baseelement.y, obj_actor)
+	scr_actor_setup(actorid, __actor, actorname)
+	__actor.sprite_index = baseelement.sprite_index
+	
+	if (actordepth == "auto") {
+		__actor.auto_depth = true
+	} else {
+		__actor.auto_depth = false
+		__actor.depth = actordepth
+	}
+	
+	return __actor;
 }

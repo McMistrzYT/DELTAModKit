@@ -9,8 +9,8 @@
   "name":"obj_spareanim",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"Defeat",
+    "path":"folders/DELTARUNE/Objects/Battle/Effects/Defeat.yy",
   },
   "parentObjectId":null,
   "persistent":false,

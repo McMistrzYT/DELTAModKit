@@ -31,10 +31,27 @@ function ossafe_fill_rectangle(arg0, arg1, arg2, arg3, arg4){
     draw_rectangle(x1, y1, x2, y2, outline);
 }
 
-function setxy(x, y){
-    self.x = x;
-    self.y = y;
+function setxy(x, y, instance = self){
+	with instance {
+	    self.x = x;
+	    self.y = y;
+	}
 }
+
+function scr_sizeexact(width, height, instance = id){
+	with (instance){
+		if (!sprite_exists(sprite_index)) {
+			debug_message("Can't size, no sprite")
+			exit
+		}
+		
+		var _w = sprite_get_width(sprite_index)
+		var _h = sprite_get_width(sprite_index)
+		image_xscale = width / _w
+		image_yscale = height / _h
+	}
+}
+
 
 function draw_background_tiled_ext(sprite, xoffset, yoffset, xscale, yscale, blend, alpha)
 {

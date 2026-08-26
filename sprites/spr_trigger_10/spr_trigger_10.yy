@@ -44,8 +44,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"Editor",
-    "path":"folders/DELTARUNE/Sprites/Editor.yy",
+    "name":"Regions",
+    "path":"folders/DELTARUNE/Sprites/Editor/Regions.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

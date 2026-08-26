@@ -60,8 +60,13 @@ function arr_pop(arr) {
 
 function arr_length(arr) { return array_length(arr); }
 
-// string
-function stringsetloc(str, code) { return str; }
+/// @desc Usually the Deltarune Team uses this for strings that will be converted into localizationKeys.
+/// @arg EnglishString
+function stringset(str) { return str }
+
+/// @arg EnglishString
+/// @arg LocalizationKey
+function stringsetloc(str, code) { return stringset(str); }
 /// @func stringsetsubloc(string, ..., localizationkey)
 /// @arg 0 englishstring
 /// @arg 1+ replacements

@@ -11,8 +11,8 @@
   "name":"obj_frozennpc",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"Defeat",
+    "path":"folders/DELTARUNE/Objects/Battle/Effects/Defeat.yy",
   },
   "parentObjectId":{
     "name":"obj_readable",

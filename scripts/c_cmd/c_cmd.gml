@@ -75,8 +75,15 @@ function c_arg_objectxy(arg0, arg1, arg2) { c_cmd("arg_objectxy", arg0, arg1, ar
 
 function c_wait_if(inst, var_name, condition, value) { c_cmd("waitif", inst, var_name, condition, value); }
 
+/// @arg {function} FunctionOrMethod
+/// @arg {any} Argument A Literal Argument, Inputted into the function
 function c_customfunc(func, arg1 = -1) { with (obj_cutscene_master) { array_push(customfuncs, func); } c_cmd("customfunc", arg1, 0, 0, 0); }
-function c_delay_customfunc(t, func, arg2 = -1) { c_cmd_x("delaycmd", t, "customfunc", arg2, func, 0, 0); }
+
+/// @arg {real} DelayTime
+/// @arg {function} FunctionOrMethod
+/// @arg {any} Argument A Literal Argument, Inputted into the function
+function c_delay_customfunc(t, func, arg = -1) { c_cmd_x("delaycmd", t, "customfunc", arg, func, 0, 0); }
+
 function c_script_instance(){
 	if (argument_count == 3) c_cmd_x("script", argument[0], argument[1], argument[2], -pi, -pi, -pi)	
 	if (argument_count == 4) c_cmd_x("script", argument[0], argument[1], argument[2], argument[3], -pi, -pi)	
@@ -85,6 +92,9 @@ function c_script_instance(){
 }
 function c_script_instance_stop(arg0, arg1){ c_cmd_x("script", arg0, arg1, -10, 0, 0, 0) }
 
+function c_jump(landx, landy, speed, time) { c_cmd("jump", landx, landy, speed, time) }
+function c_jump_in_place(speed, time){ c_cmd("jumpinplace", speed, time, 0, 0) }
+function c_jump_sprite(landx, landy, speed, time, jumpspr, landspr){ c_cmd_x("jumpsprite", landx, landy, speed, time, jumpspr, landspr) }
 
 
 // ch3

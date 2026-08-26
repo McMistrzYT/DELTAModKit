@@ -678,7 +678,7 @@ if (view_current == 0)
             {
                 if (special == 1)
                 {
-                    if (draw_get_color() != 16777215 && draw_get_color() != 0)
+                    if (draw_get_color() != c_white && draw_get_color() != 0)
                     {
                         draw_text_color(wx + random(shake) + 1, wy + random(shake) + 1, mychar, xcolor, xcolor, xcolor, xcolor, 0.3);
                         draw_text_color(wx + random(shake), wy + random(shake), mychar, c_white, c_white, xcolor, xcolor, 1);

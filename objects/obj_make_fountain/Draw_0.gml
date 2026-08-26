@@ -18,7 +18,7 @@ if (active == 1)
             balltimer = 0;
             yballtimer = 1;
             ballcon = 2;
-            whitecolor = 16777215;
+            whitecolor = c_white;
         }
     }
     

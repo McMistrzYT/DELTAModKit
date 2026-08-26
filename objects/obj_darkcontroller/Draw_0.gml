@@ -670,7 +670,7 @@ if (global.menuno == 2)
             styleup = weaponstyle[cur];
             grazeup = weapongrazeamt[cur] - global.itemgrazeamt[charcoord][0];
             sizeup = weapongrazesize[cur] - global.itemgrazesize[charcoord][0];
-            _abilitycolor[0] = 16777215;
+            _abilitycolor[0] = c_white;
             _abilityicon[0] = weaponabilityicon[cur];
             
             if (weaponability[cur] != _abilitytext[0])
@@ -726,7 +726,7 @@ if (global.menuno == 2)
                 magup = armormag[cur] - global.itemmag[charcoord][arno];
                 grazeup = armorgrazeamt[cur] - global.itemgrazeamt[charcoord][arno];
                 sizeup = armorgrazesize[cur] - global.itemgrazesize[charcoord][arno];
-                _abilitycolor[arno] = 16777215;
+                _abilitycolor[arno] = c_white;
                 _abilityicon[arno] = armorabilityicon[cur];
                 
                 if (armorability[cur] != _abilitytext[arno])
@@ -799,9 +799,9 @@ if (global.menuno == 2)
         _abilitytext[0] = charweaponability[charcoord];
         _abilitytext[1] = chararmor1ability[charcoord];
         _abilitytext[2] = chararmor2ability[charcoord];
-        _abilitycolor[0] = 16777215;
-        _abilitycolor[1] = 16777215;
-        _abilitycolor[2] = 16777215;
+        _abilitycolor[0] = c_white;
+        _abilitycolor[1] = c_white;
+        _abilitycolor[2] = c_white;
         _abilityicon[0] = charweaponabilityicon[charcoord];
         _abilityicon[1] = chararmor1abilityicon[charcoord];
         _abilityicon[2] = chararmor2abilityicon[charcoord];
