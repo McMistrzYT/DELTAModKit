@@ -75,13 +75,13 @@ if con == 0 && place_meeting(x, y, obj_mainchara) {
 	
 	c_soundplay(snd_impact)
 	c_soundplay(snd_hurt1)
-	c_customfunc(function(){
-		var damageamt = irandom_range(10, global.maxhp[1] / 3)
-		var hp = global.hp[1]
-		global.hp[1] = max(global.hp[1] - damageamt, 1)
+	c_customfunc(function(){ // Doing this stuff Manually so that it doesn't attempt to Retarget to someone else, not even paying attention to the Party.
+		var damageamt = irandom_range(10, global.maxhp[DRCharacter.Kris] / 3)
+		var hp = global.hp[DRCharacter.Kris]
+		global.hp[DRCharacter.Kris] = max(global.hp[DRCharacter.Kris] - damageamt, 1)
 		
 		dmgwriter = instance_create(kr_actor.x, kr_actor.y, obj_dmgwriter)
-        dmgwriter.damage = abs(hp - global.hp[1]);
+        dmgwriter.damage = abs(hp - global.hp[DRCharacter.Kris]);
         dmgwriter.type = -1;
 		times++
 	})
