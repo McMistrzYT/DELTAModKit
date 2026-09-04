@@ -1,4 +1,4 @@
-show_debug_message("starting existance");
+debug_log("starting existance");
 
 char = 0;
 myself = 0;

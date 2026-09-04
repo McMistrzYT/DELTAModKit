@@ -26,8 +26,7 @@ function scr_itemcomment(charid, msg)
     itemcomment.msg = msg;
     itemcomment.who = charid;
     
-    if (global.flag[32] == 1)
-    {
+    if (global.flag[DRFLAG.BlockPartyItemComments] == 1) {
         with (itemcomment)
             instance_destroy();
     }
@@ -147,14 +146,13 @@ function scr_keyitemshift(arg0, arg1)
     scr_keyiteminfo_all();
 }
 
-function scr_itemdesc()
-{
-    for (i = 0; i < 12; i += 1)
-    {
-        itemid = global.item[i];
-        itemdesc[i] = scr_itemdesc_single(itemid);
+function scr_itemdesc(array = global.item, offset = 0, itemdescholder = scr_itemdesc_single) {
+    for (i = 0; i < array_length(array); i += 1) {
+        itemid = array[i] + offset;
+        itemdesc[i] = itemdescholder(itemid);
     }
 }
+
 
 function scr_itemdialoguer()
 {
@@ -211,7 +209,7 @@ function scr_itemget(itemid)
             {
                 if (global.pocketitem[__j] == 0)
                 {
-                    show_debug_message("Placed in pocket :" + string(__j));
+                    debug_log("Placed in pocket :" + string(__j));
                     global.pocketitem[__j] = itemid;
                     _pocketed = 1;
                     noroom = 0;
@@ -226,9 +224,9 @@ function scr_itemget(itemid)
     }
     
     script_execute(scr_iteminfo_all);
-    show_debug_message("noroom=" + string(noroom));
-    show_debug_message("_pocketed=" + string(_pocketed));
-    show_debug_message("_noroominventory=" + string(_noroominventory));
+    debug_log("noroom=" + string(noroom));
+    debug_log("_pocketed=" + string(_pocketed));
+    debug_log("_noroominventory=" + string(_noroominventory));
 }
 
 function scr_keyitemget(kitemid)
@@ -393,8 +391,8 @@ function scr_itemuse(arg0)
     if (global.charselect < 3)
         _gc = global.char[global.charselect];
 	
-	if (w < 10000)
+	if (w < KEYITEMDATASTART)
 		scr_item_use_action_overworld(w);
 	else
-		scr_key_item_use_action_overworld(w - 10000);
+		scr_key_item_use_action_overworld(w - KEYITEMDATASTART);
 }

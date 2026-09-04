@@ -33,9 +33,7 @@ if (!global.is_console)
     
     if (file_exists("config_" + string(MENUCOORD[2]) + ".ini"))
         file_copy("config_" + string(MENUCOORD[2]) + ".ini", "config_" + string(MENUCOORD[3]) + ".ini");
-}
-else
-{
+} else {
     var file_to_copy = ds_map_find_value(global.savedata, "filech" + CH + "_" + string(MENUCOORD[2]));
     var new_filename = "filech" + CH + "_" + string(MENUCOORD[3]);
     var new_file = ossafe_file_text_open_write(new_filename);
@@ -48,12 +46,11 @@ else
         ossafe_ini_open("config_" + string(MENUCOORD[2]) + ".ini");
         var copy_border = ini_read_string("BORDER", "TYPE", global.screen_border_id);
         var copy_controls_list = [];
-        var shoulder_reassign = 0;//obj_gamecontroller.gamepad_shoulderlb_reassign;
+        var shoulder_reassign = obj_gamecontroller.gamepad_shoulderlb_reassign;
         
-        for (var i = 0; i < 10; i += 1)
-            copy_controls_list[i] = ini_read_real("GAMEPAD_CONTROLS", string(i), global.input_g[i]);
+        for (var i = 0; i < 10; i += 1) copy_controls_list[i] = ini_read_real("GAMEPAD_CONTROLS", string(i), global.input_g[i]);
         
-        shoulder_reassign = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN",0 /*obj_gamecontroller.gamepad_shoulderlb_reassign*/);
+        shoulder_reassign = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign);
         ossafe_ini_close();
         ossafe_ini_open("config_" + string(MENUCOORD[3]) + ".ini");
         ini_write_string("BORDER", "TYPE", copy_border);

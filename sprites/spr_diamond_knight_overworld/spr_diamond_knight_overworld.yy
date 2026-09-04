@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Chapter 1",
-    "path":"folders/DELTARUNE/Sprites/Enemies/Vanilla/Chapter 1.yy",
+    "name":"knight",
+    "path":"folders/DELTARUNE/Sprites/Enemies/Vanilla/Chapter 1/Diamond/knight.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

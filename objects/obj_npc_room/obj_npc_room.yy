@@ -11,8 +11,8 @@
   "name":"obj_npc_room",
   "overriddenProperties":[],
   "parent":{
-    "name":"World",
-    "path":"folders/DELTARUNE/Objects/World.yy",
+    "name":"NPC",
+    "path":"folders/DELTARUNE/Objects/World/NPC.yy",
   },
   "parentObjectId":{
     "name":"obj_interactablesolid",
@@ -36,6 +36,7 @@
     {"$GMObjectProperty":"v2","%Name":"CUSTOM_TEXT","filters":[],"listItems":[],"multiselect":false,"name":"CUSTOM_TEXT","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"[\"* The gash weaves down as if you cry.//\", \"* But you've already heard that, haven't you?/%\"]","varType":4,},
     {"$GMObjectProperty":"v2","%Name":"CUSTOM_SPRITE","filters":[],"listItems":[],"multiselect":false,"name":"CUSTOM_SPRITE","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"spr_npc_puzzlepiece","path":"sprites/spr_npc_puzzlepiece/spr_npc_puzzlepiece.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_npc_puzzlepiece","varType":5,},
     {"$GMObjectProperty":"v2","%Name":"CUSTOM_IMAGESPEED","filters":[],"listItems":[],"multiselect":false,"name":"CUSTOM_IMAGESPEED","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
+    {"$GMObjectProperty":"v2","%Name":"sprite_index","filters":[],"listItems":[],"multiselect":false,"name":"sprite_index","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sprite_index","varType":4,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

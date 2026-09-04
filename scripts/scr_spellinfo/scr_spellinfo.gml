@@ -1,9 +1,7 @@
-function scr_spellinfo_all()
-{
-    for (j = 0; j < DRCharacter.__MAX__; j += 1)
-    {
-        for (i = 0; i < 12; i += 1)
-        {
+/// @desc Update all currently known character spell information, Including Characters not in your Party.
+function scr_spellinfo_all() {
+    for (j = 0; j < DRCharacter.__MAX__; j += 1) {
+        for (i = 0; i < 12; i += 1) {
             spellid = global.spell[j][i];
             scr_spellinfo(spellid);
             global.spellname[j][i] = spellname;
@@ -17,21 +15,23 @@ function scr_spellinfo_all()
     }
 }
 
-function scr_spelltext(spellid, arg1)
-{
+/// @desc Gets the Text for the Spell ID (add [SCRSPELL_ItemsStart] to call Item Text)
+/// @arg spell The Spell ID
+/// @arg caster The Slot that the Spell is being casted From
+function scr_spelltext(spellid, spellcaster) {
     spell = spellid;
-    caster = arg1;
-    star = global.chartarget[arg1];
+    caster = spellcaster;
+    star = global.chartarget[spellcaster];
     spelltext = " ";
 	
-	if spellid < 10000
+	if spellid < SCRSPELL_ItemsStart
 		scr_spell_get_battle_use_text(spellid);
 	else
-		scr_item_get_battle_use_text(spellid - 10000);
+		scr_item_get_battle_use_text(spellid - SCRSPELL_ItemsStart);
 }
 
-function scr_spellmenu_setup()
-{
+/// @desc Setup the Spell Menu.
+function scr_spellmenu_setup(){
     var __actnamecheck = 0;
     var __monstertype = global.monstertype[0];
     
@@ -41,14 +41,11 @@ function scr_spellmenu_setup()
             __actnamecheck = 1;
     }
     
-    for (__charIdx = 0; __charIdx < 3; __charIdx++)
-    {
-        for (__actIdx = 0; __actIdx < 6; __actIdx++)
-        {
+    for (__charIdx = 0; __charIdx < 3; __charIdx++) {
+        for (__actIdx = 0; __actIdx < 6; __actIdx++) {
             global.battlespell[__charIdx][__actIdx] = DRSpell.None;
             
-            if (global.canact[global.char[__charIdx]][0][__actIdx] == 1)
-            {
+            if (global.canact[global.char[__charIdx]][0][__actIdx] == 1) {
                 global.battlespell[__charIdx][__actIdx] = -1;
                     
                 if (global.battleactcount[__charIdx] < (__actIdx + 1))

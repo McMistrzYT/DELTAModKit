@@ -13,7 +13,7 @@ alwaysanimate = false;
 jpspecial = 0;
 skip = 0;
 
-scr_npc_config();
+scr_npc_setup();
 
 USECUSTOMFUNC = false
 CUSTOM_FUNC = function() {}

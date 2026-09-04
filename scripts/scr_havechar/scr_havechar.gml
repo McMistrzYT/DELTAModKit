@@ -13,7 +13,7 @@ function scr_havechar(charname, giveslot = false){
     
 	var found = giveslot ? [0, false] : false
 	
-	for (var i = 0; i < array_length(global.char); ++i) {
+	for (i = 0; i < array_length(global.char); ++i) {
 	    if global.char[i] == checker {
 			found = giveslot ? [true, i] : true
 			break
@@ -24,7 +24,7 @@ function scr_havechar(charname, giveslot = false){
 }
 
 function scr_losechar() {
-	for (var i = 1; i < array_length(global.char); ++i) {
+	for (i = 1; i < array_length(global.char); ++i) {
 	    global.char[i] = DRCharacter.None
 	}
     
@@ -74,7 +74,7 @@ function scr_getchar(charid, force = false) {
 	if getchar == false {
 		var charname = "UnknownCharacter | " + string(characterToGet)
 		try { charname = global.charname[characterToGet] } catch (ex) {} // Incase if that charname does not Exist.
-		show_debug_message("Tried to add '{0}' to the party, {1}", charname, force ? "Forcing in anyways." : "But the party was full.")
+		debug_log("Tried to add '{0}' to the party, {1}", charname, force ? "Forcing in anyways." : "But the party was full.")
 		
 		if force {
 			array_push(global.char, characterToGet)

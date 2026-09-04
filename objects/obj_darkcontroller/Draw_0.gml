@@ -117,7 +117,7 @@ if (global.menuno == 5) {
     
     if (global.submenu == 35)
     {
-        var is_dualshock = false;//global.gamepad_type == "Sony DualShock 4" || global.gamepad_type == "DualSense Wireless Controller";
+        var is_dualshock = global.gamepad_type == "Sony DualShock 4" || global.gamepad_type == "DualSense Wireless Controller";
         var _yOffset = (global.lang == "en") ? 0 : -4;
         var _headerOffset = (is_dualshock && global.lang == "ja") ? -5 : 0;
         draw_set_color(c_white);
@@ -133,8 +133,7 @@ if (global.menuno == 5) {
         {
             draw_text(xx + 325, yy + 100 + _headerOffset, string_hash_to_newline("Key"));
             
-            //if (obj_gamecontroller.gamepad_active)
-            //    draw_text(xx + 435, yy + 100 + _headerOffset, string_hash_to_newline("Gamepad"));
+            if (obj_gamecontroller.gamepad_active) draw_text(xx + 435, yy + 100 + _headerOffset, string_hash_to_newline("Gamepad"));
         }
         
         my_function[0] = "DOWN";
@@ -167,11 +166,8 @@ if (global.menuno == 5) {
         {
             draw_set_color(c_white);
             
-            if (global.submenucoord[35] == i)
-                draw_set_color(c_aqua);
-            
-            if (global.submenucoord[35] == i && control_select_con == 1)
-                draw_set_color(c_red);
+            if (global.submenucoord[35] == i) draw_set_color(c_aqua);            
+            if (global.submenucoord[35] == i && control_select_con == 1) draw_set_color(c_red);
             
             if (i == 7 && control_flash_timer > 0)
                 draw_set_color(merge_color(c_aqua, c_yellow, (control_flash_timer / 10) - 0.1));
@@ -189,17 +185,14 @@ if (global.menuno == 5) {
                 draw_text(xx + 105, yy + 140 + (i * (28 + line_padding)) + _yOffset, string_hash_to_newline(my_function[i]));
             }
             
-            if (i < 7)
-            {
-                /*if (is_dualshock)
-                {
+            if (i < 7) {
+                if (is_dualshock) {
                     var _sprite = scr_getbuttonsprite(global.input_g[i], false);
                     var _sprite_height = 29;
                     var _xPos = xx + 465;
                     var _yPos = yy + 139;
                     
-                    if (_sprite == button_ps4_dpad_up || _sprite == button_ps4_dpad_down || _sprite == button_ps4_dpad_left || _sprite == button_ps4_dpad_right)
-                    {
+                    if (_sprite == button_ps4_dpad_up || _sprite == button_ps4_dpad_down || _sprite == button_ps4_dpad_left || _sprite == button_ps4_dpad_right){
                         _sprite_height = 30;
                         _yPos = _textYPos + 0.5;
                         _xPos = xx + 463;
@@ -213,36 +206,19 @@ if (global.menuno == 5) {
                     
                     draw_sprite_ext(_sprite, 0, _xPos, _yPos + (i * (_sprite_height + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
                     
-                    if (!global.is_console)
-                        draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
-                }
-                else if (global.is_console)
-                {
-                    if (obj_gamecontroller.gamepad_active)
-                    {
-                        var _sprite = (scr_getbuttonsprite(global.input_g[i], false) != noone) ? scr_getbuttonsprite(global.input_g[i], false) : button_switch_left_0;
-                        var _xPos = (global.lang == "en") ? (xx + 475) : (xx + 465);
-                        
-                        if (_sprite == button_switch_lStickClick_0 || _sprite == button_switch_rStickClick_0)
-                            _xPos -= 3;
-                        
-                        draw_sprite_ext(_sprite, 0, _xPos, yy + 144 + (i * (28 + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
-                    }
-                }
-                else*/
-                {
+                    if (!global.is_console) draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
+                } else {
                     draw_text(xx + 325, yy + voff + 140 + (i * vspacing), string_hash_to_newline(global.asc_def[global.input_k[i]]));
                     
-                    /*if (obj_gamecontroller.gamepad_active)
+                    if (obj_gamecontroller.gamepad_active)
                     {
                         var _sprite = scr_getbuttonsprite(global.input_g[i], false);
                         var _xPos = (global.lang == "en") ? (xx + 475) : (xx + 465);
                         
-                        if (sprite_get_width(_sprite) < 12)
-                            _xPos += 2;
+                        if (sprite_get_width(_sprite) < 12) _xPos += 2;
                         
                         draw_sprite_ext(_sprite, 0, _xPos, yy + 144 + (i * (28 + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
-                    }*/
+                    }
                 }
             }
         }
@@ -296,7 +272,7 @@ if (global.menuno == 4)
     
     var ch_yoff = yy + 230;
     var ch_vspace = langopt(25, 28);
-    var falselv = "1";
+    falselv = "1";
     
     if (global.chapter == 2)
     {
@@ -483,7 +459,7 @@ if (global.menuno == 2)
     
 	var slots = scr_character_darkmenu_geticondatareader(charcoord)
 		
-	for (var i = 0; i < array_length(slots); ++i) {
+	for (i = 0; i < array_length(slots); ++i) {
 		try {
 			var slot = slots[i]
 			var sprite = slot.sprite
@@ -513,7 +489,7 @@ if (global.menuno == 2)
 			    draw_set_color(c_white);
 			}
 		} catch (ex) {
-			show_debug_message("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
+			debug_log("Failed to render icon {0}, reason: {1}", i, ex.longMessage)}
 	}
     
     var eq_xoff = langopt(0, -6);
@@ -526,11 +502,9 @@ if (global.menuno == 2)
         {
             g = weaponchar[i][charcoord] == false;
             
-            if (g == 0)
-                draw_set_color(c_white);
+            if (g == 0) draw_set_color(c_white);
             
-            if (g == 1)
-                draw_set_color(c_gray);
+            if (g == 1) draw_set_color(c_gray);
             
             draw_item_icon(xx + 364 + eq_xoff, yy + 236 + (j * ch_vspace), weaponicon[i]);
             
@@ -580,25 +554,38 @@ if (global.menuno == 2)
     
     if (global.submenu == 12 || global.submenu == 13 || global.submenu == 14)
     {
-        var __equipmenumax = 47;
+        var __equipmenumax = (INVENTORYMAX_ARMORANDWEAPONS - 1);
         var scroll_xoff = langopt(0, 50);
-        
-        if (global.submenu == 12)
-            pm = 0;
-        else
-            pm = 1;
+		var scrolloptionsvisibleatonce = 5
+		var scrollheight = 110 + scrolloptionsvisibleatonce
+		
+		pm = global.submenu == 12 ? 0 : 1
+		
+		var scrollposy = (pagemax[pm] * (scrollheight / ( __equipmenumax - scrolloptionsvisibleatonce)))
         
         draw_sprite(spr_heart, 0, xx + 344 + eq_xoff, yy + 240 + ((global.submenucoord[global.submenu] - pagemax[pm]) * 27));
-        draw_set_color(c_dkgray);
-        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + 115, false);
-        draw_set_color(c_white);
-        draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + (pagemax[pm] * 2.738095238095238)) - 1, xx + 560 + scroll_xoff, yy + 263 + (pagemax[pm] * 2.738095238095238) + 1, false);
+		draw_set_color(c_white);
+		
+		if INVENTORYMAX_ARMORANDWEAPONS <= 12 { 
+			var __scrollbartype2spacing = (scrollheight + scrolloptionsvisibleatonce) / (INVENTORYMAX_ARMORANDWEAPONS)
+	        for (var i = 0; i < INVENTORYMAX_ARMORANDWEAPONS; i += 1) {
+	            buff = 0;
+            
+	            if (global.submenucoord[global.submenu] == i) buff += 3;            
+				if (pm ? (global.armor[i]) : global.weapon[i]) == 0 buff -= 1            				
+			
+	            draw_rectangle(((xx + 555) - buff) + scroll_xoff, (yy + 260 + (i * __scrollbartype2spacing)) - buff, xx + 558 + buff + scroll_xoff, yy + 263 + (i * __scrollbartype2spacing) + buff, false);
+	        }
+		} else {
+	        draw_set_color(c_dkgray);
+	        draw_rectangle(xx + 555 + scroll_xoff, yy + 260, xx + 560 + scroll_xoff, yy + 263 + scrollheight, false);
+	        draw_set_color(c_white);
+			draw_rectangle(xx + 555 + scroll_xoff, (yy + 260 + scrollposy) - 1, xx + 560 + scroll_xoff, yy + 263 + scrollposy + 1, false);
+		}
+		        
+        if (pagemax[pm] > 0) draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, (yy + 250) - (sin(cur_jewel / 12) * 3), 1, -1, 0, c_white, 1);
         
-        if (pagemax[pm] > 0)
-            draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, (yy + 250) - (sin(cur_jewel / 12) * 3), 1, -1, 0, c_white, 1);
-        
-        if ((5 + pagemax[pm]) < __equipmenumax)
-            draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, yy + 385 + (sin(cur_jewel / 12) * 3), 1, 1, 0, c_white, 1);
+        if ((scrolloptionsvisibleatonce + pagemax[pm]) < __equipmenumax) draw_sprite_ext(spr_morearrow, 0, xx + 551 + scroll_xoff, yy + 385 + (sin(cur_jewel / 12) * 3), 1, 1, 0, c_white, 1);
     }
     
     draw_set_color(c_white);
@@ -683,7 +670,7 @@ if (global.menuno == 2)
             styleup = weaponstyle[cur];
             grazeup = weapongrazeamt[cur] - global.itemgrazeamt[charcoord][0];
             sizeup = weapongrazesize[cur] - global.itemgrazesize[charcoord][0];
-            _abilitycolor[0] = 16777215;
+            _abilitycolor[0] = c_white;
             _abilityicon[0] = weaponabilityicon[cur];
             
             if (weaponability[cur] != _abilitytext[0])
@@ -739,7 +726,7 @@ if (global.menuno == 2)
                 magup = armormag[cur] - global.itemmag[charcoord][arno];
                 grazeup = armorgrazeamt[cur] - global.itemgrazeamt[charcoord][arno];
                 sizeup = armorgrazesize[cur] - global.itemgrazesize[charcoord][arno];
-                _abilitycolor[arno] = 16777215;
+                _abilitycolor[arno] = c_white;
                 _abilityicon[arno] = armorabilityicon[cur];
                 
                 if (armorability[cur] != _abilitytext[arno])
@@ -812,9 +799,9 @@ if (global.menuno == 2)
         _abilitytext[0] = charweaponability[charcoord];
         _abilitytext[1] = chararmor1ability[charcoord];
         _abilitytext[2] = chararmor2ability[charcoord];
-        _abilitycolor[0] = 16777215;
-        _abilitycolor[1] = 16777215;
-        _abilitycolor[2] = 16777215;
+        _abilitycolor[0] = c_white;
+        _abilitycolor[1] = c_white;
+        _abilitycolor[2] = c_white;
         _abilityicon[0] = charweaponabilityicon[charcoord];
         _abilityicon[1] = chararmor1abilityicon[charcoord];
         _abilityicon[2] = chararmor2abilityicon[charcoord];
@@ -847,44 +834,24 @@ if (global.menuno == 1)
     draw_set_font(global.mainbig_font);
     scr_itemname();
     
-    if (global.submenu == 1)
-        draw_sprite(spr_heart, 0, xx + langopt(155, 134) + (120 * global.submenucoord[1]), yy + 120);
-    
     draw_set_color(c_white);
     var itemoff = langopt([180, 300, 420], [158, 278, 398]);
     
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 0)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
+	var heartx = 0
+	for (var i = 0; i < _itemmenussize; i++) {    
+		var menudata = _itemmenuslist[i]
+		var hovered = global.submenucoord[1] == i
+		if global.submenu > 1 draw_set_color(hovered ? c_orange : c_gray)
+            
+		var myx = scr_getitempositiononcenteredlist(itemmenutopbarcx, itemtopbarspacing, 0, i, _itemmenussize)
+            
+		draw_text(xx + myx, yy + 110, string_hash_to_newline(menudata.getname())); // USE
+           
+		if hovered heartx = myx - 25
+	}
+	if (global.submenu == 1) draw_sprite(spr_heart, 0, xx + heartx, yy + 120);
     
-    draw_text(xx + itemoff[0], yy + 110, string_hash_to_newline("USE"));
-    
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 1)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
-    
-    draw_text(xx + itemoff[1], yy + 110, string_hash_to_newline("TOSS"));
-    
-    if (global.submenu > 1)
-    {
-        if (global.submenucoord[1] == 2)
-            draw_set_color(c_orange);
-        else
-            draw_set_color(c_gray);
-    }
-    
-    draw_text(xx + itemoff[2], yy + 110, string_hash_to_newline("KEY"));
-    
-    if (global.submenu >= 2 && global.submenu <= 6 && global.submenu != 4)
-    {
+	if (global.submenu >= 2 && global.submenu <= 6 && global.submenu != 4){
         sm = global.submenucoord[2];
         yheart = (floor(sm / 2) * 30) + 162 + yy;
         xheart = langopt(120, 72) + xx;
@@ -898,86 +865,66 @@ if (global.menuno == 1)
         draw_set_color(c_white);
         draw_text(xx + 20, yy + 10, string_hash_to_newline(itemdesc[global.submenucoord[2]]));
     }
-    
+	
     if (global.submenu == 7)
     {
         draw_set_color(c_white);
         draw_text(xx + 20, yy + 10, string_hash_to_newline(stringsetsub("Really throw away the#~1?", global.itemname[global.submenucoord[2]])));
     }
-    
-    if (global.submenucoord[1] != 2)
-    {
-        draw_set_color(bcolor);
+    var menudata = _itemmenuslist[global.submenucoord[1]]
+    menudata.xx = xx
+    menudata.yy = yy
+    menudata.bcolor = bcolor
+    menudata.updateitems()
+    var ___itemmenutextshadowdistance = 2
+    /*
+        itemnames = []
+        itemsusable = []    
+    */
+    with menudata {
+        var gray = grayunusableitems && global.submenu != 1
+        //show_message(itemnames)
         
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(148, 94), yy + 154 + (30 * i), string_hash_to_newline(global.itemname[i * 2]));
-            draw_text(xx + 358, yy + 154 + (30 * i), string_hash_to_newline(global.itemname[(i * 2) + 1]));
-        }
-        
-        draw_set_color(c_white);
-        
-        if (global.submenu == 1)
-            draw_set_color(c_gray);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(146, 92), yy + 152 + (30 * i), string_hash_to_newline(global.itemname[i * 2]));
-            draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(global.itemname[(i * 2) + 1]));
-        }
-    }
-    
-    if (global.submenucoord[1] == 2)
-    {
-        scr_keyiteminfo_all();
-        draw_set_color(bcolor);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            draw_text(xx + langopt(148, 94), yy + 154 + (30 * i), string_hash_to_newline(keyitemname[i * 2]));
-            draw_text(xx + 358, yy + 154 + (30 * i), string_hash_to_newline(keyitemname[(i * 2) + 1]));
-        }
-        
-        draw_set_color(c_white);
-        
-        if (global.submenu == 1)
-            draw_set_color(c_gray);
-        
-        for (i = 0; i < 6; i += 1)
-        {
-            if (global.submenu == 4)
-            {
-                if (keyitemusable[i * 2] == 1)
-                    draw_set_color(c_white);
-                else
-                    draw_set_color(c_ltgray);
+        if (global.lang == "ja") {
+            draw_set_color(bcolor);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                draw_text(xx + 92 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot]));
+                draw_text(xx + 356 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
             }
             
-            draw_text(xx + langopt(146, 92), yy + 152 + (30 * i), string_hash_to_newline(keyitemname[i * 2]));
-            
-            if (global.submenu == 4)
-            {
-                if (keyitemusable[(i * 2) + 1] == 1)
-                    draw_set_color(c_white);
-                else
-                    draw_set_color(c_ltgray);
-            }
-            
-            draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(keyitemname[(i * 2) + 1]));
-        }
-        
-        if (global.submenu == 4)
-        {
-            sm = global.submenucoord[4];
-            yheart = (floor(sm / 2) * 30) + 162 + yy;
-            xheart = langopt(120, 72) + xx;
-            
-            if (sm == 1 || sm == 3 || sm == 5 || sm == 7 || sm == 9 || sm == 11)
-                xheart = langopt(330, 334) + xx;
-            
-            draw_sprite(spr_heart, 0, xheart, yheart);
             draw_set_color(c_white);
-            draw_text(xx + 20, yy + 10, string_hash_to_newline(keyitemdesc[global.submenucoord[4]]));
+            
+            if (!gray) draw_set_color(c_gray);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                if gray draw_set_color(itemsusable[slot] ? c_ltgray : c_white)
+                draw_text(xx + 92, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot]));
+                if gray  draw_set_color(itemsusable[slot + 1] ? c_ltgray : c_white)
+                draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
+        } else {
+            draw_set_color(bcolor);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                draw_text(xx + 146 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot]));
+                draw_text(xx + 356 + ___itemmenutextshadowdistance, yy + 152 + ___itemmenutextshadowdistance + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
+            
+            draw_set_color(c_white);
+            
+            if (global.submenu == 1) draw_set_color(c_gray);
+            
+            for (var i = 0; i < 6; i += 1) {
+                var slot = i * 2
+                if gray draw_set_color(!itemsusable[slot] ? c_ltgray : c_white)
+                draw_text(xx + 146, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot]));
+                if gray draw_set_color(!itemsusable[slot + 1] ? c_ltgray : c_white)
+                draw_text(xx + 356, yy + 152 + (30 * i), string_hash_to_newline(itemnames[slot + 1]));
+            }
         }
     }
 }

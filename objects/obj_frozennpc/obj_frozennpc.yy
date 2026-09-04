@@ -11,10 +11,13 @@
   "name":"obj_frozennpc",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"Defeat",
+    "path":"folders/DELTARUNE/Objects/Battle/Effects/Defeat.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_readable",
+    "path":"objects/obj_readable/obj_readable.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

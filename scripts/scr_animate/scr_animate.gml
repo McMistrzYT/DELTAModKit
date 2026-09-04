@@ -1,9 +1,8 @@
-function scr_animate(arg0, arg1, arg2)
-{
+function scr_animate(initalframe, finalframe, imagespeed){
     __animator = instance_create(x, y, obj_animator);
     __animator.target = id;
-    __animator.initframe = arg0;
-    __animator.endframe = arg1;
-    __animator.fake_image_speed = arg2;
+    __animator.initframe = initalframe;
+    __animator.endframe = finalframe;
+    __animator.fake_image_speed = imagespeed;
     return __animator;
 }

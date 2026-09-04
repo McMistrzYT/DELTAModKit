@@ -1,0 +1,30 @@
+{
+  "$GMAnimCurve":"",
+  "%Name":"ac_testcurve",
+  "channels":[
+    {"$GMAnimCurveChannel":"","%Name":"number","colour":4290799884,"name":"number","points":[
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.038,"th1":0.038,"tv0":0.0,"tv1":0.0,"x":0.19,"y":1.0,},
+        {"th0":-0.038,"th1":0.048000004,"tv0":0.0,"tv1":0.0,"x":0.38,"y":-1.0,},
+        {"th0":-0.048000004,"th1":0.027999997,"tv0":0.0,"tv1":0.0,"x":0.62,"y":0.76,},
+        {"th0":-0.027999997,"th1":0.020000005,"tv0":0.0,"tv1":0.0,"x":0.76,"y":0.24,},
+        {"th0":-0.020000005,"th1":0.027999997,"tv0":0.0,"tv1":0.0,"x":0.86,"y":-0.36,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+    {"$GMAnimCurveChannel":"","%Name":"color","colour":4281083598,"name":"color","points":[
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.0,},
+        {"th0":-0.036000002,"th1":0.05,"tv0":0.0,"tv1":0.0,"x":0.18,"y":1.0,},
+        {"th0":-0.05,"th1":0.04,"tv0":0.0,"tv1":0.0,"x":0.43,"y":0.05,},
+        {"th0":-0.04,"th1":0.074,"tv0":0.0,"tv1":0.0,"x":0.63,"y":0.55,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":0.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+  ],
+  "function":2,
+  "name":"ac_testcurve",
+  "parent":{
+    "name":"Curves",
+    "path":"folders/DELTARUNE/Curves.yy",
+  },
+  "resourceType":"GMAnimCurve",
+  "resourceVersion":"2.0",
+}

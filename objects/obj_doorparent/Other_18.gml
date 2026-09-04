@@ -24,20 +24,15 @@ if (doorPreset > 0)
     }
 }
 
-if (doorFadeMusic)
-{
+if (doorFadeMusic){	
     alarm[3] = doorFadeMusicTime;
     mus_volume(global.currentsong[1], 0, alarm[3]);
     
-    if (doorDelay <= doorFadeMusicTime)
-        doorDelay = doorFadeMusicTime + 1;
+    if (doorDelay <= doorFadeMusicTime) doorDelay = doorFadeMusicTime + 1;
 }
 
-if (doorDelay > 0)
-    alarm[2] = doorDelay;
-
-if (doorSound != -1)
-    snd_play(doorSound);
+if (doorDelay > 0) alarm[2] = doorDelay;
+if (doorSound != -1) snd_play(doorSound);
 
 if (i_ex(obj_fadeout))
 {

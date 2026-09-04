@@ -30,8 +30,12 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"doorRoom","filters":[],"listItems":[],"multiselect":false,"name":"doorRoom","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"room_next(room)","varType":4,},
-    {"$GMObjectProperty":"v2","%Name":"doorEntrance","filters":[],"listItems":[],"multiselect":false,"name":"doorEntrance","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":1,},
-    {"$GMObjectProperty":"v2","%Name":"doorFadeMusic","filters":[],"listItems":[],"multiselect":false,"name":"doorFadeMusic","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
+    {"$GMObjectProperty":"v2","%Name":"doorEntrance","filters":[],"listItems":[],"multiselect":false,"name":"doorEntrance","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":4,},
+    {"$GMObjectProperty":"v2","%Name":"doorFadeMusic","filters":[],"listItems":[
+        "false",
+        "true",
+        "-1",
+      ],"multiselect":false,"name":"doorFadeMusic","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":6,},
     {"$GMObjectProperty":"v2","%Name":"doorFadeMusicTime","filters":[],"listItems":[],"multiselect":false,"name":"doorFadeMusicTime","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"14","varType":0,},
     {"$GMObjectProperty":"v2","%Name":"doorFacing","filters":[],"listItems":[],"multiselect":false,"name":"doorFacing","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":1,},
     {"$GMObjectProperty":"v2","%Name":"doorPreset","filters":[],"listItems":[],"multiselect":false,"name":"doorPreset","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":1,},

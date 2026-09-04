@@ -45,9 +45,7 @@ boxwidth = -1;
 xoff = 0;
 yoff = 0;
 
-show_debug_message("dialoguer made on depth " + string(depth));
+debug_log("dialoguer made on depth " + string(depth));
 
-function scr_facechoice()
-{
-    myface = instance_create(writer.x + (8 * f), writer.y + (5 * f), obj_face);
-}
+c_border = c_white
+c_inner = c_black

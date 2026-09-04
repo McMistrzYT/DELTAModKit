@@ -74,13 +74,16 @@ if (top == 1)
             pers = instance_create(0, 0, obj_persistentfadein);
             pers.image_blend = c_white;
             global.interact = 3;
-            global.entrance = 24;
+			
+            if (!is_nan(entrance)){
+			    if (entrance != -1) global.entrance = entrance;
+			} else if (is_string(entrance)){
+			    global.entrance = (ord(string_upper(entrance)) - ord("A")) + 1;
+			}
+
             snd_free(global.currentsong[0]);
             
-            if (!unlock_mode)
-                scr_become_light();
-            else
-                global.tempflag[58] = 1;
+			if !gotodark scr_become_light() else global.tempflag[58] = 1;
             
             room_goto(nextroom);
         }

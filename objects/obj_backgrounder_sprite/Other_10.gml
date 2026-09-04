@@ -1,0 +1,1 @@
+x = (camerax() * ss) + xstart

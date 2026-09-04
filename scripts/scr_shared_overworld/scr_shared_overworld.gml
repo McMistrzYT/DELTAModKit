@@ -50,7 +50,7 @@ function scr_overworldcontrollers_spawncharacters(spawndarkners = true) {
 	    global.faceaction[i] = 0;
 	
 		if (char == DRCharacter.None) continue;
-		if !spawndarkners && !scr_character_is_lightner(char) continue;
+		if !spawndarkners && !scr_character_is_lightner(char) && i > 0 continue;
 		
 		chartotal++;
 		havechar[char - 1] = true;

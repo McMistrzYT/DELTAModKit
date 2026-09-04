@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"You",
-    "path":"folders/DELTARUNE/Sprites/Characters/You.yy",
+    "name":"Die",
+    "path":"folders/DELTARUNE/Sprites/Characters/You/Die.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

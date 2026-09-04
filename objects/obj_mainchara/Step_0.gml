@@ -18,15 +18,15 @@ if (!roomenterfreezeend)
 {
     if (global.interact == 3)
     {
-        if (global.flag[21] > 0)
+        if (global.flag[DRFLAG.RoomEnterFreezeTimer] > 0)
         {
-            global.flag[21]--;
+            global.flag[DRFLAG.RoomEnterFreezeTimer]--;
         }
         else
         {
             roomenterfreezeend = 1;
             global.interact = 0;
-            global.flag[21] = -10;
+            global.flag[DRFLAG.RoomEnterFreezeTimer] = -10;
         }
     }
 }
@@ -418,10 +418,8 @@ if (fun == false) {
 
 if (stepping == 1 && fun == 0)
 {
-    if (image_index == 1 && stepped == 0)
-    {
-        //if (global.flag[31] == 0)
-        //    snd_play(snd_step1);
+    if (image_index == 1 && stepped == 0) {
+        if (global.flag[DRFLAG.BlockFootsteps] == 0) snd_play(snd_step1);
         
         stepped = 1;
     }
@@ -429,137 +427,75 @@ if (stepping == 1 && fun == 0)
     if (image_index == 0 || image_index == 2)
         stepped = 0;
     
-    if (image_index == 3 && stepped == 0)
-    {
-        //if (global.flag[31] == 0)
-        //    snd_play(snd_step2);
+    if (image_index == 3 && stepped == 0) {
+        if (global.flag[DRFLAG.BlockFootsteps] == 0) snd_play(snd_step2);
         
         stepped = 1;
     }
 }
 
-if (onebuffer < 0)
-{
-    if (global.interact == 0)
-    {
-        if (button1_p())
-        {
+if (onebuffer < 0){
+    if (global.interact == 0) {
+        if (button1_p()){
+			interactedobject = noone
             thisinteract = 0;
-            d = global.darkzone + 1;
+            d = real(global.darkzone) + 1;
+			
+			var facinghitboxes = [
+				[x + (4 * d), y + (28 * d), (x + sprite_width) - (4 * d), y + sprite_height + (15 * d)],
+				[x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x + sprite_width + (13 * d), y + sprite_height],
+				[x + 3, (y + sprite_height) - (5 * d), (x + sprite_width) - (5 * d), y + (5 * d)],
+				[x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x - (13 * d), y + sprite_height]
+			]
+			var interactabletypes = [
+				obj_interactable,
+				obj_interactablesolid
+			]
+			interactfacingrectanglebounds = facinghitboxes[scr_wrap_newer(global.facing, 0, array_length(facinghitboxes))]
             
-            if (global.facing == 1)
-            {
-                if (collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x + sprite_width + (13 * d), y + sprite_height, obj_interactable, false, true))
-                    thisinteract = 1;
-                
-                if (collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x + sprite_width + (13 * d), y + sprite_height, obj_interactablesolid, false, true))
-                    thisinteract = 2;
-            }
-            
-            if (thisinteract > 0)
-            {
-                if (thisinteract == 1)
-                    interactedobject = collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x + sprite_width + (13 * d), y + sprite_height, obj_interactable, false, true);
-                
-                if (thisinteract == 2)
-                    interactedobject = collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x + sprite_width + (13 * d), y + sprite_height, obj_interactablesolid, false, true);
-                
-                if (interactedobject != -4)
-                {
-                    with (interactedobject)
-                        facing = 3;
-                    
-                    with (interactedobject)
-                        scr_interact();
-                }
-            }
-            
-            thisinteract = 0;
-            
-            if (global.facing == 3)
-            {
-                if (collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x - (13 * d), y + sprite_height, obj_interactable, false, true))
-                    thisinteract = 1;
-                
-                if (collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x - (13 * d), y + sprite_height, obj_interactablesolid, false, true))
-                    thisinteract = 2;
-            }
-            
-            if (thisinteract > 0)
-            {
-                if (thisinteract == 1)
-                    interactedobject = collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x - (13 * d), y + sprite_height, obj_interactable, false, true);
-                
-                if (thisinteract == 2)
-                    interactedobject = collision_rectangle(x + (sprite_width / 2), y + (6 * d) + (sprite_height / 2), x - (13 * d), y + sprite_height, obj_interactablesolid, false, true);
-                
-                if (interactedobject != -4)
-                {
-                    with (interactedobject)
-                        facing = 1;
-                    
-                    with (interactedobject)
-                        scr_interact();
-                }
-            }
-            
-            thisinteract = 0;
-            
-            if (global.facing == 0)
-            {
-                if (collision_rectangle(x + (4 * d), y + (28 * d), (x + sprite_width) - (4 * d), y + sprite_height + (15 * d), obj_interactable, false, true))
-                    thisinteract = 1;
-                
-                if (collision_rectangle(x + (4 * d), y + (28 * d), (x + sprite_width) - (4 * d), y + sprite_height + (15 * d), obj_interactablesolid, false, true))
-                    thisinteract = 2;
-            }
-            
-            if (thisinteract > 0)
-            {
-                if (thisinteract == 1)
-                    interactedobject = collision_rectangle(x + (4 * d), y + (28 * d), (x + sprite_width) - (4 * d), y + sprite_height + (15 * d), obj_interactable, false, true);
-                
-                if (thisinteract == 2)
-                    interactedobject = collision_rectangle(x + (4 * d), y + (28 * d), (x + sprite_width) - (4 * d), y + sprite_height + (15 * d), obj_interactablesolid, false, true);
-                
-                if (interactedobject != -4)
-                {
-                    with (interactedobject)
-                        facing = 2;
-                    
-                    with (interactedobject)
-                        scr_interact();
-                }
-            }
-            
-            thisinteract = 0;
-            
-            if (global.facing == 2)
-            {
-                if (collision_rectangle(x + 3, (y + sprite_height) - (5 * d), (x + sprite_width) - (5 * d), y + (5 * d), obj_interactable, false, true))
-                    thisinteract = 1;
-                
-                if (collision_rectangle(x + 3, (y + sprite_height) - (5 * d), (x + sprite_width) - (5 * d), y + (5 * d), obj_interactablesolid, false, true))
-                    thisinteract = 2;
-            }
-            
-            if (thisinteract > 0)
-            {
-                if (thisinteract == 1)
-                    interactedobject = collision_rectangle(x + (3 * d), (y + sprite_height) - (5 * d), (x + sprite_width) - (5 * d), y + (5 * d), obj_interactable, false, true);
-                
-                if (thisinteract == 2)
-                    interactedobject = collision_rectangle(x + (3 * d), (y + sprite_height) - (5 * d), (x + sprite_width) - (5 * d), y + (5 * d), obj_interactablesolid, false, true);
-                
-                if (interactedobject != -4)
-                {
-                    with (interactedobject)
-                        facing = 0;
-                    
-                    with (interactedobject)
-                        scr_interact();
-                }
-            }
+			for (var i = 0; i < array_length(interactabletypes) && thisinteract == 0; i++) {
+				if collision_rectangle(interactfacingrectanglebounds[0], interactfacingrectanglebounds[1], interactfacingrectanglebounds[2], interactfacingrectanglebounds[3], interactabletypes[i], false, true) thisinteract = i + 1;
+			}
+			
+			if thisinteract > 0 {
+				var interactobject = interactabletypes[thisinteract - 1]
+				interactedobject = collision_rectangle(interactfacingrectanglebounds[0], interactfacingrectanglebounds[1], interactfacingrectanglebounds[2], interactfacingrectanglebounds[3], interactobject, false, true)
+				if i_ex(interactedobject) {
+					with interactedobject {
+						facing = (global.facing + 2) % 4
+						scr_interact()
+					}
+				}
+			}
+			
+			if disable_interaction_checks interactedobject = noone
+			
+			if (holding_item != noone && visible && !cutscene){
+				if (!i_ex(interactedobject) || interactedobject.id == holding_item.id || (interactedobject.id != holding_item.id && interactedobject.myinteract < 3)){
+					holding_item.can_use = true
+				
+					if (button1_p()){
+						var use_cancelled = holding_item.on_press()
+						is_using_held_item = use_cancelled != false
+					}
+				
+					if (button1_h() && holding_item != noone && is_using_held_item) holding_item.on_hold()
+				
+					if (button1_r() && holding_item != noone) {
+						holding_item.on_release()
+						is_using_held_item = false
+					}
+				}
+				else {
+					is_using_held_item = false
+					holding_item.can_use = false
+				}
+			}
+			else
+			{
+				is_using_held_item = false
+			}
+			
         }
     }
 }
@@ -569,28 +505,29 @@ twobuffer -= 1;
 threebuffer -= 1;
 climbbuffer--;
 
-if (climbbuffer <= 0)
-    climbing = 0;
+if (climbbuffer <= 0) climbing = 0;
+with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0)) event_user(9);
 
-with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0))
-    event_user(9);
+var hx = heartxoffset * image_xscale
+var hy = heartyoffset * image_yscale
 
-if (battlemode == 1)
-{
+if (battlemode == 1) {
     global.inv -= 1;
     
-    if (global.inv < 0)
-    {
-		if object_exists(asset_get_index("obj_overworldbulletparent"))
-		{
-	        with (collision_rectangle(x + 12, y + 40, x + 27, y + 49, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
-        
-	        with (collision_line(x + 12, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
-        
-	        with (collision_line(x + 26, y + 49, x + 19, y + 57, obj_overworldbulletparent, 1, 0))
-	            event_user(5);
+    if (global.inv < 0) {
+		if OverworldBattleMode_UsebattleheartasHitbox {
+			with battleheart {
+				with instance_place(x, y, obj_overworldbulletparent) event_user(5)
+			}
+		} else {
+			var soulboxright = hx + (7.5 * image_xscale)
+			var soulboxbottom = hy + (4.5 * image_yscale)
+			var soullinesmiddle = hx + (3.5 * image_xscale)
+			var soullinesright = hx + (7 * image_xscale)
+			var soullinesbottom = hy + (8.5 * image_yscale)
+		    with collision_rectangle(x + hx, y + hy, x + soulboxright, y + soulboxbottom, obj_overworldbulletparent, 1, 0)								event_user(5);        
+		    with collision_line(x + hx, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)					event_user(5);        
+		    with collision_line(x + soullinesright, y + soulboxbottom, x + soullinesmiddle, y + soullinesbottom, obj_overworldbulletparent, 1, 0)		event_user(5);
 		}
     }
 }

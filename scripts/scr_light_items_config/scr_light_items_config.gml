@@ -188,8 +188,8 @@ function scr_phonename()
 function scr_litemuseb(idx, lightWorldId)
 {
     var is_weapon = get_weapon_by_lw_id(lightWorldId) != -4;
-	show_debug_message(get_weapon_by_lw_id(lightWorldId));
-	show_debug_message("isweapon {0} lightworldid {1}", is_weapon, lightWorldId);
+	debug_log(get_weapon_by_lw_id(lightWorldId));
+	debug_log("isweapon {0} lightworldid {1}", is_weapon, lightWorldId);
     
     if is_weapon && !scr_lweapon_can_equip(lightWorldId)
     {

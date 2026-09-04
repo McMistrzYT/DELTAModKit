@@ -5,7 +5,7 @@ if (fresh == 0)
     if (skipsound == 0)
         snd_play(snd_petrify);
     
-    if (global.flag[55] != 0 && global.flag[56] != 0)
+    if (global.flag[EncountersCore_EncounterX] != 0 && global.flag[EncountersCore_EncounterY] != 0)
         returntoxy = 1;
     
     fresh = 2;
@@ -32,11 +32,11 @@ if (global.fighting == 0 && fresh == 2)
     if (returntoxy == 1)
     {
         fresh = 5;
-        remx = global.flag[55];
-        remy = global.flag[56];
+        remx = global.flag[EncountersCore_EncounterX];
+        remy = global.flag[EncountersCore_EncounterY];
         
-        global.flag[55] = 0;
-        global.flag[56] = 0;
+        global.flag[EncountersCore_EncounterX] = 0;
+        global.flag[EncountersCore_EncounterY] = 0;
         
         if (remx == 0)
             instance_destroy();

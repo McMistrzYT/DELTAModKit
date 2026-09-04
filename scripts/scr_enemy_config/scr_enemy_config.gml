@@ -68,7 +68,7 @@ function scr_monstersetup()
             global.monsterhp[myself] = 130;
             global.monsterat[myself] = 7;
             global.monsterdf[myself] = 0;
-            global.monsterexp[myself] = 0;
+            global.monsterexp[myself] = 10;
             global.monstergold[myself] = 20;
             global.sparepoint[myself] = 10;
             global.mercymod[myself] = 0;
@@ -112,7 +112,7 @@ function scr_monstersetup()
 }
 
 function scr_enemy_process_phase(enemyId, phase) {
-	show_debug_message("scr_enemy_process_phase({0}, {1})", enemyId, phase);
+	debug_log("scr_enemy_process_phase({0}, {1})", enemyId, phase);
 	
 	switch (enemyId) {
 		default:
@@ -141,9 +141,9 @@ function scr_enemy_process_phase(enemyId, phase) {
 				}
 				
 				case DREncounterPhase.CreateBulletArea: {
-					show_debug_message("My Attack Priority, before pass: {0}", myattackpriority);
+					debug_log("My Attack Priority, before pass: {0}", myattackpriority);
 					if !scr_attackpriority(myattackpriority + 1) break;
-					show_debug_message("My Attack Priority, pass: {0}", myattackpriority);
+					debug_log("My Attack Priority, pass: {0}", myattackpriority);
 					
 					if !instance_exists(obj_growtangle) instance_create(camerax() + 320, cameray() + 170, obj_growtangle);
 					
@@ -301,11 +301,32 @@ function scr_enemy_process_phase(enemyId, phase) {
 
 function scr_enemy_defeatrunanimations(){
 	#region Base Deltarune
-		scr_createdefeatanimation(obj_defeatanim, function() { return true     })     // Lowest Priorty, Default Battle Run
-		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    }, 10) // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
-		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen }, 60, function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
-		scr_createdefeatanimation(obj_spareanim,  function() { return _spared  }, 100,function(instance) { _spritetochangeto = sparedsprite }) // Frozen Solid.
+		scr_createdefeatanimation(obj_defeatanim, function() { return true     })       // Lowest Priorty, Default Battle Run
+		scr_createdefeatanimation(obj_deathanim,  function() { return fatal    },  10)  // Only seen on Slaying Titan Spawns or using Snowgrave on Regular Enemies.
+		scr_createdefeatanimation(obj_frozennpc,  function() { return __frozen },  60,  function(instance) { instance.depth = depth instance.inbattle = true }) // Frozen Solid.
+		scr_createdefeatanimation(obj_spareanim,  function() { return __spared  }, 100, function(instance) { _spritetochangeto = sparedsprite }) // Spared and Pacified.
 	#endregion
+}
+
+function scr_enemy_drawstatus_battle(enemyId){
+	switch enemyId {
+		default:
+		  // Comment
+          draw_set_color(c_gray);
+          draw_text(xx + 80 + namewidth + 60, yy + 375 + (i * 30), string_hash_to_newline(global.monstercomment[i]));
+          
+		  // HealthBar
+          draw_set_color(c_maroon);
+          draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
+          draw_set_color(c_lime);
+          draw_rectangle(xx + 420, yy + 380 + (i * 30), xx + 420 + ((global.monsterhp[i] / global.monstermaxhp[i]) * 80), yy + 380 + (i * 30) + 15, false);
+          draw_set_color(c_white);
+		  
+		  // HP Text
+          draw_text_transformed(xx + 424, yy + 364, "HP", 1, 0.5, 0);
+          draw_text_transformed(xx + 424, yy + 380 + (i * 30), string(ceil((global.monsterhp[i] / global.monstermaxhp[i]) * 100)) + "%", 1, 0.5, 0);
+		break
+	}
 }
 
 // Defeat Run System Core Data Config init
@@ -325,7 +346,8 @@ function scr_getdefeatanimationdataarray() {
 	return 	variable_global_get("@@DefeatAnimationData@@")
 }
 
-function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[51 + self.myself]) {
+// DefeatTypes
+function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = global.flag[EncountersCore_EncounterResult_Enemy1 + self.myself]) {
 	// For more Precise Control go to 'scr_monster->scr_monsterdefeat' and 'scr_turn->scr_defeatrun'
 	#macro MONSTERS_DEFEATTYPES_None 0
 	#macro MONSTERS_DEFEATTYPES_Violence 1
@@ -350,14 +372,222 @@ function scr_monster_get_defeattypes(mode = "init", monsterslotbattleendflag = g
 			case MONSTERS_DEFEATTYPES_Frozen:	_frozened++		break
 		}
 	}
+	
 	if mode == "all" || mode == "updatebattleendflags" {
-        if (_frozened > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Frozen;
-        if (_pacified > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Pacify;
-        if (_spared > 0)	global.flag[50] = MONSTERS_DEFEATTYPES_Spare;
-        if (_violenced > 0) global.flag[50] = MONSTERS_DEFEATTYPES_Violence;
+        if (_frozened > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Frozen;
+        if (_pacified > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Pacify;
+        if (_spared > 0)	global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Spare;
+        if (_violenced > 0) global.flag[EncountersCore_EncounterResult_Total] = MONSTERS_DEFEATTYPES_Violence;
 		
-		switch global.flag[50] {
-			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break
+		switch global.flag[EncountersCore_EncounterResult_Total] {
+			case MONSTERS_DEFEATTYPES_Frozen: global.flag[926]++ break // All Enemies Frozen.
 		}
+	}
+}
+
+function scr_chaseenemy_init() {
+	if extflag == "ModularEnemiesRoundabout" {
+		sprite_index = spr_diamond_overworld
+		myencounter = DREncounter.TestEnemies
+		alerttype = 2
+		pacetype = pacetype_followpath
+		path_start(path_chaseenemy_dwtestloop, pathSpeed, path_action_restart, 0)
+		offscreen_frozen = 0
+	}
+}
+
+function scr_chaseenemy_chasetype(Type) {
+	var movestopointusingspeed = true
+	switch Type {
+		default:	
+			alerttimer = 0
+			alertcon = 0
+			pacecon = 0
+			movestopointusingspeed = false
+		break
+		
+		case 0: {
+			if (speed < ct0minspeed) speed = ct0minspeed
+			if (speed < ct0topspeed) speed += ct0acc
+		break}
+		case 3: {
+			if (speed < 2) speed = 2
+			if (speed < 4) speed += 0.5
+		break}
+		case 4: {
+			if (speed < 6) speed = 6
+			if (speed < 14) speed += 0.5
+		break}
+		case 5.5: 
+		case 5: {
+			hspeed += lengthdir_x(0.5, point_direction(x, y, targetx, targety))
+			vspeed += lengthdir_y(0.5, point_direction(x, y, targetx, targety))
+			
+			if Type == 5 {
+				if (speed < 4)  speed = 4
+				if (speed < 7)  speed += 0.5
+				if (speed >= 7) speed = 7
+			} else {
+				if (speed < startchasespeed) speed = startchasespeed
+				if (speed != topchasespeed) speed = lerp(speed, topchasespeed, chaseaccel)				
+			}
+		break}
+		case 6: {
+			speed = 8 
+		break}
+		case 7: {
+			if (speed == 0) speed = 6
+			if (speed < 10) speed *= 1.1
+			
+			image_speed = 0.25
+		break}
+		
+		case 9: {
+			hspeed += lengthdir_x(0.5, point_direction(x, y, targetx, targety))
+			vspeed += lengthdir_y(0.5, point_direction(x, y, targetx, targety))
+			speed = clamp(speed, minspeed, maxspeed)
+		break}
+		
+		case 8: {
+			mymidx = x + (sprite_width / 2)
+			mymidy = y + ((bbox_bottom - y) / 2)
+			
+			if (point_distance(mymidx, mymidy, charaHeartX(), charaHeartY()) > 50)
+				direction = point_direction(mymidx, mymidy, charaHeartX(), charaHeartY()) + 180
+			
+			speed = 6
+			movestopointusingspeed = false
+		break}
+		
+		case 1: {
+			movestopointusingspeed = false
+			if (alerttimer == 0) move_towards_point(targetx, targety, 10)
+			
+			alerttimer += 1
+			if (alerttimer >= 20) speed *= 0.75
+			if (alerttimer >= 25) speed = 0
+			if (alerttimer >= 27) alerttimer = 0
+		break}
+		
+		case 2: {
+			movestopointusingspeed = false
+			if (alerttimer == 0) {
+				xnext = 0
+				ynext = 0
+				
+				if (right_h()) xnext =  132
+				if (left_h())  xnext = -132
+				if (down_h())  ynext =  132
+				if (up_h())    ynext = -132
+				move_towards_point(targetx + xnext, targety + ynext, 10)
+			}
+			
+			alerttimer += 1
+			
+			if (alerttimer >= 20) speed *= 0.75
+			if (alerttimer >= 25) speed = 0
+			if (alerttimer >= 27) alerttimer = 0
+		break}
+	}
+	
+	if movestopointusingspeed move_towards_point(targetx, targety, speed)
+}
+	
+/// @desc Not all pacetypes are here yet, mainly because of how many there is
+function scr_chaseenemy_pacetype(Type) {
+	#macro pacetype_rightandleftwithpauses 1
+	#macro pacetype_circlearound 2
+	#macro pacetype_upanddown 5
+	#macro pacetype_standinplace 6
+	#macro pacetype_movesin 7
+	#macro pacetype_movesin_duplicated 7.1
+	#macro pacetype_movesin_flipped 7.5
+	#macro pacetype_movesin_vertical 8
+	#macro pacetype_leftrightmove 9
+	#macro pacetype_leftrightmove_alt 9.5
+	#macro pacetype_slidetokris 10
+	
+	#macro pacetype_followpath 11
+	#macro pacetype_doublesiner 12	
+	#macro pacetype_hovering 13
+	
+	
+	
+	switch Type {
+		default: if DEBUGMODE && scr_debug() debug_log("Entity ({1}) using Unknown Pacing Type {0}", Type, string(real(id)) + " | " + string(object_get_name(object_index))) break	
+		
+		case pacetype_rightandleftwithpauses: {
+			if (pacetimer == 10) hspeed = 2
+			if (pacetimer == 34) hspeed = 0
+			if (pacetimer == 50) hspeed = -2
+			if (pacetimer == 74) hspeed = 0
+			if (pacetimer == 80) pacetimer = 0
+		break}
+		case pacetype_circlearound: {
+			hspeed = sin(pacetimer / 24) * 4
+			vspeed = cos(pacetimer / 24) * 4			
+		break}
+		case pacetype_upanddown: {
+			if (pacetimer == 1)  vspeed = 6
+			if (pacetimer == 25) vspeed = -6
+			if (y < ystart) pacetimer = 0			
+		break}
+		case pacetype_standinplace: {
+			cancelwalk = 1
+			walk_index += 0.25			
+		break}
+		case pacetype_movesin:
+		case pacetype_movesin_duplicated: {
+			hspeed = -sin(pacetimer / 30) * 10	
+		break}
+		case pacetype_movesin_flipped: {
+			hspeed = sin(pacetimer / 30) * 10
+		break}
+		case pacetype_movesin_vertical: {
+			vspeed = -sin(pacetimer / 25) * 12.5			
+		break}
+		case pacetype_leftrightmove: {
+			if (float != 0) y = yy - (sin(pacetimer / 5) * float)
+			
+			hspeed = sin(pacetimer / (pacespeed * 30)) * (moveradius / 20)
+			pacespeed = 0.8
+		break}
+		
+		case pacetype_leftrightmove_alt: {
+			if (float != 0) y = yy - sin(pacetimer / float)
+			
+			hspeed = 2 * (sin(pacetimer / 24) * (moveradius / 20))
+		break}
+		case pacetype_slidetokris: {
+			if (pacecon2 == 0) {
+				if (vspeed > 0) vspeed *= 0.9
+				
+				if (vspeed <= 0.5 && pacecon2 == 0) pacecon2 = 1
+			}
+			
+			if (pacecon2 == 1) move_towards_point(obj_mainchara.x, obj_mainchara.y, 4)			
+		break}
+		case pacetype_followpath: {
+			cancelwalk = 1
+			image_speed = 0.25
+			
+			if (pathSpeed == 0)
+				pathSpeed = 6
+			
+			if (direction >= 136 && direction <= 225)
+				facing = 0
+			
+			if (direction >= 306 || direction <= 45)
+				facing = 1			
+		break}
+		case pacetype_doublesiner: {
+			hspeed = -sin(pacetimer / 30) * 10
+			vspeed = (-sin(pacetimer / 12) * 12.5) / 10
+		break}
+		case pacetype_hovering: {
+			t = (t + increment) % 360
+			shift = amplitude * dsin(t)
+			y = yy + shift
+		break}
 	}
 }

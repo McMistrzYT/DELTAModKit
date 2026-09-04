@@ -1,5 +1,4 @@
-function scr_levelup()
-{
+function scr_levelup() {
     var encountercountflag = 1248;
     var attackpluscountflag = 1249;
     var gainedstats = 0;

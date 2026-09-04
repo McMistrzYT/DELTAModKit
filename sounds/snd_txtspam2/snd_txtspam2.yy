@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_txtspam2",
   "parent":{
-    "name":"Dialogue",
-    "path":"folders/DELTARUNE/Sounds/Dark/Dialogue.yy",
+    "name":"Spamton",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/Spamton.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

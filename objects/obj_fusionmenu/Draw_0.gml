@@ -80,13 +80,13 @@ if (type == 3 && init == 1)
                 draw_text(xx + 380, yy + 320, string_hash_to_newline(stringsetsub("~1: More Info#~2: Quit", scr_get_input_name(4), scr_get_input_name(5))));
             }
         }
-        /*else if (global.is_console || obj_gamecontroller.gamepad_active)
+        else if (global.is_console || obj_gamecontroller.gamepad_active)
         {
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[4], false), 0, xx + 380, yy + 323, 2, 2, 0, c_white, 1);
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, xx + 380, yy + 353, 2, 2, 0, c_white, 1);
             draw_text(xx + 414, yy + 320, string_hash_to_newline("More Info"));
             draw_text(xx + 414, yy + 350, string_hash_to_newline("Quit"));
-        }*/
+        }
         else
         {
             draw_text(xx + 380, yy + 320, string_hash_to_newline(stringsetsub("~1: More Info#~2: Quit", scr_get_input_name(4), scr_get_input_name(5))));

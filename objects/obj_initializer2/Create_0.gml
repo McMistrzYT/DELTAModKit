@@ -1,4 +1,5 @@
 global.is_console = /*scr_is_switch_os() || */os_type == os_ps4 || os_type == os_ps5;
+global.runtimeyear = string_split(GM_runtime_version, ".", 0)[0]
 
 global.charname = [];
 repeat DRCharacter.__MAX__ array_push(global.charname, "???")
@@ -82,8 +83,11 @@ else
 {
     global_flagname_init(); // flagnames are stripped
     //scr_84_init_localization(); // no translations im too lazy
-    //pal_swap_init_system(18); // ts gives me nightmares
+    pal_swap_init_system(shd_pal_swapper);
 	scr_enemy_defeatrunanimations()
+	scr_tensionbar_colors_init()
+	scr_soulmodes_init()
+	scr_darkitemmenu_init()
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);
     global.damagefontgold = font_add_sprite_ext(spr_numbersfontbig_gold, "0123456789+-%", 20, 0);
     global.hpfont = font_add_sprite_ext(spr_numbersfontsmall, "0123456789-+", 0, 2);

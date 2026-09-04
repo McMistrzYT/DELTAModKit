@@ -1,7 +1,5 @@
-if (i_ex(target))
-{
-    if (init == 0)
-    {
+if (i_ex(target)) {
+    if (init == 0) {
         dark = global.darkzone + 1;
         fakegravity = jumpspeed / (jumptime * 0.5);
         fakegravitystart = fakegravity;
@@ -162,13 +160,10 @@ if (i_ex(target))
     
     if (con == 3)
     {
-        if (usesprites == 1)
-        {
+        if (usesprites == 1 && landsprite > 0) {
             body_obj.sprite_index = landsprite;
             usespritestimer++;
-        }
-        else
-        {
+        } else {
             usespritestimer = 10;
         }
         
@@ -184,23 +179,12 @@ else
     instance_destroy();
 }
 
-if (i_ex(body_obj))
-    body_obj.image_alpha = image_alpha;
+if (i_ex(body_obj)) body_obj.image_alpha = image_alpha;
 
-if (i_ex(body_obj) && i_ex(target))
-{
-    if (trackalpha)
-        body_obj.image_alpha = target.image_alpha;
-    
-    if (trackblend)
-        body_obj.image_blend = target.image_blend;
-    
-    if (trackindex)
-        body_obj.image_index = target.image_index;
-    
-    if (tracksprite)
-        body_obj.sprite_index = target.sprite_index;
-    
-    if (trackangle)
-        body_obj.image_angle = target.image_angle;
+if (i_ex(body_obj) && i_ex(target)) {
+    if (trackalpha) body_obj.image_alpha = target.image_alpha;    
+    if (trackblend) body_obj.image_blend = target.image_blend;    
+    if (trackindex) body_obj.image_index = target.image_index;    
+    if (tracksprite) body_obj.sprite_index = target.sprite_index;    
+    if (trackangle) body_obj.image_angle = target.image_angle;
 }

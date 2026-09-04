@@ -88,26 +88,19 @@ if (global.interact == 5)
                 
                 if (dontthrow == 1)
                 {
-                    if (dontthrowtype == 0)
-                    {
-                        global.msc = 10;
+                    if (dontthrowtype == 0) {
+                        global.msc = SCRTEXT_Choices_Item_BallofJunk;
                         scr_text(global.msc);
-                        script_execute(scr_writetext, 10, "x", 0, 0);
-                    }
-                    else if (dontthrowtype == 1)
-                    {
+                        script_execute(scr_writetext, SCRTEXT_Choices_Item_BallofJunk, "x", 0, 0);
+                    } else if (dontthrowtype == 1) {
                         msgset(0, "* (You fumbled and caught them^1. You can't throw these away!)/%");
                         script_execute(scr_writetext, 0, "x", 0, 0);
-                    }
-                    else if (dontthrowtype == 2)
-                    {
+                    } else if (dontthrowtype == 2) {
                         msgset(0, "* (For some reason you felt like if you throw it away...)/");
                         msgnext("* (It would be like throwing away someone's..^1. ???)/");
                         msgnext("* (..^1. But you didn't fully understand it.)/%");
                         script_execute(scr_writetext, 0, "x", 0, 0);
-                    }
-                    else if (dontthrowtype == 3)
-                    {
+                    } else if (dontthrowtype == 3) {
                         msgset(0, "* (Recently, seems like weapons can't be thrown away so easily.)/%");
                         script_execute(scr_writetext, 0, "x", 0, 0);
                     }

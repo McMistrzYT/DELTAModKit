@@ -103,10 +103,9 @@ if (MENU_NO == 1 || MENU_NO == 4 || MENU_NO == 6 || MENU_NO == 7 || MENU_NO == 1
                         }
                         else
                         {
-                            readval = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", 0/*obj_gamecontroller.gamepad_shoulderlb_reassign*/);
+                            readval = ini_read_real("SHOULDERLB_REASSIGN", "SHOULDERLB_REASSIGN", obj_gamecontroller.gamepad_shoulderlb_reassign);
                             
-                            //if (readval != -1)
-                            //    obj_gamecontroller.gamepad_shoulderlb_reassign = readval;
+                            if (readval != -1) obj_gamecontroller.gamepad_shoulderlb_reassign = readval;
                             
                             global.button0 = global.input_g[4];
                             global.button1 = global.input_g[5];

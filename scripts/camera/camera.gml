@@ -39,3 +39,29 @@ function cameraheight_set(camheight, cameraid = 0) {
 	var __height = camheight
 	return camera_set_view_size(view_camera[cameraid], __width, __height);
 }
+
+// Additional
+function scr_outside_camera() {
+	_offcamera = 0
+	rightx = x + sprite_width
+	leftx = x
+	bottomy = y + sprite_height
+	topy = y
+
+	if (x > (camerax() + camerawidth() + argument0))  _offcamera = 1
+	if (rightx < (camerax() - argument0))             _offcamera = 1
+	if (y > (cameray() + cameraheight() + argument0)) _offcamera = 1
+	if (bottomy < (cameray() - argument0))			  _offcamera = 1
+
+	return _offcamera;
+}
+
+function scr_getcam(cameraid = 0){
+	var ___cam = {
+		x: camerax(cameraid),
+		y: cameray(cameraid),
+		w: camerawidth(cameraid),//(640 * (2 - (global.darkzone == 0))) / 2,
+		h: cameraheight(cameraid)//(480 * (2 - (global.darkzone == 0))) / 2
+	}
+	return ___cam;
+}

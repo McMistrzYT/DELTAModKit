@@ -6,8 +6,8 @@
   "name":"obj_solidblock",
   "overriddenProperties":[],
   "parent":{
-    "name":"World",
-    "path":"folders/DELTARUNE/Objects/World.yy",
+    "name":"Collision Building Blocks",
+    "path":"folders/DELTARUNE/Objects/World/Collision Building Blocks.yy",
   },
   "parentObjectId":null,
   "persistent":false,

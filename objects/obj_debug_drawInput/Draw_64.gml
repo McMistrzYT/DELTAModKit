@@ -7,7 +7,7 @@ if (scr_debug())
 	holdcol = c_white
     draw_set_font(fnt_small);
     
-    draw_set_color(left_p() ? presscol : (left_h() ? holdcol : col));
+    draw_set_color(up_p() ? presscol : (up_h() ? holdcol : col));
     
     draw_text_outline(xx, yy - 6, "[U]", 0);
     

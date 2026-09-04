@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_txtq",
   "parent":{
-    "name":"Dialogue",
-    "path":"folders/DELTARUNE/Sounds/Dark/Dialogue.yy",
+    "name":"QC",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/QC.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

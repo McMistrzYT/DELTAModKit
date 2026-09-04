@@ -9,8 +9,8 @@
   "name":"obj_icespell",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"ice",
+    "path":"folders/DELTARUNE/Objects/Battle/Effects/Spells/ice.yy",
   },
   "parentObjectId":null,
   "persistent":false,

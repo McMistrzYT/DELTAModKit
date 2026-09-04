@@ -1,7 +1,6 @@
 draw_self();
 
-if (secondnumber > 1 && !showcount)
-{
+if (secondnumber > 1 && !showcount) {
     draw_set_color(c_white);
     draw_set_font(global.damagefontgold);
     draw_set_alpha(image_alpha);
@@ -13,8 +12,7 @@ if (secondnumber > 1 && !showcount)
     draw_set_alpha(1);
 }
 
-if (showcount)
-{
+if (showcount) {
     var ypos = y + 22;
     draw_set_color(c_white);
     draw_set_font(global.damagefontgold);

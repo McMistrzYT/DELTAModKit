@@ -31,29 +31,58 @@ function ossafe_fill_rectangle(arg0, arg1, arg2, arg3, arg4){
     draw_rectangle(x1, y1, x2, y2, outline);
 }
 
-function setxy(x, y){
-    self.x = x;
-    self.y = y;
+function setxy(x, y, instance = self){
+	with instance {
+	    self.x = x;
+	    self.y = y;
+	}
 }
 
-function draw_background_tiled_ext(arg0, arg1, arg2, arg3, arg4, arg5, arg6)
+function scr_sizeexact(width, height, instance = id){
+	with (instance){
+		if (!sprite_exists(sprite_index)) {
+			debug_message("Can't size, no sprite")
+			exit
+		}
+		
+		var _w = sprite_get_width(sprite_index)
+		var _h = sprite_get_width(sprite_index)
+		image_xscale = width / _w
+		image_yscale = height / _h
+	}
+}
+
+
+function draw_background_tiled_ext(sprite, xoffset, yoffset, xscale, yscale, blend, alpha)
 {
-    draw_sprite_tiled_ext(arg0, 0, arg1, arg2, arg3, arg4, arg5, arg6);
+    draw_sprite_tiled_ext(sprite, 0, xoffset, yoffset, xscale, yscale, blend, alpha);
 }
 
 function scr_moveheart(){
     global.inv = 0;
-    return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
+	var pos = scr_heartgetspawnpos()
+    return instance_create(pos.x, pos.y, obj_moveheart);
 }
 
-function ossafe_ini_open(arg0){
-    if (!global.is_console)
-    {
-        ini_open(arg0);
-    }
-    else
-    {
-        var name = string_lower(arg0);
+function scr_heartgetspawnpos(){
+	var vec = new Vector2(camerax() - 20, cameray() + (cameraheight()/2) - 10)
+	with obj_herokris {
+		vec.x = x + 10
+		vec.y = y + 40
+	}
+	with obj_battleheartspawnmarker {
+		vec.x = x
+		vec.y = y
+	}
+	return vec
+	
+}
+
+function ossafe_ini_open(fname){
+    if (!global.is_console) {
+        ini_open(fname);
+    } else {
+        var name = string_lower(fname);
         global.current_ini = name;
         var file = ds_map_find_value(global.savedata, name);
         var data;
@@ -67,13 +96,10 @@ function ossafe_ini_open(arg0){
     }
 }
 
-function ossafe_ini_close()
-{
-    if (!global.is_console)
-    {
+function ossafe_ini_close(){
+    if (!global.is_console) {
         return ini_close();
-    }
-    else if (!is_undefined(global.current_ini))
+    } else if (!is_undefined(global.current_ini))
     {
         ds_map_set(global.savedata, global.current_ini, ini_close());
         global.current_ini = undefined;
@@ -84,15 +110,11 @@ function draw_background_ext(sprite, x, y, xscale, yscale, rot = 0, col = c_whit
     draw_sprite_ext(sprite, 0, x, y, xscale, yscale, rot, col, alpha);
 }
 
-function ossafe_file_text_open_read(arg0)
-{
-    if (!global.is_console)
-    {
-        return file_text_open_read(arg0);
-    }
-    else
-    {
-        var name = string_lower(arg0);
+function ossafe_file_text_open_read(fname){
+    if (!global.is_console) {
+        return file_text_open_read(fname);
+    } else {
+        var name = string_lower(fname);
         var file = ds_map_find_value(global.savedata, name);
         
         if (is_undefined(file))
@@ -102,8 +124,7 @@ function ossafe_file_text_open_read(arg0)
         var num_lines = 0;
         var lines;
         
-        while (string_byte_length(data) > 0)
-        {
+        while (string_byte_length(data) > 0){
             var newline_pos = string_pos("\n", data);
             var line;
             
@@ -143,15 +164,15 @@ function ossafe_file_text_open_read(arg0)
     }
 }
 
-function ossafe_file_text_read_string(arg0)
+function ossafe_file_text_read_string(fname)
 {
     if (!global.is_console)
     {
-        return file_text_read_string(arg0);
+        return file_text_read_string(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         
         if (ds_map_find_value(handle, "line_read"))
             return "";
@@ -167,15 +188,15 @@ function ossafe_file_text_read_string(arg0)
     }
 }
 
-function ossafe_file_text_read_real(arg0)
+function ossafe_file_text_read_real(fname)
 {
     if (!global.is_console)
     {
-        return file_text_read_real(arg0);
+        return file_text_read_real(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         
         if (ds_map_find_value(handle, "line_read"))
             return 0;
@@ -191,15 +212,15 @@ function ossafe_file_text_read_real(arg0)
     }
 }
 
-function ossafe_file_text_readln(arg0)
+function ossafe_file_text_readln(fname)
 {
     if (!global.is_console)
     {
-        return file_text_readln(arg0);
+        return file_text_readln(fname);
     }
     else
     {
-        var handle = arg0;
+        var handle = fname;
         ds_map_set(handle, "line_read", false);
         var line = ds_map_set_post(handle, "line", ds_map_find_value(handle, "line") + 1);
         
@@ -211,10 +232,9 @@ function ossafe_file_text_readln(arg0)
     }
 }
 
-function scr_ds_list_read(arg0)
-{
+function scr_ds_list_read(fname){
     var new_list = ds_list_create();
-    var list_string = ossafe_file_text_read_string(arg0);
+    var list_string = ossafe_file_text_read_string(fname);
     
     if (list_string != "")
         ds_list_read(new_list, list_string);
@@ -226,8 +246,7 @@ function safe_delete(instance) {
     if i_ex(instance) with (instance) instance_destroy();
 }
 
-function ossafe_file_delete(arg0)
-{
+function ossafe_file_delete(arg0){
     if (!global.is_console)
         return file_delete(arg0);
     else if (!is_undefined(ds_map_find_value(global.savedata, arg0)))
@@ -380,9 +399,8 @@ function ossafe_file_text_close(arg0)
     }
 }
 
-function langopt(en, ja) {
-    return (global.lang == "ja") ? ja : en;
-}
+function is_english() { return langopt(true, false)	}
+function langopt(en, ja) { return (global.lang == "ja") ? ja : en; }
 
 function scr_timedisp(frames) {
     var minutes = floor(frames / 1800);
@@ -737,3 +755,21 @@ function ossafe_fill_rectangle_color(arg0, arg1, arg2, arg3, arg4, arg5, arg6, a
     
     draw_rectangle_color(x1, y1, x2, y2, col1, col2, col3, col4, outline);
 }
+
+function scr_change_language(){
+	global.lang = langopt("ja", "en")
+	
+	ossafe_ini_open("true_config.ini")
+	ini_write_string("LANG", "LANG", global.lang)
+	ossafe_ini_close()
+	ossafe_savedata_save()
+	if scr_asset_exists("scr_84_init_localization") scr_84_init_localization()
+}
+
+function scr_getitempositiononcenteredlist(middlevalue, distancebetweenitems = 1, itemswidth = 0, currentitem = 0, maxitems = 2) {
+    var changeamt = distancebetweenitems + itemswidth
+    return (middlevalue + (changeamt * (currentitem - (maxitems / 2))))
+}
+
+function d3d_set_fog(enable, col, start, _end){ gpu_set_fog(enable, col, start, _end) }
+function draw_set_blend_mode(blendmode){ gpu_set_blendmode(blendmode) }

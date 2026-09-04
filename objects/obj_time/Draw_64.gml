@@ -1,5 +1,14 @@
-if (quit_timer >= 1)
-    draw_sprite_ext(spr_quitmessage, quit_timer / 7, 4, 4, 2, 2, 0, c_white, quit_timer / 15);
+if (scr_debug()) {
+	if (quicksaved != 2) {
+		if (variable_global_exists("chemg_menu_depth")) {
+			if (global.chemg_menu_depth != 0) draw_sprite_ext(spr_pxwhite, 0, 0, 0, 640, 480, 0, #002B36, 0.95)
+		}
+		
+		scr_84_debug(false)
+	}
+}
+
+if (quit_timer >= 1) draw_sprite_ext(spr_quitmessage, quit_timer / 7, 4, 4, 2, 2, 0, c_white, quit_timer / 15);
 	
 if scr_debug() {
 	var prev_font = draw_get_font();
@@ -18,7 +27,7 @@ if scr_debug() {
 	var xcent = __view_get(e__VW.WPort, 0) / 2;
 	var balign = __view_get(e__VW.HPort, 0) - th - starty;
 	
-	draw_set_halign(textalign_center);
+	draw_set_halign(fa_center);
 	
 	var _t = string_hash_to_newline("DELTARUNE Ch. " + string(global.chapter) + " " + global.versionno + "#Running in Editor");
 	draw_text(xcent, starty, _t);

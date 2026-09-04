@@ -263,3 +263,144 @@ function scr_ease_inout(arg0, arg1)
         return 0.5 * (scr_ease_out(arg0, arg1) + 1);
     }
 }
+
+function scr_approach(pointa, pointb, speed){
+	if abs(pointa - pointb) < speed 
+		pointa = pointb
+	else {
+		var changeamt = sign(pointb - pointa) * speed		
+		pointa += changeamt
+	}
+	
+	return pointa;
+}
+
+function scr_approach_curve(pointa, pointb, speed, minincrement = 0.1){
+	return scr_approach(pointa, pointb, max(minincrement, abs(pointb - pointa) / speed));
+}
+
+function ease_inout_circ(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * (1 - sqrt(1 - (arg0 * arg0)))) + arg1;
+	
+	arg0 -= 2
+	return (arg2 * 0.5 * (sqrt(1 - (arg0 * arg0)) + 1)) + arg1;
+}
+function ease_inout_cubic(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * power(arg0, 3)) + arg1;
+	
+	return (arg2 * 0.5 * (power(arg0 - 2, 3) + 2)) + arg1;
+}
+
+function ease_inout_expo(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * power(2, 10 * (arg0 - 1))) + arg1;
+	
+	arg0 -= 1
+	return (arg2 * 0.5 * (-power(2, -10 * arg0) + 2)) + arg1;
+}
+
+function ease_inout_quad(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * (arg0 * arg0)) + arg1;
+	
+	return (-arg2 * 0.5 * ((--arg0 * (arg0 - 2)) - 1)) + arg1;
+}
+
+function ease_inout_quart(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * power(arg0, 4)) + arg1;
+	
+	return (-arg2 * 0.5 * (power(arg0 - 2, 4) - 2)) + arg1;
+}
+
+function ease_inout_quint(arg0, arg1, arg2, arg3)
+{
+	arg0 /= (arg3 * 0.5)
+	
+	if (arg0 < 1)
+		return (arg2 * 0.5 * power(arg0, 5)) + arg1;
+	
+	return (arg2 * 0.5 * (power(arg0 - 2, 5) + 2)) + arg1;
+}
+
+function ease_out_quint(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * (power((arg0 / arg3) - 1, 5) + 1)) + arg1;
+}
+
+function ease_out_quart(arg0, arg1, arg2, arg3)
+{
+	return (-arg2 * (power((arg0 / arg3) - 1, 4) - 1)) + arg1;
+}
+
+function ease_out_expo(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * (-power(2, (-10 * arg0) / arg3) + 1)) + arg1;
+}
+
+function ease_out_cubic(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * (power((arg0 / arg3) - 1, 3) + 1)) + arg1;
+}
+
+function ease_out_circ(arg0, arg1, arg2, arg3)
+{
+	arg0 = (arg0 / arg3) - 1
+	return (arg2 * sqrt(1 - (arg0 * arg0))) + arg1;
+}
+
+function ease_in_quint(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * power(arg0 / arg3, 5)) + arg1;
+}
+
+function ease_in_quart(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * power(arg0 / arg3, 4)) + arg1;
+}
+
+function ease_in_quad(arg0, arg1, arg2, arg3)
+{
+	arg0 /= arg3
+	return (arg2 * arg0 * arg0) + arg1;
+}
+
+function ease_in_expo(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * power(2, 10 * ((arg0 / arg3) - 1))) + arg1;
+}
+
+function ease_in_cubic(arg0, arg1, arg2, arg3)
+{
+	return (arg2 * power(arg0 / arg3, 3)) + arg1;
+}
+
+function ease_in_circ(arg0, arg1, arg2, arg3)
+{
+	arg0 /= arg3
+	return (arg2 * (1 - sqrt(1 - (arg0 * arg0)))) + arg1;
+}
+
+function ease_in_back(arg0, arg1, arg2, arg3)
+{
+	var _s = 1.70158
+	arg0 /= arg3
+	return (arg2 * arg0 * arg0 * (((_s + 1) * arg0) - _s)) + arg1;
+}

@@ -10,8 +10,8 @@
   "name":"obj_initializer2",
   "overriddenProperties":[],
   "parent":{
-    "name":"Engine",
-    "path":"folders/DELTARUNE/Objects/Engine.yy",
+    "name":"Core",
+    "path":"folders/DELTARUNE/Objects/Engine/Core.yy",
   },
   "parentObjectId":null,
   "persistent":false,

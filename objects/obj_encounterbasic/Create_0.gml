@@ -6,7 +6,7 @@ if (global.flag[9] == 1)
 scr_encountersetup(global.encounterno);
 
 count = -1;
-for (var i = 0; i < array_length(global.cinstance) + 1 && i < array_length(global.char); ++i) {
+for (i = 0; i < array_length(global.cinstance) + 1 && i < array_length(global.char); ++i) {
 	var instance = obj_mainchara
 	var cateri = i - 1
 	if cateri >= 0 instance = global.cinstance[cateri]

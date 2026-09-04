@@ -544,18 +544,20 @@ if (view_current == 0)
             
             if (nextchar == "C")
             {
+				debug_log("Attempting to create Choicer ID {0}", nextchar2)
                 if (nextchar2 == "1")
                 {
+					debug_log("Starting Legacy Choicer", nextchar2)
                     if (instance_exists(obj_choicer_old) == false)
                         choicer = instance_create(0, 0, obj_choicer_old);
                     
                     halt = 5;
                 }
                 
-                if (nextchar2 == "2" || nextchar2 == "3" || nextchar2 == "4")
-                {
-                    if (instance_exists(obj_choicer_neo) == false)
-                    {
+                if (nextchar2 == "2" || nextchar2 == "3" || nextchar2 == "4" || nextchar2 == "0") {
+					if (nextchar2 == "0") nextchar2 = "1"
+					debug_log("Starting Choicer with {0} Choices", nextchar2)
+                    if (instance_exists(obj_choicer_neo) == false) {
                         choicer = instance_create(0, 0, obj_choicer_neo);
                         choicer.choicetotal = real(nextchar2) - 1;
                     }
@@ -564,37 +566,8 @@ if (view_current == 0)
                 }
             }
             
-            if (nextchar == "M")
-            {
-                if (nextchar2 == "0")
-                    global.flag[20] = 0;
-                
-                if (nextchar2 == "1")
-                    global.flag[20] = 1;
-                
-                if (nextchar2 == "2")
-                    global.flag[20] = 2;
-                
-                if (nextchar2 == "3")
-                    global.flag[20] = 3;
-                
-                if (nextchar2 == "4")
-                    global.flag[20] = 4;
-                
-                if (nextchar2 == "5")
-                    global.flag[20] = 5;
-                
-                if (nextchar2 == "6")
-                    global.flag[20] = 6;
-                
-                if (nextchar2 == "7")
-                    global.flag[20] = 7;
-                
-                if (nextchar2 == "8")
-                    global.flag[20] = 8;
-                
-                if (nextchar2 == "9")
-                    global.flag[20] = 9;
+            if (nextchar == "M") {
+				if nextchar2 >= "0" && nextchar2 <= "9" global.flag[20] = real(nextchar2)
             }
             
             if (nextchar == "S")
@@ -705,7 +678,7 @@ if (view_current == 0)
             {
                 if (special == 1)
                 {
-                    if (draw_get_color() != 16777215 && draw_get_color() != 0)
+                    if (draw_get_color() != c_white && draw_get_color() != 0)
                     {
                         draw_text_color(wx + random(shake) + 1, wy + random(shake) + 1, mychar, xcolor, xcolor, xcolor, xcolor, 0.3);
                         draw_text_color(wx + random(shake), wy + random(shake), mychar, c_white, c_white, xcolor, xcolor, 1);

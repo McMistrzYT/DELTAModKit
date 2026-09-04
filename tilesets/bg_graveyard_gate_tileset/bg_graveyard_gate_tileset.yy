@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"bg_graveyard_gate_tileset",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"bg_graveyard_gate_tileset",
+  "out_columns":4,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Chapter 1",
+    "path":"folders/DELTARUNE/Tilesets/Light World/Tilesets/Chapter 1.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"bg_graveyard_gate",
+    "path":"sprites/bg_graveyard_gate/bg_graveyard_gate.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":160,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":33,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":4,
+}

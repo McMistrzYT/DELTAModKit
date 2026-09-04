@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_ripple",
+  "name":"shd_ripple",
+  "parent":{
+    "name":"Ch5+",
+    "path":"folders/DELTARUNE/Shaders/Ch5+.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

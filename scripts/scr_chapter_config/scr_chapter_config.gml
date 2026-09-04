@@ -1,6 +1,7 @@
 function scr_chapter_config() {
-	global.chapter = 4;
-	global.versionno = "v0.901-modkit-3";
+	#macro CHAPTERINDEX 4
+	global.chapter = CHAPTERINDEX;
+	global.versionno = "v0.902-modkit-3";
 	
 	global.newFileStartingRoom = room_lw_test;
 	global.isStartingRoomDarkWorld = false;
@@ -12,11 +13,13 @@ function scr_chapter_get_recruit_color(chapter) {
 		case 2: return c_aqua;
 		case 3: return c_green;
 		case 4: return c_blue;
+		case 5: return c_yellow;
 	}
 	
 	return c_black;
 }
 
+/// @desc This is ran when loading a save from a previous Chapter and in scr_gamestart
 function scr_gamestart_chapter_override(){
     global.plot = 0;
     global.char[0] = DRCharacter.Kris;
@@ -48,8 +51,7 @@ function scr_gamestart_chapter_override(){
 	
     scr_itemremove(DRItem.Manual);
     
-    if (global.flag[64] < 24)
-        global.flag[64] = 24;
+    if (global.flag[64] < INVENTORYMAX_STORAGE) global.flag[64] = INVENTORYMAX_STORAGE;
     
     if (global.chapter == 3) {
         global.flag[1173] = 0;
@@ -58,23 +60,21 @@ function scr_gamestart_chapter_override(){
         global.flag[1196] = 0;
         global.flag[1198] = 0;
         
-        for (var i = 0; i < 20; i++)
-            global.battlegrade[i] = "Z";
+        for (var i = 0; i < 20; i++) global.battlegrade[i] = "Z";
         
         global.swordboardeath = 0;
         // scr_funnytext_init_sounds();
     }
     
-    if (global.chapter > 2)
-    {
+    if (global.chapter > 2){
         global.flag[7] = 0;
         global.flag[9] = 1;
         global.flag[10] = 1;
         global.flag[16] = 0.85;
         global.flag[17] = 0.6;
         global.flag[20] = 0;
-        global.flag[21] = 0;
-        global.flag[31] = 1;
-        global.flag[32] = 0;
+        global.flag[DRFLAG.RoomEnterFreezeTimer] = 0;
+        global.flag[DRFLAG.BlockFootsteps] = 1;
+        global.flag[DRFLAG.BlockPartyItemComments] = 0;
     }
 }

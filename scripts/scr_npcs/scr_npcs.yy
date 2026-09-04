@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_npcs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_npcs",
+  "parent":{
+    "name":"World",
+    "path":"folders/DELTARUNE/Scripts/World.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_heart_overworld",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_heart_overworld",
+  "parent":{
+    "name":"World",
+    "path":"folders/DELTARUNE/Scripts/World.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

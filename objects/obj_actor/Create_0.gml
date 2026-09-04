@@ -35,7 +35,7 @@ for (i = 0; i < 10; i++)
 
 sprite_palette = -1;
 current_pal = 0;
-color_blend = 16777215;
+color_blend = c_white;
 siner0 = 0;
 siner_add0 = 0;
 siner_amplitude0 = 0;

@@ -303,6 +303,8 @@ function scr_save() {
     ini_write_real(scr_ini_chapter(global.chapter, global.filechoice), "Date", date_current_datetime());
     ini_write_real(scr_ini_chapter(global.chapter, global.filechoice), "Room", scr_get_id_by_room_index(room));
     ini_write_real(scr_ini_chapter(global.chapter, global.filechoice), "InitLang", global.flag[912]);
+    ini_write_string(scr_ini_chapter(global.chapter, global.filechoice), "Room_Name", scr_roomname(room));
+	
     var uraboss = 0;
     
     if (global.chapter == 1)
@@ -337,7 +339,10 @@ function scr_save() {
 function scr_saveprocess(arg0) {
     global.lastsavedtime = global.time;
     global.lastsavedlv = global.lv;
-    file = "filech" + string(global.chapter) + "_" + string(arg0);
+	
+	if (!variable_global_exists("filechoice_route")) global.filechoice_route = ""
+		
+    file = "filech" + string(global.chapter) + "_" + string(arg0) + global.filechoice_route
     myfileid = ossafe_file_text_open_write(file);
     ossafe_file_text_write_string(myfileid, global.truename);
     ossafe_file_text_writeln(myfileid);
@@ -476,7 +481,7 @@ function scr_saveprocess(arg0) {
         ossafe_file_text_writeln(myfileid);
         scr_ds_list_write(global.armor, INVENTORYMAX_ARMORANDWEAPONS);
         ossafe_file_text_writeln(myfileid);
-        scr_ds_list_write(global.pocketitem, 72);
+        scr_ds_list_write(global.pocketitem, INVENTORYMAX_STORAGEARRAYSIZE);
         ossafe_file_text_writeln(myfileid);
     }
     else
@@ -497,7 +502,7 @@ function scr_saveprocess(arg0) {
             ossafe_file_text_writeln(myfileid);
         }
         
-        for (j = 0; j < 72; j++)
+        for (j = 0; j < INVENTORYMAX_STORAGEARRAYSIZE; j++)
         {
             ossafe_file_text_write_real(myfileid, global.pocketitem[j]);
             ossafe_file_text_writeln(myfileid);
@@ -559,7 +564,7 @@ function scr_saveprocess(arg0) {
     
     ossafe_file_text_write_real(myfileid, global.plot);
     ossafe_file_text_writeln(myfileid);
-    ossafe_file_text_write_string(myfileid, room_get_name(global.currentroom));
+    ossafe_file_text_write_string(myfileid, global.currentroom);
     ossafe_file_text_writeln(myfileid);
     ossafe_file_text_write_real(myfileid, global.time);
     ossafe_file_text_close(myfileid);
@@ -571,7 +576,10 @@ function scr_load() {
 	    filechoicebk = global.filechoice;
 	    scr_gamestart();
 	    global.filechoice = filechoicebk;
-	    file = "filech" + string(global.chapter) + "_" + string(global.filechoice);
+		
+		if (!variable_global_exists("filechoice_route")) global.filechoice_route = ""
+		
+	    file = "filech" + string(global.chapter) + "_" + string(global.filechoice) + global.filechoice_route;
 	    myfileid = ossafe_file_text_open_read(file);
 	    global.truename = ossafe_file_text_read_string(myfileid);
 	    ossafe_file_text_readln(myfileid);
@@ -812,7 +820,7 @@ function scr_load() {
 	            ossafe_file_text_readln(myfileid);
 	        }
         
-	        for (j = 0; j < 72; j += 1)
+	        for (j = 0; j < INVENTORYMAX_STORAGEARRAYSIZE; j += 1)
 	        {
 	            global.pocketitem[j] = ossafe_file_text_read_real(myfileid);
 	            ossafe_file_text_readln(myfileid);
@@ -889,7 +897,7 @@ function scr_load() {
     
 	    global.plot = ossafe_file_text_read_real(myfileid);
 	    ossafe_file_text_readln(myfileid);
-	    global.currentroom = asset_get_index(ossafe_file_text_read_string(myfileid));
+	    global.currentroom = ossafe_file_text_read_real(myfileid);
 	    ossafe_file_text_readln(myfileid);
 	    global.time = ossafe_file_text_read_real(myfileid);
 	    ossafe_file_text_readln(myfileid);
@@ -899,18 +907,26 @@ function scr_load() {
     
 	    audio_group_set_gain(1, global.flag[15], 0);
 	    audio_set_master_gain(0, global.flag[17]);
-	    __loadedroom = scr_get_id_by_room_index(global.currentroom);
-    
-	    //if (scr_dogcheck())
-	    //    __loadedroom = 83;
+		var room_id = global.currentroom
+	
+		if (room_id < 10000) {
+			room_id = scr_get_id_by_room_index(global.currentroom)
+		
+			if (room_id == -1) room_id += (global.chapter * 10000)
+		
+			global.currentroom = room_id
+		}
+		
+		
+		__loadedroom = scr_get_room_by_id(global.currentroom)
+	
+		//if (scr_dogcheck()) __loadedroom = PLACE_DOGCHECK
     
 	    scr_tempsave();
     
-	    if (global.is_console)
-	        global.tempflag[95] = 1;
+	    if (global.is_console) global.tempflag[95] = 1;
     
-	    if (scr_debug())
-	    {
+	    if (scr_debug()){
 	        if (room_exists(__loadedroom)) {
 	            room_goto(__loadedroom);
 	        } else {
@@ -927,74 +943,63 @@ function scr_load() {
 	}
 }
 
-function scr_tempsave()
-{
+function scr_tempsave(){
     filechoicebk2 = global.filechoice;
     global.filechoice = 9;
     scr_saveprocess(global.filechoice);
     global.filechoice = filechoicebk2;
 }
 
-function scr_ini_chapter(arg0, arg1)
-{
-    if (arg0 >= 2)
-        return "G_" + string(arg0) + "_" + string(arg1);
+function scr_ini_chapter(chapter, slot){
+    if (chapter >= 2)
+        return "G_" + string(chapter) + "_" + string(slot) + global.filechoice_route;
     else
-        return "G" + string(arg1);
+        return "G" + string(slot) + global.filechoice_route;
 }
 
 function scr_get_room_by_id(arg0) {
-    var room_id = arg0;
+    var room_id = real(arg0);
     var rooms = scr_get_room_list();
     
     if (room_id < 10000) room_id += (global.chapter * 10000);
     
     var room_index = -1;
 	var foundroom = false
-	for (var i = 0; i < array_length(rooms); i++)
-	{
-	    if (rooms[i].room_id == room_id)
-	    {
+	
+	for (var i = 0; i < array_length(rooms); i++){
+	    if (real(rooms[i].room_id) == room_id){
 	        room_index = rooms[i].room_index;
 			if (rooms[i].room_index != 0) foundroom = true
 	        break;
 	    }
 	}
-	
-	if !foundroom room_index = room_get_name(room_id) // Compatability with Room Order Changes
 
     if (room_index == -1) {
-		show_message("FAILED TO GET ROOM INDEX")
+		show_debug_message("*** ERROR: could not find room with id " + string(room_id))
+		debug_print("FAILED TO GET ROOM INDEX")
 		return 0;
     }
-    
+	
     return room_index;
 }
 
 function scr_get_id_by_room_index(arg0) {
-    var room_index = arg0;
+    var room_index = real(arg0);
     var rooms = scr_get_room_list();
     var room_id = -1;
-	if room_exists(room_index) {
-		room_id = room_index
-	} else if !is_string(room_index) {
-	    for (var i = 0; i < array_length(rooms); i++)
-	    {
-	        if (rooms[i].room_index == room_index)
-	        {
-	            room_id = rooms[i].room_id;
-	            break;
-	        }
+	
+	for (var i = 0; i < array_length(rooms); i++) {
+	    if (real(rooms[i].room_index) == real(room_index)) {
+	        room_id = rooms[i].room_id;
+	        break;
 	    }
-    }
-	else room_id = asset_get_index(room_index)
-
+	}
+	
     if (room_id == -1) {
-		show_message("FAILED TO GET ROOM {INPUT}:[" + string(room_index) + "]")
+		debug_print("FAILED TO GET ROOM {INPUT}:[" + string(room_index) + "]")
 		return 0
     }
-    
-    return room_id;
+    return real(room_id);
 }
 
 function scr_room(arg0, arg1) constructor

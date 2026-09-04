@@ -1,3 +1,5 @@
+instancestokill = []
+
 if (global.flag[9] == 1)
 {
     var battlemusicvolume = 0.7;
@@ -6,7 +8,7 @@ if (global.flag[9] == 1)
     {
         if (obj_astream.mystream == global.batmusic[0])
         {
-            if (obj_astream.songname != "mus/battle.ogg")
+            if (obj_astream.songname != MusicFolder + "battle.ogg")
                 battlemusicvolume = 1;
         }
     }
@@ -37,15 +39,14 @@ global.fighting = 1;
     global.fc = 3;
     global.fe = 4;
     global.flag[62] = 1;
-}
+}*/
 
-if (global.flag[62] == 0)
-{
+if (global.flag[62] == 0){
     global.fe = 0;
     global.fc = 0;
     global.typer = 4;
     global.battletyper = 4;
-}*/
+}
 
 global.flag[62] = 0;
 global.myfight = 0;
@@ -87,10 +88,10 @@ for (i = 0; i < 3; i += 1)
 
 itempage = 0;
 spellpage = 0;
-global.flag[50] = 0;
-global.flag[51] = 0;
-global.flag[52] = 0;
-global.flag[53] = 0;
+global.flag[EncountersCore_EncounterResult_Total] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy1] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy2] = 0;
+global.flag[EncountersCore_EncounterResult_Enemy3] = 0;
 global.flag[63] = 0;
 
 for (i = 0; i < 3; i += 1)
@@ -207,8 +208,8 @@ for (i = 0; i < DRHero.__MAX__; i++) {
 	hpcolorsoft[i] = merge_color(hpcolor[i], c_white, 0.5);
 }
 
-global.flag[36] = 0;
-global.flag[39] = 0;
+global.flag[DRFLAG.FailedBattle] = 0;
+global.flag[DRFLAG.ForceEndBattle] = 0;
 
 if (global.ambush == 1)
 {
@@ -228,6 +229,8 @@ if (global.ambush == 2)
 disablesusieact = 0;
 mercytotal = 0;
 idefendedthisturn = 0;
+
+// Leftover Chapter 3:
 ypostenna = 0;
 oopsallacts = 0;
 spadebuttonenabled = false;
@@ -270,12 +273,12 @@ dogselectedcount = 0;
 
 if (global.chapter == 3)
 {
-    battletimer = 0;
-    battleseconds = 0;
-    battleminutes = 0;
-    boardend = 0;
-    global.boardbattleresult = "won";
-    rabbickvar = choose(0, 1);
+	battletimer = 0;
+	battleseconds = 0;
+	battleminutes = 0;
+	boardend = 0;
+	global.boardbattleresult = "won";
+	rabbickvar = choose(0, 1);
 }
 
 tripticket = 0;
@@ -284,9 +287,9 @@ triptickettimer = 0;
 
 if (global.chapter == 3)
 {
-    if (global.encounterno == 131 || global.encounterno == 126 || global.encounterno == 125)
-    {
-        if (scr_keyitemcheck(DRKeyItem.TripTicket))
-            tripticket = 1;
-    }
+	if (global.encounterno == 131 || global.encounterno == 126 || global.encounterno == 125)
+	{
+	    if (scr_keyitemcheck(DRKeyItem.TripTicket))
+	        tripticket = 1;
+	}
 }

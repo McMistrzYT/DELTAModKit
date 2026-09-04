@@ -1,5 +1,4 @@
-function scr_controls_default()
-{
+function scr_controls_default(){
     global.button0 = gp_face1;
     global.button1 = gp_face2;
     global.button2 = gp_face4;
@@ -69,11 +68,8 @@ function scr_controls_default()
     global.input_g[8] = 999;
     global.input_g[9] = 999;
     
-    //if (!i_ex(obj_gamecontroller))
-    //    instance_create(0, 0, obj_gamecontroller);
-    
-    //with (obj_gamecontroller)
-    //    gamepad_shoulderlb_reassign = 0;
+    if (!i_ex(obj_gamecontroller)) instance_create(0, 0, obj_gamecontroller);    
+    with (obj_gamecontroller) gamepad_shoulderlb_reassign = 0;
 }
 
 function scr_input_manager_init()
@@ -83,70 +79,45 @@ function scr_input_manager_init()
     global.kbdRepeatDurationSec = 0.1;
 }
 
-function scr_input_manager_process()
-{
-    global.kbdBlocked = false;
-}
+function scr_input_manager_process(){ global.kbdBlocked = false; }
 
-function sunkus_kb_block()
-{
-    global.kbdBlocked = true;
-}
+function sunkus_kb_block(){ global.kbdBlocked = true; }
 
-function sunkus_kb_check(arg0)
-{
-    return global.kbdBlocked ? false : keyboard_check(arg0);
-}
+function sunkus_kb_check(key) { return global.kbdBlocked ? false : keyboard_check(key); }
 
-function sunkus_kb_check_pressed_with_repeat(arg0)
+function sunkus_kb_check_pressed_with_repeat(key)
 {
     if (global.kbdBlocked)
         return false;
     
-    if (keyboard_check_pressed(arg0))
+    if (keyboard_check_pressed(key))
     {
-        ds_map_set(global.kbdPressedMap, arg0, global.kbdRepeatDelaySec);
+        ds_map_set(global.kbdPressedMap, key, global.kbdRepeatDelaySec);
         return true;
     }
     
-    if (keyboard_check(arg0))
+    if (keyboard_check(key))
     {
-        var time = ds_map_find_value(global.kbdPressedMap, arg0) - (delta_time / 1000000);
+        var time = ds_map_find_value(global.kbdPressedMap, key) - (delta_time / 1000000);
         
         if (time < 0)
         {
-            ds_map_set(global.kbdPressedMap, arg0, global.kbdRepeatDurationSec);
+            ds_map_set(global.kbdPressedMap, key, global.kbdRepeatDurationSec);
             return true;
         }
         
-        ds_map_set(global.kbdPressedMap, arg0, time);
+        ds_map_set(global.kbdPressedMap, key, time);
     }
     
     return false;
 }
 
-function sunkus_kb_check_pressed(arg0)
-{
-    return global.kbdBlocked ? false : keyboard_check_pressed(arg0);
-}
+function sunkus_kb_check_pressed(key){ return global.kbdBlocked ? false : keyboard_check_pressed(key); }
+function sunkus_kb_check_released(key){ return global.kbdBlocked ? false : keyboard_check_released(key); }
+function sunkus_kb_check_direct(key){ return global.kbdBlocked ? false : keyboard_check_direct(key); }
+function sunkus_kb_clear(key) { return global.kbdBlocked ? false : keyboard_clear(key); }
 
-function sunkus_kb_check_released(arg0)
-{
-    return global.kbdBlocked ? false : keyboard_check_released(arg0);
-}
-
-function sunkus_kb_check_direct(arg0)
-{
-    return global.kbdBlocked ? false : keyboard_check_direct(arg0);
-}
-
-function sunkus_kb_clear(arg0)
-{
-    return global.kbdBlocked ? false : keyboard_clear(arg0);
-}
-
-function scr_ascii_input_names()
-{
+function scr_ascii_input_names(){
     global.asc_def[8] = "Backspace";
     global.asc_def[9] = "Tab";
     global.asc_def[12] = "Numpad 5 (nmlk off)";
@@ -251,4 +222,81 @@ function scr_ascii_input_names()
     global.asc_def[16] = "Shift";
     global.asc_def[17] = "Control";
     global.asc_def[18] = "Alt";
+}
+
+function scr_gamepad_check_pressed_any(){
+	var button_pressed
+	
+	if (!i_ex(obj_gamecontroller)) return false;
+	else {
+		button_pressed = false
+		
+		for (var i = 0; i < 10; i += 1) {
+			if (gamepad_button_check_pressed(obj_gamecontroller.gamepad_id, global.input_g[i])) {
+				button_pressed = true
+				break
+			}
+		}
+	}
+	
+	return button_pressed;
+}
+
+function scr_gamepad_axis_check(gamepadid, axis){
+	axis_value = obj_time.axis_value
+	__returnvalue = 0
+	
+	if (axis == 0) {
+		if (gamepad_axis_value(gamepadid, gp_axislv) >= axis_value)
+			__returnvalue = 1
+	}
+	
+	if (axis == 1) {
+		if (gamepad_axis_value(gamepadid, gp_axislh) >= axis_value)
+			__returnvalue = 1
+	}
+	
+	if (axis == 2) {
+		if (gamepad_axis_value(gamepadid, gp_axislv) <= -axis_value)
+			__returnvalue = 1
+	}
+	
+	if (axis == 3) {
+		if (gamepad_axis_value(gamepadid, gp_axislh) <= -axis_value)
+			__returnvalue = 1
+	}
+	
+	return __returnvalue;
+}
+
+function scr_gamepad_check_any(){
+	var any_input
+	
+	if (!i_ex(obj_gamecontroller))
+	{
+		return false;
+	}
+	else
+	{
+		any_input = false
+		
+		for (var i = 0; i < 4; i += 1)
+		{
+			if (scr_gamepad_axis_check(obj_gamecontroller.gamepad_id, i)) {
+				any_input = true
+				break
+			}
+		}
+		
+		for (var i = 0; i < 10; i += 1)
+		{
+			if (gamepad_button_check(obj_gamecontroller.gamepad_id, global.input_g[i]))
+			{
+				any_input = true
+				break
+			}
+		}
+	}
+	
+	return any_input;
 }

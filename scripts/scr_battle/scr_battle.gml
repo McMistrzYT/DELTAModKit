@@ -1,12 +1,10 @@
-function scr_battle(encounterno, specialbattle, enemy0, enemy1, enemy2)
-{
+function scr_battle(encounterno, specialbattle, enemy0 = undefined, enemy1 = undefined, enemy2 = undefined) {// `= undefined` Added to have Feather Ignore it
     global.specialbattle = specialbattle;
     global.encounterno = encounterno;
     
-    if (global.flag[9] != 2)
-    {
+    if (global.flag[9] != 2) {
         global.flag[9] = 1;
-        var batmusic = "rudebuster_boss.ogg";//"battle.ogg";
+        var batmusic = PrimaryBattleMusic;//"battle.ogg";
         
         /*if (global.chapter == 3)
         {

@@ -35,5 +35,5 @@
     "path":"sprites/spr_emote_ellipsis/spr_emote_ellipsis.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

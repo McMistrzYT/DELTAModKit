@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_txtnoe_echo",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.841338,
+  "exportDir":"",
+  "name":"snd_txtnoe_echo",
+  "parent":{
+    "name":"Noelle",
+    "path":"folders/DELTARUNE/Sounds/Dialogue/Noelle.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_txtnoe_echo.wav",
+  "volume":1.0,
+}

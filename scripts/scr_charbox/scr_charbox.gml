@@ -1,11 +1,12 @@
 function scr_charbox(){
     for (curhero = 0; curhero < array_length(global.char); curhero += 1) {
-		var charicon_width = 213; // A value that seems to be Exactly the correct pos
+		charicon_width = 213; // A value that seems to be Exactly the correct pos
 		var charicon_dis = 0; // Not really useful with the normal charboxes since those don't use spacing normally
 		var changeamt = (charicon_width + charicon_dis)
 		
 		xchunk = floor(((camerawidth()/2) + (changeamt * (curhero - (chartotal / 2))))); // 320 is the middle of the screen.
 		c = global.char[curhero] - 1;
+		if c < 0 continue;
 		charpos[c] = curhero;
 		charcolor = scr_hero_get_color(c);
         gc = global.charturn;
@@ -24,7 +25,7 @@ function scr_charbox(){
             else
                 mmy[curhero] = 0;
         }
-		var boxcasingy = mmy[curhero]
+		boxcasingy = mmy[curhero]
             
         if (gc == charpos[c] && global.myfight == 0)
             scr_selectionmatrix(xx + xchunk, (480 - bp) + yy);
@@ -61,7 +62,7 @@ function scr_charbox(){
             
         if (global.charselect == charpos[c] || global.charselect == 3)
             draw_set_color(charcolor);
-            
+		
         if (rouxlsgridenabled == false)
         {
             draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + boxcasingy, xx + xchunk + 212, ((480 - bp) + yy) - 2, false);

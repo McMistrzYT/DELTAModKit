@@ -109,8 +109,20 @@ enum DRKeyItem {
 	ClaimbClaws = 31,
 }
 
-function scr_iteminfo(itemid)
-{
+enum DROverworldItem {
+	None,
+	
+	// Custom
+	trashballCh2 = 4,
+}
+
+
+enum DRItemCurrencyTypes {
+	DarkDollars,
+	PinkCoins,
+}
+
+function scr_iteminfo(itemid){
 	usable = 0;
     replaceable = 0;
     value = 0;
@@ -119,8 +131,22 @@ function scr_iteminfo(itemid)
     itemdescb = " ";
 	__itemdesc = "---";
     
-    switch (itemid)
-    {
+    switch (itemid){
+		
+        default: 
+            if itemid > KEYITEMDATASTART {
+                itemtarget = 2;
+                scr_keyiteminfo(itemid - KEYITEMDATASTART);
+                itemdescb = tempkeyitemdesc;
+				__itemdesc = tempkeyitemdesc;
+                itemnameb = tempkeyitemname;
+                usable = tempkeyitemusable;
+				consumable = tempkeyitemconsumable;
+				value = tempkeyitembuyprice;
+				itemcurrrency = tempkeyitemcurrrency;
+            }
+        break
+		
         case DRItem.None:
             itemnameb = " ";
             itemdescb = "---";
@@ -632,11 +658,14 @@ function scr_item_get_battle_use_text(itemid) {
 	}
 }
 
-function scr_keyiteminfo(keyitemid)
-{
+function scr_keyiteminfo(keyitemid){
+	
     tempkeyitemdesc = "---";
     tempkeyitemname = " ";
-    tempkeyitemusable = false;
+    tempkeyitemusable = 0;
+    tempkeyitemconsumable = 0;
+	tempkeyitembuyprice = 0;
+	tempkeyitemcurrrency = DRItemCurrencyTypes.DarkDollars;
     
     switch (keyitemid)
     {
@@ -1459,9 +1488,54 @@ function scr_item_use_action_battle(casterid, itemid) {
 		}
     }
 	
-	show_debug_message("scr_item_use_action_battle({0}, {1}) = {2}", casterid, itemid, item_use);
+	debug_log("scr_item_use_action_battle({0}, {1}) = {2}", casterid, itemid, item_use);
 	return item_use;
 }
+
+function scr_item_throw_special(itemid) {
+    switch itemid {
+        default: break
+        case 4: // Manual
+            if scr_havechar(DRCharacter.Ralsei) {
+                global.interact = 1;
+                scr_closemenu();
+                global.fc = 2;
+                global.typer = 31;
+                global.fe = 9;
+				msgset(0, "* .../%")
+                if (global.flag[207] == 1){
+                    global.fc = 0;
+                    global.typer = 6;
+					msgset(0, "* (You tossed the Manual hard.^1)&* (Its pages scatter in the wind.)/")
+					scr_anyface_next("ralsei", 9)
+					msgnext("* ............../")
+					msgnext("\\E5* Umm..^1.&* Th-that's OK^1, Kris^1!&* I can always.../")
+					msgnext("\\E6* I'll just make a better one next time!/%")
+                    global.flag[207] = 2;
+                }
+                
+                if (global.flag[207] == 0){
+                    global.fc = 0;
+                    global.typer = 6;
+					msgset(0, "* (You drop the manual on the floor with a resounding thud.)/")
+					scr_anyface_next("ralsei", 0)
+                    msgnext("* Hey^1, Kris^1.&* What are you doing...?/")
+                    msgnext("\\E3* Oh no^1!&* Is that the manual?/")
+                    msgnext("\\E1* Looks like you accidentally dropped it.../")
+					scr_anyface_next("no_name", 0)
+                    msgnext("* (You got the Manual.^1)&* (Again.)/%")
+                    scr_itemget(4);
+                    global.flag[207] = 1;
+                }
+                
+                dl = instance_create(0, 0, obj_dialoguer);
+                dl.free = 1;
+            }
+        break
+    
+    }
+}
+
 
 function scr_key_item_use_action_overworld(itemid) {
 	switch (itemid)
@@ -1536,4 +1610,20 @@ function scr_key_item_use_action_overworld(itemid) {
 			scr_itemdialoguer();
 			break;
     }
+}
+
+function scr_overworlditem_create(overworlditemid) {
+	var instanceid = noone
+	
+	switch overworlditemid {
+		default: break
+		
+		// Custom
+		case DROverworldItem.trashballCh2: {
+			instanceid = instance_create(x, y, mod_obj_holdable_trashball)
+		break;}
+		
+	}
+	
+	return instanceid
 }

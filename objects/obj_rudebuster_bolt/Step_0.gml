@@ -62,7 +62,7 @@ if (explode == 1)
         
         if (chosen_bolt > 0)
         {
-            if (chosen_bolt == final_bolt)
+            if (chosen_bolt == final_bolt) 
                 damage += 30;
             
             if (chosen_bolt == (final_bolt - 1))

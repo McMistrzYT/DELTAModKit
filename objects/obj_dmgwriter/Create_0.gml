@@ -1,3 +1,4 @@
+scale = global.darkzone ? 2 : 1
 spec = 0;
 delaytimer = 0;
 delay = 2;
@@ -7,7 +8,8 @@ bounces = 0;
 type = -1;
 mercytimer = 0;
 stretch = 0.2;
-stretchgo = 1;/*
+stretchgo = 1;
+/*
 lightf = merge_color(c_purple, c_white, 0.6);
 lightb = merge_color(c_aqua, c_white, 0.5);
 lightg = merge_color(c_lime, c_white, 0.5);

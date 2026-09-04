@@ -1,1 +1,1 @@
-draw_self();
+method(id, _soulmodedata.draw)()

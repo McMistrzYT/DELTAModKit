@@ -22,8 +22,8 @@ function scr_getbuttonsprite(arg0, arg1)
     var button_sprite = button_questionmark;
     var invert = is_dualshock && (global.typer == 50 || global.typer == 70 || global.typer == 71);
     
-    if (isString)
-    {
+	try {
+    if (isString){
         if (control == "A")
         {
             button_sprite = button_xbox_left;
@@ -174,26 +174,18 @@ function scr_getbuttonsprite(arg0, arg1)
         
         if (control == "j")
         {
-            button_sprite = button_xbox_l;
-            
-            if (is_dualshock || is_dualsense)
-                button_sprite = button_ps4_l;
-            
-            if (os_type == os_switch || os_type == os_switch2)
-                button_sprite = button_switch_lStick;
+            button_sprite = button_xbox_l;            
+            if (is_dualshock || is_dualsense) button_sprite = button_ps4_l;            
+            if (os_type == os_switch || os_type == os_switch2) button_sprite = button_switch_lStick;
             
             return button_sprite;
         }
         
-        if (control == "J")
-        {
+        if (control == "J"){
             button_sprite = button_xbox_r;
             
-            if (is_dualshock || is_dualsense)
-                button_sprite = button_ps4_r;
-            
-            if (os_type == os_switch || os_type == os_switch2)
-                button_sprite = button_switch_rStick;
+            if (is_dualshock || is_dualsense) button_sprite = button_ps4_r;            
+            if (os_type == os_switch || os_type == os_switch2) button_sprite = button_switch_rStick;
             
             return button_sprite;
         }
@@ -574,5 +566,8 @@ function scr_getbuttonsprite(arg0, arg1)
         return button_sprite;
     }
     
+	} catch (ex) {
+		debug_log("**** Error attempting to get Button sprite [{0}, {1}]", control, isString)	
+	}
     return button_sprite;
 }

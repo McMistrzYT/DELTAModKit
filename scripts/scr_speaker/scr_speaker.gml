@@ -217,10 +217,10 @@ function scr_anyface(speakerchar, msgno, emotion){
     if _speaker == "carol" msgsetsub(msgno, "\\TX \\F0 \\E~1 \\FC \\TC %", string(_emotion));
     if _speaker == "bratty" msgsetsub(msgno, "\\TX \\F0 \\E~1 \\Fy \\T0 %", string(_emotion));
     if _speaker == "catti" msgsetsub(msgno, "\\TX \\F0 \\E~1 \\Fi \\T0 %", string(_emotion));
-    if _speaker == "jackenstein" msgset(msgno, "\\TX \\F0 \\Tj %", string(_emotion));
-    if _speaker == "jackenstein_cute" msgset(msgno, "\\TX \\F0 \\Tk %", string(_emotion));
+    if _speaker == "jackenstein" msgsetsub(msgno, "\\TX \\F0 \\Tj %", string(_emotion));
+    if _speaker == "jackenstein_cute" msgsetsub(msgno, "\\TX \\F0 \\Tk %", string(_emotion));
     if _speaker == "tenna" msgsetsub(msgno, "\\TX \\F0 \\E~1 \\Tv %", string(_emotion));
-    if _speaker == "gerson" msgset(msgno, "\\TX \\F0 \\Tg %", string(_emotion));
+    if _speaker == "gerson" msgsetsub(msgno, "\\TX \\F0 \\Tg %", string(_emotion));
 }
 
 function scr_susface(msgno, faceid){

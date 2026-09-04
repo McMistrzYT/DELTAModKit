@@ -1,6 +1,6 @@
 if (!i_ex(target) && con < 20)
 {
-    show_debug_message("target does not exist");
+    debug_log("target does not exist");
     con = 99;
     instance_destroy();
     exit;

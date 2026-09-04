@@ -9,8 +9,8 @@
   "name":"obj_spell_mist",
   "overriddenProperties":[],
   "parent":{
-    "name":"Effects",
-    "path":"folders/DELTARUNE/Objects/Battle/Effects.yy",
+    "name":"Pacify",
+    "path":"folders/DELTARUNE/Objects/Battle/Effects/Spells/Pacify.yy",
   },
   "parentObjectId":null,
   "persistent":false,
